@@ -1,0 +1,37 @@
+#pragma once
+
+#include <iostream>
+#include <queue>
+#include <string>
+#include <utility>
+#include <vector>
+#include <netinet/in.h>
+#include "liberror.h"
+#include "socket.h"
+#include "ToClientMessage.h"
+#include "ClientMessage.h"
+
+class Protocol {
+private:
+    Socket socket;
+    bool wasClosed;
+public:
+    /* private methods don't use them, and if you do it use wisely */
+    uint8_t recvByte();
+    uint16_t recvTwoBytes();
+    void recvMessage(std::string& message);
+    void sendByte(uint8_t byte);
+    void sendTwoBytes(uint16_t bytes);
+    void sendMessage(const std::string& message);
+    /* end private methods don't use */
+    explicit Protocol(Socket socket);
+    Protocol(const std::string& hostname, const std::string& servname);
+    void sendMessage(ToClientMessage& message);
+    void receiveMessage(ClientMessage& clientMessage);
+    bool isClosed() const;
+    void close();
+    void shutdown(int mode);
+
+    ~Protocol();
+    Protocol(const Protocol&) = delete;
+};
