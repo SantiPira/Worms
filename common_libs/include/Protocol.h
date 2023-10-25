@@ -8,8 +8,9 @@
 #include <netinet/in.h>
 #include "liberror.h"
 #include "socket.h"
-#include "ToClientMessage.h"
-#include "ClientMessage.h"
+#include "../include/InfoServer.h"
+#include "ClientRequest.h"
+
 
 class Protocol {
 private:
@@ -20,14 +21,16 @@ public:
     uint8_t recvByte();
     uint16_t recvTwoBytes();
     void recvMessage(std::string& message);
+    void recvClientRequest(ClientRequest& clientRequest);
     void sendByte(uint8_t byte);
     void sendTwoBytes(uint16_t bytes);
     void sendMessage(const std::string& message);
     /* end private methods don't use */
     explicit Protocol(Socket socket);
     Protocol(const std::string& hostname, const std::string& servname);
-    void sendMessage(ToClientMessage& message);
-    void receiveMessage(ClientMessage& clientMessage);
+    //void sendMessage(ToClientMessage& message);
+    //void receiveMessage(ClientMessage& clientMessage);
+    void sendMessage(InfoServer& infoServer);
     bool isClosed() const;
     void close();
     void shutdown(int mode);

@@ -12,12 +12,6 @@
 #include "../../common_libs/include/Thread.h"
 #include "../../common_libs/include/liberror.h"
 #include "../../common_libs/include/socket.h"
-#include "../../common_libs/include/ClientMessage.h"
-#include "../../common_libs/include/ToClientMessage.h"
-#include "../../common_libs/include/MessageCoreGamesAvailables.h"
-#include "../../common_libs/include/ActionSVToCLEnum.h"
-#include "../../common_libs/include/PlayerInfoMessage.h"
-#include "../../common_libs/include/ActionFromClientEnum.h"
 #include "ClientSender.h"
 #include "Games.h"
 

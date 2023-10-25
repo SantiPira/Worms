@@ -29,7 +29,7 @@ private:
 public:
     explicit Server(const char* port);
 
-    virtual void run() override;
+    void run() override;
     void stop();
     void acceptConnection();
 

@@ -50,7 +50,13 @@ void Protocol::sendMessage(const std::string& message) {
  * */
 
 /*------------------------------------SERVER METHODS------------------------------------*/
-
+void Protocol::sendMessage(InfoServer& infoServer) {
+    sendByte(infoServer.getIdMessage());
+    sendByte(infoServer.getGames());
+    for (auto& player : infoServer.getPlayers()) {
+        sendTwoBytes(player);
+    }
+}
 
 /*------------------------------------END SERVER METHODS------------------------------------*/
 
@@ -71,13 +77,18 @@ Protocol::~Protocol() {
 }
 bool Protocol::isClosed() const { return wasClosed; }
 
-void Protocol::sendMessage(ToClientMessage &message) {
+void Protocol::recvClientRequest(ClientRequest& clientRequest) {
+    uint8_t action = recvByte();
+    clientRequest.setAction(action);
+}
+
+/*void Protocol::sendMessage(ToClientMessage &message) {
     message.serialize(*this);
 }
 
 void Protocol::receiveMessage(ClientMessage &clientMessage) {
     clientMessage.deserialize(*this);
-}
+}*/
 
 
 
