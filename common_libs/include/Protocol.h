@@ -8,8 +8,8 @@
 #include <netinet/in.h>
 #include "liberror.h"
 #include "socket.h"
-#include "../include/InfoServer.h"
-#include "ClientRequest.h"
+#include "messages/server/to_client/InfoServer.h"
+#include "messages/server/from_client/ClientResponse.h"
 
 
 class Protocol {
@@ -21,7 +21,7 @@ public:
     uint8_t recvByte();
     uint16_t recvTwoBytes();
     void recvMessage(std::string& message);
-    void recvClientRequest(ClientRequest& clientRequest);
+    void recvClientResponse(ClientResponse& clientRequest);
     void sendByte(uint8_t byte);
     void sendTwoBytes(uint16_t bytes);
     void sendMessage(const std::string& message);

@@ -4,7 +4,7 @@ Server::Server(const char* port): socket(port), m_KeepRunning(true) {}
 
 void Server::acceptConnection() {
     Socket peer = socket.accept();
-    m_Clients.emplace_back(std::move(peer), &m_Games);
+    m_Clients.emplace_back(std::move(peer), &m_Matches);
     m_Clients.back().start();
 }
 

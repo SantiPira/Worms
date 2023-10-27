@@ -1,39 +1,39 @@
 #include "../include/Client.h"
-#include "../../common_libs/include/InfoServer.h"
-#include "../../common_libs/include/ClientRequest.h"
+#include "../../common_libs/include/messages/server/to_client/InfoServer.h"
+#include "../../common_libs/include/messages/server/from_client/ClientResponse.h"
 #include <iostream>
 
-Client::Client(Socket peer, Games* games) : m_Protocol(std::move(peer)), m_KeepRunning(true), m_Games(games) {}
+Client::Client(Socket peer, MatchesMonitor* matches) : m_Protocol(std::move(peer)), m_KeepRunning(true),
+    m_Matches(matches), m_UpdatesGame(100) {}
 
 void Client::run() {
-    std::cout << "Client running" << std::endl;
-    InfoServer infoServer(0x00, m_Games->getGames(), m_Games->getAllPlayers());
+    InfoServer infoServer(ActionToClient::TC_GAME_LIST, m_Matches->getGames(), m_Matches->getAllPlayers());
     m_Protocol.sendMessage(std::ref(infoServer));
-    ClientRequest clientRequest;
-    m_Protocol.recvClientRequest(clientRequest);
-    while (m_KeepRunning && !clientRequest.isQuit()) {
-        switch (clientRequest.getAction()) {
-            case 0x01: {
-                idGame = m_Games->createGame();
+    ClientResponse clientResponse;
+    while (!m_Protocol.isClosed() && !clientResponse.isQuit()) {
+        m_Protocol.recvClientResponse(clientResponse);
+        switch (clientResponse.getAction()) {
+            case ActionFromClient::FC_CREATE_GAME: {
+                idGame = m_Matches->createGame(&m_UpdatesGame);
                 hasGame = true;
                 break;
             }
-            case 0x02: {
-                m_Protocol.recvClientRequest(clientRequest);
-                m_Games->addPlayer(idGame);
+            case ActionFromClient::FC_JOIN_GAME: {
+                m_Protocol.recvClientResponse(clientResponse);
+                m_Matches->addPlayer(idGame, &m_UpdatesGame);
                 hasGame = true;
                 break;
             }
-            case 0x03: {
-                //gamesAvailables.setGames(m_Games->getAllPlayers());
-                //gamesAvailables.setGamesAvailables(m_Games->getGames());
+            case ActionFromClient::FC_LIST_GAMES: {
+                infoServer.setIdAction(ActionToClient::TC_GAME_LIST);
+                infoServer.setGames(m_Matches->getGames());
+                infoServer.setPlayers(m_Matches->getAllPlayers());
                 m_Protocol.sendMessage(std::ref(infoServer));
             }
             default: {
                 break;
             }
         }
-        m_Protocol.recvClientRequest(clientRequest);
     }
 }
 

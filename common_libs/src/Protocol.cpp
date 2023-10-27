@@ -51,7 +51,7 @@ void Protocol::sendMessage(const std::string& message) {
 
 /*------------------------------------SERVER METHODS------------------------------------*/
 void Protocol::sendMessage(InfoServer& infoServer) {
-    sendByte(infoServer.getIdMessage());
+    sendByte(infoServer.getIdAction());
     sendByte(infoServer.getGames());
     for (auto& player : infoServer.getPlayers()) {
         sendTwoBytes(player);
@@ -77,9 +77,9 @@ Protocol::~Protocol() {
 }
 bool Protocol::isClosed() const { return wasClosed; }
 
-void Protocol::recvClientRequest(ClientRequest& clientRequest) {
+void Protocol::recvClientResponse(ClientResponse& clientResponse) {
     uint8_t action = recvByte();
-    clientRequest.setAction(action);
+    clientResponse.setAction(ActionFromClient(action));
 }
 
 /*void Protocol::sendMessage(ToClientMessage &message) {

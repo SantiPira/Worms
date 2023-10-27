@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10.2)
 project(worms)
 
 set (CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD 17)
+
 set(SDL2PP_WITH_IMAGE ON)
 set(SDL2PP_WITH_MIXER ON)
 set(SDL2PP_WITH_TTF ON)

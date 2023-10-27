@@ -13,21 +13,22 @@
 #include "../../common_libs/include/liberror.h"
 #include "../../common_libs/include/socket.h"
 #include "ClientSender.h"
-#include "Games.h"
+#include "MatchesMonitor.h"
 
 class Client : public Thread {
 private:
     Protocol m_Protocol;
     std::atomic<bool> m_KeepRunning;
-    Games* m_Games;
+    MatchesMonitor* m_Matches;
     int idGame;
     bool hasGame = false;
+    ProtectedQueue<std::string> m_UpdatesGame;
 public:
-    Client(Socket peer, Games* games);
+    Client(Socket peer, MatchesMonitor* games);
     bool isDead();
     void stop();
     void kill();
-    virtual void run() override;
+    void run() override;
 
     ~Client() override = default;
     Client(const Client&) = delete;
