@@ -37,4 +37,6 @@ public:
 
     ~Protocol();
     Protocol(const Protocol&) = delete;
+
+    void recvServerInfo(InfoServer& server);
 };

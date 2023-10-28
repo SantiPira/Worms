@@ -82,6 +82,19 @@ void Protocol::recvClientResponse(ClientResponse& clientResponse) {
     clientResponse.setAction(ActionFromClient(action));
 }
 
+void Protocol::recvServerInfo(InfoServer& infoServer) {
+    uint8_t action = recvByte();
+    infoServer.setIdAction(ActionToClient(action));
+    uint8_t games = recvByte();
+    infoServer.setGames(games);
+    std::vector<uint16_t> playersList;
+    for (int i = 0; i < games; i++) {
+        uint16_t players = recvTwoBytes();
+        playersList.push_back(players);
+    }
+    infoServer.setPlayers(playersList);
+}
+
 /*void Protocol::sendMessage(ToClientMessage &message) {
     message.serialize(*this);
 }

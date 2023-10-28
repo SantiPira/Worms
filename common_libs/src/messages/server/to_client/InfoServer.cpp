@@ -5,6 +5,8 @@
 InfoServer::InfoServer(ActionToClient idAction, uint8_t games, std::vector<uint16_t> players) : m_IdAction(idAction),
 m_Games(games), m_Players(std::move(players)){}
 
+InfoServer::InfoServer() : m_IdAction(ActionToClient::TC_INVALID), m_Games(0), m_Players() {}
+
 uint8_t InfoServer::getGames() const {
     return m_Games;
 }
@@ -28,4 +30,5 @@ void InfoServer::setGames(uint8_t games) {
 void InfoServer::setPlayers(std::vector<uint16_t> players) {
     m_Players = std::move(players);
 }
+
 

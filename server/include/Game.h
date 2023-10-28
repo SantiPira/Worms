@@ -1,8 +1,9 @@
 #pragma once
 
+#include <vector>
+#include <atomic>
 #include "../../common_libs/include/Thread.h"
-#include "Client.h"
-
+#include "../../common_libs/include/ProtectedQueue.h"
 /*GameLoop gameLogic*/
 class Game : public Thread {
  private:

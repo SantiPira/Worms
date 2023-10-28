@@ -1,6 +1,6 @@
 #include "../include/MatchesMonitor.h"
 
-MatchesMonitor::MatchesMonitor() : m_Games() {}
+MatchesMonitor::MatchesMonitor() {}
 
 void MatchesMonitor::removeGame(int id) {
     std::lock_guard<std::mutex> lock(m_Mutex);
@@ -11,7 +11,7 @@ int MatchesMonitor::createGame(ProtectedQueue<std::string>* qClientUpdates) {
     std::lock_guard<std::mutex> lock(m_Mutex);
     int id = m_Games.size();
     Game* game = new Game(id);
-    m_Games[id] = game;
+    m_Games.insert(std::make_pair(id, game));
     game->addPlayer(qClientUpdates);
     return id;
 }
@@ -32,5 +32,5 @@ std::vector<uint16_t> MatchesMonitor::getAllPlayers() {
 
 void MatchesMonitor::addPlayer(int id, ProtectedQueue<std::string>* qClientUpdates) {
     std::lock_guard<std::mutex> lock(m_Mutex);
-    m_Games[id]->addPlayer(qClientUpdates);
+    m_Games.at(id)->addPlayer(qClientUpdates);
 }

@@ -2,15 +2,13 @@
 
 #include <mutex>
 #include <unordered_map>
-#include <vector>
 #include "Game.h"
 
 class MatchesMonitor {
-private:
-    //unordered_map<idGame, Game> Game is an object that contains the World and the players
-    std::unordered_map<int, Game*> m_Games;
+ private:
     std::mutex m_Mutex;
-public:
+    std::unordered_map<int, Game*> m_Games;
+ public:
     MatchesMonitor();
     int createGame(ProtectedQueue<std::string>* qClientUpdates);
     void removeGame(int id);

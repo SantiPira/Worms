@@ -1,7 +1,4 @@
 #include "../include/Client.h"
-#include "../../common_libs/include/messages/server/to_client/InfoServer.h"
-#include "../../common_libs/include/messages/server/from_client/ClientResponse.h"
-#include <iostream>
 
 Client::Client(Socket peer, MatchesMonitor* matches) : m_Protocol(std::move(peer)), m_KeepRunning(true),
     m_Matches(matches), m_UpdatesGame(100) {}
@@ -35,6 +32,8 @@ void Client::run() {
             }
         }
     }
+    ClientSender sender(std::ref(m_Protocol), &m_UpdatesGame);
+    sender.start();
 }
 
 bool Client::isDead() {

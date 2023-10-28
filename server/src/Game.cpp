@@ -1,6 +1,5 @@
 #include "../include/Game.h"
 
-#define MAX_PLAYERS 2
 
 Game::Game(int id) : m_IdGame(id), m_InputActions(100), m_KeepRunning(true) {}
 
@@ -26,5 +25,5 @@ void Game::addPlayer(ProtectedQueue<std::string> *qClientUpdates) {
 }
 
 bool Game::isReadyToStart() {
-    return m_QClientUpdates.size() == MAX_PLAYERS;
+    return m_QClientUpdates.size() == 2;
 }

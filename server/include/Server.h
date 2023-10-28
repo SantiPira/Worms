@@ -20,7 +20,7 @@ private:
     Socket socket;
     std::atomic<bool> m_KeepRunning;
     std::list<Client> m_Clients;
-    MatchesMonitor m_Matches;
+    MatchesMonitor m_Games;
 
 private:
     void reapDead();
