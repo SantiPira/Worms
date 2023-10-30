@@ -10,10 +10,13 @@ class MatchesMonitor {
     std::unordered_map<int, Game*> m_Games;
  public:
     MatchesMonitor();
-    int createGame(ProtectedQueue<std::string>* qClientUpdates);
+    int createGame();
     void removeGame(int id);
     std::vector<uint16_t> getAllPlayers();
     int getGames();
-    void addPlayer(int id, ProtectedQueue<std::string>* qClientUpdates);
+    int addPlayer(int id, ProtectedQueue<std::string>* qClientUpdates);
+    ProtectedQueue<std::string>* getInputActionGame(int idGame);
     ~MatchesMonitor() = default;
+
+    Game *getGame(int idGame);
 };

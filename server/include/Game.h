@@ -1,22 +1,23 @@
 #pragma once
 
-#include <vector>
 #include <atomic>
+#include <unordered_map>
 #include "../../common_libs/include/Thread.h"
 #include "../../common_libs/include/ProtectedQueue.h"
+
 /*GameLoop gameLogic*/
 class Game : public Thread {
  private:
     int m_IdGame;
-    std::vector<ProtectedQueue<std::string>*> m_QClientUpdates; //TODO: Change string to GameUpdate later
+    std::unordered_map<int, ProtectedQueue<std::string>*> m_QClientUpdates; //TODO: Change string to GameUpdate later
     ProtectedQueue<std::string> m_InputActions;
     std::atomic<bool> m_KeepRunning;
 public:
     explicit Game(int id);
     void run() override;
-    ProtectedQueue<std::string>* getInputActions();
     int getPlayers();
-    void addPlayer(ProtectedQueue<std::string>* qClientUpdates);
+    int addPlayer(ProtectedQueue<std::string>* qClientUpdates);
+    ProtectedQueue<std::string>* getInputActions();
     void stop();
     ~Game() override = default;
     Game(const Game&) = delete;

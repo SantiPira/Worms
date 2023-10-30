@@ -7,12 +7,11 @@ void MatchesMonitor::removeGame(int id) {
     m_Games.erase(id);
 }
 
-int MatchesMonitor::createGame(ProtectedQueue<std::string>* qClientUpdates) {
+int MatchesMonitor::createGame() {
     std::lock_guard<std::mutex> lock(m_Mutex);
     int id = m_Games.size();
     Game* game = new Game(id);
     m_Games.insert(std::make_pair(id, game));
-    game->addPlayer(qClientUpdates);
     return id;
 }
 
@@ -30,7 +29,18 @@ std::vector<uint16_t> MatchesMonitor::getAllPlayers() {
     return players;
 }
 
-void MatchesMonitor::addPlayer(int id, ProtectedQueue<std::string>* qClientUpdates) {
+int MatchesMonitor::addPlayer(int id, ProtectedQueue<std::string>* qClientUpdates) {
     std::lock_guard<std::mutex> lock(m_Mutex);
-    m_Games.at(id)->addPlayer(qClientUpdates);
+    return m_Games.at(id)->addPlayer(qClientUpdates);
 }
+
+Game *MatchesMonitor::getGame(int idGame) {
+    std::lock_guard<std::mutex> lock(m_Mutex);
+    return m_Games.at(idGame);
+}
+
+ProtectedQueue<std::string> *MatchesMonitor::getInputActionGame(int idGame) {
+    std::lock_guard<std::mutex> lock(m_Mutex);
+    return m_Games.at(idGame)->getInputActions();
+}
+

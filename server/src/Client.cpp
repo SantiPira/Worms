@@ -11,13 +11,16 @@ void Client::run() {
         m_Protocol.recvClientResponse(clientResponse);
         switch (clientResponse.getAction()) {
             case ActionFromClient::FC_CREATE_GAME: {
-                idGame = m_Matches->createGame(&m_UpdatesGame);
+                idGame = m_Matches->createGame();
+                idPlayer = m_Matches->addPlayer(idGame, &m_UpdatesGame);
+                m_InputActions = m_Matches->getInputActionGame(idGame);
                 hasGame = true;
                 break;
             }
             case ActionFromClient::FC_JOIN_GAME: {
-                m_Protocol.recvClientResponse(clientResponse);
-                m_Matches->addPlayer(idGame, &m_UpdatesGame);
+                idGame = clientResponse.getIdGame();
+                idPlayer = m_Matches->addPlayer(idGame, &m_UpdatesGame);
+                m_InputActions = m_Matches->getInputActionGame(idGame);
                 hasGame = true;
                 break;
             }
@@ -32,8 +35,14 @@ void Client::run() {
             }
         }
     }
-    ClientSender sender(std::ref(m_Protocol), &m_UpdatesGame);
+    ClientSender sender(std::ref(m_Protocol), &m_UpdatesGame, idPlayer);
     sender.start();
+    //Receiver state
+    while (!m_Protocol.isClosed()) {
+        m_Protocol.recvClientResponse(clientResponse);
+        //Concat idPlayer + action
+        m_InputActions->push("clientResponse");
+    }
 }
 
 bool Client::isDead() {

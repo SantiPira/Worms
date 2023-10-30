@@ -21,8 +21,10 @@ private:
     std::atomic<bool> m_KeepRunning;
     MatchesMonitor* m_Matches;
     int idGame;
+    int idPlayer;
     bool hasGame = false;
     ProtectedQueue<std::string> m_UpdatesGame;
+    ProtectedQueue<std::string>* m_InputActions;
 public:
     Client(Socket peer, MatchesMonitor* games);
     bool isDead();

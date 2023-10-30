@@ -79,7 +79,12 @@ bool Protocol::isClosed() const { return wasClosed; }
 
 void Protocol::recvClientResponse(ClientResponse& clientResponse) {
     uint8_t action = recvByte();
-    clientResponse.setAction(ActionFromClient(action));
+    auto actionFromClient = ActionFromClient(action);
+    clientResponse.setAction(actionFromClient);
+    if (actionFromClient == ActionFromClient::FC_JOIN_GAME) {
+        uint8_t idGame = recvByte();
+        clientResponse.setIdGame(idGame);
+    }
 }
 
 void Protocol::recvServerInfo(InfoServer& infoServer) {
