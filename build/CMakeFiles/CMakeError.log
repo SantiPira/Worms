@@ -1,0 +1,45 @@
+Performing C++ SOURCE FILE Test COMPILER_HAS_DEPRECATED_ATTR failed with the following output:
+Change Dir: /home/churrasquito77/Desktop/Taller/Worms/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_bc00d/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_bc00d.dir/build.make CMakeFiles/cmTC_bc00d.dir/build
+gmake[1]: Entering directory '/home/churrasquito77/Desktop/Taller/Worms/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_bc00d.dir/src.cxx.o
+/usr/bin/c++ -DCOMPILER_HAS_DEPRECATED_ATTR  -Wall -O0 -Werror -pedantic -ggdb -DDEBUG -fno-inline    -std=c++17 -o CMakeFiles/cmTC_bc00d.dir/src.cxx.o -c /home/churrasquito77/Desktop/Taller/Worms/build/CMakeFiles/CMakeTmp/src.cxx
+/home/churrasquito77/Desktop/Taller/Worms/build/CMakeFiles/CMakeTmp/src.cxx: In function ‘int main()’:
+/home/churrasquito77/Desktop/Taller/Worms/build/CMakeFiles/CMakeTmp/src.cxx:2:33: error: ‘int somefunc()’ is deprecated [-Werror=deprecated-declarations]
+    2 |     int main() { return somefunc();}
+      |                         ~~~~~~~~^~
+/home/churrasquito77/Desktop/Taller/Worms/build/CMakeFiles/CMakeTmp/src.cxx:1:37: note: declared here
+    1 | __attribute__((__deprecated__)) int somefunc() { return 0; }
+      |                                     ^~~~~~~~
+cc1plus: all warnings being treated as errors
+gmake[1]: *** [CMakeFiles/cmTC_bc00d.dir/build.make:78: CMakeFiles/cmTC_bc00d.dir/src.cxx.o] Error 1
+gmake[1]: Leaving directory '/home/churrasquito77/Desktop/Taller/Worms/build/CMakeFiles/CMakeTmp'
+gmake: *** [Makefile:127: cmTC_bc00d/fast] Error 2
+
+
+Source file was:
+__attribute__((__deprecated__)) int somefunc() { return 0; }
+    int main() { return somefunc();}
+Performing C++ SOURCE FILE Test COMPILER_HAS_DEPRECATED failed with the following output:
+Change Dir: /home/churrasquito77/Desktop/Taller/Worms/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_16e5c/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_16e5c.dir/build.make CMakeFiles/cmTC_16e5c.dir/build
+gmake[1]: Entering directory '/home/churrasquito77/Desktop/Taller/Worms/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_16e5c.dir/src.cxx.o
+/usr/bin/c++ -DCOMPILER_HAS_DEPRECATED  -Wall -O0 -Werror -pedantic -ggdb -DDEBUG -fno-inline    -std=c++17 -o CMakeFiles/cmTC_16e5c.dir/src.cxx.o -c /home/churrasquito77/Desktop/Taller/Worms/build/CMakeFiles/CMakeTmp/src.cxx
+/home/churrasquito77/Desktop/Taller/Worms/build/CMakeFiles/CMakeTmp/src.cxx:1:11: error: expected constructor, destructor, or type conversion before ‘(’ token
+    1 | __declspec(deprecated) int somefunc() { return 0; }
+      |           ^
+/home/churrasquito77/Desktop/Taller/Worms/build/CMakeFiles/CMakeTmp/src.cxx: In function ‘int main()’:
+/home/churrasquito77/Desktop/Taller/Worms/build/CMakeFiles/CMakeTmp/src.cxx:2:25: error: ‘somefunc’ was not declared in this scope
+    2 |     int main() { return somefunc();}
+      |                         ^~~~~~~~
+gmake[1]: *** [CMakeFiles/cmTC_16e5c.dir/build.make:78: CMakeFiles/cmTC_16e5c.dir/src.cxx.o] Error 1
+gmake[1]: Leaving directory '/home/churrasquito77/Desktop/Taller/Worms/build/CMakeFiles/CMakeTmp'
+gmake: *** [Makefile:127: cmTC_16e5c/fast] Error 2
+
+
+Source file was:
+__declspec(deprecated) int somefunc() { return 0; }
+    int main() { return somefunc();}

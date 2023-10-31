@@ -16,11 +16,13 @@ list(FILTER CLIENT_SRCS EXCLUDE REGEX "main.cpp")
 list(FILTER SERVER_SRCS EXCLUDE REGEX "main.cpp")
 
 add_subdirectory(SDL2pp)
+add_subdirectory(Box2D)
 
 add_library(libcommon STATIC ${COMMON_SRCS})
 add_library(libserver STATIC ${SERVER_SRCS})
 add_library(libclient STATIC ${CLIENT_SRCS})
 target_link_libraries(libcommon SDL2pp)
+target_link_libraries(libcommon ${CMAKE_SOURCE_DIR}/Box2D/build/bin/libbox2d.a)
 TARGET_LINK_LIBRARIES(libserver libcommon)
 target_link_libraries(libclient libcommon)
 
