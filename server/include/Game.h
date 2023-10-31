@@ -5,6 +5,7 @@
 #include "../../common_libs/include/Thread.h"
 #include "../../common_libs/include/ProtectedQueue.h"
 
+#define MAX_TURN_SECONDS 120
 /*GameLoop gameLogic*/
 class Game : public Thread {
  private:
