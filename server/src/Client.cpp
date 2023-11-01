@@ -6,10 +6,21 @@ Client::Client(Socket peer, MatchesMonitor* matches) : m_Protocol(std::move(peer
 void Client::run() {
     InfoServer infoServer(ActionToClient::TC_GAME_LIST, m_Matches->getGames(), m_Matches->getAllPlayers());
     m_Protocol.sendMessage(std::ref(infoServer));
-    ClientResponse clientResponse;
-    while (!m_Protocol.isClosed() && !clientResponse.isQuit()) {
-        m_Protocol.recvClientResponse(clientResponse);
-        switch (clientResponse.getAction()) {
+    while (!m_Protocol.isClosed()) {
+    }
+    ClientSender sender(std::ref(m_Protocol), &m_UpdatesGame, idPlayer);
+    sender.start();
+    //Receiver state
+    while (!m_Protocol.isClosed()) {
+        ClientInitGame clientInitGame;
+        std::unique_ptr<HandlerInitGame> handler = factoryHandler(clientInitGame.getAction(), clientInitGame);
+        //handlerInitGame->handle(std::ref(clientInitGame));
+        m_Protocol.recvClientInitGame(std::ref(clientInitGame));
+        //clientInitGame.executeAction(std::ref(m_Matches), std::ref(m_UpdatesGame), idPlayer, idGame);
+        m_InputActions->push("clientResponse");
+    }
+}
+/*switch (clientResponse.getAction()) {
             case ActionFromClient::FC_CREATE_GAME: {
                 idGame = m_Matches->createGame();
                 idPlayer = m_Matches->addPlayer(idGame, &m_UpdatesGame);
@@ -33,17 +44,7 @@ void Client::run() {
             default: {
                 break;
             }
-        }
-    }
-    ClientSender sender(std::ref(m_Protocol), &m_UpdatesGame, idPlayer);
-    sender.start();
-    //Receiver state
-    while (!m_Protocol.isClosed()) {
-        m_Protocol.recvClientResponse(clientResponse);
-        //Concat idPlayer + action
-        m_InputActions->push("clientResponse");
-    }
-}
+        }*/
 
 bool Client::isDead() {
     return !m_KeepRunning.load();
@@ -56,4 +57,10 @@ void Client::stop() {
 void Client::kill() {
     m_Protocol.shutdown(SHUT_RDWR);
     m_Protocol.close();
+}
+
+std::unique_ptr<HandlerInitGame> Client::factoryHandler(ActionFromClient actionFromClient, ClientInitGame& clientInitGame) {
+    if (actionFromClient == ActionFromClient::FC_CREATE_GAME) {
+        return std::make_unique<CreateGameHandler>(std::ref(clientInitGame));
+    }
 }

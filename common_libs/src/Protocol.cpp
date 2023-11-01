@@ -19,12 +19,12 @@ uint16_t Protocol::recvTwoBytes() {
     return ntohs(aux);
 }
 
-void Protocol::recvMessage(std::string& message) {
+std::string Protocol::recvString() {
     uint16_t size = recvTwoBytes();
     std::vector<char> messageFromServer(size + 1);
     socket.recvall(messageFromServer.data(), size, &wasClosed);
     messageFromServer[size] = '\0';
-    message = std::string(messageFromServer.data());
+    return messageFromServer.data();
 }
 
 void Protocol::sendByte(uint8_t byte) {
@@ -39,7 +39,7 @@ void Protocol::sendTwoBytes(uint16_t bytes) {
     }
 }
 
-void Protocol::sendMessage(const std::string& message) {
+void Protocol::sendString(const std::string &message) {
     uint16_t size = message.size();
     sendTwoBytes(size);
     socket.sendall(message.c_str(), size, &wasClosed);
@@ -77,14 +77,12 @@ Protocol::~Protocol() {
 }
 bool Protocol::isClosed() const { return wasClosed; }
 
-void Protocol::recvClientResponse(ClientResponse& clientResponse) {
-    uint8_t action = recvByte();
-    auto actionFromClient = ActionFromClient(action);
-    clientResponse.setAction(actionFromClient);
-    if (actionFromClient == ActionFromClient::FC_JOIN_GAME) {
-        uint8_t idGame = recvByte();
-        clientResponse.setIdGame(idGame);
-    }
+void Protocol::recvClientInitGame(ClientInitGame &clientInitGame) {
+    clientInitGame.setAction(getAction(recvByte()));
+    clientInitGame.setIdGame(recvByte());
+    clientInitGame.setGameName(recvString());
+    clientInitGame.setMapName(recvString());
+    clientInitGame.setPlayers(recvByte());
 }
 
 void Protocol::recvServerInfo(InfoServer& infoServer) {
@@ -100,13 +98,6 @@ void Protocol::recvServerInfo(InfoServer& infoServer) {
     infoServer.setPlayers(playersList);
 }
 
-/*void Protocol::sendMessage(ToClientMessage &message) {
-    message.serialize(*this);
-}
-
-void Protocol::receiveMessage(ClientMessage &clientMessage) {
-    clientMessage.deserialize(*this);
-}*/
 
 
 
