@@ -12,14 +12,26 @@ CreateGameWindow::CreateGameWindow(QWidget *parent) : QWidget(parent), buttonCre
     setStyleSheet("QPushButton { font-size: 16px; background-color: #3498db; color: #ffffff; }"
                   "QLabel { font-size: 14px; }");
 
+    // Crear un desplegable para el campo "Mapa"
+    comboBoxMapa = new QComboBox();
+    comboBoxMapa->addItem("Mapa 1");
+    comboBoxMapa->addItem("Mapa 2");
+    comboBoxMapa->addItem("Mapa 3");
+
+    // Agregar elementos al diseño vertical
     layoutV->addWidget(new QLabel("Mapa:"));
-    layoutV->addWidget(&this->editGameMap);
+    layoutV->addWidget(comboBoxMapa);
 
     layoutV->addWidget(new QLabel("Nombre de la partida:"));
     layoutV->addWidget(&this->editGameName);
 
+    comboBoxPlayers = new QComboBox();
+    comboBoxPlayers->addItem("2");
+    comboBoxPlayers->addItem("4");
+    comboBoxPlayers->addItem("6");
+
     layoutV->addWidget(new QLabel("Cantidad de jugadores:"));
-    layoutV->addWidget(&this->editGameAmountPlayers);
+    layoutV->addWidget(comboBoxPlayers);
 
     layoutV->addWidget(&buttonCreateGame);
 
@@ -32,9 +44,14 @@ void CreateGameWindow::slotCreateGame() {
     qDebug() << "Botón 'Iniciar Partida' presionado.";
 
     //Me guardo el mapa, el nombre de la partida y la cantidad de jugadores
-    QString map = this->editGameMap.text();
+    QString mapa_seleccionado = this->comboBoxMapa->currentText();
     QString name = this->editGameName.text();
-    QString amountPlayers = this->editGameAmountPlayers.text();
+    QString amountPlayers = this->comboBoxPlayers->currentText();
 
+    //Imprimo el nombre del mapa seleccionado, el nombre de la partida y la cantidad de jugadores
+    qDebug() << "Mapa seleccionado: " << mapa_seleccionado;
+    qDebug() << "Nombre de la partida: " << name;
+    qDebug() << "Cantidad de jugadores: " << amountPlayers;
+    
     this->close();
 }

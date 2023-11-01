@@ -9,6 +9,7 @@
 #include <QVBoxLayout>
 #include <QLineEdit>
 #include <QDebug>
+#include <QComboBox>
 
 class CreateGameWindow : public QWidget {
 public:
@@ -17,8 +18,8 @@ public:
 private:
     QPushButton buttonCreateGame;
     QLineEdit editGameName;
-    QLineEdit editGameAmountPlayers;
-    QLineEdit editGameMap;
+    QComboBox *comboBoxMapa;
+    QComboBox *comboBoxPlayers;
 
 public slots:
     void slotCreateGame();
