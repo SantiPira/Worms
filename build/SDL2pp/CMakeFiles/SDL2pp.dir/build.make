@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/fran/Escritorio/Taller_/Worms
+CMAKE_SOURCE_DIR = /home/vic/Escritorio/universidad/materias/taller_i/tps/worms
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/fran/Escritorio/Taller_/Worms/build
+CMAKE_BINARY_DIR = /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build
 
 # Include any dependencies generated for this target.
 include SDL2pp/CMakeFiles/SDL2pp.dir/depend.make
@@ -72,226 +72,226 @@ include SDL2pp/CMakeFiles/SDL2pp.dir/flags.make
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioDevice.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/flags.make
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioDevice.cc.o: ../SDL2pp/SDL2pp/AudioDevice.cc
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioDevice.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioDevice.cc.o"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioDevice.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/AudioDevice.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/AudioDevice.cc.o -c /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/AudioDevice.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioDevice.cc.o"
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioDevice.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/AudioDevice.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/AudioDevice.cc.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/AudioDevice.cc
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioDevice.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SDL2pp.dir/SDL2pp/AudioDevice.cc.i"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/AudioDevice.cc > CMakeFiles/SDL2pp.dir/SDL2pp/AudioDevice.cc.i
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/AudioDevice.cc > CMakeFiles/SDL2pp.dir/SDL2pp/AudioDevice.cc.i
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioDevice.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SDL2pp.dir/SDL2pp/AudioDevice.cc.s"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/AudioDevice.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/AudioDevice.cc.s
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/AudioDevice.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/AudioDevice.cc.s
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioLock.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/flags.make
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioLock.cc.o: ../SDL2pp/SDL2pp/AudioLock.cc
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioLock.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioLock.cc.o"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioLock.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/AudioLock.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/AudioLock.cc.o -c /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/AudioLock.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioLock.cc.o"
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioLock.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/AudioLock.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/AudioLock.cc.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/AudioLock.cc
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioLock.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SDL2pp.dir/SDL2pp/AudioLock.cc.i"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/AudioLock.cc > CMakeFiles/SDL2pp.dir/SDL2pp/AudioLock.cc.i
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/AudioLock.cc > CMakeFiles/SDL2pp.dir/SDL2pp/AudioLock.cc.i
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioLock.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SDL2pp.dir/SDL2pp/AudioLock.cc.s"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/AudioLock.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/AudioLock.cc.s
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/AudioLock.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/AudioLock.cc.s
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioSpec.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/flags.make
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioSpec.cc.o: ../SDL2pp/SDL2pp/AudioSpec.cc
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioSpec.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioSpec.cc.o"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioSpec.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/AudioSpec.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/AudioSpec.cc.o -c /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/AudioSpec.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioSpec.cc.o"
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioSpec.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/AudioSpec.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/AudioSpec.cc.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/AudioSpec.cc
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioSpec.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SDL2pp.dir/SDL2pp/AudioSpec.cc.i"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/AudioSpec.cc > CMakeFiles/SDL2pp.dir/SDL2pp/AudioSpec.cc.i
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/AudioSpec.cc > CMakeFiles/SDL2pp.dir/SDL2pp/AudioSpec.cc.i
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioSpec.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SDL2pp.dir/SDL2pp/AudioSpec.cc.s"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/AudioSpec.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/AudioSpec.cc.s
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/AudioSpec.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/AudioSpec.cc.s
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Color.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/flags.make
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Color.cc.o: ../SDL2pp/SDL2pp/Color.cc
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Color.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Color.cc.o"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Color.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/Color.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/Color.cc.o -c /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Color.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Color.cc.o"
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Color.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/Color.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/Color.cc.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Color.cc
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Color.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SDL2pp.dir/SDL2pp/Color.cc.i"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Color.cc > CMakeFiles/SDL2pp.dir/SDL2pp/Color.cc.i
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Color.cc > CMakeFiles/SDL2pp.dir/SDL2pp/Color.cc.i
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Color.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SDL2pp.dir/SDL2pp/Color.cc.s"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Color.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/Color.cc.s
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Color.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/Color.cc.s
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Exception.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/flags.make
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Exception.cc.o: ../SDL2pp/SDL2pp/Exception.cc
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Exception.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Exception.cc.o"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Exception.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/Exception.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/Exception.cc.o -c /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Exception.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Exception.cc.o"
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Exception.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/Exception.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/Exception.cc.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Exception.cc
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Exception.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SDL2pp.dir/SDL2pp/Exception.cc.i"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Exception.cc > CMakeFiles/SDL2pp.dir/SDL2pp/Exception.cc.i
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Exception.cc > CMakeFiles/SDL2pp.dir/SDL2pp/Exception.cc.i
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Exception.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SDL2pp.dir/SDL2pp/Exception.cc.s"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Exception.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/Exception.cc.s
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Exception.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/Exception.cc.s
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Point.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/flags.make
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Point.cc.o: ../SDL2pp/SDL2pp/Point.cc
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Point.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Point.cc.o"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Point.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/Point.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/Point.cc.o -c /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Point.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Point.cc.o"
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Point.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/Point.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/Point.cc.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Point.cc
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Point.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SDL2pp.dir/SDL2pp/Point.cc.i"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Point.cc > CMakeFiles/SDL2pp.dir/SDL2pp/Point.cc.i
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Point.cc > CMakeFiles/SDL2pp.dir/SDL2pp/Point.cc.i
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Point.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SDL2pp.dir/SDL2pp/Point.cc.s"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Point.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/Point.cc.s
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Point.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/Point.cc.s
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/RWops.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/flags.make
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/RWops.cc.o: ../SDL2pp/SDL2pp/RWops.cc
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/RWops.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/RWops.cc.o"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/RWops.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/RWops.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/RWops.cc.o -c /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/RWops.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/RWops.cc.o"
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/RWops.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/RWops.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/RWops.cc.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/RWops.cc
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/RWops.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SDL2pp.dir/SDL2pp/RWops.cc.i"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/RWops.cc > CMakeFiles/SDL2pp.dir/SDL2pp/RWops.cc.i
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/RWops.cc > CMakeFiles/SDL2pp.dir/SDL2pp/RWops.cc.i
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/RWops.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SDL2pp.dir/SDL2pp/RWops.cc.s"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/RWops.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/RWops.cc.s
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/RWops.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/RWops.cc.s
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Rect.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/flags.make
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Rect.cc.o: ../SDL2pp/SDL2pp/Rect.cc
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Rect.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Rect.cc.o"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Rect.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/Rect.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/Rect.cc.o -c /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Rect.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Rect.cc.o"
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Rect.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/Rect.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/Rect.cc.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Rect.cc
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Rect.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SDL2pp.dir/SDL2pp/Rect.cc.i"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Rect.cc > CMakeFiles/SDL2pp.dir/SDL2pp/Rect.cc.i
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Rect.cc > CMakeFiles/SDL2pp.dir/SDL2pp/Rect.cc.i
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Rect.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SDL2pp.dir/SDL2pp/Rect.cc.s"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Rect.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/Rect.cc.s
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Rect.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/Rect.cc.s
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Renderer.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/flags.make
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Renderer.cc.o: ../SDL2pp/SDL2pp/Renderer.cc
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Renderer.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Renderer.cc.o"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Renderer.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/Renderer.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/Renderer.cc.o -c /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Renderer.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Renderer.cc.o"
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Renderer.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/Renderer.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/Renderer.cc.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Renderer.cc
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Renderer.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SDL2pp.dir/SDL2pp/Renderer.cc.i"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Renderer.cc > CMakeFiles/SDL2pp.dir/SDL2pp/Renderer.cc.i
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Renderer.cc > CMakeFiles/SDL2pp.dir/SDL2pp/Renderer.cc.i
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Renderer.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SDL2pp.dir/SDL2pp/Renderer.cc.s"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Renderer.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/Renderer.cc.s
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Renderer.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/Renderer.cc.s
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SDL.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/flags.make
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SDL.cc.o: ../SDL2pp/SDL2pp/SDL.cc
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SDL.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SDL.cc.o"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SDL.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/SDL.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/SDL.cc.o -c /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/SDL.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SDL.cc.o"
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SDL.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/SDL.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/SDL.cc.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/SDL.cc
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SDL.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SDL2pp.dir/SDL2pp/SDL.cc.i"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/SDL.cc > CMakeFiles/SDL2pp.dir/SDL2pp/SDL.cc.i
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/SDL.cc > CMakeFiles/SDL2pp.dir/SDL2pp/SDL.cc.i
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SDL.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SDL2pp.dir/SDL2pp/SDL.cc.s"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/SDL.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/SDL.cc.s
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/SDL.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/SDL.cc.s
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Surface.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/flags.make
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Surface.cc.o: ../SDL2pp/SDL2pp/Surface.cc
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Surface.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Surface.cc.o"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Surface.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/Surface.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/Surface.cc.o -c /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Surface.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Surface.cc.o"
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Surface.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/Surface.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/Surface.cc.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Surface.cc
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Surface.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SDL2pp.dir/SDL2pp/Surface.cc.i"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Surface.cc > CMakeFiles/SDL2pp.dir/SDL2pp/Surface.cc.i
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Surface.cc > CMakeFiles/SDL2pp.dir/SDL2pp/Surface.cc.i
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Surface.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SDL2pp.dir/SDL2pp/Surface.cc.s"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Surface.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/Surface.cc.s
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Surface.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/Surface.cc.s
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SurfaceLock.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/flags.make
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SurfaceLock.cc.o: ../SDL2pp/SDL2pp/SurfaceLock.cc
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SurfaceLock.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SurfaceLock.cc.o"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SurfaceLock.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/SurfaceLock.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/SurfaceLock.cc.o -c /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/SurfaceLock.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SurfaceLock.cc.o"
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SurfaceLock.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/SurfaceLock.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/SurfaceLock.cc.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/SurfaceLock.cc
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SurfaceLock.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SDL2pp.dir/SDL2pp/SurfaceLock.cc.i"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/SurfaceLock.cc > CMakeFiles/SDL2pp.dir/SDL2pp/SurfaceLock.cc.i
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/SurfaceLock.cc > CMakeFiles/SDL2pp.dir/SDL2pp/SurfaceLock.cc.i
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SurfaceLock.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SDL2pp.dir/SDL2pp/SurfaceLock.cc.s"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/SurfaceLock.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/SurfaceLock.cc.s
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/SurfaceLock.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/SurfaceLock.cc.s
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Texture.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/flags.make
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Texture.cc.o: ../SDL2pp/SDL2pp/Texture.cc
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Texture.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Texture.cc.o"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Texture.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/Texture.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/Texture.cc.o -c /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Texture.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Texture.cc.o"
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Texture.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/Texture.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/Texture.cc.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Texture.cc
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Texture.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SDL2pp.dir/SDL2pp/Texture.cc.i"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Texture.cc > CMakeFiles/SDL2pp.dir/SDL2pp/Texture.cc.i
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Texture.cc > CMakeFiles/SDL2pp.dir/SDL2pp/Texture.cc.i
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Texture.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SDL2pp.dir/SDL2pp/Texture.cc.s"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Texture.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/Texture.cc.s
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Texture.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/Texture.cc.s
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/TextureLock.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/flags.make
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/TextureLock.cc.o: ../SDL2pp/SDL2pp/TextureLock.cc
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/TextureLock.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/TextureLock.cc.o"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/TextureLock.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/TextureLock.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/TextureLock.cc.o -c /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/TextureLock.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/TextureLock.cc.o"
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/TextureLock.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/TextureLock.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/TextureLock.cc.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/TextureLock.cc
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/TextureLock.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SDL2pp.dir/SDL2pp/TextureLock.cc.i"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/TextureLock.cc > CMakeFiles/SDL2pp.dir/SDL2pp/TextureLock.cc.i
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/TextureLock.cc > CMakeFiles/SDL2pp.dir/SDL2pp/TextureLock.cc.i
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/TextureLock.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SDL2pp.dir/SDL2pp/TextureLock.cc.s"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/TextureLock.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/TextureLock.cc.s
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/TextureLock.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/TextureLock.cc.s
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Wav.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/flags.make
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Wav.cc.o: ../SDL2pp/SDL2pp/Wav.cc
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Wav.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Wav.cc.o"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Wav.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/Wav.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/Wav.cc.o -c /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Wav.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Wav.cc.o"
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Wav.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/Wav.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/Wav.cc.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Wav.cc
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Wav.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SDL2pp.dir/SDL2pp/Wav.cc.i"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Wav.cc > CMakeFiles/SDL2pp.dir/SDL2pp/Wav.cc.i
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Wav.cc > CMakeFiles/SDL2pp.dir/SDL2pp/Wav.cc.i
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Wav.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SDL2pp.dir/SDL2pp/Wav.cc.s"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Wav.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/Wav.cc.s
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Wav.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/Wav.cc.s
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Window.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/flags.make
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Window.cc.o: ../SDL2pp/SDL2pp/Window.cc
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Window.cc.o: SDL2pp/CMakeFiles/SDL2pp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Window.cc.o"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Window.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/Window.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/Window.cc.o -c /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Window.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Window.cc.o"
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Window.cc.o -MF CMakeFiles/SDL2pp.dir/SDL2pp/Window.cc.o.d -o CMakeFiles/SDL2pp.dir/SDL2pp/Window.cc.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Window.cc
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Window.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SDL2pp.dir/SDL2pp/Window.cc.i"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Window.cc > CMakeFiles/SDL2pp.dir/SDL2pp/Window.cc.i
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Window.cc > CMakeFiles/SDL2pp.dir/SDL2pp/Window.cc.i
 
 SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Window.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SDL2pp.dir/SDL2pp/Window.cc.s"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Window.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/Window.cc.s
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Window.cc -o CMakeFiles/SDL2pp.dir/SDL2pp/Window.cc.s
 
 # Object files for target SDL2pp
 SDL2pp_OBJECTS = \
@@ -335,9 +335,9 @@ SDL2pp/libSDL2pp.so.8.3.0: SDL2pp/CMakeFiles/SDL2pp.dir/build.make
 SDL2pp/libSDL2pp.so.8.3.0: /usr/lib/x86_64-linux-gnu/libSDL2.so
 SDL2pp/libSDL2pp.so.8.3.0: /usr/lib/x86_64-linux-gnu/libSDL2main.a
 SDL2pp/libSDL2pp.so.8.3.0: SDL2pp/CMakeFiles/SDL2pp.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX shared library libSDL2pp.so"
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SDL2pp.dir/link.txt --verbose=$(VERBOSE)
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && $(CMAKE_COMMAND) -E cmake_symlink_library libSDL2pp.so.8.3.0 libSDL2pp.so.8 libSDL2pp.so
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX shared library libSDL2pp.so"
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SDL2pp.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && $(CMAKE_COMMAND) -E cmake_symlink_library libSDL2pp.so.8.3.0 libSDL2pp.so.8 libSDL2pp.so
 
 SDL2pp/libSDL2pp.so.8: SDL2pp/libSDL2pp.so.8.3.0
 	@$(CMAKE_COMMAND) -E touch_nocreate SDL2pp/libSDL2pp.so.8
@@ -350,10 +350,10 @@ SDL2pp/CMakeFiles/SDL2pp.dir/build: SDL2pp/libSDL2pp.so
 .PHONY : SDL2pp/CMakeFiles/SDL2pp.dir/build
 
 SDL2pp/CMakeFiles/SDL2pp.dir/clean:
-	cd /home/fran/Escritorio/Taller_/Worms/build/SDL2pp && $(CMAKE_COMMAND) -P CMakeFiles/SDL2pp.dir/cmake_clean.cmake
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp && $(CMAKE_COMMAND) -P CMakeFiles/SDL2pp.dir/cmake_clean.cmake
 .PHONY : SDL2pp/CMakeFiles/SDL2pp.dir/clean
 
 SDL2pp/CMakeFiles/SDL2pp.dir/depend:
-	cd /home/fran/Escritorio/Taller_/Worms/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/fran/Escritorio/Taller_/Worms /home/fran/Escritorio/Taller_/Worms/SDL2pp /home/fran/Escritorio/Taller_/Worms/build /home/fran/Escritorio/Taller_/Worms/build/SDL2pp /home/fran/Escritorio/Taller_/Worms/build/SDL2pp/CMakeFiles/SDL2pp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/vic/Escritorio/universidad/materias/taller_i/tps/worms /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp/CMakeFiles/SDL2pp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : SDL2pp/CMakeFiles/SDL2pp.dir/depend
 

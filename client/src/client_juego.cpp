@@ -1,7 +1,7 @@
 #include "client_juego.h"
 #include "menuWindow.h"
 
-Juego::Juego(const char* ip, const char* puerto) : ip(ip), puerto(puerto){}
+Juego::Juego(const char* ip, const char* puerto) : thread_emisor(ip, puerto) {}
 
 void Juego::menu_window(){
     MenuWindow *menu = new MenuWindow();
@@ -17,10 +17,9 @@ void Juego::createGame(std::string mapa, std::string nombre, std::string cantida
 
 void Juego::iniciar_juego() {
 
-    //ventana de juego
-    std::cout<<"El ip es: "<<ip<<std::endl;
-    std::cout<<"El puerto es: "<<puerto<<std::endl;
-
     menu_window();
+
+    this->thread_emisor.start();
+    this->thread_emisor.join();
 
 }

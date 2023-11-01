@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/fran/Escritorio/Taller_/Worms
+CMAKE_SOURCE_DIR = /home/vic/Escritorio/universidad/materias/taller_i/tps/worms
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/fran/Escritorio/Taller_/Worms/build
+CMAKE_BINARY_DIR = /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -132,9 +132,9 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fran/Escritorio/Taller_/Worms/build/CMakeFiles /home/fran/Escritorio/Taller_/Worms/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fran/Escritorio/Taller_/Worms/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -286,6 +286,78 @@ client/src/client_juego.s: client/src/client_juego.cpp.s
 client/src/client_juego.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_juego.cpp.s
 .PHONY : client/src/client_juego.cpp.s
+
+client/src/client_protocol.o: client/src/client_protocol.cpp.o
+.PHONY : client/src/client_protocol.o
+
+# target to build an object file
+client/src/client_protocol.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_protocol.cpp.o
+.PHONY : client/src/client_protocol.cpp.o
+
+client/src/client_protocol.i: client/src/client_protocol.cpp.i
+.PHONY : client/src/client_protocol.i
+
+# target to preprocess a source file
+client/src/client_protocol.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_protocol.cpp.i
+.PHONY : client/src/client_protocol.cpp.i
+
+client/src/client_protocol.s: client/src/client_protocol.cpp.s
+.PHONY : client/src/client_protocol.s
+
+# target to generate assembly for a file
+client/src/client_protocol.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_protocol.cpp.s
+.PHONY : client/src/client_protocol.cpp.s
+
+client/src/client_reciever.o: client/src/client_reciever.cpp.o
+.PHONY : client/src/client_reciever.o
+
+# target to build an object file
+client/src/client_reciever.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_reciever.cpp.o
+.PHONY : client/src/client_reciever.cpp.o
+
+client/src/client_reciever.i: client/src/client_reciever.cpp.i
+.PHONY : client/src/client_reciever.i
+
+# target to preprocess a source file
+client/src/client_reciever.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_reciever.cpp.i
+.PHONY : client/src/client_reciever.cpp.i
+
+client/src/client_reciever.s: client/src/client_reciever.cpp.s
+.PHONY : client/src/client_reciever.s
+
+# target to generate assembly for a file
+client/src/client_reciever.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_reciever.cpp.s
+.PHONY : client/src/client_reciever.cpp.s
+
+client/src/client_sender.o: client/src/client_sender.cpp.o
+.PHONY : client/src/client_sender.o
+
+# target to build an object file
+client/src/client_sender.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_sender.cpp.o
+.PHONY : client/src/client_sender.cpp.o
+
+client/src/client_sender.i: client/src/client_sender.cpp.i
+.PHONY : client/src/client_sender.i
+
+# target to preprocess a source file
+client/src/client_sender.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_sender.cpp.i
+.PHONY : client/src/client_sender.cpp.i
+
+client/src/client_sender.s: client/src/client_sender.cpp.s
+.PHONY : client/src/client_sender.s
+
+# target to generate assembly for a file
+client/src/client_sender.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_sender.cpp.s
+.PHONY : client/src/client_sender.cpp.s
 
 client/src/createGameWindow.o: client/src/createGameWindow.cpp.o
 .PHONY : client/src/createGameWindow.o
@@ -695,6 +767,15 @@ help:
 	@echo "... client/src/client_juego.o"
 	@echo "... client/src/client_juego.i"
 	@echo "... client/src/client_juego.s"
+	@echo "... client/src/client_protocol.o"
+	@echo "... client/src/client_protocol.i"
+	@echo "... client/src/client_protocol.s"
+	@echo "... client/src/client_reciever.o"
+	@echo "... client/src/client_reciever.i"
+	@echo "... client/src/client_reciever.s"
+	@echo "... client/src/client_sender.o"
+	@echo "... client/src/client_sender.i"
+	@echo "... client/src/client_sender.s"
 	@echo "... client/src/createGameWindow.o"
 	@echo "... client/src/createGameWindow.i"
 	@echo "... client/src/createGameWindow.s"

@@ -1,13 +1,15 @@
 #ifndef CLIENT_JUEGO_H
 #define CLIENT_JUEGO_H
 
+#include "client_sender.h"
+#include "ProtectedQueue.h"
+
 #include <iostream>
 
 class Juego{
     private:
-    std::string ip;
-    std::string puerto;
-    //ClientProtocol protocolo_cliente;
+    ClientSender thread_emisor; 
+    //cola de juan (muy profunda).
 
     public:
 

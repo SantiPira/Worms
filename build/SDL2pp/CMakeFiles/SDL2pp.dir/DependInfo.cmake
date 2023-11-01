@@ -8,28 +8,28 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/AudioDevice.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioDevice.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioDevice.cc.o.d"
-  "/home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/AudioLock.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioLock.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioLock.cc.o.d"
-  "/home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/AudioSpec.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioSpec.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioSpec.cc.o.d"
-  "/home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Color.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Color.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Color.cc.o.d"
-  "/home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Exception.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Exception.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Exception.cc.o.d"
-  "/home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Point.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Point.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Point.cc.o.d"
-  "/home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/RWops.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/RWops.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/RWops.cc.o.d"
-  "/home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Rect.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Rect.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Rect.cc.o.d"
-  "/home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Renderer.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Renderer.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Renderer.cc.o.d"
-  "/home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/SDL.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SDL.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SDL.cc.o.d"
-  "/home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Surface.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Surface.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Surface.cc.o.d"
-  "/home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/SurfaceLock.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SurfaceLock.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SurfaceLock.cc.o.d"
-  "/home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Texture.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Texture.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Texture.cc.o.d"
-  "/home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/TextureLock.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/TextureLock.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/TextureLock.cc.o.d"
-  "/home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Wav.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Wav.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Wav.cc.o.d"
-  "/home/fran/Escritorio/Taller_/Worms/SDL2pp/SDL2pp/Window.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Window.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Window.cc.o.d"
+  "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/AudioDevice.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioDevice.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioDevice.cc.o.d"
+  "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/AudioLock.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioLock.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioLock.cc.o.d"
+  "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/AudioSpec.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioSpec.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/AudioSpec.cc.o.d"
+  "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Color.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Color.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Color.cc.o.d"
+  "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Exception.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Exception.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Exception.cc.o.d"
+  "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Point.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Point.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Point.cc.o.d"
+  "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/RWops.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/RWops.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/RWops.cc.o.d"
+  "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Rect.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Rect.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Rect.cc.o.d"
+  "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Renderer.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Renderer.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Renderer.cc.o.d"
+  "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/SDL.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SDL.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SDL.cc.o.d"
+  "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Surface.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Surface.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Surface.cc.o.d"
+  "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/SurfaceLock.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SurfaceLock.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/SurfaceLock.cc.o.d"
+  "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Texture.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Texture.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Texture.cc.o.d"
+  "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/TextureLock.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/TextureLock.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/TextureLock.cc.o.d"
+  "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Wav.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Wav.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Wav.cc.o.d"
+  "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Window.cc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Window.cc.o" "gcc" "SDL2pp/CMakeFiles/SDL2pp.dir/SDL2pp/Window.cc.o.d"
   )
 
 # Pairs of files generated by the same build rule.
 set(CMAKE_MULTIPLE_OUTPUT_PAIRS
-  "/home/fran/Escritorio/Taller_/Worms/build/SDL2pp/libSDL2pp.so" "/home/fran/Escritorio/Taller_/Worms/build/SDL2pp/libSDL2pp.so.8.3.0"
-  "/home/fran/Escritorio/Taller_/Worms/build/SDL2pp/libSDL2pp.so.8" "/home/fran/Escritorio/Taller_/Worms/build/SDL2pp/libSDL2pp.so.8.3.0"
+  "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp/libSDL2pp.so" "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp/libSDL2pp.so.8.3.0"
+  "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp/libSDL2pp.so.8" "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/SDL2pp/libSDL2pp.so.8.3.0"
   )
 
 

@@ -371,8 +371,34 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qtextformat.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qpen.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qtextoption.h \
-  ../client/include/client_juego.h
+  ../client/include/client_juego.h \
+  ../client/include/client_sender.h \
+  ../common_libs/include/Thread.h \
+  /usr/include/c++/11/thread \
+  /usr/include/c++/11/bits/std_thread.h \
+  /usr/include/c++/11/bits/this_thread_sleep.h \
+  ../client/include/client_protocol.h \
+  ../common_libs/include/socket.h \
+  ../client/include/client_reciever.h \
+  ../common_libs/include/ProtectedQueue.h \
+  /usr/include/c++/11/queue \
+  /usr/include/c++/11/deque \
+  /usr/include/c++/11/bits/stl_deque.h \
+  /usr/include/c++/11/bits/deque.tcc \
+  /usr/include/c++/11/bits/stl_queue.h \
+  /usr/include/c++/11/mutex \
+  /usr/include/c++/11/bits/std_mutex.h \
+  /usr/include/c++/11/bits/unique_lock.h \
+  /usr/include/c++/11/condition_variable
 
+
+/usr/include/c++/11/bits/std_mutex.h:
+
+/usr/include/c++/11/mutex:
+
+../common_libs/include/ProtectedQueue.h:
+
+../client/include/client_sender.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtGui/qpen.h:
 
@@ -399,6 +425,8 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 /usr/include/x86_64-linux-gnu/qt5/QtGui/qfontmetrics.h:
 
 /usr/include/c++/11/pstl/glue_memory_defs.h:
+
+/usr/include/c++/11/queue:
 
 /usr/include/c++/11/bits/shared_ptr_atomic.h:
 
@@ -429,6 +457,8 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 /usr/include/x86_64-linux-gnu/qt5/QtGui/qkeysequence.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtGui/qpolygon.h:
+
+/usr/include/c++/11/deque:
 
 /usr/include/x86_64-linux-gnu/qt5/QtGui/qmatrix.h:
 
@@ -498,6 +528,8 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qstringlist.h:
 
+/usr/include/c++/11/bits/deque.tcc:
+
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qbytearraylist.h:
 
 /usr/include/x86_64-linux-gnu/bits/xopen_lim.h:
@@ -540,6 +572,8 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/endian.h:
 
+/usr/include/c++/11/bits/stl_deque.h:
+
 /usr/include/x86_64-linux-gnu/gnu/stubs.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qboxlayout.h:
@@ -549,6 +583,8 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 /usr/include/c++/11/algorithm:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h:
+
+../common_libs/include/Thread.h:
 
 /usr/include/c++/11/bits/locale_classes.h:
 
@@ -702,6 +738,8 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 
 /usr/include/c++/11/ext/type_traits.h:
 
+../common_libs/include/socket.h:
+
 /usr/include/c++/11/ext/numeric_traits.h:
 
 /usr/include/c++/11/bits/atomic_base.h:
@@ -814,9 +852,13 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
 
+../client/include/client_protocol.h:
+
 /usr/include/c++/11/bits/std_function.h:
 
 /usr/include/c++/11/bits/stl_tempbuf.h:
+
+/usr/include/c++/11/bits/stl_queue.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
 
@@ -847,6 +889,10 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 /usr/include/c++/11/atomic:
 
 /usr/include/x86_64-linux-gnu/bits/cpu-set.h:
+
+/usr/include/c++/11/condition_variable:
+
+/usr/include/c++/11/thread:
 
 /usr/include/c++/11/ratio:
 
@@ -889,6 +935,8 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 /usr/include/ctype.h:
 
 /usr/include/c++/11/bits/stream_iterator.h:
+
+/usr/include/c++/11/bits/std_thread.h:
 
 /usr/include/c++/11/bits/cpp_type_traits.h:
 
@@ -996,6 +1044,8 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/ctype_inline.h:
 
+/usr/include/c++/11/bits/this_thread_sleep.h:
+
 /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
 
 /usr/include/c++/11/bits/locale_facets.tcc:
@@ -1024,6 +1074,8 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qsystemdetection.h:
 
+../client/include/client_reciever.h:
+
 /usr/include/c++/11/bits/refwrap.h:
 
 /usr/include/limits.h:
@@ -1049,6 +1101,8 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 /usr/include/c++/11/bits/stl_heap.h:
 
 /usr/include/c++/11/array:
+
+/usr/include/c++/11/bits/unique_lock.h:
 
 /usr/include/c++/11/bits/uses_allocator.h:
 
