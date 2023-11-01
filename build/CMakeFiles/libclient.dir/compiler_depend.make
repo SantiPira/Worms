@@ -747,7 +747,20 @@ CMakeFiles/libclient.dir/client/src/createGameWindow.cpp.o: ../client/src/create
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qdebug.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qtextstream.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qset.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtCore/qcontiguouscache.h
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qcontiguouscache.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QComboBox \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qcombobox.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractitemdelegate.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qstyleoption.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractspinbox.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtGui/qvalidator.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qregularexpression.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qslider.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractslider.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qstyle.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtabbar.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qrubberband.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qabstractitemmodel.h
 
 CMakeFiles/libclient.dir/client/src/mainWindow.cpp.o: ../client/src/mainWindow.cpp \
   /usr/include/stdc-predef.h \
@@ -1476,12 +1489,39 @@ CMakeFiles/libclient.dir/client/src/menuWindow.cpp.o: ../client/src/menuWindow.c
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qtextstream.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qset.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qcontiguouscache.h \
-  ../client/include/createGameWindow.h
+  ../client/include/createGameWindow.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QComboBox \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qcombobox.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractitemdelegate.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qstyleoption.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractspinbox.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtGui/qvalidator.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qregularexpression.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qslider.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractslider.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qstyle.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtabbar.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qrubberband.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qabstractitemmodel.h
 
 
 ../client/src/menuWindow.cpp:
 
 ../client/src/mainWindow.cpp:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qabstractitemmodel.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qstyle.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractslider.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtGui/qvalidator.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qstyleoption.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qcombobox.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/QComboBox:
 
 ../client/src/createGameWindow.cpp:
 
@@ -1504,6 +1544,8 @@ CMakeFiles/libclient.dir/client/src/menuWindow.cpp.o: ../client/src/menuWindow.c
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QLineEdit:
 
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qgridlayout.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractitemdelegate.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlayoutitem.h:
 
@@ -1590,6 +1632,8 @@ CMakeFiles/libclient.dir/client/src/menuWindow.cpp.o: ../client/src/menuWindow.c
 /usr/include/x86_64-linux-gnu/qt5/QtGui/qguiapplication.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtGui/qcursor.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qregularexpression.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qsize.h:
 
@@ -1763,6 +1807,8 @@ CMakeFiles/libclient.dir/client/src/menuWindow.cpp.o: ../client/src/menuWindow.c
 
 /usr/include/x86_64-linux-gnu/bits/floatn-common.h:
 
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtabbar.h:
+
 /usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtGui/qtgui-config.h:
@@ -1824,6 +1870,8 @@ CMakeFiles/libclient.dir/client/src/menuWindow.cpp.o: ../client/src/menuWindow.c
 /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qsysinfo.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qslider.h:
 
 /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
 
@@ -1997,6 +2045,8 @@ CMakeFiles/libclient.dir/client/src/menuWindow.cpp.o: ../client/src/menuWindow.c
 
 /usr/include/c++/11/initializer_list:
 
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractspinbox.h:
+
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qpair.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qatomic_cxx11.h:
@@ -2084,6 +2134,8 @@ CMakeFiles/libclient.dir/client/src/menuWindow.cpp.o: ../client/src/menuWindow.c
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qstringview.h:
 
 /usr/include/c++/11/bits/charconv.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qrubberband.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qnumeric.h:
 
