@@ -1,7 +1,7 @@
 #include "menuWindow.h"
 #include "createGameWindow.h"
 
-MenuWindow::MenuWindow(QWidget *parent) : QWidget(parent), buttonCreate("Crear Partida"), buttonJoin("Unirse Partida") {
+MenuWindow::MenuWindow(QWidget *parent, Juego* juego) : QWidget(parent), juego(juego), buttonCreate("Crear Partida"), buttonJoin("Unirse Partida") {
     QVBoxLayout* layout = new QVBoxLayout();
 
     setWindowTitle("Menú del Juego");
@@ -33,7 +33,7 @@ void MenuWindow::slotCrearPartida() {
     this->close();
 
     // Crear ventana de crear partida
-    CreateGameWindow* createGameWindow = new CreateGameWindow();
+    CreateGameWindow* createGameWindow = new CreateGameWindow(nullptr, juego);
     createGameWindow->show();
 
 }

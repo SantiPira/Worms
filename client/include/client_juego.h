@@ -15,7 +15,9 @@ class Juego{
 
     void iniciar_juego();
 
-    void game_window();
+    void createGame(std::string mapa, std::string nombre, std::string cantidad_jugadores);
+
+    void menu_window();
 
 
 };

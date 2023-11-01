@@ -1,6 +1,6 @@
 #include "createGameWindow.h"
 
-CreateGameWindow::CreateGameWindow(QWidget *parent) : QWidget(parent), buttonCreateGame("Iniciar Partida") {
+CreateGameWindow::CreateGameWindow(QWidget *parent, Juego* juego) : QWidget(parent), juego(juego), buttonCreateGame("Iniciar Partida") {
     QVBoxLayout* layoutV = new QVBoxLayout();
 
     setWindowTitle("Creacion de partidas");
@@ -48,10 +48,7 @@ void CreateGameWindow::slotCreateGame() {
     QString name = this->editGameName.text();
     QString amountPlayers = this->comboBoxPlayers->currentText();
 
-    //Imprimo el nombre del mapa seleccionado, el nombre de la partida y la cantidad de jugadores
-    qDebug() << "Mapa seleccionado: " << mapa_seleccionado;
-    qDebug() << "Nombre de la partida: " << name;
-    qDebug() << "Cantidad de jugadores: " << amountPlayers;
-    
+    juego->createGame(mapa_seleccionado.toStdString(), name.toStdString(), amountPlayers.toStdString());
+
     this->close();
 }

@@ -9,10 +9,12 @@
 #include <QVBoxLayout>
 #include <QLineEdit>
 #include <QDebug>
+#include "client_juego.h"
 
 class MenuWindow : public QWidget {
 public:
-    MenuWindow(QWidget *parent = 0);
+    MenuWindow(QWidget *parent = 0, Juego* Juego = 0);
+    Juego* juego;
 
 private:
     QPushButton buttonCreate;
