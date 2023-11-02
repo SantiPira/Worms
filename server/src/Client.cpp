@@ -1,39 +1,44 @@
 #include "../include/Client.h"
-#include "../../common_libs/include/InfoServer.h"
-#include "../../common_libs/include/ClientRequest.h"
-#include <iostream>
 
-Client::Client(Socket peer, Games* games) : m_Protocol(std::move(peer)), m_KeepRunning(true), m_Games(games) {}
+
+Client::Client(Socket peer, MatchesMonitor* matches) : m_Protocol(std::move(peer)), m_KeepRunning(true),
+    m_Matches(matches), m_UpdatesGame(100) {}
 
 void Client::run() {
-    std::cout << "Client running" << std::endl;
-    InfoServer infoServer(0x00, m_Games->getGames(), m_Games->getAllPlayers());
-    m_Protocol.sendMessage(std::ref(infoServer));
-    ClientRequest clientRequest;
-    m_Protocol.recvClientRequest(clientRequest);
-    while (m_KeepRunning && !clientRequest.isQuit()) {
-        switch (clientRequest.getAction()) {
-            case 0x01: {
-                idGame = m_Games->createGame();
+    while (!m_Protocol.isClosed() && !hasGame) {
+        GameInfo clientResponse = m_Protocol.recvGameInfo();
+        switch (clientResponse.getIdAction()) {
+            case InitGameEnum::CREATE_GAME: {
+                idGame = m_Matches->createGame(clientResponse.getGameProperties()[0].m_GameName,
+                                               clientResponse.getGameProperties()[0].m_MapName);
+                idPlayer = m_Matches->addPlayer(idGame, &m_UpdatesGame);
+                m_InputActions = m_Matches->getInputActionGame(idGame);
                 hasGame = true;
                 break;
             }
-            case 0x02: {
-                m_Protocol.recvClientRequest(clientRequest);
-                m_Games->addPlayer(idGame);
+            case InitGameEnum::JOIN_GAME: {
+                idGame = clientResponse.getGameProperties()[0].m_idGame;
+                idPlayer = m_Matches->addPlayer(idGame, &m_UpdatesGame);
+                m_InputActions = m_Matches->getInputActionGame(idGame);
                 hasGame = true;
                 break;
             }
-            case 0x03: {
-                //gamesAvailables.setGames(m_Games->getAllPlayers());
-                //gamesAvailables.setGamesAvailables(m_Games->getGames());
-                m_Protocol.sendMessage(std::ref(infoServer));
+            case InitGameEnum::LIST_GAMES: {
+                GameInfo gameInfo(InitGameEnum::LIST_GAMES, m_Matches->getGameProperties());
+                m_Protocol.sendGameInfo(std::ref(gameInfo));
             }
             default: {
                 break;
             }
         }
-        m_Protocol.recvClientRequest(clientRequest);
+    }
+    ClientSender sender(std::ref(m_Protocol), &m_UpdatesGame, idPlayer);
+    sender.start();
+    //Receiver state
+    while (!m_Protocol.isClosed()) {
+        //handlerInitGame->handle(std::ref(clientInitGame));
+        //clientInitGame.executeAction(std::ref(m_Matches), std::ref(m_UpdatesGame), idPlayer, idGame);
+        m_InputActions->push("clientResponse");
     }
 }
 
@@ -49,3 +54,4 @@ void Client::kill() {
     m_Protocol.shutdown(SHUT_RDWR);
     m_Protocol.close();
 }
+

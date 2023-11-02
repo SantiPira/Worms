@@ -15,7 +15,7 @@
 class CreateGameWindow : public QWidget {
 public:
     CreateGameWindow(QWidget *parent = 0, Juego* Juego = 0);
-    Juego* juego;
+    Juego* m_Juego;
 
 private:
     QPushButton buttonCreateGame;

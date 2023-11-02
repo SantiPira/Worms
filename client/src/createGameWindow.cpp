@@ -1,6 +1,6 @@
 #include "createGameWindow.h"
 
-CreateGameWindow::CreateGameWindow(QWidget *parent, Juego* juego) : QWidget(parent), juego(juego), buttonCreateGame("Iniciar Partida") {
+CreateGameWindow::CreateGameWindow(QWidget *parent, Juego* juego) : QWidget(parent), m_Juego(juego), buttonCreateGame("Iniciar Partida") {
     QVBoxLayout* layoutV = new QVBoxLayout();
 
     setWindowTitle("Creacion de partidas");
@@ -48,7 +48,7 @@ void CreateGameWindow::slotCreateGame() {
     QString name = this->editGameName.text();
     QString amountPlayers = this->comboBoxPlayers->currentText();
 
-    juego->createGame(mapa_seleccionado.toStdString(), name.toStdString(), amountPlayers.toStdString());
+    m_Juego->createGame(mapa_seleccionado.toStdString(), name.toStdString(), amountPlayers.toStdString());
 
     this->close();
 }

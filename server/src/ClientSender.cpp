@@ -1,8 +1,8 @@
 #include "../include/ClientSender.h"
 
 
-ClientSender::ClientSender(Protocol& protocol, ProtectedQueue<std::string>* selfQueue) :
-        m_Protocol(protocol), m_SelfQueue(selfQueue), m_KeepRunning(true) {}
+ClientSender::ClientSender(Protocol& protocol, ProtectedQueue<std::string>* selfQueue, int idPlayer) :
+        m_Protocol(protocol), m_SelfQueue(selfQueue), idPlayer(idPlayer), m_KeepRunning(true) {}
 
 void ClientSender::run() {
     try {

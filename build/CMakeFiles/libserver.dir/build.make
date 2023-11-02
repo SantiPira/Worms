@@ -97,24 +97,38 @@ CMakeFiles/libserver.dir/server/src/ClientSender.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/libserver.dir/server/src/ClientSender.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/ClientSender.cpp -o CMakeFiles/libserver.dir/server/src/ClientSender.cpp.s
 
-CMakeFiles/libserver.dir/server/src/Games.cpp.o: CMakeFiles/libserver.dir/flags.make
-CMakeFiles/libserver.dir/server/src/Games.cpp.o: ../server/src/Games.cpp
-CMakeFiles/libserver.dir/server/src/Games.cpp.o: CMakeFiles/libserver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/libserver.dir/server/src/Games.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libserver.dir/server/src/Games.cpp.o -MF CMakeFiles/libserver.dir/server/src/Games.cpp.o.d -o CMakeFiles/libserver.dir/server/src/Games.cpp.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/Games.cpp
+CMakeFiles/libserver.dir/server/src/Game.cpp.o: CMakeFiles/libserver.dir/flags.make
+CMakeFiles/libserver.dir/server/src/Game.cpp.o: ../server/src/Game.cpp
+CMakeFiles/libserver.dir/server/src/Game.cpp.o: CMakeFiles/libserver.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/libserver.dir/server/src/Game.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libserver.dir/server/src/Game.cpp.o -MF CMakeFiles/libserver.dir/server/src/Game.cpp.o.d -o CMakeFiles/libserver.dir/server/src/Game.cpp.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/Game.cpp
 
-CMakeFiles/libserver.dir/server/src/Games.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libserver.dir/server/src/Games.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/Games.cpp > CMakeFiles/libserver.dir/server/src/Games.cpp.i
+CMakeFiles/libserver.dir/server/src/Game.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libserver.dir/server/src/Game.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/Game.cpp > CMakeFiles/libserver.dir/server/src/Game.cpp.i
 
-CMakeFiles/libserver.dir/server/src/Games.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/libserver.dir/server/src/Games.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/Games.cpp -o CMakeFiles/libserver.dir/server/src/Games.cpp.s
+CMakeFiles/libserver.dir/server/src/Game.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/libserver.dir/server/src/Game.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/Game.cpp -o CMakeFiles/libserver.dir/server/src/Game.cpp.s
+
+CMakeFiles/libserver.dir/server/src/MatchesMonitor.cpp.o: CMakeFiles/libserver.dir/flags.make
+CMakeFiles/libserver.dir/server/src/MatchesMonitor.cpp.o: ../server/src/MatchesMonitor.cpp
+CMakeFiles/libserver.dir/server/src/MatchesMonitor.cpp.o: CMakeFiles/libserver.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/libserver.dir/server/src/MatchesMonitor.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libserver.dir/server/src/MatchesMonitor.cpp.o -MF CMakeFiles/libserver.dir/server/src/MatchesMonitor.cpp.o.d -o CMakeFiles/libserver.dir/server/src/MatchesMonitor.cpp.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/MatchesMonitor.cpp
+
+CMakeFiles/libserver.dir/server/src/MatchesMonitor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libserver.dir/server/src/MatchesMonitor.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/MatchesMonitor.cpp > CMakeFiles/libserver.dir/server/src/MatchesMonitor.cpp.i
+
+CMakeFiles/libserver.dir/server/src/MatchesMonitor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/libserver.dir/server/src/MatchesMonitor.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/MatchesMonitor.cpp -o CMakeFiles/libserver.dir/server/src/MatchesMonitor.cpp.s
 
 CMakeFiles/libserver.dir/server/src/Server.cpp.o: CMakeFiles/libserver.dir/flags.make
 CMakeFiles/libserver.dir/server/src/Server.cpp.o: ../server/src/Server.cpp
 CMakeFiles/libserver.dir/server/src/Server.cpp.o: CMakeFiles/libserver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/libserver.dir/server/src/Server.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/libserver.dir/server/src/Server.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libserver.dir/server/src/Server.cpp.o -MF CMakeFiles/libserver.dir/server/src/Server.cpp.o.d -o CMakeFiles/libserver.dir/server/src/Server.cpp.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/Server.cpp
 
 CMakeFiles/libserver.dir/server/src/Server.cpp.i: cmake_force
@@ -125,23 +139,41 @@ CMakeFiles/libserver.dir/server/src/Server.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/libserver.dir/server/src/Server.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/Server.cpp -o CMakeFiles/libserver.dir/server/src/Server.cpp.s
 
+CMakeFiles/libserver.dir/server/src/TurnMonitor.cpp.o: CMakeFiles/libserver.dir/flags.make
+CMakeFiles/libserver.dir/server/src/TurnMonitor.cpp.o: ../server/src/TurnMonitor.cpp
+CMakeFiles/libserver.dir/server/src/TurnMonitor.cpp.o: CMakeFiles/libserver.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/libserver.dir/server/src/TurnMonitor.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libserver.dir/server/src/TurnMonitor.cpp.o -MF CMakeFiles/libserver.dir/server/src/TurnMonitor.cpp.o.d -o CMakeFiles/libserver.dir/server/src/TurnMonitor.cpp.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/TurnMonitor.cpp
+
+CMakeFiles/libserver.dir/server/src/TurnMonitor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libserver.dir/server/src/TurnMonitor.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/TurnMonitor.cpp > CMakeFiles/libserver.dir/server/src/TurnMonitor.cpp.i
+
+CMakeFiles/libserver.dir/server/src/TurnMonitor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/libserver.dir/server/src/TurnMonitor.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/TurnMonitor.cpp -o CMakeFiles/libserver.dir/server/src/TurnMonitor.cpp.s
+
 # Object files for target libserver
 libserver_OBJECTS = \
 "CMakeFiles/libserver.dir/server/src/Client.cpp.o" \
 "CMakeFiles/libserver.dir/server/src/ClientSender.cpp.o" \
-"CMakeFiles/libserver.dir/server/src/Games.cpp.o" \
-"CMakeFiles/libserver.dir/server/src/Server.cpp.o"
+"CMakeFiles/libserver.dir/server/src/Game.cpp.o" \
+"CMakeFiles/libserver.dir/server/src/MatchesMonitor.cpp.o" \
+"CMakeFiles/libserver.dir/server/src/Server.cpp.o" \
+"CMakeFiles/libserver.dir/server/src/TurnMonitor.cpp.o"
 
 # External object files for target libserver
 libserver_EXTERNAL_OBJECTS =
 
 liblibserver.a: CMakeFiles/libserver.dir/server/src/Client.cpp.o
 liblibserver.a: CMakeFiles/libserver.dir/server/src/ClientSender.cpp.o
-liblibserver.a: CMakeFiles/libserver.dir/server/src/Games.cpp.o
+liblibserver.a: CMakeFiles/libserver.dir/server/src/Game.cpp.o
+liblibserver.a: CMakeFiles/libserver.dir/server/src/MatchesMonitor.cpp.o
 liblibserver.a: CMakeFiles/libserver.dir/server/src/Server.cpp.o
+liblibserver.a: CMakeFiles/libserver.dir/server/src/TurnMonitor.cpp.o
 liblibserver.a: CMakeFiles/libserver.dir/build.make
 liblibserver.a: CMakeFiles/libserver.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX static library liblibserver.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX static library liblibserver.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/libserver.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/libserver.dir/link.txt --verbose=$(VERBOSE)
 

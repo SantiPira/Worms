@@ -13,10 +13,10 @@
 
 class MenuWindow : public QWidget {
 public:
-    MenuWindow(QWidget *parent = 0, Juego* Juego = 0);
-    Juego* juego;
+    MenuWindow(QWidget *parent = 0, Juego* juego = 0);
 
 private:
+    Juego* m_Juego;
     QPushButton buttonCreate;
     QPushButton buttonJoin;
 

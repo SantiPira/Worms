@@ -9,9 +9,11 @@
 #include "client_juego.h"
 
 class MainWindow : public QWidget {
+private:
+    Juego* juego;
 public:
     explicit MainWindow(QWidget *parent = 0);
-
+    Protocol* getProtocol();
 private slots:
     void switchToGame();
     

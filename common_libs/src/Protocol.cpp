@@ -19,12 +19,12 @@ uint16_t Protocol::recvTwoBytes() {
     return ntohs(aux);
 }
 
-void Protocol::recvMessage(std::string& message) {
+std::string Protocol::recvString() {
     uint16_t size = recvTwoBytes();
     std::vector<char> messageFromServer(size + 1);
     socket.recvall(messageFromServer.data(), size, &wasClosed);
     messageFromServer[size] = '\0';
-    message = std::string(messageFromServer.data());
+    return messageFromServer.data();
 }
 
 void Protocol::sendByte(uint8_t byte) {
@@ -39,7 +39,7 @@ void Protocol::sendTwoBytes(uint16_t bytes) {
     }
 }
 
-void Protocol::sendMessage(const std::string& message) {
+void Protocol::sendString(const std::string &message) {
     uint16_t size = message.size();
     sendTwoBytes(size);
     socket.sendall(message.c_str(), size, &wasClosed);
@@ -49,21 +49,44 @@ void Protocol::sendMessage(const std::string& message) {
  * PUBLIC METHODS
  * */
 
-/*------------------------------------SERVER METHODS------------------------------------*/
-void Protocol::sendMessage(InfoServer& infoServer) {
-    sendByte(infoServer.getIdMessage());
-    sendByte(infoServer.getGames());
-    for (auto& player : infoServer.getPlayers()) {
-        sendTwoBytes(player);
+void Protocol::sendGameInfo(GameInfo& gameInfo) {
+    sendByte(gameInfo.getIdAction());
+    //if (gameInfo.getIdAction() == InitGameEnum::LIST_GAMES || gameInfo.getIdAction() == InitGameEnum::JOIN_GAME
+                                                           //   || gameInfo.getIdAction() == InitGameEnum::CREATE_GAME) {
+    sendByte(gameInfo.getGameProperties().size());
+    for (auto& gameProperty : gameInfo.getGameProperties()) {
+        sendByte(gameProperty.m_idGame);
+        sendString(gameProperty.m_GameName);
+        sendString(gameProperty.m_MapName);
+        sendByte(gameProperty.m_Players);
     }
+    /*} else if (gameInfo.getIdAction() == InitGameEnum::CREATE_GAME) {
+        sendByte(gameInfo.getGameProperties().size());
+        for (auto& gameProperty : gameInfo.getGameProperties()) {
+            sendString(gameProperty.m_GameName);
+            sendString(gameProperty.m_MapName);
+            sendByte(gameProperty.m_Players);
+        }
+    }*/
 }
 
-/*------------------------------------END SERVER METHODS------------------------------------*/
-
-/*------------------------------------CLIENT METHODS------------------------------------*/
-
-
-/*------------------------------------END CLIENT METHODS------------------------------------*/
+GameInfo Protocol::recvGameInfo() {
+    GameInfo gameInfo;
+    gameInfo.setIdAction(InitGameEnum(recvByte()));
+    //if (gameInfo.getIdAction() == InitGameEnum::LIST_GAMES) {
+    uint8_t size = recvByte();
+    std::vector<GameProperty> gameProperties;
+    for (int i = 0; i < size; i++) {
+        //GameProperty gameProperty;
+        int idGame = recvByte();
+        std::string gameName = recvString();
+        std::string mapName = recvString();
+        int players = recvByte();
+        gameProperties.emplace_back(idGame, gameName, mapName, players);
+    }
+    gameInfo.setGameProperties(gameProperties);
+    return gameInfo;
+}
 
 void Protocol::close() { socket.close(); }
 void Protocol::shutdown(int mode) { socket.shutdown(mode); }
@@ -76,19 +99,3 @@ Protocol::~Protocol() {
     }
 }
 bool Protocol::isClosed() const { return wasClosed; }
-
-void Protocol::recvClientRequest(ClientRequest& clientRequest) {
-    uint8_t action = recvByte();
-    clientRequest.setAction(action);
-}
-
-/*void Protocol::sendMessage(ToClientMessage &message) {
-    message.serialize(*this);
-}
-
-void Protocol::receiveMessage(ClientMessage &clientMessage) {
-    clientMessage.deserialize(*this);
-}*/
-
-
-

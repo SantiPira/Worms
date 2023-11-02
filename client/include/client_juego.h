@@ -1,29 +1,26 @@
 #ifndef CLIENT_JUEGO_H
 #define CLIENT_JUEGO_H
 
-#include "client_sender.h"
-#include "ProtectedQueue.h"
-#include "client_protocol.h"
-
 #include <iostream>
-#include <string>
-
+#include "../../common_libs/include/Protocol.h"
 
 class Juego{
     private:
-    ClientProtocol comunicacion_con_server;
-    
+    Protocol m_Protocol;
+    //ClientProtocol protocolo_cliente;
+
     public:
 
-    Juego(const char* ip, const char* puerto);
+    explicit Juego(const std::string& ip, const std::string& puerto);
 
     void iniciar_juego();
 
-    void createGame(std::string mapa, std::string nombre, std::string cantidad_jugadores);
+    void createGame(const std::string& mapa, const std::string& nombre, const std::string& cantidad_jugadores);
 
     void menu_window();
 
 
+    Protocol *getProtocol();
 };
 
 #endif // CLIENT_JUEGO_H

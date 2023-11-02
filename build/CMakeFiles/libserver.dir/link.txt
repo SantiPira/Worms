@@ -1,2 +1,2 @@
-/usr/bin/ar qc liblibserver.a CMakeFiles/libserver.dir/server/src/Client.cpp.o CMakeFiles/libserver.dir/server/src/ClientSender.cpp.o CMakeFiles/libserver.dir/server/src/Games.cpp.o CMakeFiles/libserver.dir/server/src/Server.cpp.o
+/usr/bin/ar qc liblibserver.a CMakeFiles/libserver.dir/server/src/Client.cpp.o CMakeFiles/libserver.dir/server/src/ClientSender.cpp.o CMakeFiles/libserver.dir/server/src/Game.cpp.o CMakeFiles/libserver.dir/server/src/MatchesMonitor.cpp.o CMakeFiles/libserver.dir/server/src/Server.cpp.o CMakeFiles/libserver.dir/server/src/TurnMonitor.cpp.o
 /usr/bin/ranlib liblibserver.a

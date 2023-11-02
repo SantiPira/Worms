@@ -287,78 +287,6 @@ client/src/client_juego.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_juego.cpp.s
 .PHONY : client/src/client_juego.cpp.s
 
-client/src/client_protocol.o: client/src/client_protocol.cpp.o
-.PHONY : client/src/client_protocol.o
-
-# target to build an object file
-client/src/client_protocol.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_protocol.cpp.o
-.PHONY : client/src/client_protocol.cpp.o
-
-client/src/client_protocol.i: client/src/client_protocol.cpp.i
-.PHONY : client/src/client_protocol.i
-
-# target to preprocess a source file
-client/src/client_protocol.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_protocol.cpp.i
-.PHONY : client/src/client_protocol.cpp.i
-
-client/src/client_protocol.s: client/src/client_protocol.cpp.s
-.PHONY : client/src/client_protocol.s
-
-# target to generate assembly for a file
-client/src/client_protocol.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_protocol.cpp.s
-.PHONY : client/src/client_protocol.cpp.s
-
-client/src/client_reciever.o: client/src/client_reciever.cpp.o
-.PHONY : client/src/client_reciever.o
-
-# target to build an object file
-client/src/client_reciever.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_reciever.cpp.o
-.PHONY : client/src/client_reciever.cpp.o
-
-client/src/client_reciever.i: client/src/client_reciever.cpp.i
-.PHONY : client/src/client_reciever.i
-
-# target to preprocess a source file
-client/src/client_reciever.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_reciever.cpp.i
-.PHONY : client/src/client_reciever.cpp.i
-
-client/src/client_reciever.s: client/src/client_reciever.cpp.s
-.PHONY : client/src/client_reciever.s
-
-# target to generate assembly for a file
-client/src/client_reciever.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_reciever.cpp.s
-.PHONY : client/src/client_reciever.cpp.s
-
-client/src/client_sender.o: client/src/client_sender.cpp.o
-.PHONY : client/src/client_sender.o
-
-# target to build an object file
-client/src/client_sender.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_sender.cpp.o
-.PHONY : client/src/client_sender.cpp.o
-
-client/src/client_sender.i: client/src/client_sender.cpp.i
-.PHONY : client/src/client_sender.i
-
-# target to preprocess a source file
-client/src/client_sender.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_sender.cpp.i
-.PHONY : client/src/client_sender.cpp.i
-
-client/src/client_sender.s: client/src/client_sender.cpp.s
-.PHONY : client/src/client_sender.s
-
-# target to generate assembly for a file
-client/src/client_sender.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_sender.cpp.s
-.PHONY : client/src/client_sender.cpp.s
-
 client/src/createGameWindow.o: client/src/createGameWindow.cpp.o
 .PHONY : client/src/createGameWindow.o
 
@@ -455,54 +383,6 @@ client/src/menuWindow.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/menuWindow.cpp.s
 .PHONY : client/src/menuWindow.cpp.s
 
-common_libs/src/ClientRequest.o: common_libs/src/ClientRequest.cpp.o
-.PHONY : common_libs/src/ClientRequest.o
-
-# target to build an object file
-common_libs/src/ClientRequest.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libcommon.dir/build.make CMakeFiles/libcommon.dir/common_libs/src/ClientRequest.cpp.o
-.PHONY : common_libs/src/ClientRequest.cpp.o
-
-common_libs/src/ClientRequest.i: common_libs/src/ClientRequest.cpp.i
-.PHONY : common_libs/src/ClientRequest.i
-
-# target to preprocess a source file
-common_libs/src/ClientRequest.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libcommon.dir/build.make CMakeFiles/libcommon.dir/common_libs/src/ClientRequest.cpp.i
-.PHONY : common_libs/src/ClientRequest.cpp.i
-
-common_libs/src/ClientRequest.s: common_libs/src/ClientRequest.cpp.s
-.PHONY : common_libs/src/ClientRequest.s
-
-# target to generate assembly for a file
-common_libs/src/ClientRequest.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libcommon.dir/build.make CMakeFiles/libcommon.dir/common_libs/src/ClientRequest.cpp.s
-.PHONY : common_libs/src/ClientRequest.cpp.s
-
-common_libs/src/InfoServer.o: common_libs/src/InfoServer.cpp.o
-.PHONY : common_libs/src/InfoServer.o
-
-# target to build an object file
-common_libs/src/InfoServer.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libcommon.dir/build.make CMakeFiles/libcommon.dir/common_libs/src/InfoServer.cpp.o
-.PHONY : common_libs/src/InfoServer.cpp.o
-
-common_libs/src/InfoServer.i: common_libs/src/InfoServer.cpp.i
-.PHONY : common_libs/src/InfoServer.i
-
-# target to preprocess a source file
-common_libs/src/InfoServer.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libcommon.dir/build.make CMakeFiles/libcommon.dir/common_libs/src/InfoServer.cpp.i
-.PHONY : common_libs/src/InfoServer.cpp.i
-
-common_libs/src/InfoServer.s: common_libs/src/InfoServer.cpp.s
-.PHONY : common_libs/src/InfoServer.s
-
-# target to generate assembly for a file
-common_libs/src/InfoServer.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libcommon.dir/build.make CMakeFiles/libcommon.dir/common_libs/src/InfoServer.cpp.s
-.PHONY : common_libs/src/InfoServer.cpp.s
-
 common_libs/src/Protocol.o: common_libs/src/Protocol.cpp.o
 .PHONY : common_libs/src/Protocol.o
 
@@ -550,6 +430,30 @@ common_libs/src/liberror.s: common_libs/src/liberror.cpp.s
 common_libs/src/liberror.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libcommon.dir/build.make CMakeFiles/libcommon.dir/common_libs/src/liberror.cpp.s
 .PHONY : common_libs/src/liberror.cpp.s
+
+common_libs/src/messages/server/GameInfo.o: common_libs/src/messages/server/GameInfo.cpp.o
+.PHONY : common_libs/src/messages/server/GameInfo.o
+
+# target to build an object file
+common_libs/src/messages/server/GameInfo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libcommon.dir/build.make CMakeFiles/libcommon.dir/common_libs/src/messages/server/GameInfo.cpp.o
+.PHONY : common_libs/src/messages/server/GameInfo.cpp.o
+
+common_libs/src/messages/server/GameInfo.i: common_libs/src/messages/server/GameInfo.cpp.i
+.PHONY : common_libs/src/messages/server/GameInfo.i
+
+# target to preprocess a source file
+common_libs/src/messages/server/GameInfo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libcommon.dir/build.make CMakeFiles/libcommon.dir/common_libs/src/messages/server/GameInfo.cpp.i
+.PHONY : common_libs/src/messages/server/GameInfo.cpp.i
+
+common_libs/src/messages/server/GameInfo.s: common_libs/src/messages/server/GameInfo.cpp.s
+.PHONY : common_libs/src/messages/server/GameInfo.s
+
+# target to generate assembly for a file
+common_libs/src/messages/server/GameInfo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libcommon.dir/build.make CMakeFiles/libcommon.dir/common_libs/src/messages/server/GameInfo.cpp.s
+.PHONY : common_libs/src/messages/server/GameInfo.cpp.s
 
 common_libs/src/resolver.o: common_libs/src/resolver.cpp.o
 .PHONY : common_libs/src/resolver.o
@@ -671,29 +575,53 @@ server/src/ClientSender.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libserver.dir/build.make CMakeFiles/libserver.dir/server/src/ClientSender.cpp.s
 .PHONY : server/src/ClientSender.cpp.s
 
-server/src/Games.o: server/src/Games.cpp.o
-.PHONY : server/src/Games.o
+server/src/Game.o: server/src/Game.cpp.o
+.PHONY : server/src/Game.o
 
 # target to build an object file
-server/src/Games.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libserver.dir/build.make CMakeFiles/libserver.dir/server/src/Games.cpp.o
-.PHONY : server/src/Games.cpp.o
+server/src/Game.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libserver.dir/build.make CMakeFiles/libserver.dir/server/src/Game.cpp.o
+.PHONY : server/src/Game.cpp.o
 
-server/src/Games.i: server/src/Games.cpp.i
-.PHONY : server/src/Games.i
+server/src/Game.i: server/src/Game.cpp.i
+.PHONY : server/src/Game.i
 
 # target to preprocess a source file
-server/src/Games.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libserver.dir/build.make CMakeFiles/libserver.dir/server/src/Games.cpp.i
-.PHONY : server/src/Games.cpp.i
+server/src/Game.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libserver.dir/build.make CMakeFiles/libserver.dir/server/src/Game.cpp.i
+.PHONY : server/src/Game.cpp.i
 
-server/src/Games.s: server/src/Games.cpp.s
-.PHONY : server/src/Games.s
+server/src/Game.s: server/src/Game.cpp.s
+.PHONY : server/src/Game.s
 
 # target to generate assembly for a file
-server/src/Games.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libserver.dir/build.make CMakeFiles/libserver.dir/server/src/Games.cpp.s
-.PHONY : server/src/Games.cpp.s
+server/src/Game.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libserver.dir/build.make CMakeFiles/libserver.dir/server/src/Game.cpp.s
+.PHONY : server/src/Game.cpp.s
+
+server/src/MatchesMonitor.o: server/src/MatchesMonitor.cpp.o
+.PHONY : server/src/MatchesMonitor.o
+
+# target to build an object file
+server/src/MatchesMonitor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libserver.dir/build.make CMakeFiles/libserver.dir/server/src/MatchesMonitor.cpp.o
+.PHONY : server/src/MatchesMonitor.cpp.o
+
+server/src/MatchesMonitor.i: server/src/MatchesMonitor.cpp.i
+.PHONY : server/src/MatchesMonitor.i
+
+# target to preprocess a source file
+server/src/MatchesMonitor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libserver.dir/build.make CMakeFiles/libserver.dir/server/src/MatchesMonitor.cpp.i
+.PHONY : server/src/MatchesMonitor.cpp.i
+
+server/src/MatchesMonitor.s: server/src/MatchesMonitor.cpp.s
+.PHONY : server/src/MatchesMonitor.s
+
+# target to generate assembly for a file
+server/src/MatchesMonitor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libserver.dir/build.make CMakeFiles/libserver.dir/server/src/MatchesMonitor.cpp.s
+.PHONY : server/src/MatchesMonitor.cpp.s
 
 server/src/Server.o: server/src/Server.cpp.o
 .PHONY : server/src/Server.o
@@ -718,6 +646,30 @@ server/src/Server.s: server/src/Server.cpp.s
 server/src/Server.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libserver.dir/build.make CMakeFiles/libserver.dir/server/src/Server.cpp.s
 .PHONY : server/src/Server.cpp.s
+
+server/src/TurnMonitor.o: server/src/TurnMonitor.cpp.o
+.PHONY : server/src/TurnMonitor.o
+
+# target to build an object file
+server/src/TurnMonitor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libserver.dir/build.make CMakeFiles/libserver.dir/server/src/TurnMonitor.cpp.o
+.PHONY : server/src/TurnMonitor.cpp.o
+
+server/src/TurnMonitor.i: server/src/TurnMonitor.cpp.i
+.PHONY : server/src/TurnMonitor.i
+
+# target to preprocess a source file
+server/src/TurnMonitor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libserver.dir/build.make CMakeFiles/libserver.dir/server/src/TurnMonitor.cpp.i
+.PHONY : server/src/TurnMonitor.cpp.i
+
+server/src/TurnMonitor.s: server/src/TurnMonitor.cpp.s
+.PHONY : server/src/TurnMonitor.s
+
+# target to generate assembly for a file
+server/src/TurnMonitor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libserver.dir/build.make CMakeFiles/libserver.dir/server/src/TurnMonitor.cpp.s
+.PHONY : server/src/TurnMonitor.cpp.s
 
 server/src/main.o: server/src/main.cpp.o
 .PHONY : server/src/main.o
@@ -767,15 +719,6 @@ help:
 	@echo "... client/src/client_juego.o"
 	@echo "... client/src/client_juego.i"
 	@echo "... client/src/client_juego.s"
-	@echo "... client/src/client_protocol.o"
-	@echo "... client/src/client_protocol.i"
-	@echo "... client/src/client_protocol.s"
-	@echo "... client/src/client_reciever.o"
-	@echo "... client/src/client_reciever.i"
-	@echo "... client/src/client_reciever.s"
-	@echo "... client/src/client_sender.o"
-	@echo "... client/src/client_sender.i"
-	@echo "... client/src/client_sender.s"
 	@echo "... client/src/createGameWindow.o"
 	@echo "... client/src/createGameWindow.i"
 	@echo "... client/src/createGameWindow.s"
@@ -788,18 +731,15 @@ help:
 	@echo "... client/src/menuWindow.o"
 	@echo "... client/src/menuWindow.i"
 	@echo "... client/src/menuWindow.s"
-	@echo "... common_libs/src/ClientRequest.o"
-	@echo "... common_libs/src/ClientRequest.i"
-	@echo "... common_libs/src/ClientRequest.s"
-	@echo "... common_libs/src/InfoServer.o"
-	@echo "... common_libs/src/InfoServer.i"
-	@echo "... common_libs/src/InfoServer.s"
 	@echo "... common_libs/src/Protocol.o"
 	@echo "... common_libs/src/Protocol.i"
 	@echo "... common_libs/src/Protocol.s"
 	@echo "... common_libs/src/liberror.o"
 	@echo "... common_libs/src/liberror.i"
 	@echo "... common_libs/src/liberror.s"
+	@echo "... common_libs/src/messages/server/GameInfo.o"
+	@echo "... common_libs/src/messages/server/GameInfo.i"
+	@echo "... common_libs/src/messages/server/GameInfo.s"
 	@echo "... common_libs/src/resolver.o"
 	@echo "... common_libs/src/resolver.i"
 	@echo "... common_libs/src/resolver.s"
@@ -815,12 +755,18 @@ help:
 	@echo "... server/src/ClientSender.o"
 	@echo "... server/src/ClientSender.i"
 	@echo "... server/src/ClientSender.s"
-	@echo "... server/src/Games.o"
-	@echo "... server/src/Games.i"
-	@echo "... server/src/Games.s"
+	@echo "... server/src/Game.o"
+	@echo "... server/src/Game.i"
+	@echo "... server/src/Game.s"
+	@echo "... server/src/MatchesMonitor.o"
+	@echo "... server/src/MatchesMonitor.i"
+	@echo "... server/src/MatchesMonitor.s"
 	@echo "... server/src/Server.o"
 	@echo "... server/src/Server.i"
 	@echo "... server/src/Server.s"
+	@echo "... server/src/TurnMonitor.o"
+	@echo "... server/src/TurnMonitor.i"
+	@echo "... server/src/TurnMonitor.s"
 	@echo "... server/src/main.o"
 	@echo "... server/src/main.i"
 	@echo "... server/src/main.s"

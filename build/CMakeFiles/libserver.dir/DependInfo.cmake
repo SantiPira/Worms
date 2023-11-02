@@ -10,8 +10,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/Client.cpp" "CMakeFiles/libserver.dir/server/src/Client.cpp.o" "gcc" "CMakeFiles/libserver.dir/server/src/Client.cpp.o.d"
   "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/ClientSender.cpp" "CMakeFiles/libserver.dir/server/src/ClientSender.cpp.o" "gcc" "CMakeFiles/libserver.dir/server/src/ClientSender.cpp.o.d"
-  "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/Games.cpp" "CMakeFiles/libserver.dir/server/src/Games.cpp.o" "gcc" "CMakeFiles/libserver.dir/server/src/Games.cpp.o.d"
+  "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/Game.cpp" "CMakeFiles/libserver.dir/server/src/Game.cpp.o" "gcc" "CMakeFiles/libserver.dir/server/src/Game.cpp.o.d"
+  "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/MatchesMonitor.cpp" "CMakeFiles/libserver.dir/server/src/MatchesMonitor.cpp.o" "gcc" "CMakeFiles/libserver.dir/server/src/MatchesMonitor.cpp.o.d"
   "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/Server.cpp" "CMakeFiles/libserver.dir/server/src/Server.cpp.o" "gcc" "CMakeFiles/libserver.dir/server/src/Server.cpp.o.d"
+  "/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/TurnMonitor.cpp" "CMakeFiles/libserver.dir/server/src/TurnMonitor.cpp.o" "gcc" "CMakeFiles/libserver.dir/server/src/TurnMonitor.cpp.o.d"
   )
 
 # Targets to which this target links.
