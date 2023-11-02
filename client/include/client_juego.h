@@ -3,14 +3,16 @@
 
 #include "client_sender.h"
 #include "ProtectedQueue.h"
+#include "client_protocol.h"
 
 #include <iostream>
+#include <string>
+
 
 class Juego{
     private:
-    ClientSender thread_emisor; 
-    //cola de juan (muy profunda).
-
+    ClientProtocol comunicacion_con_server;
+    
     public:
 
     Juego(const char* ip, const char* puerto);
