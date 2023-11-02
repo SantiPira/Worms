@@ -14,8 +14,9 @@
 #include "../../common_libs/include/socket.h"
 #include "ClientSender.h"
 #include "MatchesMonitor.h"
-#include "HandlerInitGame.h"
-#include "CreateGameHandler.h"
+#include "messages/server/InitGameEnum.h"
+#include "messages/server/from_client/ClientInitGame.h"
+
 
 class Client : public Thread {
 private:

@@ -13,6 +13,7 @@ void Juego::createGame(std::string mapa, std::string nombre, std::string cantida
     std::cout<<"El mapa es: "<<mapa<<std::endl;
     std::cout<<"El nombre es: "<<nombre<<std::endl;
     std::cout<<"La cantidad de jugadores es: "<<cantidad_jugadores<<std::endl;
+    this->m_Protocol.sendClientInitGame(std::ref(mapa), std::ref(nombre), std::ref(cantidad_jugadores));
 }
 
 void Juego::iniciar_juego() {

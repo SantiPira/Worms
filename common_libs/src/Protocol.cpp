@@ -49,21 +49,40 @@ void Protocol::sendString(const std::string &message) {
  * PUBLIC METHODS
  * */
 
-/*------------------------------------SERVER METHODS------------------------------------*/
-void Protocol::sendMessage(InfoServer& infoServer) {
-    sendByte(infoServer.getIdAction());
-    sendByte(infoServer.getGames());
-    for (auto& player : infoServer.getPlayers()) {
-        sendTwoBytes(player);
+void Protocol::sendGameInfo(GameInfo& gameInfo) {
+    sendByte(gameInfo.getIdAction());
+    if (gameInfo.getIdAction() == InitGameEnum::JOIN_GAME) {
+        sendByte(gameInfo.getGameProperties().size());
+        for (auto& gameProperty : gameInfo.getGameProperties()) {
+            sendByte(gameProperty.m_idGame);
+            sendString(gameProperty.m_GameName);
+            sendString(gameProperty.m_MapName);
+            sendByte(gameProperty.m_Players);
+        }
     }
 }
 
-/*------------------------------------END SERVER METHODS------------------------------------*/
-
-/*------------------------------------CLIENT METHODS------------------------------------*/
-
-
-/*------------------------------------END CLIENT METHODS------------------------------------*/
+void Protocol::recvGameInfo(GameInfo& gameInfo) {
+    gameInfo.setIdAction(InitGameEnum(recvByte()));
+    if (gameInfo.getIdAction() == InitGameEnum::LIST_GAMES) {
+        uint8_t size = recvByte();
+        for (int i = 0; i < size; i++) {
+            GameProperty gameProperty;
+            gameProperty.m_idGame = recvByte();
+            gameProperty.m_GameName = recvString();
+            gameProperty.m_MapName = recvString();
+            gameProperty.m_Players = recvByte();
+            gameInfo.getGameProperties().push_back(gameProperty);
+        }
+    } else if (gameInfo.getIdAction() == InitGameEnum::JOIN_GAME) {
+        GameProperty gameProperty;
+        gameProperty.m_idGame = recvByte();
+        gameProperty.m_GameName = recvString();
+        gameProperty.m_MapName = recvString();
+        gameProperty.m_Players = recvByte();
+        gameInfo.getGameProperties().push_back(gameProperty);
+    }
+}
 
 void Protocol::close() { socket.close(); }
 void Protocol::shutdown(int mode) { socket.shutdown(mode); }
@@ -76,28 +95,3 @@ Protocol::~Protocol() {
     }
 }
 bool Protocol::isClosed() const { return wasClosed; }
-
-void Protocol::recvClientInitGame(ClientInitGame &clientInitGame) {
-    clientInitGame.setAction(getAction(recvByte()));
-    clientInitGame.setIdGame(recvByte());
-    clientInitGame.setGameName(recvString());
-    clientInitGame.setMapName(recvString());
-    clientInitGame.setPlayers(recvByte());
-}
-
-void Protocol::recvServerInfo(InfoServer& infoServer) {
-    uint8_t action = recvByte();
-    infoServer.setIdAction(ActionToClient(action));
-    uint8_t games = recvByte();
-    infoServer.setGames(games);
-    std::vector<uint16_t> playersList;
-    for (int i = 0; i < games; i++) {
-        uint16_t players = recvTwoBytes();
-        playersList.push_back(players);
-    }
-    infoServer.setPlayers(playersList);
-}
-
-
-
-

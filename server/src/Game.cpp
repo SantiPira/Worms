@@ -1,7 +1,10 @@
+#include <utility>
+
 #include "../include/Game.h"
 
 
-Game::Game(int id) : m_IdGame(id), m_InputActions(100), m_KeepRunning(true) {}
+Game::Game(int id, std::string gameName, std::string mapName) : m_IdGame(id), m_GameName(std::move(gameName)),
+    m_MapName(std::move(mapName)), m_InputActions(100), m_KeepRunning(true) {}
 
 void Game::run() {
     int turnTime = MAX_TURN_SECONDS;
@@ -39,6 +42,7 @@ int Game::getPlayers() {
 
 int Game::addPlayer(ProtectedQueue<std::string> *qClientUpdates) {
     m_QClientUpdates.insert(std::make_pair(m_QClientUpdates.size(), qClientUpdates));
+    players++;
     if (isReadyToStart()) {
         start();
     }
@@ -51,6 +55,18 @@ bool Game::isReadyToStart() {
 
 ProtectedQueue<std::string> *Game::getInputActions() {
     return &m_InputActions;
+}
+
+int Game::getIdGame() const {
+    return m_IdGame;
+}
+
+std::string Game::getGameName() const {
+    return m_GameName;
+}
+
+std::string Game::getMapName() const {
+    return m_MapName;
 }
 
 
