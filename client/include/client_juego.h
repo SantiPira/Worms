@@ -9,6 +9,8 @@ class Juego{
     Protocol m_Protocol;
     //ClientProtocol protocolo_cliente;
 
+    void getGamesInfo();
+
     public:
 
     explicit Juego(const std::string& ip, const std::string& puerto);
@@ -16,6 +18,8 @@ class Juego{
     void iniciar_juego();
 
     void createGame(const std::string& mapa, const std::string& nombre, const std::string& cantidad_jugadores);
+    
+    void joinGame();
 
     void menu_window();
 

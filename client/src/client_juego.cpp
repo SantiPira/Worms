@@ -1,6 +1,26 @@
 #include "client_juego.h"
 #include "menuWindow.h"
 
+//PRIVADO:
+
+std::vector<GameInfo> Juego::getGamesInfo(){
+
+    std::vector<GameInfo> gamesInfo(0);
+    GameInfo actualGameInfo();
+    actualGameInfo.setIdAction(InitGameEnum::LIST_GAMES);
+
+    this->m_Protocol.sendGameInfo(actualGameInfo);
+
+    
+
+
+
+    return gamesInfo;
+}
+
+
+//PUBLICO:
+
 Juego::Juego(const std::string& ip, const std::string& puerto) : m_Protocol(ip, puerto) {}
 
 void Juego::menu_window(){
@@ -13,11 +33,18 @@ void Juego::createGame(const std::string& mapa, const std::string& nombre, const
     GameProperty gameProperty(0, nombre, mapa, std::stoi(cantidad_jugadores));
     GameInfo gameInfo(InitGameEnum::CREATE_GAME, {gameProperty});
     m_Protocol.sendGameInfo(std::ref(gameInfo));
-    GameInfo serverResponse = m_Protocol.recvGameInfo();
+    //GameInfo serverResponse = m_Protocol.recvGameInfo();
     std::cout<<"El mapa es: "<<mapa<<std::endl;
     std::cout<<"El nombre es: "<<nombre<<std::endl;
     std::cout<<"La cantidad de jugadores es: "<<cantidad_jugadores<<std::endl;
 }
+
+void Juego::joinGame() {
+
+
+
+}
+
 
 void Juego::iniciar_juego() {
 
