@@ -6,22 +6,21 @@
 
 class Juego{
     private:
-    std::string ip;
-    std::string puerto;
     Protocol m_Protocol;
     //ClientProtocol protocolo_cliente;
 
     public:
 
-    Juego(const char* ip, const char* puerto);
+    explicit Juego(const std::string& ip, const std::string& puerto);
 
     void iniciar_juego();
 
-    void createGame(std::string mapa, std::string nombre, std::string cantidad_jugadores);
+    void createGame(const std::string& mapa, const std::string& nombre, const std::string& cantidad_jugadores);
 
     void menu_window();
 
 
+    Protocol *getProtocol();
 };
 
 #endif // CLIENT_JUEGO_H

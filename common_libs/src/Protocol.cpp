@@ -51,37 +51,41 @@ void Protocol::sendString(const std::string &message) {
 
 void Protocol::sendGameInfo(GameInfo& gameInfo) {
     sendByte(gameInfo.getIdAction());
-    if (gameInfo.getIdAction() == InitGameEnum::JOIN_GAME) {
+    //if (gameInfo.getIdAction() == InitGameEnum::LIST_GAMES || gameInfo.getIdAction() == InitGameEnum::JOIN_GAME
+                                                           //   || gameInfo.getIdAction() == InitGameEnum::CREATE_GAME) {
+    sendByte(gameInfo.getGameProperties().size());
+    for (auto& gameProperty : gameInfo.getGameProperties()) {
+        sendByte(gameProperty.m_idGame);
+        sendString(gameProperty.m_GameName);
+        sendString(gameProperty.m_MapName);
+        sendByte(gameProperty.m_Players);
+    }
+    /*} else if (gameInfo.getIdAction() == InitGameEnum::CREATE_GAME) {
         sendByte(gameInfo.getGameProperties().size());
         for (auto& gameProperty : gameInfo.getGameProperties()) {
-            sendByte(gameProperty.m_idGame);
             sendString(gameProperty.m_GameName);
             sendString(gameProperty.m_MapName);
             sendByte(gameProperty.m_Players);
         }
-    }
+    }*/
 }
 
-void Protocol::recvGameInfo(GameInfo& gameInfo) {
+GameInfo Protocol::recvGameInfo() {
+    GameInfo gameInfo;
     gameInfo.setIdAction(InitGameEnum(recvByte()));
-    if (gameInfo.getIdAction() == InitGameEnum::LIST_GAMES) {
-        uint8_t size = recvByte();
-        for (int i = 0; i < size; i++) {
-            GameProperty gameProperty;
-            gameProperty.m_idGame = recvByte();
-            gameProperty.m_GameName = recvString();
-            gameProperty.m_MapName = recvString();
-            gameProperty.m_Players = recvByte();
-            gameInfo.getGameProperties().push_back(gameProperty);
-        }
-    } else if (gameInfo.getIdAction() == InitGameEnum::JOIN_GAME) {
-        GameProperty gameProperty;
-        gameProperty.m_idGame = recvByte();
-        gameProperty.m_GameName = recvString();
-        gameProperty.m_MapName = recvString();
-        gameProperty.m_Players = recvByte();
-        gameInfo.getGameProperties().push_back(gameProperty);
+    //if (gameInfo.getIdAction() == InitGameEnum::LIST_GAMES) {
+    uint8_t size = recvByte();
+    std::vector<GameProperty> gameProperties;
+    for (int i = 0; i < size; i++) {
+        //GameProperty gameProperty;
+        int idGame = recvByte();
+        std::string gameName = recvString();
+        std::string mapName = recvString();
+        int players = recvByte();
+        gameProperties.emplace_back(idGame, gameName, mapName, players);
     }
+    gameInfo.setGameProperties(gameProperties);
+    return gameInfo;
 }
 
 void Protocol::close() { socket.close(); }

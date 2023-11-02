@@ -26,7 +26,7 @@ private:
 public:
     explicit Protocol(Socket socket);
     Protocol(const std::string& hostname, const std::string& servname);
-    void recvGameInfo(GameInfo& gameInfo);
+    GameInfo recvGameInfo();
     void sendGameInfo(GameInfo& gameInfo);
 
     bool isClosed() const;

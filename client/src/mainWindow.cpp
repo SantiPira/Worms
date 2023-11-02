@@ -34,11 +34,11 @@ void MainWindow::switchToGame() {
     QString server = this->inputServer.text();
 
     this->close();
-    m_Protocol = new Protocol(server.toStdString().c_str(), port.toStdString().c_str());
-    Juego* juego = new Juego(server.toStdString().c_str(), port.toStdString().c_str());
-    juego->iniciar_juego();
+    this->juego = new Juego(server.toStdString(), port.toStdString());
+    //juego->iniciar_juego();
+    juego->menu_window();
 }
 
 Protocol *MainWindow::getProtocol() {
-    return this->m_Protocol;
+    return this->juego->getProtocol();
 }

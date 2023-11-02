@@ -11,6 +11,7 @@ struct GameProperty {
     std::string m_GameName;
     std::string m_MapName;
     int m_Players;
+    GameProperty(int idGame, std::string gameName, std::string mapName, int players);
 };
 
 class GameInfo {

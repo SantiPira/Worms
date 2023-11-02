@@ -1,15 +1,19 @@
 #include "client_juego.h"
 #include "menuWindow.h"
 
-Juego::Juego(const char* ip, const char* puerto) : ip(ip), puerto(puerto), m_Protocol(ip, puerto){}
+Juego::Juego(const std::string& ip, const std::string& puerto) : m_Protocol(ip, puerto) {}
 
 void Juego::menu_window(){
-    MenuWindow *menu = new MenuWindow();
+    MenuWindow *menu = new MenuWindow(nullptr, this);
     
     menu->show();
 }
 
-void Juego::createGame(std::string mapa, std::string nombre, std::string cantidad_jugadores) {
+void Juego::createGame(const std::string& mapa, const std::string& nombre, const std::string& cantidad_jugadores) {
+    GameProperty gameProperty(0, nombre, mapa, std::stoi(cantidad_jugadores));
+    GameInfo gameInfo(InitGameEnum::CREATE_GAME, {gameProperty});
+    m_Protocol.sendGameInfo(std::ref(gameInfo));
+    GameInfo serverResponse = m_Protocol.recvGameInfo();
     std::cout<<"El mapa es: "<<mapa<<std::endl;
     std::cout<<"El nombre es: "<<nombre<<std::endl;
     std::cout<<"La cantidad de jugadores es: "<<cantidad_jugadores<<std::endl;
@@ -18,8 +22,13 @@ void Juego::createGame(std::string mapa, std::string nombre, std::string cantida
 void Juego::iniciar_juego() {
 
     //ventana de juego
-    std::cout<<"El ip es: "<<ip<<std::endl;
-    std::cout<<"El puerto es: "<<puerto<<std::endl;
+    //std::cout<<"El ip es: "<<ip<<std::endl;
+    //std::cout<<"El puerto es: "<<puerto<<std::endl;
     menu_window();
 
 }
+
+Protocol *Juego::getProtocol() {
+    return &m_Protocol;
+}
+

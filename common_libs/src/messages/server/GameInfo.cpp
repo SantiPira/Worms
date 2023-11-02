@@ -2,6 +2,9 @@
 
 GameInfo::GameInfo() : m_IdAction(InitGameEnum::INVALID) {}
 
+GameProperty::GameProperty(int idGame, std::string gameName, std::string mapName, int players) : m_idGame(idGame),
+    m_GameName(std::move(gameName)), m_MapName(std::move(mapName)), m_Players(players) {}
+
 GameInfo::GameInfo(InitGameEnum idAction, std::vector<GameProperty> gameProperties) : m_IdAction(idAction),
     m_GameProperties(std::move(gameProperties)) {}
 

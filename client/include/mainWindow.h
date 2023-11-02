@@ -10,7 +10,7 @@
 
 class MainWindow : public QWidget {
 private:
-    Protocol* m_Protocol;
+    Juego* juego;
 public:
     explicit MainWindow(QWidget *parent = 0);
     Protocol* getProtocol();

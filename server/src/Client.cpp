@@ -5,9 +5,8 @@ Client::Client(Socket peer, MatchesMonitor* matches) : m_Protocol(std::move(peer
     m_Matches(matches), m_UpdatesGame(100) {}
 
 void Client::run() {
-    while (!m_Protocol.isClosed()) {
-        GameInfo clientResponse;
-        m_Protocol.recvGameInfo(std::ref(clientResponse));
+    while (!m_Protocol.isClosed() && !hasGame) {
+        GameInfo clientResponse = m_Protocol.recvGameInfo();
         switch (clientResponse.getIdAction()) {
             case InitGameEnum::CREATE_GAME: {
                 idGame = m_Matches->createGame(clientResponse.getGameProperties()[0].m_GameName,
