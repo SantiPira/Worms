@@ -15,7 +15,6 @@
 #include "ClientSender.h"
 #include "MatchesMonitor.h"
 #include "messages/server/InitGameEnum.h"
-#include "messages/server/from_client/ClientInitGame.h"
 
 
 class Client : public Thread {
