@@ -1,5 +1,6 @@
 #include "menuWindow.h"
 #include "createGameWindow.h"
+#include "joinGameWindow.h"
 
 MenuWindow::MenuWindow(QWidget *parent, Juego* juego) : QWidget(parent), m_Juego(juego), buttonCreate("Crear Partida"), buttonJoin("Unirse Partida") {
     QVBoxLayout* layout = new QVBoxLayout();
@@ -41,6 +42,12 @@ void MenuWindow::slotCrearPartida() {
 void MenuWindow::slotUnirsePartida() {
     qDebug() << "Botón 'Unirse Partida' presionado.";
 
+    this->close();
+
+    //Crear ventana de unirse a partida
+
+    JoinGameWindow* joinGameWindow = new JoinGameWindow(nullptr, m_Juego);
+    joinGameWindow->show();
 
 }
 

@@ -3,19 +3,16 @@
 
 //PRIVADO:
 
-std::vector<GameInfo> Juego::getGamesInfo(){
+GameInfo Juego::getGamesInfo(){
 
-    std::vector<GameInfo> gamesInfo(0);
-    GameInfo actualGameInfo();
+    GameInfo actualGameInfo;
     actualGameInfo.setIdAction(InitGameEnum::LIST_GAMES);
 
     this->m_Protocol.sendGameInfo(actualGameInfo);
 
-    
+    GameInfo serverResponse = this->m_Protocol.recvGameInfo();
 
-
-
-    return gamesInfo;
+    return serverResponse;
 }
 
 
@@ -58,4 +55,3 @@ void Juego::iniciar_juego() {
 Protocol *Juego::getProtocol() {
     return &m_Protocol;
 }
-

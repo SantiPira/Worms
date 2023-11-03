@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/vic/Escritorio/universidad/materias/taller_i/tps/worms
+CMAKE_SOURCE_DIR = /home/vic/Escritorio/Taller_/Worms
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build
+CMAKE_BINARY_DIR = /home/vic/Escritorio/Taller_/Worms/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -132,9 +132,9 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/Taller_/Worms/build/CMakeFiles /home/vic/Escritorio/Taller_/Worms/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/Taller_/Worms/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -310,6 +310,30 @@ client/src/createGameWindow.s: client/src/createGameWindow.cpp.s
 client/src/createGameWindow.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/createGameWindow.cpp.s
 .PHONY : client/src/createGameWindow.cpp.s
+
+client/src/joinGameWindow.o: client/src/joinGameWindow.cpp.o
+.PHONY : client/src/joinGameWindow.o
+
+# target to build an object file
+client/src/joinGameWindow.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/joinGameWindow.cpp.o
+.PHONY : client/src/joinGameWindow.cpp.o
+
+client/src/joinGameWindow.i: client/src/joinGameWindow.cpp.i
+.PHONY : client/src/joinGameWindow.i
+
+# target to preprocess a source file
+client/src/joinGameWindow.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/joinGameWindow.cpp.i
+.PHONY : client/src/joinGameWindow.cpp.i
+
+client/src/joinGameWindow.s: client/src/joinGameWindow.cpp.s
+.PHONY : client/src/joinGameWindow.s
+
+# target to generate assembly for a file
+client/src/joinGameWindow.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/joinGameWindow.cpp.s
+.PHONY : client/src/joinGameWindow.cpp.s
 
 client/src/main.o: client/src/main.cpp.o
 .PHONY : client/src/main.o
@@ -722,6 +746,9 @@ help:
 	@echo "... client/src/createGameWindow.o"
 	@echo "... client/src/createGameWindow.i"
 	@echo "... client/src/createGameWindow.s"
+	@echo "... client/src/joinGameWindow.o"
+	@echo "... client/src/joinGameWindow.i"
+	@echo "... client/src/joinGameWindow.s"
 	@echo "... client/src/main.o"
 	@echo "... client/src/main.i"
 	@echo "... client/src/main.s"

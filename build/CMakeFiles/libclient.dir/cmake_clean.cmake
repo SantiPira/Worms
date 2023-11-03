@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/libclient.dir/client/src/client_juego.cpp.o.d"
   "CMakeFiles/libclient.dir/client/src/createGameWindow.cpp.o"
   "CMakeFiles/libclient.dir/client/src/createGameWindow.cpp.o.d"
+  "CMakeFiles/libclient.dir/client/src/joinGameWindow.cpp.o"
+  "CMakeFiles/libclient.dir/client/src/joinGameWindow.cpp.o.d"
   "CMakeFiles/libclient.dir/client/src/mainWindow.cpp.o"
   "CMakeFiles/libclient.dir/client/src/mainWindow.cpp.o.d"
   "CMakeFiles/libclient.dir/client/src/menuWindow.cpp.o"
