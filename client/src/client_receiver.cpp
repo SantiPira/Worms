@@ -8,4 +8,10 @@ void  ClientReceiver::run() {
 
     std::cout << "SOY EL RECEIVER Y ACABO DE LANZARME\n";
 
+    while (/*EL JUEGO SIGA EN CURSO */ 1) {
+        //game_info = this->comunicacion_con_server.recvGameInfo(); -> MIRAR BIEN QUE SE RECIBE.
+        //this->cola_de_mensajes.try_push(game_info);
+    }
+
+
 }
