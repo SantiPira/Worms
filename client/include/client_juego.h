@@ -1,13 +1,20 @@
 #ifndef CLIENT_JUEGO_H
 #define CLIENT_JUEGO_H
 
-#include <iostream>
 #include "../../common_libs/include/Protocol.h"
+#include "../../common_libs/include/ProtectedQueue.h"
+#include "client_sender.h"
+#include "client_receiver.h"
+
+#include <iostream>
+
 
 class Juego{
     private:
     Protocol m_Protocol;
-    //ClientProtocol protocolo_cliente;
+    ClientSender* emisor_de_mensajes{NULL};
+    ClientReceiver* receptor_de_mensajes{NULL};
+    ProtectedQueue<std::string> cola_de_mensajes;
 
     public:
 

@@ -1,4 +1,4 @@
-# Install script for directory: /home/vic/Escritorio/Taller_/Worms/SDL2pp
+# Install script for directory: /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
