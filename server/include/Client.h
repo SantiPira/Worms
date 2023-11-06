@@ -12,6 +12,7 @@
 #include "../../common_libs/include/Thread.h"
 #include "../../common_libs/include/liberror.h"
 #include "../../common_libs/include/socket.h"
+#include "../../common_libs/include/ParseMapFromFile.h"
 #include "ClientSender.h"
 #include "MatchesMonitor.h"
 #include "messages/server/InitGameEnum.h"
@@ -37,4 +38,6 @@ public:
     ~Client() override = default;
     Client(const Client&) = delete;
     Client(Client&& other) = delete;
+private:
+    void sendMap();
 };

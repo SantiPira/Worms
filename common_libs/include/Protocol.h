@@ -10,6 +10,7 @@
 #include "socket.h"
 #include <functional>
 #include "messages/server/GameInfo.h"
+#include "ParseMapFromFile.h"
 
 class Protocol {
 private:
@@ -27,11 +28,15 @@ public:
     explicit Protocol(Socket socket);
     Protocol(const std::string& hostname, const std::string& servname);
     GameInfo recvGameInfo();
+    std::vector<Grd> recvMap();
     void sendGameInfo(GameInfo& gameInfo);
+    void sendMap(std::reference_wrapper<std::vector<Grd>> map);
 
     bool isClosed() const;
     void close();
     void shutdown(int mode);
     ~Protocol();
     Protocol(const Protocol&) = delete;
+
+
 };

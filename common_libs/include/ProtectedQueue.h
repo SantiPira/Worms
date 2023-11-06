@@ -61,6 +61,30 @@ public:
         return true;
     }
 
+    bool try_pop(std::vector<T>& val, size_t n) {
+        std::unique_lock<std::mutex> lck(mtx);
+
+        if (q.empty()) {
+            if (closed) {
+                throw ClosedQueue();
+            }
+            return false;
+        }
+
+        if (q.size() == this->max_size) {
+            is_not_full.notify_all();
+        }
+
+        if (q.size() < n) {
+            n = q.size();
+        }
+        for (size_t i = 0; i < n; i++) {
+            val.push_back(q.front());
+            q.pop();
+        }
+        return true;
+    }
+
     void push(T const& val) {
         std::unique_lock<std::mutex> lck(mtx);
 

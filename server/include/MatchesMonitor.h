@@ -13,13 +13,9 @@ class MatchesMonitor {
     MatchesMonitor();
     int createGame(std::string gameName, std::string mapName);
     void removeGame(int id);
-    std::vector<uint16_t> getAllPlayers();
-    int getGames();
+    std::string getMapName(int idGame);
     std::vector<GameProperty> getGameProperties();
     int addPlayer(int id, ProtectedQueue<std::string>* qClientUpdates);
     ProtectedQueue<std::string>* getInputActionGame(int idGame);
     ~MatchesMonitor() = default;
-
-    Game *getGame(int idGame);
-
 };

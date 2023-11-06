@@ -32,6 +32,7 @@ void Client::run() {
             }
         }
     }
+    sendMap();
     ClientSender sender(std::ref(m_Protocol), &m_UpdatesGame, idPlayer);
     sender.start();
     //Receiver state
@@ -53,5 +54,10 @@ void Client::stop() {
 void Client::kill() {
     m_Protocol.shutdown(SHUT_RDWR);
     m_Protocol.close();
+}
+
+void Client::sendMap() {
+    std::vector<Grd> map = ParseMapFromFile::parse(m_Matches->getMapName(idGame));
+    m_Protocol.sendMap(std::ref(map));
 }
 

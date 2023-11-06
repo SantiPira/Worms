@@ -51,8 +51,6 @@ void Protocol::sendString(const std::string &message) {
 
 void Protocol::sendGameInfo(GameInfo& gameInfo) {
     sendByte(gameInfo.getIdAction());
-    //if (gameInfo.getIdAction() == InitGameEnum::LIST_GAMES || gameInfo.getIdAction() == InitGameEnum::JOIN_GAME
-                                                           //   || gameInfo.getIdAction() == InitGameEnum::CREATE_GAME) {
     sendByte(gameInfo.getGameProperties().size());
     for (auto& gameProperty : gameInfo.getGameProperties()) {
         sendByte(gameProperty.m_idGame);
@@ -60,24 +58,23 @@ void Protocol::sendGameInfo(GameInfo& gameInfo) {
         sendString(gameProperty.m_MapName);
         sendByte(gameProperty.m_Players);
     }
-    /*} else if (gameInfo.getIdAction() == InitGameEnum::CREATE_GAME) {
-        sendByte(gameInfo.getGameProperties().size());
-        for (auto& gameProperty : gameInfo.getGameProperties()) {
-            sendString(gameProperty.m_GameName);
-            sendString(gameProperty.m_MapName);
-            sendByte(gameProperty.m_Players);
-        }
-    }*/
+}
+
+void Protocol::sendMap(std::reference_wrapper<std::vector<Grd>> map) {
+    sendByte(map.get().size());
+    for (auto& grd : map.get()) {
+        sendByte(grd.grdType);
+        sendTwoBytes(grd.x);
+        sendTwoBytes(grd.y);
+    }
 }
 
 GameInfo Protocol::recvGameInfo() {
     GameInfo gameInfo;
     gameInfo.setIdAction(InitGameEnum(recvByte()));
-    //if (gameInfo.getIdAction() == InitGameEnum::LIST_GAMES) {
     uint8_t size = recvByte();
     std::vector<GameProperty> gameProperties;
     for (int i = 0; i < size; i++) {
-        //GameProperty gameProperty;
         int idGame = recvByte();
         std::string gameName = recvString();
         std::string mapName = recvString();
@@ -86,6 +83,18 @@ GameInfo Protocol::recvGameInfo() {
     }
     gameInfo.setGameProperties(gameProperties);
     return gameInfo;
+}
+
+std::vector<Grd> Protocol::recvMap() {
+    std::vector<Grd> map;
+    uint8_t size = recvByte();
+    for (int i = 0; i < size; i++) {
+        uint8_t grdType = recvByte();
+        uint16_t x = recvTwoBytes();
+        uint16_t y = recvTwoBytes();
+        map.emplace_back(grdType, x, y);
+    }
+    return map;
 }
 
 void Protocol::close() { socket.close(); }
