@@ -42,4 +42,3 @@ std::string MatchesMonitor::getMapName(int idGame) {
     return m_Games.at(idGame)->getMapName();
 }
 
-
