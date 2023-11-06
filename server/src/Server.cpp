@@ -30,7 +30,6 @@ void Server::reapDead() {
     for (auto it = m_Clients.begin(); it != m_Clients.end();) {
         if (it->isDead()) {
             it->join();
-            //m_Lobby.removeClient(it->getIdClient());
             it = m_Clients.erase(it);
         } else {
             ++it;
@@ -49,7 +48,6 @@ void Server::killAll() {
         if (!it->isDead()) {
             it->kill();
         }
-        //m_Lobby.removeClient(it->getIdClient());
         it->join();
         it = m_Clients.erase(it);
     }

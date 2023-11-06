@@ -8,33 +8,35 @@
 #include <netinet/in.h>
 #include "liberror.h"
 #include "socket.h"
-#include "../include/InfoServer.h"
-#include "ClientRequest.h"
-
+#include <functional>
+#include "messages/server/GameInfo.h"
+#include "ParseMapFromFile.h"
 
 class Protocol {
 private:
     Socket socket;
     bool wasClosed;
-public:
+private:
     /* private methods don't use them, and if you do it use wisely */
-    uint8_t recvByte();
-    uint16_t recvTwoBytes();
-    void recvMessage(std::string& message);
-    void recvClientRequest(ClientRequest& clientRequest);
     void sendByte(uint8_t byte);
     void sendTwoBytes(uint16_t bytes);
-    void sendMessage(const std::string& message);
-    /* end private methods don't use */
+    void sendString(const std::string& message);
+    uint8_t recvByte();
+    uint16_t recvTwoBytes();
+    std::string recvString();
+public:
     explicit Protocol(Socket socket);
     Protocol(const std::string& hostname, const std::string& servname);
-    //void sendMessage(ToClientMessage& message);
-    //void receiveMessage(ClientMessage& clientMessage);
-    void sendMessage(InfoServer& infoServer);
+    GameInfo recvGameInfo();
+    std::vector<Grd> recvMap();
+    void sendGameInfo(GameInfo& gameInfo);
+    void sendMap(std::reference_wrapper<std::vector<Grd>> map);
+
     bool isClosed() const;
     void close();
     void shutdown(int mode);
-
     ~Protocol();
     Protocol(const Protocol&) = delete;
+
+
 };

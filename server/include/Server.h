@@ -13,14 +13,14 @@
 #include "../../common_libs/include/Thread.h"
 #include "../../common_libs/include/socket.h"
 #include "Client.h"
-#include "Games.h"
+#include "MatchesMonitor.h"
 
 class Server : public Thread {
 private:
     Socket socket;
     std::atomic<bool> m_KeepRunning;
     std::list<Client> m_Clients;
-    Games m_Games;
+    MatchesMonitor m_Games;
 
 private:
     void reapDead();
