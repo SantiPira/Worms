@@ -25,7 +25,6 @@ void Juego::menu_window(){
     menu->show();
 }
 
-
 void Juego::createGame(const std::string& mapa, const std::string& nombre, const std::string& cantidad_jugadores) {
     GameProperty gameProperty(0, nombre, mapa, std::stoi(cantidad_jugadores));
     GameInfo gameInfo(InitGameEnum::CREATE_GAME, {gameProperty});
