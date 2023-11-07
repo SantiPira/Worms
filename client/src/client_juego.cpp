@@ -1,8 +1,6 @@
 #include "client_juego.h"
 #include "menuWindow.h"
 
-
-
 GameInfo Juego::getGamesInfo(){
 
     GameInfo actualGameInfo;
@@ -35,13 +33,11 @@ void Juego::createGame(const std::string& mapa, const std::string& nombre, const
     std::cout<<"La cantidad de jugadores es: "<<cantidad_jugadores<<std::endl;
 }
 
-
 void Juego::joinGame() {
 
 
 
 }
-
 
 void Juego::iniciar_juego() {
 

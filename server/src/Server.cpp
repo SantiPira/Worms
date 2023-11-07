@@ -56,6 +56,6 @@ void Server::killAll() {
 void Server::unexpectedError() {
     stop();
     killAll();
-    throw LibError(1, "Error desconocido en el servidor"); //TODO: Change this exception for a more specific one
+    throw UnExpectedException("Unexpected error");
 }
 

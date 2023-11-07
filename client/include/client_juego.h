@@ -7,10 +7,10 @@
 
 #include <iostream>
 
-
 class Juego{
     private:
     Protocol m_Protocol;
+
     ClientSender* emisor_de_mensajes{NULL};
     ClientReceiver* receptor_de_mensajes{NULL};
     bool inicio_el_juego{false};

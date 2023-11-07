@@ -12,6 +12,7 @@
 #include "../../common_libs/include/Thread.h"
 #include "../../common_libs/include/liberror.h"
 #include "../../common_libs/include/socket.h"
+#include "../../common_libs/include/ParseMapFromFile.h"
 #include "ClientSender.h"
 #include "MatchesMonitor.h"
 #include "messages/server/InitGameEnum.h"
@@ -22,11 +23,12 @@ private:
     Protocol m_Protocol;
     std::atomic<bool> m_KeepRunning;
     MatchesMonitor* m_Matches;
-    int idGame;
-    int idPlayer;
+    int m_IdGame{};
+    int m_IdPlayer{};
     bool hasGame = false;
     ProtectedQueue<std::string> m_UpdatesGame;
-    ProtectedQueue<std::string>* m_InputActions;
+    ProtectedQueue<std::string>* m_InputActions{};
+    ClientSender m_Sender;
 public:
     Client(Socket peer, MatchesMonitor* games);
     bool isDead();
@@ -37,4 +39,10 @@ public:
     ~Client() override = default;
     Client(const Client&) = delete;
     Client(Client&& other) = delete;
+private:
+    void sendMap();
+
+    void lobbyGame();
+
+    void destroyClient();
 };

@@ -48,6 +48,4 @@ void MenuWindow::slotUnirsePartida() {
 
     JoinGameWindow* joinGameWindow = new JoinGameWindow(nullptr, m_Juego);
     joinGameWindow->show();
-
 }
-
