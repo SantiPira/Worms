@@ -35,6 +35,9 @@ public:
     Game(Game&& other) = delete;
 
     bool isReadyToStart();
+
+    std::unordered_map<int, ProtectedQueue<std::string>*>* getClientUpdates();
+
 private:
     void pushUpdatesToClients(std::reference_wrapper<std::vector<std::string>> updates);
     void pushUpdateToClients(std::string& update);

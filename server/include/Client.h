@@ -23,11 +23,12 @@ private:
     Protocol m_Protocol;
     std::atomic<bool> m_KeepRunning;
     MatchesMonitor* m_Matches;
-    int idGame;
-    int idPlayer;
+    int m_IdGame{};
+    int m_IdPlayer{};
     bool hasGame = false;
     ProtectedQueue<std::string> m_UpdatesGame;
-    ProtectedQueue<std::string>* m_InputActions;
+    ProtectedQueue<std::string>* m_InputActions{};
+    ClientSender m_Sender;
 public:
     Client(Socket peer, MatchesMonitor* games);
     bool isDead();
@@ -40,4 +41,8 @@ public:
     Client(Client&& other) = delete;
 private:
     void sendMap();
+
+    void lobbyGame();
+
+    void destroyClient();
 };

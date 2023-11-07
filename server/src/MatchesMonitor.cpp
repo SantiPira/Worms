@@ -42,3 +42,9 @@ std::string MatchesMonitor::getMapName(int idGame) {
     return m_Games.at(idGame)->getMapName();
 }
 
+void MatchesMonitor::removePlayer(int idGame, int idPlayer) {
+    std::lock_guard<std::mutex> lock(m_Mutex);
+    m_Games.at(idGame)->getClientUpdates()->erase(idPlayer);
+    //TODO: Preguntar si no hay race condition aca.
+}
+

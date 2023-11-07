@@ -2,7 +2,7 @@
 
 
 ClientSender::ClientSender(Protocol& protocol, ProtectedQueue<std::string>* selfQueue, int idPlayer) :
-        m_Protocol(protocol), m_SelfQueue(selfQueue), idPlayer(idPlayer), m_KeepRunning(true) {}
+        m_Protocol(protocol), m_SelfQueue(selfQueue), m_IdPlayer(idPlayer), m_KeepRunning(true) {}
 
 void ClientSender::run() {
     try {
@@ -19,6 +19,9 @@ void ClientSender::run() {
 }
 
 void ClientSender::stop() {
-    m_SelfQueue->close();
     m_KeepRunning.store(false);
+}
+
+void ClientSender::setPlayerId(int idPlayer) {
+    this->m_IdPlayer = idPlayer;
 }

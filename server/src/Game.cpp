@@ -1,8 +1,9 @@
 #include "../include/Game.h"
 
+#define POP_MESSAGE_QUANTITY 10
 
 Game::Game(int id, std::string gameName, std::string mapName) : m_IdGame(id), m_GameName(std::move(gameName)),
-    m_MapName(std::move(mapName)), m_InputActions(100), m_KeepRunning(true), m_PopMessageQuantity(10) {}
+    m_MapName(std::move(mapName)), m_InputActions(100), m_KeepRunning(true), m_PopMessageQuantity(POP_MESSAGE_QUANTITY) {}
 
 void Game::run() {
     std::vector<std::string> updates;
@@ -12,7 +13,7 @@ void Game::run() {
     while (m_KeepRunning) {
         while (turnHandler.isValidTurn()) {
             //Ver como se estan almacenando los mensajes en el vector, si hay repetidos etc... y como llega al pushUpdateToClients..
-            m_InputActions.try_pop(std::ref(updates), 10);
+            m_InputActions.try_pop(std::ref(updates), m_PopMessageQuantity);
             //TODO: Update world
             pushUpdatesToClients(std::ref(updates));
             //TODO: Revisar esto, pero creo que deberia estar bien, el loop del turnHandler no esta mal, ya que administra de quien es el turno.
@@ -78,4 +79,8 @@ void Game::pushUpdatesToClients(std::reference_wrapper<std::vector<std::string>>
             clientQueue.second->push(std::ref(update));
         }
     }
+}
+
+std::unordered_map<int, ProtectedQueue<std::string>*>* Game::getClientUpdates() {
+    return &m_QClientUpdates;
 }
