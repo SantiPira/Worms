@@ -1,13 +1,13 @@
 #include "../include/ClientSender.h"
 
 
-ClientSender::ClientSender(Protocol& protocol, ProtectedQueue<std::string>* selfQueue, int idPlayer) :
+ClientSender::ClientSender(Protocol& protocol, ProtectedQueue<GameUpdate>* selfQueue, int idPlayer) :
         m_Protocol(protocol), m_SelfQueue(selfQueue), m_IdPlayer(idPlayer), m_KeepRunning(true) {}
 
 void ClientSender::run() {
     try {
         while (m_KeepRunning) {
-            std::string message = m_SelfQueue->pop();
+            //GameUpdate message = m_SelfQueue->pop();
         }
     } catch (const LibError& e) {
         m_KeepRunning.store(false);

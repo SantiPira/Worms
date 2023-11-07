@@ -1,7 +1,40 @@
 #include "../include/GameWorld.h"
 
-GameWorld::GameWorld(const std::string &file_map_path) : players(1), gravity(0.0f,10.0f), m_world(gravity) {
+GameWorld::GameWorld(const std::string &file_map_path) : players(1), width(20.0f), height(20.0f),
+ timeStep(1.0f/60.0f), velocityIterations(8), positionIterations(3), gravity(0.0f,-10.0f),
+ m_world(gravity), map_path(file_map_path) {}
 
+void GameWorld::Setup() {
+    ParseMapFromFile parser;
+    std::vector<Grd> girders = parser.parse(map_path);
+    for (auto& girder : girders) {
+        SetGirder(girder);
+    }
+}
+
+GameUpdate GameWorld::UpdateWorld() {
+
+    m_world.Step(timeStep,velocityIterations,positionIterations);
+    GameUpdate update;
+    return update;
+}
+
+void GameWorld::SetGirder(const Grd& girder) {
+    if(girder.grdType == GRD_SMALL_HORIZONTAL) {
+        b2BodyDef bd;
+        bd.position.Set(float(girder.x),float(girder.y));
+        bd.type = b2_staticBody;
+        b2Body * body = m_world.CreateBody(&bd); 
+        b2PolygonShape shape;
+        b2FixtureDef myFixtureDef;
+        shape.SetAsBox(3.0f,.25f);
+        myFixtureDef.shape = &shape;
+        myFixtureDef.density = 1;
+        body->CreateFixture(&myFixtureDef);
+    }
+}
+
+void GameWorld::StartWorld() {
     b2BodyDef myBodyDef;
     b2PolygonShape polygonShape;
 
@@ -24,50 +57,14 @@ GameWorld::GameWorld(const std::string &file_map_path) : players(1), gravity(0.0
     staticBody->CreateFixture(&myFixtureDef);
     polygonShape.SetAsBox( 1, 10, b2Vec2(10, 10), 0);//right wall
     staticBody->CreateFixture(&myFixtureDef);
+}
 
-    std::ifstream file(file_map_path);
-    std::string current_line;
-
-    if (!file.is_open()) {
-        throw stderr;
-    }
-
-    if(!getline(file,current_line)) {
-        throw stderr;
-    }         
-    std::istringstream current_line_istream(current_line);
-    current_line_istream >> beams;
-
-    for(int i = 0; i < beams;i++) {
-        if(!getline(file,current_line)) {
-            throw stderr;
-        } 
-
-        int type;
-        float x;
-        float y;
-        b2BodyDef bd;
-
-        std::istringstream line_istream(current_line);
-        line_istream >> type >> x >> y;
-        bd.position.Set(x,y);
-        bd.type = b2_staticBody;
-
-        b2Body * body = m_world.CreateBody(&bd); 
-
-        b2PolygonShape shape;
-        b2FixtureDef myFixtureDef;
-        shape.SetAsBox(3.0f,.25f);
-        myFixtureDef.shape = &shape;
-        myFixtureDef.density = 1;
-
-        body->CreateFixture(&myFixtureDef);
-    }
+void GameWorld::SetWorm(const int& player_number, const float & x_pos, const float& y_pos) {
 
     b2Body * body;
 
 	b2BodyDef bd;
-	bd.position.Set(5.0f, 10.0f);
+	bd.position.Set(x_pos, y_pos);
 	bd.type = b2_dynamicBody;
 	bd.fixedRotation = true;
 	bd.allowSleep = false;
@@ -79,8 +76,6 @@ GameWorld::GameWorld(const std::string &file_map_path) : players(1), gravity(0.0
 	fd.density = 20.0f;
 	body->CreateFixture(&fd);
 
+    worms.insert(std::make_pair(player_number, body)); //worms.size()
 }
 
-void GameWorld::UpdateWorld() {
-
-}

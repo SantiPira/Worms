@@ -1,11 +1,8 @@
 #pragma once
 
 #include <atomic>
-#include <unordered_map>
 #include "../../common_libs/include/Thread.h"
-#include "../../common_libs/include/ProtectedQueue.h"
-
-#include "TurnHandler.h"
+#include "GameWorld.h"
 
 #define MAX_TURN_SECONDS 120
 
@@ -15,10 +12,11 @@ class Game : public Thread {
     std::string m_GameName;
     std::string m_MapName;
     int m_Players{};
-    std::unordered_map<int, ProtectedQueue<std::string>*> m_QClientUpdates; //TODO: Change string to GameUpdate later
+    std::unordered_map<int, ProtectedQueue<GameUpdate>*> m_QClientUpdates; //TODO: Change string to GameUpdate later
     ProtectedQueue<std::string> m_InputActions;
     std::atomic<bool> m_KeepRunning;
     int m_PopMessageQuantity;
+    GameWorld world;
 
 public:
     explicit Game(int id, std::string gameName, std::string mapName);
@@ -28,7 +26,7 @@ public:
     std::string getGameName() const;
     std::string getMapName() const;
     int getPlayers();
-    int addPlayer(ProtectedQueue<std::string>* qClientUpdates);
+    int addPlayer(ProtectedQueue<GameUpdate>* qClientUpdates);
     ProtectedQueue<std::string>* getInputActions();
     void stop();
     ~Game() override = default;
@@ -37,9 +35,11 @@ public:
 
     bool isReadyToStart();
 
-    std::unordered_map<int, ProtectedQueue<std::string>*>* getClientUpdates();
+    std::unordered_map<int, ProtectedQueue<GameUpdate>*>* getClientUpdates();
+    void setupWorld();
+    void updateWorld();
 
 private:
-    void pushUpdatesToClients(std::reference_wrapper<std::vector<std::string>> updates);
-    void pushUpdateToClients(std::string& update);
+    void pushUpdatesToClients(std::reference_wrapper<std::vector<GameUpdate>> updates);
+    void pushUpdateToClients(GameUpdate& update);
 };
