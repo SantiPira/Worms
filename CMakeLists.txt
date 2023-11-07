@@ -9,6 +9,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O0 -Werror -pedantic")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb -DDEBUG -fno-inline ")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 add_subdirectory(SDL2pp)
+add_subdirectory(Box2D)
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
@@ -21,6 +22,7 @@ include_directories(${CMAKE_SOURCE_DIR}/server/include)
 include_directories(${CMAKE_SOURCE_DIR}/common_libs/include)
 
 target_link_libraries(libcommon SDL2pp Qt5::Widgets)
+target_link_libraries(libcommon ${CMAKE_SOURCE_DIR}/Box2D/build/bin/libbox2d.a)
 
 file(GLOB_RECURSE SERVER_SRCS ./server/src/*.cpp)
 list(FILTER SERVER_SRCS EXCLUDE REGEX "main.cpp")
