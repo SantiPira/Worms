@@ -18,4 +18,6 @@ class MatchesMonitor {
     int addPlayer(int id, ProtectedQueue<std::string>* qClientUpdates);
     ProtectedQueue<std::string>* getInputActionGame(int idGame);
     ~MatchesMonitor() = default;
+
+    void removePlayer(int idGame, int idPlayer);
 };

@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(SDL2PP_WITH_IMAGE ON) # if you need SDL_image support
 set(SDL2PP_WITH_MIXER ON) # if you need SDL_mixer support
 set(SDL2PP_WITH_TTF ON) # if you need SDL_ttf support
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O0 -Werror -pedantic")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb -DDEBUG -fno-inline ")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
@@ -18,6 +19,7 @@ add_library(libcommon STATIC ${COMMON_SRCS})
 
 include_directories(${CMAKE_SOURCE_DIR}/client/include)
 include_directories(${CMAKE_SOURCE_DIR}/editor/include)
+
 include_directories(${CMAKE_SOURCE_DIR}/server/include)
 include_directories(${CMAKE_SOURCE_DIR}/common_libs/include)
 

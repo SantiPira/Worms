@@ -11,11 +11,12 @@ class ClientSender : public Thread {
 private:
     Protocol& m_Protocol;
     ProtectedQueue<std::string>* m_SelfQueue;
-    int idPlayer;
+    int m_IdPlayer;
     std::atomic<bool> m_KeepRunning;
  public:
     ClientSender(Protocol& protocol, ProtectedQueue<std::string>* selfQueue, int idPlayer);
-    virtual void run() override;
+    void setPlayerId(int idPlayer);
+    void run() override;
     void stop();
     ~ClientSender() override = default;
     ClientSender(const ClientSender&) = delete;

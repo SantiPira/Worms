@@ -7,6 +7,7 @@
 
 #include "TurnHandler.h"
 
+#define MAX_TURN_SECONDS 120
 
 class Game : public Thread {
  private:
@@ -18,6 +19,7 @@ class Game : public Thread {
     ProtectedQueue<std::string> m_InputActions;
     std::atomic<bool> m_KeepRunning;
     int m_PopMessageQuantity;
+
 public:
     explicit Game(int id, std::string gameName, std::string mapName);
     void run() override;
@@ -34,6 +36,9 @@ public:
     Game(Game&& other) = delete;
 
     bool isReadyToStart();
+
+    std::unordered_map<int, ProtectedQueue<std::string>*>* getClientUpdates();
+
 private:
     void pushUpdatesToClients(std::reference_wrapper<std::vector<std::string>> updates);
     void pushUpdateToClients(std::string& update);

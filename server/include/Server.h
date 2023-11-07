@@ -12,6 +12,7 @@
 #include "../../common_libs/include/Protocol.h"
 #include "../../common_libs/include/Thread.h"
 #include "../../common_libs/include/socket.h"
+#include "exceptions/UnExpectedException.h"
 #include "Client.h"
 #include "MatchesMonitor.h"
 

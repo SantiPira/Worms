@@ -37,6 +37,4 @@ public:
     void shutdown(int mode);
     ~Protocol();
     Protocol(const Protocol&) = delete;
-
-
 };

@@ -3,7 +3,7 @@
 
 int main(int argc, char const *argv[]) {
     if (argc != 2) {
-        std::cout << "Error: argumentos invalidos" << std::endl;
+        std::cout << "Error: invalid arguments. To run it properly set a port" << std::endl;
         return 1;
     }
     try {
@@ -16,7 +16,7 @@ int main(int argc, char const *argv[]) {
         std::cerr << e.what() << std::endl;
         return 1;
     } catch (...) {
-        std::cerr << "Error: error desconocido" << std::endl;
+        std::cerr << "Unknown error" << std::endl;
         return 1;
     }
 }
