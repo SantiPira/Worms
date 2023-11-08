@@ -42,3 +42,7 @@ void MainWindow::switchToGame() {
 Protocol *MainWindow::getProtocol() {
     return this->juego->getProtocol();
 }
+
+MainWindow::~MainWindow() {
+    delete this->juego;
+}

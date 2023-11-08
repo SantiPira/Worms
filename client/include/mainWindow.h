@@ -14,6 +14,7 @@ private:
 public:
     explicit MainWindow(QWidget *parent = 0);
     Protocol* getProtocol();
+    ~MainWindow() override;
 private slots:
     void switchToGame();
     
