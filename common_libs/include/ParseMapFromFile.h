@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <filesystem>
 #include "resources/GrdEnum.h"
 
 struct Grd {

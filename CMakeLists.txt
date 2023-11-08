@@ -53,6 +53,9 @@ target_link_libraries(worms-server libserver)
 add_executable(worms-editor "editor/src/main.cpp")
 target_link_libraries(worms-editor libeditor)
 
+file(COPY ${CMAKE_SOURCE_DIR}/maps DESTINATION ${CMAKE_BINARY_DIR})
+
+
 install(TARGETS worms-server worms-client worms-editor libclient libserver libcommon libeditor
         ARCHIVE DESTINATION "lib"
         RUNTIME DESTINATION "bin"

@@ -1,7 +1,7 @@
 #include "../include/ParseMapFromFile.h"
 
 std::vector<Grd> ParseMapFromFile::parse(const std::string& mapName) {
-    std::ifstream inputFile("../../../maps/" + mapName + ".txt");
+    std::ifstream inputFile(std::filesystem::current_path().concat("/maps/").concat(mapName + ".txt"));
     if (!inputFile.is_open()) {
         std::cerr << "Cannot open file" << std::endl;
     }
