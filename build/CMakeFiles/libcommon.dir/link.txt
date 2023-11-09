@@ -1,0 +1,2 @@
+/usr/bin/ar qc liblibcommon.a CMakeFiles/libcommon.dir/common_libs/src/ParseMapFromFile.cpp.o CMakeFiles/libcommon.dir/common_libs/src/Protocol.cpp.o CMakeFiles/libcommon.dir/common_libs/src/liberror.cpp.o CMakeFiles/libcommon.dir/common_libs/src/messages/server/GameInfo.cpp.o CMakeFiles/libcommon.dir/common_libs/src/resolver.cpp.o CMakeFiles/libcommon.dir/common_libs/src/resolvererror.cpp.o CMakeFiles/libcommon.dir/common_libs/src/socket.cpp.o
+/usr/bin/ranlib liblibcommon.a
