@@ -16,6 +16,7 @@ find_package(Qt5 COMPONENTS Widgets REQUIRED)
 file(GLOB_RECURSE COMMON_SRCS ./common_libs/src/*.cpp)
 add_library(libcommon STATIC ${COMMON_SRCS})
 
+
 include_directories(${CMAKE_SOURCE_DIR}/client/include)
 include_directories(${CMAKE_SOURCE_DIR}/editor/include)
 

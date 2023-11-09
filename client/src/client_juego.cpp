@@ -10,6 +10,10 @@ GameInfo Juego::getGamesInfo(){
 
     GameInfo serverResponse = this->m_Protocol.recvGameInfo();
 
+    //this->map_info = this->m_Protocol.recvMap();
+
+    //std::cout << "RECIBIR EL MAPA";
+
     return serverResponse;
 }
 
@@ -27,16 +31,17 @@ void Juego::createGame(const std::string& mapa, const std::string& nombre, const
     GameProperty gameProperty(0, nombre, mapa, std::stoi(cantidad_jugadores));
     GameInfo gameInfo(InitGameEnum::CREATE_GAME, {gameProperty});
     m_Protocol.sendGameInfo(std::ref(gameInfo));
-    //GameInfo serverResponse = m_Protocol.recvGameInfo();
-    std::cout<<"El mapa es: "<<mapa<<std::endl;
-    std::cout<<"El nombre es: "<<nombre<<std::endl;
-    std::cout<<"La cantidad de jugadores es: "<<cantidad_jugadores<<std::endl;
+    
+    //this->map_info = this->m_Protocol.recvMap();
+    //std::cout << "RECIBIR EL MAPA";
+
+    this->game_renderer = new ClientRenderer(this->cola_de_mensajes,this->inicio_el_juego, this->map_info);
+    this->game_renderer->start();
 }
 
 void Juego::joinGame() {
-
-
-
+    this->game_renderer = new ClientRenderer(this->cola_de_mensajes,this->inicio_el_juego, this->map_info);
+    this->game_renderer->start();
 }
 
 void Juego::iniciar_juego() {
@@ -44,8 +49,12 @@ void Juego::iniciar_juego() {
     //ventana de juego
     //std::cout<<"El ip es: "<<ip<<std::endl;
     //std::cout<<"El puerto es: "<<puerto<<std::endl;
-    menu_window();
+    this->menu_window();
+    //se eligio una configuracion
 
+    
+
+    this->game_renderer->join();
     //this->emisor_de_mensajes->join();
 }
 
