@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
+#include <filesystem>
 
 class GameClient {
 public:
@@ -10,7 +11,7 @@ public:
 
     void HandleEvents();
 
-    void Update();
+    void Update(double elapsedSeconds);
 
     void Render();
 
@@ -37,4 +38,5 @@ private:
     SDL_Rect _sourceHeroRect;
     SDL_Rect _destHeroRect;
     int _frameIndex;
+    float _heroXPosition;
 };

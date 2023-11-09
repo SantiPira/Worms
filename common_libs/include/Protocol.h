@@ -12,6 +12,7 @@
 #include "messages/server/GameInfo.h"
 #include "ParseMapFromFile.h"
 #include "messages/user_actions/UserAction.h"
+#include "messages/server/GameUpdate.h"
 
 class Protocol {
 private:
@@ -30,8 +31,12 @@ public:
     Protocol(const std::string& hostname, const std::string& servname);
     GameInfo recvGameInfo();
     std::vector<Grd> recvMap();
+    GameUpdate recvGameUpdate();
+
     void sendGameInfo(GameInfo& gameInfo);
     void sendMap(std::reference_wrapper<std::vector<Grd>> map);
+    void sendUserAction(UserAction action);
+    void sendGameUpdate(GameUpdate& update);
 
     bool isClosed() const;
     void close();
@@ -39,7 +44,5 @@ public:
     ~Protocol();
     Protocol(const Protocol&) = delete;
 
-    void sendUserAction(UserAction action);
 
-    std::string recvUpdateGame();
 };

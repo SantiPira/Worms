@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include "mainWindow.h"
 #include "GameClient.h"
+#include "messages/server/GameUpdate.h"
 
 int main(int argc, char *argv[]) {
     try{
@@ -10,33 +11,39 @@ int main(int argc, char *argv[]) {
         MainWindow window_connect;
         window_connect.show();
         app.exec();
-        Protocol* protocol = window_connect.getProtocol();
-        ProtectedQueue<std::string> settingsQueue(100);
-        ProtectedQueue<std::string> gameUpdates(100);
-        EventSender eventSender(*protocol, 1, std::ref(settingsQueue));
-        ClientReceiver receiver(*protocol, std::ref(gameUpdates));
-        eventSender.start();
-        receiver.start();
         try {
+            auto lastTime = std::chrono::system_clock::now();
+            Protocol* protocol = window_connect.getProtocol();
+            const std::vector<Grd> &map = protocol->recvMap();
+            GameUpdate gameUpdate = protocol->recvGameUpdate();
+            ProtectedQueue<std::string> settingsQueue(100);
+            ProtectedQueue<GameUpdate> gameUpdates(100);
+            gameUpdates.push(gameUpdate);
+            EventSender eventSender(*protocol, 1, std::ref(settingsQueue));
+            ClientReceiver receiver(*protocol, std::ref(gameUpdates));
             auto game = GameClient();
             game.Init();
-
+            eventSender.start();
+            receiver.start();
             while (game.IsRunning()) {
-                game.HandleEvents();
+                auto current = std::chrono::system_clock::now();
+                std::chrono::duration<double> elapsedSeconds = current - lastTime;
 
-                game.Update();
+                //game.HandleEvents();
+
+                game.Update(elapsedSeconds.count());
 
                 game.Render();
             }
 
             game.Release();
+            receiver.join();
+            eventSender.join();
         } catch (std::exception &exception) {
             fprintf(stderr, "%s", exception.what());
             SDL_Quit();
             return -1;
         }
-        receiver.join();
-        eventSender.join();
     }catch(std::exception &e){
         std::cerr << e.what() << std::endl;
         return 1;

@@ -69,6 +69,13 @@ void Protocol::sendMap(std::reference_wrapper<std::vector<Grd>> map) {
     }
 }
 
+void Protocol::sendGameUpdate(GameUpdate &update) {
+    sendByte(update.player_id);
+    sendByte(update.action);
+    sendTwoBytes(update.x_pos);
+    sendTwoBytes(update.y_pos);
+}
+
 GameInfo Protocol::recvGameInfo() {
     GameInfo gameInfo;
     gameInfo.setIdAction(InitGameEnum(recvByte()));
@@ -97,6 +104,15 @@ std::vector<Grd> Protocol::recvMap() {
     return map;
 }
 
+GameUpdate Protocol::recvGameUpdate() {
+    GameUpdate update{};
+    update.player_id = recvByte();
+    update.action = GameAction(recvByte());
+    update.x_pos = recvTwoBytes();
+    update.y_pos = recvTwoBytes();
+    return update;
+}
+
 void Protocol::close() { socket.close(); }
 void Protocol::shutdown(int mode) { socket.shutdown(mode); }
 Protocol::~Protocol() {
@@ -117,6 +133,3 @@ void Protocol::sendUserAction(UserAction action) {
     }
 }
 
-std::string Protocol::recvUpdateGame() {
-    return recvString();
-}

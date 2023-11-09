@@ -5,28 +5,21 @@ void GameClient::Init() {
     CreateWindowAndRender();
     SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
 
-
-    SDL_Surface *surfaceTemp = IMG_Load("/home/santipira/CLionProjects/SDL-Project/SDLProject/LoadImages/resources/logo.png");
-    _logoTexture = SDL_CreateTextureFromSurface(_renderer, surfaceTemp);
-    SDL_QueryTexture(_logoTexture, NULL, NULL, &_sourceLogoRect.w, &_sourceLogoRect.h);
-    _destLogoRect.x = 0;
-    _destLogoRect.y = 0;
-    _destLogoRect.w = 150;
-    _destLogoRect.h = 150;
-    SDL_FreeSurface(surfaceTemp);
-
-    surfaceTemp = IMG_Load("/home/santipira/CLionProjects/SDL-Project/SDLProject/LoadImages/resources/hero_walk.png");
+    SDL_Surface *surfaceTemp = IMG_Load(std::filesystem::current_path().concat("/resources/Worms/waccuse.png").c_str());
+    SDL_SetColorKey(surfaceTemp, SDL_TRUE, SDL_MapRGB(surfaceTemp->format, 128, 128, 192));
+    //surfaceTemp = IMG_Load(std::filesystem::current_path().concat("/resources/waccuse.png").c_str());
+            //IMG_Load("/home/santipira/CLionProjects/SDL-Project/SDLProject/LoadImages/resources/hero_walk.png");
     _heroTexture = SDL_CreateTextureFromSurface(_renderer, surfaceTemp);
     //SDL_QueryTexture(_heroTexture, NULL, NULL, &_sourceHeroRect.w, &_sourceHeroRect.h);
-    _frameIndex = 0;
-    _sourceHeroRect.x = _frameIndex * 587;
+    _frameIndex = 0;    //36 SPRITES
+    _sourceHeroRect.x = _frameIndex * 60;
     _sourceHeroRect.y = 0;
-    _sourceHeroRect.w = 587;
-    _sourceHeroRect.h = 707;
+    _sourceHeroRect.w = 60;
+    _sourceHeroRect.h = 59;
     _destHeroRect.x = 0;
     _destHeroRect.y = 155;
-    _destHeroRect.w = 195;
-    _destHeroRect.h = 235;
+    _destHeroRect.w = 60;
+    _destHeroRect.h = 60;
     SDL_FreeSurface(surfaceTemp);
 
     _isRunning = true;
@@ -43,7 +36,6 @@ void GameClient::InitSDL() {
 
 void GameClient::CreateWindowAndRender() {
     SDL_CreateWindowAndRenderer(512, 512, SDL_WINDOW_SHOWN, &_window, &_renderer);
-
     if (_window == NULL || _renderer == NULL) {
         //throw SDL_Exception(SDL_GetError());
         std::cout << "Exception" << std::endl;
@@ -61,12 +53,13 @@ void GameClient::HandleEvents() {
     }
 }
 
-void GameClient::Update() {
-    _frameIndex = int(((SDL_GetTicks() / 100) % 10));
+void GameClient::Update(double elapsedSeconds) {
+    _frameIndex = (SDL_GetTicks() % (36 * 100)) / 100;
 
-    _sourceHeroRect.x = _frameIndex * 587;
+    _sourceHeroRect.y = _frameIndex * 60;
 
-    _destHeroRect.x += 1;
+    _heroXPosition += 0.1 * elapsedSeconds;
+    _destHeroRect.x = _heroXPosition;
 
 }
 
@@ -75,7 +68,7 @@ void GameClient::Render() {
 
     // renderizar imagenes, etc.
     SDL_RenderCopy(_renderer, _logoTexture, &_sourceLogoRect, &_destLogoRect);
-    SDL_RenderCopyEx(_renderer, _heroTexture, &_sourceHeroRect, &_destHeroRect, 0, NULL, SDL_FLIP_NONE);
+    SDL_RenderCopyEx(_renderer, _heroTexture, &_sourceHeroRect, &_destHeroRect, 0, NULL, SDL_FLIP_HORIZONTAL);
 
     SDL_RenderPresent(_renderer);
 }

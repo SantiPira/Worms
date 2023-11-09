@@ -7,7 +7,8 @@ ClientSender::ClientSender(Protocol& protocol, ProtectedQueue<GameUpdate>* selfQ
 void ClientSender::run() {
     try {
         while (m_KeepRunning) {
-            //GameUpdate message = m_SelfQueue->pop();
+            auto update = m_SelfQueue->pop();
+            m_Protocol.sendGameUpdate(update);
         }
     } catch (const LibError& e) {
         m_KeepRunning.store(false);

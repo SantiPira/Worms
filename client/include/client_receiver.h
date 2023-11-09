@@ -10,10 +10,10 @@
 class ClientReceiver: public Thread {
  private:
     Protocol& m_Protocol;
-    ProtectedQueue<std::string>& m_GameUpdates;
+    ProtectedQueue<GameUpdate>& m_GameUpdates;
 
  public:
-    ClientReceiver(Protocol& protocol, ProtectedQueue<std::string>& gameUpdates);
+    ClientReceiver(Protocol& protocol, ProtectedQueue<GameUpdate>& gameUpdates);
 
     void run() override;
 };
