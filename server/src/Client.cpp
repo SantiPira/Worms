@@ -43,7 +43,8 @@ void Client::lobbyGame() {
         switch (clientResponse.getIdAction()) {
             case CREATE_GAME: {
                 m_IdGame = m_Matches->createGame(clientResponse.getGameProperties()[0].m_GameName,
-                                                 clientResponse.getGameProperties()[0].m_MapName);
+                                                 clientResponse.getGameProperties()[0].m_MapName,
+                                                 clientResponse.getGameProperties()[0].m_Players);
                 m_IdPlayer = m_Matches->addPlayer(m_IdGame, &m_UpdatesGame);
                 m_InputActions = m_Matches->getInputActionGame(m_IdGame);
                 hasGame = true;

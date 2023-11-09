@@ -11,9 +11,11 @@
 class MainWindow : public QWidget {
 private:
     Juego* juego;
+    std::atomic<bool> m_Lobby;
 public:
     explicit MainWindow(QWidget *parent = 0);
     Protocol* getProtocol();
+    bool isLobby();
     ~MainWindow() override;
 private slots:
     void switchToGame();

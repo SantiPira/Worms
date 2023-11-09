@@ -2,24 +2,24 @@
 
 #define POP_MESSAGE_QUANTITY 1
 
-Game::Game(int id, std::string gameName, std::string mapName) : m_IdGame(id), m_GameName(std::move(gameName)),
-    m_MapName(std::move(mapName)), m_InputActions(100), m_KeepRunning(true), m_PopMessageQuantity(POP_MESSAGE_QUANTITY), world(m_MapName) {}
+Game::Game(int id, std::string gameName, std::string mapName, int players) : m_IdGame(id), m_GameName(std::move(gameName)),
+    m_MapName(std::move(mapName)), m_Players(players), m_InputActions(100), m_KeepRunning(true),
+    m_PopMessageQuantity(POP_MESSAGE_QUANTITY), world(m_MapName) {}
 
 void Game::run() {
-    //std::vector<std::string> updates;
     setupWorld();
-    GameUpdate update;
+    GameUpdate update{};
     update.action = TURN_INFO;
-    update.player_id = 1;
+    update.player_id = 0;
     pushUpdateToClients(std::ref(update));
-    TurnHandler turnHandler(1, m_Players);
+    TurnHandler turnHandler(0, m_Players);
     while (m_KeepRunning) {
         while (turnHandler.isValidTurn()) {
             //Ver como se estan almacenando los mensajes en el vector, si hay repetidos etc... y como llega al pushUpdateToClients..
             //m_InputActions.try_pop(std::ref(updates), m_PopMessageQuantity);
             std::string client_action;
             m_InputActions.try_pop(std::ref(client_action));
-            GameUpdate update = world.UpdateWorld();
+            update = world.UpdateWorld();
             pushUpdateToClients(std::ref(update));
             //TODO: Revisar esto, pero creo que deberia estar bien, el loop del turnHandler no esta mal, ya que administra de quien es el turno.
             std::chrono::steady_clock::time_point start_time = std::chrono::steady_clock::now();
@@ -33,7 +33,6 @@ void Game::run() {
             }
         }
         turnHandler.nextTurn();
-        GameUpdate update;
         update.action = TURN_INFO;
         update.player_id = turnHandler.getCurrentPlayer();
         pushUpdateToClients(std::ref(update));
@@ -46,7 +45,6 @@ int Game::getPlayers() {
 
 int Game::addPlayer(ProtectedQueue<GameUpdate> *qClientUpdates) {
     m_QClientUpdates.insert(std::make_pair(m_QClientUpdates.size(), qClientUpdates));
-    m_Players++;
     if (isReadyToStart()) {
         start();
     }
@@ -54,7 +52,7 @@ int Game::addPlayer(ProtectedQueue<GameUpdate> *qClientUpdates) {
 }
 
 bool Game::isReadyToStart() {
-    return m_QClientUpdates.size() == 2;
+    return static_cast<int>(m_QClientUpdates.size()) == m_Players;
 }
 
 ProtectedQueue<std::string> *Game::getInputActions() {

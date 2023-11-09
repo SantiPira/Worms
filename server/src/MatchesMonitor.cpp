@@ -9,10 +9,10 @@ void MatchesMonitor::removeGame(int id) {
     m_Games.erase(id);
 }
 
-int MatchesMonitor::createGame(std::string gameName, std::string mapName) {
+int MatchesMonitor::createGame(std::string gameName, std::string mapName, int players) {
     std::lock_guard<std::mutex> lock(m_Mutex);
     int id = m_Games.size();
-    Game* game = new Game(id, std::move(gameName), std::move(mapName));
+    Game* game = new Game(id, std::move(gameName), std::move(mapName), players);
     m_Games.insert(std::make_pair(id, game));
     return id;
 }

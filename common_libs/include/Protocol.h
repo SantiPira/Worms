@@ -11,6 +11,7 @@
 #include <functional>
 #include "messages/server/GameInfo.h"
 #include "ParseMapFromFile.h"
+#include "messages/user_actions/UserAction.h"
 
 class Protocol {
 private:
@@ -37,4 +38,8 @@ public:
     void shutdown(int mode);
     ~Protocol();
     Protocol(const Protocol&) = delete;
+
+    void sendUserAction(UserAction action);
+
+    std::string recvUpdateGame();
 };

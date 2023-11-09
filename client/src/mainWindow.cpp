@@ -1,6 +1,6 @@
 #include "mainWindow.h"
 
-MainWindow::MainWindow(QWidget *parent) : QWidget(parent), buttonConnect("Conectar") {
+MainWindow::MainWindow(QWidget *parent) : QWidget(parent), m_Lobby(true), buttonConnect("Conectar") {
     QVBoxLayout* connectLayout = new QVBoxLayout();
     QVBoxLayout* inputLayout = new QVBoxLayout();
 
@@ -45,4 +45,8 @@ Protocol *MainWindow::getProtocol() {
 
 MainWindow::~MainWindow() {
     delete this->juego;
+}
+
+bool MainWindow::isLobby() {
+    return m_Lobby.load();
 }

@@ -3,7 +3,7 @@
 
 #include "../../common_libs/include/Protocol.h"
 #include "../../common_libs/include/ProtectedQueue.h"
-#include "client_sender.h"
+#include "EventSender.h"
 #include "client_receiver.h"
 
 #include <iostream>
@@ -12,7 +12,7 @@ class Juego{
     private:
     Protocol m_Protocol;
 
-    ClientSender* emisor_de_mensajes{NULL};
+    EventSender* emisor_de_mensajes{NULL};
     ClientReceiver* receptor_de_mensajes{NULL};
     bool inicio_el_juego{false};
     ProtectedQueue<std::string> cola_de_mensajes;

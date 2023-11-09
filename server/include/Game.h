@@ -11,7 +11,7 @@ class Game : public Thread {
     int m_IdGame;
     std::string m_GameName;
     std::string m_MapName;
-    int m_Players{};
+    int m_Players;
     std::unordered_map<int, ProtectedQueue<GameUpdate>*> m_QClientUpdates; //TODO: Change string to GameUpdate later
     ProtectedQueue<std::string> m_InputActions;
     std::atomic<bool> m_KeepRunning;
@@ -19,9 +19,8 @@ class Game : public Thread {
     GameWorld world;
 
 public:
-    explicit Game(int id, std::string gameName, std::string mapName);
+    Game(int id, std::string gameName, std::string mapName, int players);
     void run() override;
-    //getters
     int getIdGame() const;
     std::string getGameName() const;
     std::string getMapName() const;

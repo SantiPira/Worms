@@ -108,3 +108,15 @@ Protocol::~Protocol() {
     }
 }
 bool Protocol::isClosed() const { return wasClosed; }
+
+void Protocol::sendUserAction(UserAction action) {
+    sendByte(action.getAction());
+    sendByte(action.getIdPlayer());
+    if (action.getAction() == ActionType::MOVE) {
+        sendByte(action.getParam1());
+    }
+}
+
+std::string Protocol::recvUpdateGame() {
+    return recvString();
+}

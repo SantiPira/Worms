@@ -5,23 +5,17 @@
 #include "../../common_libs/include/Protocol.h"
 #include "../../common_libs/include/ProtectedQueue.h"
 #include "../../common_libs/include/messages/server/GameInfo.h"
-
 #include <string>
 
 class ClientReceiver: public Thread {
-    private:
-    Protocol& comunicacion_con_server;
-    ProtectedQueue<std::string>& cola_de_mensajes;
+ private:
+    Protocol& m_Protocol;
+    ProtectedQueue<std::string>& m_GameUpdates;
 
-    public:
-
-    ClientReceiver(Protocol& protocolo_a_asignar, ProtectedQueue<std::string>& cola_a_asignar);
+ public:
+    ClientReceiver(Protocol& protocol, ProtectedQueue<std::string>& gameUpdates);
 
     void run() override;
 };
-
-
-
-
 
 #endif
