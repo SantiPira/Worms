@@ -1,26 +1,21 @@
 #include "../include/GameClient.h"
 
-void GameClient::Init() {
+void GameClient::Init(const std::vector<Grd> vector) {
     InitSDL();
     CreateWindowAndRender();
     SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
 
-    SDL_Surface *surfaceTemp = IMG_Load(std::filesystem::current_path().concat("/resources/Worms/waccuse.png").c_str());
-    SDL_SetColorKey(surfaceTemp, SDL_TRUE, SDL_MapRGB(surfaceTemp->format, 128, 128, 192));
-    //surfaceTemp = IMG_Load(std::filesystem::current_path().concat("/resources/waccuse.png").c_str());
-            //IMG_Load("/home/santipira/CLionProjects/SDL-Project/SDLProject/LoadImages/resources/hero_walk.png");
-    _heroTexture = SDL_CreateTextureFromSurface(_renderer, surfaceTemp);
-    //SDL_QueryTexture(_heroTexture, NULL, NULL, &_sourceHeroRect.w, &_sourceHeroRect.h);
-    _frameIndex = 0;    //36 SPRITES
-    _sourceHeroRect.x = _frameIndex * 60;
-    _sourceHeroRect.y = 0;
-    _sourceHeroRect.w = 60;
-    _sourceHeroRect.h = 59;
-    _destHeroRect.x = 0;
-    _destHeroRect.y = 155;
-    _destHeroRect.w = 60;
-    _destHeroRect.h = 60;
-    SDL_FreeSurface(surfaceTemp);
+    Worm* worm = new Worm(_renderer, 0, 0);
+    worm->init();
+    m_Worms.push_back(worm);
+
+    Worm* worm2 = new Worm(_renderer, 100, 100);
+    worm2->init();
+    m_Worms.push_back(worm2);
+
+    auto grdL = new GrdLarge(_renderer, vector[0].x, vector[0].y);
+    grdL->init();
+    m_GrdLarge.push_back(grdL);
 
     _isRunning = true;
 }
@@ -54,22 +49,21 @@ void GameClient::HandleEvents() {
 }
 
 void GameClient::Update(double elapsedSeconds) {
-    _frameIndex = (SDL_GetTicks() % (36 * 100)) / 100;
-
-    _sourceHeroRect.y = _frameIndex * 60;
-
-    _heroXPosition += 0.1 * elapsedSeconds;
-    _destHeroRect.x = _heroXPosition;
-
+    for (auto& worm : m_Worms) {
+        worm->update(elapsedSeconds);
+    }
 }
 
 void GameClient::Render() {
     SDL_RenderClear(_renderer);
 
-    // renderizar imagenes, etc.
-    SDL_RenderCopy(_renderer, _logoTexture, &_sourceLogoRect, &_destLogoRect);
-    SDL_RenderCopyEx(_renderer, _heroTexture, &_sourceHeroRect, &_destHeroRect, 0, NULL, SDL_FLIP_HORIZONTAL);
+    for (auto& grdL : m_GrdLarge) {
+        grdL->render();
+    }
 
+    for (auto& worm : m_Worms) {
+        worm->render();
+    }
     SDL_RenderPresent(_renderer);
 }
 

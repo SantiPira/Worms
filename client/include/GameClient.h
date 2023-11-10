@@ -4,10 +4,14 @@
 #include <SDL_image.h>
 #include <iostream>
 #include <filesystem>
+#include "engine/entities/worms/Worm.h"
+#include "ParseMapFromFile.h"
+#include "engine/entities/grd/GrdLarge.h"
+#include <vector>
 
 class GameClient {
 public:
-    void Init();
+    void Init(const std::vector<Grd> vector);
 
     void HandleEvents();
 
@@ -30,13 +34,7 @@ private:
     SDL_Window *_window;
     SDL_Renderer *_renderer;
 
-    SDL_Texture *_logoTexture;
-    SDL_Rect _sourceLogoRect;
-    SDL_Rect _destLogoRect;
-
-    SDL_Texture *_heroTexture;
-    SDL_Rect _sourceHeroRect;
-    SDL_Rect _destHeroRect;
-    int _frameIndex;
-    float _heroXPosition;
+    std::vector<Worm*> m_Worms;
+    std::vector<Grd> m_Grd;
+    std::vector<GrdLarge*> m_GrdLarge;
 };

@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
             EventSender eventSender(*protocol, 1, std::ref(settingsQueue));
             ClientReceiver receiver(*protocol, std::ref(gameUpdates));
             auto game = GameClient();
-            game.Init();
+            game.Init(map);
             eventSender.start();
             receiver.start();
             while (game.IsRunning()) {

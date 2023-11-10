@@ -15,10 +15,11 @@ class Animation {
     int m_FrameWidth;
 
 public:
-    Animation(std::string path, SDL_Renderer *renderer, int frames, float duration, int frameHeight, int frameWidth);
+    Animation(std::string path, SDL_Renderer *renderer, int frames, float duration, int frameHeight, int frameWidth,
+              BlendMode blendMode);
 
     void init();
     void release();
     void update(double elapsedSeconds);
-    void render(const SDL_Rect *destRect) const;
+    void render(const SDL_Rect *destRect, bool isFlip) const;
 };
