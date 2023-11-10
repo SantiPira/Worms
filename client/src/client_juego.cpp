@@ -37,25 +37,17 @@ void Juego::createGame(const std::string& mapa, const std::string& nombre, const
 
     this->game_renderer = new ClientRenderer(this->cola_de_mensajes,this->inicio_el_juego, this->map_info);
     this->game_renderer->start();
+
+    //Temporal
+    this->game_renderer->join();
 }
 
 void Juego::joinGame() {
     this->game_renderer = new ClientRenderer(this->cola_de_mensajes,this->inicio_el_juego, this->map_info);
     this->game_renderer->start();
-}
 
-void Juego::iniciar_juego() {
-
-    //ventana de juego
-    //std::cout<<"El ip es: "<<ip<<std::endl;
-    //std::cout<<"El puerto es: "<<puerto<<std::endl;
-    this->menu_window();
-    //se eligio una configuracion
-
-    
-
+    //Temporal
     this->game_renderer->join();
-    //this->emisor_de_mensajes->join();
 }
 
 Protocol *Juego::getProtocol() {

@@ -19,14 +19,12 @@ class ClientRenderer: public Thread {
     atomic<bool>& keep_playing;
     std::vector<Grd>& map_info;
 
-    std::unique_ptr<SDL> sdl;
-    Window* game_window{NULL};
-    Renderer* renderer{NULL};
+    SDL sdl;
+    Window game_window;
+    Renderer renderer;
+    //Texture sprites;
     SDL* sound_mixer{NULL};
     Chunk* main_music{NULL};
-
-    
-    void initialize_renderer();
 
     public:
 

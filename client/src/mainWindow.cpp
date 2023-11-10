@@ -35,7 +35,7 @@ void MainWindow::switchToGame() {
 
     this->close();
     this->juego = new Juego(server.toStdString(), port.toStdString());
-    //juego->iniciar_juego();
+    
     juego->menu_window();
 }
 

@@ -11,6 +11,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb -DDEBUG -fno-inline ")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 add_subdirectory(SDL2pp)
 
+add_definitions(-DDATA_PATH="${PROJECT_SOURCE_DIR}/data")
+
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
 file(GLOB_RECURSE COMMON_SRCS ./common_libs/src/*.cpp)
