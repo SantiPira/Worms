@@ -1,7 +1,10 @@
 #include "engine/entities/worms/Worm.h"
 
-Worm::Worm(SDL_Renderer *renderer, int posX, int posY) : m_Renderer(renderer),
-    m_DestWormRect(SDL_Rect{posX, posY, 60, 60}), m_WormXPosition(posX), m_BlendMode({true, 128, 128, 192}) {}
+Worm::Worm(SDL_Renderer *renderer, float posX, float posY) : m_Renderer(renderer), m_WormXPosition(posX),
+    m_BlendMode({true, 128, 128, 192}) {
+    m_DestWormRect = SDL_Rect{static_cast<int>(WorldScale::getPixelScale(posX)),
+                              static_cast<int>(WorldScale::getPixelScale(posY)), 60, 60};
+}
 
 void Worm::init() {
     //TODO: Enum for paths and sprites actions

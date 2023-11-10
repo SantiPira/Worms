@@ -5,17 +5,19 @@ void GameClient::Init(const std::vector<Grd> vector) {
     CreateWindowAndRender();
     SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
 
-    Worm* worm = new Worm(_renderer, 0, 0);
+    for (auto& grd : vector) {
+        auto* grdL = new GrdLarge(_renderer, grd.x, grd.y);
+        grdL->init();
+        m_GrdLarge.push_back(grdL);
+    }
+
+    Worm* worm = new Worm(_renderer, 10, 8.5);
     worm->init();
     m_Worms.push_back(worm);
 
-    Worm* worm2 = new Worm(_renderer, 100, 100);
+    Worm* worm2 = new Worm(_renderer, 0, 8);
     worm2->init();
     m_Worms.push_back(worm2);
-
-    auto grdL = new GrdLarge(_renderer, vector[0].x, vector[0].y);
-    grdL->init();
-    m_GrdLarge.push_back(grdL);
 
     _isRunning = true;
 }
