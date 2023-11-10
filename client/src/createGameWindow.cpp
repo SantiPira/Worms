@@ -26,6 +26,7 @@ CreateGameWindow::CreateGameWindow(QWidget *parent, Juego* juego) : QWidget(pare
     layoutV->addWidget(&this->editGameName);
 
     comboBoxPlayers = new QComboBox();
+    comboBoxPlayers->addItem("1");
     comboBoxPlayers->addItem("2");
     comboBoxPlayers->addItem("4");
     comboBoxPlayers->addItem("6");
@@ -49,6 +50,5 @@ void CreateGameWindow::slotCreateGame() {
     QString amountPlayers = this->comboBoxPlayers->currentText();
 
     m_Juego->createGame(mapa_seleccionado.toStdString(), name.toStdString(), amountPlayers.toStdString());
-
     this->close();
 }

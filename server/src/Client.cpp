@@ -7,20 +7,13 @@ Client::Client(Socket peer, MatchesMonitor* matches) : m_Protocol(std::move(peer
 
 void Client::run() {
     try {
-        while (m_KeepRunning && !hasGame) {
+        while (isRunning() && !hasGame) {
             lobbyGame();
         }
-        sendMap();
-        m_Sender.setPlayerId(m_IdPlayer);
-        m_Sender.start();
-        //Receiver state
-        while (m_KeepRunning) {
-            //handlerInitGame->handle(std::ref(clientInitGame));
-            //clientInitGame.executeAction(std::ref(m_Matches), std::ref(m_UpdatesGame), idPlayer, idGame);
-            m_InputActions->push("clientResponse");
+        if (hasGame) {
+            initGame();
         }
-        m_Sender.stop();
-        m_Sender.join();
+
     } catch (const LibError& e) {
         std::cerr << "LibError exception e.what(): " << e.what() << std::endl;
         destroyClient();
@@ -30,30 +23,47 @@ void Client::run() {
     }
 }
 
+void Client::initGame() {
+    sendMap();
+    m_Sender.setPlayerId(m_IdPlayer);
+    m_Sender.start();
+    //Receiver state
+    while (isRunning()) {
+        //handlerInitGame->handle(std::ref(clientInitGame));
+        //clientInitGame.executeAction(std::ref(m_Matches), std::ref(m_UpdatesGame), idPlayer, idGame);
+        m_InputActions->push("clientResponse");
+    }
+    m_Sender.stop();
+    m_Sender.join();
+}
+
 void Client::lobbyGame() {
     GameInfo clientResponse = m_Protocol.recvGameInfo();
-    switch (clientResponse.getIdAction()) {
-        case CREATE_GAME: {
-            m_IdGame = m_Matches->createGame(clientResponse.getGameProperties()[0].m_GameName,
-                                           clientResponse.getGameProperties()[0].m_MapName);
-            m_IdPlayer = m_Matches->addPlayer(m_IdGame, &m_UpdatesGame);
-            m_InputActions = m_Matches->getInputActionGame(m_IdGame);
-            hasGame = true;
-            break;
-        }
-        case JOIN_GAME: {
-            m_IdGame = clientResponse.getGameProperties()[0].m_idGame;
-            m_IdPlayer = m_Matches->addPlayer(m_IdGame, &m_UpdatesGame);
-            m_InputActions = m_Matches->getInputActionGame(m_IdGame);
-            hasGame = true;
-            break;
-        }
-        case LIST_GAMES: {
-            GameInfo gameInfo(LIST_GAMES, m_Matches->getGameProperties());
-            m_Protocol.sendGameInfo(std::ref(gameInfo));
-        }
-        default: {
-            break;
+    if (!m_Protocol.isClosed()) {
+        switch (clientResponse.getIdAction()) {
+            case CREATE_GAME: {
+                m_IdGame = m_Matches->createGame(clientResponse.getGameProperties()[0].m_GameName,
+                                                 clientResponse.getGameProperties()[0].m_MapName,
+                                                 clientResponse.getGameProperties()[0].m_Players);
+                m_IdPlayer = m_Matches->addPlayer(m_IdGame, &m_UpdatesGame);
+                m_InputActions = m_Matches->getInputActionGame(m_IdGame);
+                hasGame = true;
+                break;
+            }
+            case JOIN_GAME: {
+                m_IdGame = clientResponse.getGameProperties()[0].m_idGame;
+                m_IdPlayer = m_Matches->addPlayer(m_IdGame, &m_UpdatesGame);
+                m_InputActions = m_Matches->getInputActionGame(m_IdGame);
+                hasGame = true;
+                break;
+            }
+            case LIST_GAMES: {
+                GameInfo gameInfo(LIST_GAMES, m_Matches->getGameProperties());
+                m_Protocol.sendGameInfo(std::ref(gameInfo));
+            }
+            default: {
+                break;
+            }
         }
     }
 }
@@ -81,6 +91,20 @@ void Client::destroyClient() {
     if (m_KeepRunning.load()) {
         kill();
     }
-    m_Matches->removePlayer(m_IdGame, m_IdPlayer);
+    if (hasGame) {
+        m_Matches->removePlayer(m_IdGame, m_IdPlayer);
+    }
+}
+
+int Client::getIdPlayer() const {
+    return m_IdPlayer;
+}
+
+int Client::getIdGame() const {
+    return m_IdGame;
+}
+
+bool Client::isRunning() {
+    return m_KeepRunning.load() && !m_Protocol.isClosed();
 }
 

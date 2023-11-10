@@ -26,7 +26,7 @@ private:
     int m_IdGame{};
     int m_IdPlayer{};
     bool hasGame = false;
-    ProtectedQueue<std::string> m_UpdatesGame;
+    ProtectedQueue<GameUpdate> m_UpdatesGame;
     ProtectedQueue<std::string>* m_InputActions{};
     ClientSender m_Sender;
 public:
@@ -35,7 +35,8 @@ public:
     void stop();
     void kill();
     void run() override;
-
+    [[nodiscard]] int getIdPlayer() const;
+    [[nodiscard]] int getIdGame() const;
     ~Client() override = default;
     Client(const Client&) = delete;
     Client(Client&& other) = delete;
@@ -45,4 +46,8 @@ private:
     void lobbyGame();
 
     void destroyClient();
+
+    bool isRunning();
+
+    void initGame();
 };

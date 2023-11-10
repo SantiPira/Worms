@@ -30,6 +30,7 @@ void Server::reapDead() {
     for (auto it = m_Clients.begin(); it != m_Clients.end();) {
         if (it->isDead()) {
             it->join();
+            m_Games.removePlayer(it->getIdGame(), it->getIdPlayer());
             it = m_Clients.erase(it);
         } else {
             ++it;
