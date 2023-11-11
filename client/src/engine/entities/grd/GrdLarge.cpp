@@ -1,9 +1,8 @@
 #include "engine/entities/grd/GrdLarge.h"
 
 GrdLarge::GrdLarge(SDL_Renderer *renderer, int posX, int posY) : m_Renderer(renderer) {
-    int x = posX / 2;
-    m_DestGrdLRect = SDL_Rect{static_cast<int>(WorldScale::getPixelScale(x)),
-                              static_cast<int>(WorldScale::getPixelScale(posY)), 256, 20};
+    m_DestGrdLRect = SDL_Rect{static_cast<int>(WorldScale::getPixelScale(posX)),
+                              static_cast<int>(WorldScale::getPixelScale(posY) + 80), 512, 40};
     //m_DestGrdLRect = SDL_Rect{static_cast<int>((posX / 2) * 25.6), static_cast<int>(posY * 25.6), 256, 20};
 }
 

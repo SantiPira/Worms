@@ -29,9 +29,7 @@ void Client::initGame() {
     m_Sender.start();
     //Receiver state
     while (isRunning()) {
-        //handlerInitGame->handle(std::ref(clientInitGame));
-        //clientInitGame.executeAction(std::ref(m_Matches), std::ref(m_UpdatesGame), idPlayer, idGame);
-        m_InputActions->push("clientResponse");
+        m_InputActions->push(m_Protocol.recvUserAction());
     }
     m_Sender.stop();
     m_Sender.join();

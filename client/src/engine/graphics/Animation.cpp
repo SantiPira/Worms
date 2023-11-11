@@ -19,7 +19,7 @@ void Animation::update(double elapsedSeconds) {
         m_CurrentTime -= m_Duration;
     }
 
-    auto frameIndex = int(m_CurrentTime / m_Duration * 10);
+    auto frameIndex = int(m_CurrentTime / m_Duration * m_Frames);
 
     m_SourceRect.y = frameIndex * m_FrameWidth;
     m_Texture->setSourceRect(&m_SourceRect);

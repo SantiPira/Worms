@@ -1,6 +1,6 @@
 #include "../include/GameClient.h"
 
-void GameClient::Init(const std::vector<Grd> vector) {
+void GameClient::Init(const std::vector<Grd>& vector) {
     InitSDL();
     CreateWindowAndRender();
     SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
@@ -15,7 +15,7 @@ void GameClient::Init(const std::vector<Grd> vector) {
     worm->init();
     m_Worms.push_back(worm);
 
-    Worm* worm2 = new Worm(_renderer, 0, 8);
+    Worm* worm2 = new Worm(_renderer, 0, 8.5);
     worm2->init();
     m_Worms.push_back(worm2);
 
@@ -32,7 +32,7 @@ void GameClient::InitSDL() {
 }
 
 void GameClient::CreateWindowAndRender() {
-    SDL_CreateWindowAndRenderer(512, 512, SDL_WINDOW_SHOWN, &_window, &_renderer);
+    SDL_CreateWindowAndRenderer(1024, 1024, SDL_WINDOW_SHOWN, &_window, &_renderer);
     if (_window == NULL || _renderer == NULL) {
         //throw SDL_Exception(SDL_GetError());
         std::cout << "Exception" << std::endl;
@@ -50,9 +50,9 @@ void GameClient::HandleEvents() {
     }
 }
 
-void GameClient::Update(double elapsedSeconds) {
+void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
     for (auto& worm : m_Worms) {
-        worm->update(elapsedSeconds);
+        worm->update(elapsedSeconds, gameUpdate.x_pos, gameUpdate.y_pos);
     }
 }
 

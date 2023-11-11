@@ -3,6 +3,7 @@
 #include <atomic>
 #include "../../common_libs/include/Thread.h"
 #include "GameWorld.h"
+#include "messages/user_actions/UserAction.h"
 
 #define MAX_TURN_SECONDS 120
 
@@ -13,7 +14,7 @@ class Game : public Thread {
     std::string m_MapName;
     int m_Players;
     std::unordered_map<int, ProtectedQueue<GameUpdate>*> m_QClientUpdates; //TODO: Change string to GameUpdate later
-    ProtectedQueue<std::string> m_InputActions;
+    ProtectedQueue<UserAction> m_InputActions;
     std::atomic<bool> m_KeepRunning;
     int m_PopMessageQuantity;
     GameWorld world;
@@ -26,7 +27,7 @@ public:
     std::string getMapName() const;
     int getPlayers();
     int addPlayer(ProtectedQueue<GameUpdate>* qClientUpdates);
-    ProtectedQueue<std::string>* getInputActions();
+    ProtectedQueue<UserAction>* getInputActions();
     void stop();
     ~Game() override = default;
     Game(const Game&) = delete;

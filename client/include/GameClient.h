@@ -7,15 +7,17 @@
 #include "engine/entities/worms/Worm.h"
 #include "ParseMapFromFile.h"
 #include "engine/entities/grd/GrdLarge.h"
+#include "messages/server/GameUpdate.h"
+
 #include <vector>
 
 class GameClient {
 public:
-    void Init(const std::vector<Grd> vector);
+    void Init(const std::vector<Grd>& vector);
 
     void HandleEvents();
 
-    void Update(double elapsedSeconds);
+    void Update(double elapsedSeconds, const GameUpdate& gameUpdate);
 
     void Render();
 

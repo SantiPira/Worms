@@ -8,19 +8,24 @@ Game::Game(int id, std::string gameName, std::string mapName, int players) : m_I
 
 void Game::run() {
     setupWorld();
-    GameUpdate update{};
-    update.action = TURN_INFO;
-    update.player_id = 0;
-    pushUpdateToClients(std::ref(update));
-    TurnHandler turnHandler(0, m_Players);
+//    GameUpdate update{};
+//    update.action = TURN_INFO;
+//    update.player_id = 0;
+//    pushUpdateToClients(std::ref(update));
+//    TurnHandler turnHandler(0, m_Players);
+    {
+        auto update = world.getWormsPosition();
+        pushUpdatesToClients(std::ref(update));
+    }
     while (m_KeepRunning) {
-        while (turnHandler.isValidTurn()) {
+
+        //while (turnHandler.isValidTurn()) {
             //Ver como se estan almacenando los mensajes en el vector, si hay repetidos etc... y como llega al pushUpdateToClients..
             //m_InputActions.try_pop(std::ref(updates), m_PopMessageQuantity);
-            std::string client_action;
-            m_InputActions.try_pop(std::ref(client_action));
-            update = world.UpdateWorld();
-            pushUpdateToClients(std::ref(update));
+            std::vector<UserAction> userActions;
+            m_InputActions.try_pop(std::ref(userActions), m_PopMessageQuantity);
+            auto updates = world.UpdateWorld(std::ref(userActions));
+            pushUpdatesToClients(std::ref(updates));
             //TODO: Revisar esto, pero creo que deberia estar bien, el loop del turnHandler no esta mal, ya que administra de quien es el turno.
             std::chrono::steady_clock::time_point start_time = std::chrono::steady_clock::now();
             // Espero hasta que pase 1/60 segundos
@@ -31,11 +36,11 @@ void Game::run() {
                 end_time = std::chrono::steady_clock::now();
                 elapsed_seconds = end_time - start_time;
             }
-        }
-        turnHandler.nextTurn();
-        update.action = TURN_INFO;
-        update.player_id = turnHandler.getCurrentPlayer();
-        pushUpdateToClients(std::ref(update));
+        //}
+//        turnHandler.nextTurn();
+//        update.action = TURN_INFO;
+//        update.player_id = turnHandler.getCurrentPlayer();
+//        pushUpdateToClients(std::ref(update));
     }
 }
 
@@ -55,7 +60,7 @@ bool Game::isReadyToStart() {
     return static_cast<int>(m_QClientUpdates.size()) == m_Players;
 }
 
-ProtectedQueue<std::string> *Game::getInputActions() {
+ProtectedQueue<UserAction> *Game::getInputActions() {
     return &m_InputActions;
 }
 
@@ -92,10 +97,7 @@ std::unordered_map<int, ProtectedQueue<GameUpdate>*>* Game::getClientUpdates() {
 void Game::setupWorld() {
     this->world.Setup();
     for (auto& clientId : m_QClientUpdates) {
-        world.SetWorm(clientId.first,5.0f, 10.0f);//cambiar por posicion random
-    }    
+        world.SetWorm(clientId.first,10.0f, 11.0f);//cambiar por posicion random
+    }
 }
 
-void Game::updateWorld() {
-    world.UpdateWorld();
-}

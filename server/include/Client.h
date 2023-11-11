@@ -27,7 +27,7 @@ private:
     int m_IdPlayer{};
     bool hasGame = false;
     ProtectedQueue<GameUpdate> m_UpdatesGame;
-    ProtectedQueue<std::string>* m_InputActions{};
+    ProtectedQueue<UserAction>* m_InputActions{};
     ClientSender m_Sender;
 public:
     Client(Socket peer, MatchesMonitor* games);

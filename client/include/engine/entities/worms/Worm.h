@@ -19,6 +19,6 @@ public:
 
     void init();
     void release();
-    void update(double elapsedSeconds);
+    void update(double elapsedSeconds, float posX, float posY);
     void render();
 };

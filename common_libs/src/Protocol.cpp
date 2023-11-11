@@ -133,3 +133,13 @@ void Protocol::sendUserAction(UserAction action) {
     }
 }
 
+UserAction Protocol::recvUserAction() {
+    UserAction userAction;
+    userAction.setAction(ActionType(recvByte()));
+    userAction.setIdPlayer(recvByte());
+    if (userAction.getAction() == ActionType::MOVE) {
+        userAction.setParam1(recvByte());
+    }
+    return userAction;
+}
+

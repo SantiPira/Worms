@@ -22,7 +22,7 @@ int MatchesMonitor::addPlayer(int id, ProtectedQueue<GameUpdate>* qClientUpdates
     return m_Games.at(id)->addPlayer(qClientUpdates);
 }
 
-ProtectedQueue<std::string> *MatchesMonitor::getInputActionGame(int idGame) {
+ProtectedQueue<UserAction> *MatchesMonitor::getInputActionGame(int idGame) {
     std::lock_guard<std::mutex> lock(m_Mutex);
     return m_Games.at(idGame)->getInputActions();
 }

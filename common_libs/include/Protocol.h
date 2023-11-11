@@ -32,6 +32,7 @@ public:
     GameInfo recvGameInfo();
     std::vector<Grd> recvMap();
     GameUpdate recvGameUpdate();
+    UserAction recvUserAction();
 
     void sendGameInfo(GameInfo& gameInfo);
     void sendMap(std::reference_wrapper<std::vector<Grd>> map);
@@ -43,6 +44,4 @@ public:
     void shutdown(int mode);
     ~Protocol();
     Protocol(const Protocol&) = delete;
-
-
 };

@@ -12,28 +12,32 @@ int main(int argc, char *argv[]) {
         window_connect.show();
         app.exec();
         try {
-            auto lastTime = std::chrono::system_clock::now();
             Protocol* protocol = window_connect.getProtocol();
             const std::vector<Grd> &map = protocol->recvMap();
             GameUpdate gameUpdate = protocol->recvGameUpdate();
             ProtectedQueue<std::string> settingsQueue(100);
             ProtectedQueue<GameUpdate> gameUpdates(100);
             gameUpdates.push(gameUpdate);
-            EventSender eventSender(*protocol, 1, std::ref(settingsQueue));
+            EventSender eventSender(*protocol, gameUpdate.player_id, std::ref(settingsQueue));
             ClientReceiver receiver(*protocol, std::ref(gameUpdates));
             auto game = GameClient();
             game.Init(map);
+            auto lastTime = std::chrono::system_clock::now();
             eventSender.start();
             receiver.start();
             while (game.IsRunning()) {
+                std::vector<GameUpdate> serverUpdates;
                 auto current = std::chrono::system_clock::now();
                 std::chrono::duration<double> elapsedSeconds = current - lastTime;
-
+                gameUpdates.try_pop(serverUpdates, 10);
                 //game.HandleEvents();
 
-                game.Update(elapsedSeconds.count());
+                for (auto &serverUpdate : serverUpdates) {
+                    game.Update(elapsedSeconds.count(), serverUpdate);
+                    game.Render();
+                }
+                lastTime = current;
 
-                game.Render();
             }
 
             game.Release();
