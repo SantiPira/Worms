@@ -49,6 +49,6 @@ void CreateGameWindow::slotCreateGame() {
     QString name = this->editGameName.text();
     QString amountPlayers = this->comboBoxPlayers->currentText();
 
-    m_Juego->createGame(mapa_seleccionado.toStdString(), name.toStdString(), amountPlayers.toStdString());
     this->close();
+    m_Juego->createGame(mapa_seleccionado.toStdString(), name.toStdString(), amountPlayers.toStdString());
 }

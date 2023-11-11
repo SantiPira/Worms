@@ -34,20 +34,27 @@ void Juego::createGame(const std::string& mapa, const std::string& nombre, const
     
     //this->map_info = this->m_Protocol.recvMap();
     //std::cout << "RECIBIR EL MAPA";
+                
+    this->map_info = m_Protocol.recvMap();
 
-    this->game_renderer = new ClientRenderer(this->cola_de_mensajes,this->inicio_el_juego, this->map_info);
+    this->game_renderer = new ClientRenderer(this->cola_de_mensajes,this->inicio_el_juego, this->map_info, m_Protocol);
     this->game_renderer->start();
 
     //Temporal
     this->game_renderer->join();
+
 }
 
 void Juego::joinGame() {
-    this->game_renderer = new ClientRenderer(this->cola_de_mensajes,this->inicio_el_juego, this->map_info);
+
+    this->map_info = m_Protocol.recvMap();
+
+    this->game_renderer = new ClientRenderer(this->cola_de_mensajes,this->inicio_el_juego, this->map_info, m_Protocol);
     this->game_renderer->start();
 
     //Temporal
     this->game_renderer->join();
+    
 }
 
 Protocol *Juego::getProtocol() {

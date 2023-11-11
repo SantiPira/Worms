@@ -398,6 +398,30 @@ client/src/client_receiver.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_receiver.cpp.s
 .PHONY : client/src/client_receiver.cpp.s
 
+client/src/client_renderer.o: client/src/client_renderer.cpp.o
+.PHONY : client/src/client_renderer.o
+
+# target to build an object file
+client/src/client_renderer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_renderer.cpp.o
+.PHONY : client/src/client_renderer.cpp.o
+
+client/src/client_renderer.i: client/src/client_renderer.cpp.i
+.PHONY : client/src/client_renderer.i
+
+# target to preprocess a source file
+client/src/client_renderer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_renderer.cpp.i
+.PHONY : client/src/client_renderer.cpp.i
+
+client/src/client_renderer.s: client/src/client_renderer.cpp.s
+.PHONY : client/src/client_renderer.s
+
+# target to generate assembly for a file
+client/src/client_renderer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/client_renderer.cpp.s
+.PHONY : client/src/client_renderer.cpp.s
+
 client/src/createGameWindow.o: client/src/createGameWindow.cpp.o
 .PHONY : client/src/createGameWindow.o
 
@@ -1178,6 +1202,9 @@ help:
 	@echo "... client/src/client_receiver.o"
 	@echo "... client/src/client_receiver.i"
 	@echo "... client/src/client_receiver.s"
+	@echo "... client/src/client_renderer.o"
+	@echo "... client/src/client_renderer.i"
+	@echo "... client/src/client_renderer.s"
 	@echo "... client/src/createGameWindow.o"
 	@echo "... client/src/createGameWindow.i"
 	@echo "... client/src/createGameWindow.s"

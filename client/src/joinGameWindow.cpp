@@ -23,7 +23,8 @@ JoinGameWindow::JoinGameWindow(QWidget *parent, Juego* juego) : QWidget(parent),
 
 void JoinGameWindow::slotJoinGame() {
     
+    this->close();
+    
     m_Juego->joinGame();
 
-    this->close();
 }

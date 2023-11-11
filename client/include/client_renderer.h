@@ -8,6 +8,11 @@
 #include <atomic>
 #include <SDL2pp/SDL2pp.hh>
 #include <memory>
+#include "GameClient.h"
+#include "EventSender.h"
+#include "client_receiver.h"
+#include "messages/server/GameUpdate.h"
+#include "Protocol.h"
 
 
 using namespace SDL2pp;
@@ -19,16 +24,10 @@ class ClientRenderer: public Thread {
     atomic<bool>& keep_playing;
     std::vector<Grd>& map_info;
 
-    SDL sdl;
-    Window game_window;
-    Renderer renderer;
-    //Texture sprites;
-    SDL* sound_mixer{NULL};
-    Chunk* main_music{NULL};
-
+    Protocol& protocol;
     public:
 
-   ClientRenderer(ProtectedQueue<std::string>& queue, std::atomic<bool>& game_status, std::vector<Grd>& map_info); 
+    ClientRenderer(ProtectedQueue<std::string>& queue, std::atomic<bool>& game_status, std::vector<Grd>& map_info, Protocol& protocol); 
 
     void run() override;
 

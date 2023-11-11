@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/libclient.dir/client/src/client_juego.cpp.o.d"
   "CMakeFiles/libclient.dir/client/src/client_receiver.cpp.o"
   "CMakeFiles/libclient.dir/client/src/client_receiver.cpp.o.d"
+  "CMakeFiles/libclient.dir/client/src/client_renderer.cpp.o"
+  "CMakeFiles/libclient.dir/client/src/client_renderer.cpp.o.d"
   "CMakeFiles/libclient.dir/client/src/createGameWindow.cpp.o"
   "CMakeFiles/libclient.dir/client/src/createGameWindow.cpp.o.d"
   "CMakeFiles/libclient.dir/client/src/engine/entities/grd/GrdLarge.cpp.o"

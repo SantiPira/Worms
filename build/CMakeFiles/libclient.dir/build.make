@@ -139,10 +139,24 @@ CMakeFiles/libclient.dir/client/src/client_receiver.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/libclient.dir/client/src/client_receiver.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fran/Escritorio/Taller_/Worms/client/src/client_receiver.cpp -o CMakeFiles/libclient.dir/client/src/client_receiver.cpp.s
 
+CMakeFiles/libclient.dir/client/src/client_renderer.cpp.o: CMakeFiles/libclient.dir/flags.make
+CMakeFiles/libclient.dir/client/src/client_renderer.cpp.o: ../client/src/client_renderer.cpp
+CMakeFiles/libclient.dir/client/src/client_renderer.cpp.o: CMakeFiles/libclient.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/libclient.dir/client/src/client_renderer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libclient.dir/client/src/client_renderer.cpp.o -MF CMakeFiles/libclient.dir/client/src/client_renderer.cpp.o.d -o CMakeFiles/libclient.dir/client/src/client_renderer.cpp.o -c /home/fran/Escritorio/Taller_/Worms/client/src/client_renderer.cpp
+
+CMakeFiles/libclient.dir/client/src/client_renderer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libclient.dir/client/src/client_renderer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fran/Escritorio/Taller_/Worms/client/src/client_renderer.cpp > CMakeFiles/libclient.dir/client/src/client_renderer.cpp.i
+
+CMakeFiles/libclient.dir/client/src/client_renderer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/libclient.dir/client/src/client_renderer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fran/Escritorio/Taller_/Worms/client/src/client_renderer.cpp -o CMakeFiles/libclient.dir/client/src/client_renderer.cpp.s
+
 CMakeFiles/libclient.dir/client/src/createGameWindow.cpp.o: CMakeFiles/libclient.dir/flags.make
 CMakeFiles/libclient.dir/client/src/createGameWindow.cpp.o: ../client/src/createGameWindow.cpp
 CMakeFiles/libclient.dir/client/src/createGameWindow.cpp.o: CMakeFiles/libclient.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/libclient.dir/client/src/createGameWindow.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/libclient.dir/client/src/createGameWindow.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libclient.dir/client/src/createGameWindow.cpp.o -MF CMakeFiles/libclient.dir/client/src/createGameWindow.cpp.o.d -o CMakeFiles/libclient.dir/client/src/createGameWindow.cpp.o -c /home/fran/Escritorio/Taller_/Worms/client/src/createGameWindow.cpp
 
 CMakeFiles/libclient.dir/client/src/createGameWindow.cpp.i: cmake_force
@@ -156,7 +170,7 @@ CMakeFiles/libclient.dir/client/src/createGameWindow.cpp.s: cmake_force
 CMakeFiles/libclient.dir/client/src/engine/entities/grd/GrdLarge.cpp.o: CMakeFiles/libclient.dir/flags.make
 CMakeFiles/libclient.dir/client/src/engine/entities/grd/GrdLarge.cpp.o: ../client/src/engine/entities/grd/GrdLarge.cpp
 CMakeFiles/libclient.dir/client/src/engine/entities/grd/GrdLarge.cpp.o: CMakeFiles/libclient.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/libclient.dir/client/src/engine/entities/grd/GrdLarge.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/libclient.dir/client/src/engine/entities/grd/GrdLarge.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libclient.dir/client/src/engine/entities/grd/GrdLarge.cpp.o -MF CMakeFiles/libclient.dir/client/src/engine/entities/grd/GrdLarge.cpp.o.d -o CMakeFiles/libclient.dir/client/src/engine/entities/grd/GrdLarge.cpp.o -c /home/fran/Escritorio/Taller_/Worms/client/src/engine/entities/grd/GrdLarge.cpp
 
 CMakeFiles/libclient.dir/client/src/engine/entities/grd/GrdLarge.cpp.i: cmake_force
@@ -170,7 +184,7 @@ CMakeFiles/libclient.dir/client/src/engine/entities/grd/GrdLarge.cpp.s: cmake_fo
 CMakeFiles/libclient.dir/client/src/engine/entities/worms/Worm.cpp.o: CMakeFiles/libclient.dir/flags.make
 CMakeFiles/libclient.dir/client/src/engine/entities/worms/Worm.cpp.o: ../client/src/engine/entities/worms/Worm.cpp
 CMakeFiles/libclient.dir/client/src/engine/entities/worms/Worm.cpp.o: CMakeFiles/libclient.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/libclient.dir/client/src/engine/entities/worms/Worm.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/libclient.dir/client/src/engine/entities/worms/Worm.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libclient.dir/client/src/engine/entities/worms/Worm.cpp.o -MF CMakeFiles/libclient.dir/client/src/engine/entities/worms/Worm.cpp.o.d -o CMakeFiles/libclient.dir/client/src/engine/entities/worms/Worm.cpp.o -c /home/fran/Escritorio/Taller_/Worms/client/src/engine/entities/worms/Worm.cpp
 
 CMakeFiles/libclient.dir/client/src/engine/entities/worms/Worm.cpp.i: cmake_force
@@ -184,7 +198,7 @@ CMakeFiles/libclient.dir/client/src/engine/entities/worms/Worm.cpp.s: cmake_forc
 CMakeFiles/libclient.dir/client/src/engine/graphics/Animation.cpp.o: CMakeFiles/libclient.dir/flags.make
 CMakeFiles/libclient.dir/client/src/engine/graphics/Animation.cpp.o: ../client/src/engine/graphics/Animation.cpp
 CMakeFiles/libclient.dir/client/src/engine/graphics/Animation.cpp.o: CMakeFiles/libclient.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/libclient.dir/client/src/engine/graphics/Animation.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/libclient.dir/client/src/engine/graphics/Animation.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libclient.dir/client/src/engine/graphics/Animation.cpp.o -MF CMakeFiles/libclient.dir/client/src/engine/graphics/Animation.cpp.o.d -o CMakeFiles/libclient.dir/client/src/engine/graphics/Animation.cpp.o -c /home/fran/Escritorio/Taller_/Worms/client/src/engine/graphics/Animation.cpp
 
 CMakeFiles/libclient.dir/client/src/engine/graphics/Animation.cpp.i: cmake_force
@@ -198,7 +212,7 @@ CMakeFiles/libclient.dir/client/src/engine/graphics/Animation.cpp.s: cmake_force
 CMakeFiles/libclient.dir/client/src/engine/graphics/Texture.cpp.o: CMakeFiles/libclient.dir/flags.make
 CMakeFiles/libclient.dir/client/src/engine/graphics/Texture.cpp.o: ../client/src/engine/graphics/Texture.cpp
 CMakeFiles/libclient.dir/client/src/engine/graphics/Texture.cpp.o: CMakeFiles/libclient.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/libclient.dir/client/src/engine/graphics/Texture.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/libclient.dir/client/src/engine/graphics/Texture.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libclient.dir/client/src/engine/graphics/Texture.cpp.o -MF CMakeFiles/libclient.dir/client/src/engine/graphics/Texture.cpp.o.d -o CMakeFiles/libclient.dir/client/src/engine/graphics/Texture.cpp.o -c /home/fran/Escritorio/Taller_/Worms/client/src/engine/graphics/Texture.cpp
 
 CMakeFiles/libclient.dir/client/src/engine/graphics/Texture.cpp.i: cmake_force
@@ -212,7 +226,7 @@ CMakeFiles/libclient.dir/client/src/engine/graphics/Texture.cpp.s: cmake_force
 CMakeFiles/libclient.dir/client/src/engine/utils/WorldScale.cpp.o: CMakeFiles/libclient.dir/flags.make
 CMakeFiles/libclient.dir/client/src/engine/utils/WorldScale.cpp.o: ../client/src/engine/utils/WorldScale.cpp
 CMakeFiles/libclient.dir/client/src/engine/utils/WorldScale.cpp.o: CMakeFiles/libclient.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/libclient.dir/client/src/engine/utils/WorldScale.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/libclient.dir/client/src/engine/utils/WorldScale.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libclient.dir/client/src/engine/utils/WorldScale.cpp.o -MF CMakeFiles/libclient.dir/client/src/engine/utils/WorldScale.cpp.o.d -o CMakeFiles/libclient.dir/client/src/engine/utils/WorldScale.cpp.o -c /home/fran/Escritorio/Taller_/Worms/client/src/engine/utils/WorldScale.cpp
 
 CMakeFiles/libclient.dir/client/src/engine/utils/WorldScale.cpp.i: cmake_force
@@ -226,7 +240,7 @@ CMakeFiles/libclient.dir/client/src/engine/utils/WorldScale.cpp.s: cmake_force
 CMakeFiles/libclient.dir/client/src/joinGameWindow.cpp.o: CMakeFiles/libclient.dir/flags.make
 CMakeFiles/libclient.dir/client/src/joinGameWindow.cpp.o: ../client/src/joinGameWindow.cpp
 CMakeFiles/libclient.dir/client/src/joinGameWindow.cpp.o: CMakeFiles/libclient.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/libclient.dir/client/src/joinGameWindow.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/libclient.dir/client/src/joinGameWindow.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libclient.dir/client/src/joinGameWindow.cpp.o -MF CMakeFiles/libclient.dir/client/src/joinGameWindow.cpp.o.d -o CMakeFiles/libclient.dir/client/src/joinGameWindow.cpp.o -c /home/fran/Escritorio/Taller_/Worms/client/src/joinGameWindow.cpp
 
 CMakeFiles/libclient.dir/client/src/joinGameWindow.cpp.i: cmake_force
@@ -240,7 +254,7 @@ CMakeFiles/libclient.dir/client/src/joinGameWindow.cpp.s: cmake_force
 CMakeFiles/libclient.dir/client/src/mainWindow.cpp.o: CMakeFiles/libclient.dir/flags.make
 CMakeFiles/libclient.dir/client/src/mainWindow.cpp.o: ../client/src/mainWindow.cpp
 CMakeFiles/libclient.dir/client/src/mainWindow.cpp.o: CMakeFiles/libclient.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/libclient.dir/client/src/mainWindow.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/libclient.dir/client/src/mainWindow.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libclient.dir/client/src/mainWindow.cpp.o -MF CMakeFiles/libclient.dir/client/src/mainWindow.cpp.o.d -o CMakeFiles/libclient.dir/client/src/mainWindow.cpp.o -c /home/fran/Escritorio/Taller_/Worms/client/src/mainWindow.cpp
 
 CMakeFiles/libclient.dir/client/src/mainWindow.cpp.i: cmake_force
@@ -254,7 +268,7 @@ CMakeFiles/libclient.dir/client/src/mainWindow.cpp.s: cmake_force
 CMakeFiles/libclient.dir/client/src/menuWindow.cpp.o: CMakeFiles/libclient.dir/flags.make
 CMakeFiles/libclient.dir/client/src/menuWindow.cpp.o: ../client/src/menuWindow.cpp
 CMakeFiles/libclient.dir/client/src/menuWindow.cpp.o: CMakeFiles/libclient.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/libclient.dir/client/src/menuWindow.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/libclient.dir/client/src/menuWindow.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libclient.dir/client/src/menuWindow.cpp.o -MF CMakeFiles/libclient.dir/client/src/menuWindow.cpp.o.d -o CMakeFiles/libclient.dir/client/src/menuWindow.cpp.o -c /home/fran/Escritorio/Taller_/Worms/client/src/menuWindow.cpp
 
 CMakeFiles/libclient.dir/client/src/menuWindow.cpp.i: cmake_force
@@ -272,6 +286,7 @@ libclient_OBJECTS = \
 "CMakeFiles/libclient.dir/client/src/PruebaClient.cpp.o" \
 "CMakeFiles/libclient.dir/client/src/client_juego.cpp.o" \
 "CMakeFiles/libclient.dir/client/src/client_receiver.cpp.o" \
+"CMakeFiles/libclient.dir/client/src/client_renderer.cpp.o" \
 "CMakeFiles/libclient.dir/client/src/createGameWindow.cpp.o" \
 "CMakeFiles/libclient.dir/client/src/engine/entities/grd/GrdLarge.cpp.o" \
 "CMakeFiles/libclient.dir/client/src/engine/entities/worms/Worm.cpp.o" \
@@ -290,6 +305,7 @@ liblibclient.a: CMakeFiles/libclient.dir/client/src/GameClient.cpp.o
 liblibclient.a: CMakeFiles/libclient.dir/client/src/PruebaClient.cpp.o
 liblibclient.a: CMakeFiles/libclient.dir/client/src/client_juego.cpp.o
 liblibclient.a: CMakeFiles/libclient.dir/client/src/client_receiver.cpp.o
+liblibclient.a: CMakeFiles/libclient.dir/client/src/client_renderer.cpp.o
 liblibclient.a: CMakeFiles/libclient.dir/client/src/createGameWindow.cpp.o
 liblibclient.a: CMakeFiles/libclient.dir/client/src/engine/entities/grd/GrdLarge.cpp.o
 liblibclient.a: CMakeFiles/libclient.dir/client/src/engine/entities/worms/Worm.cpp.o
@@ -301,7 +317,7 @@ liblibclient.a: CMakeFiles/libclient.dir/client/src/mainWindow.cpp.o
 liblibclient.a: CMakeFiles/libclient.dir/client/src/menuWindow.cpp.o
 liblibclient.a: CMakeFiles/libclient.dir/build.make
 liblibclient.a: CMakeFiles/libclient.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX static library liblibclient.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/fran/Escritorio/Taller_/Worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX static library liblibclient.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/libclient.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/libclient.dir/link.txt --verbose=$(VERBOSE)
 

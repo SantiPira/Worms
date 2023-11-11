@@ -13,6 +13,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/fran/Escritorio/Taller_/Worms/client/src/PruebaClient.cpp" "CMakeFiles/libclient.dir/client/src/PruebaClient.cpp.o" "gcc" "CMakeFiles/libclient.dir/client/src/PruebaClient.cpp.o.d"
   "/home/fran/Escritorio/Taller_/Worms/client/src/client_juego.cpp" "CMakeFiles/libclient.dir/client/src/client_juego.cpp.o" "gcc" "CMakeFiles/libclient.dir/client/src/client_juego.cpp.o.d"
   "/home/fran/Escritorio/Taller_/Worms/client/src/client_receiver.cpp" "CMakeFiles/libclient.dir/client/src/client_receiver.cpp.o" "gcc" "CMakeFiles/libclient.dir/client/src/client_receiver.cpp.o.d"
+  "/home/fran/Escritorio/Taller_/Worms/client/src/client_renderer.cpp" "CMakeFiles/libclient.dir/client/src/client_renderer.cpp.o" "gcc" "CMakeFiles/libclient.dir/client/src/client_renderer.cpp.o.d"
   "/home/fran/Escritorio/Taller_/Worms/client/src/createGameWindow.cpp" "CMakeFiles/libclient.dir/client/src/createGameWindow.cpp.o" "gcc" "CMakeFiles/libclient.dir/client/src/createGameWindow.cpp.o.d"
   "/home/fran/Escritorio/Taller_/Worms/client/src/engine/entities/grd/GrdLarge.cpp" "CMakeFiles/libclient.dir/client/src/engine/entities/grd/GrdLarge.cpp.o" "gcc" "CMakeFiles/libclient.dir/client/src/engine/entities/grd/GrdLarge.cpp.o.d"
   "/home/fran/Escritorio/Taller_/Worms/client/src/engine/entities/worms/Worm.cpp" "CMakeFiles/libclient.dir/client/src/engine/entities/worms/Worm.cpp.o" "gcc" "CMakeFiles/libclient.dir/client/src/engine/entities/worms/Worm.cpp.o.d"

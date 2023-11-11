@@ -9,7 +9,7 @@ Worm::Worm(SDL_Renderer *renderer, float posX, float posY) : m_Renderer(renderer
 void Worm::init() {
     //TODO: Enum for paths and sprites actions
     //TODO: Worms::WORM_WALKING_SPRITESHEET_PATH
-    m_WormAnimation = new Animation(std::filesystem::current_path().concat(Worm_Sprite_Waccuse.c_str()).c_str(),
+    m_WormAnimation = new Animation(std::filesystem::current_path().concat(Walk_Gusano.c_str()).c_str(),
                                     m_Renderer, 36, 1, 60, 60, m_BlendMode);
     m_WormAnimation->init();
 }

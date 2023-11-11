@@ -534,6 +534,30 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qpen.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qtextoption.h \
   ../client/include/client_juego.h \
+  ../common_libs/include/ParseMapFromFile.h \
+  /usr/include/c++/11/fstream \
+  /usr/include/c++/11/bits/codecvt.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
+  /usr/include/c++/11/bits/fstream.tcc \
+  /usr/include/c++/11/filesystem \
+  /usr/include/c++/11/bits/fs_fwd.h \
+  /usr/include/c++/11/bits/fs_path.h \
+  /usr/include/c++/11/locale \
+  /usr/include/c++/11/bits/locale_facets_nonio.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/messages_members.h \
+  /usr/include/libintl.h \
+  /usr/include/c++/11/bits/locale_facets_nonio.tcc \
+  /usr/include/c++/11/bits/locale_conv.h \
+  /usr/include/c++/11/iomanip \
+  /usr/include/c++/11/bits/quoted_string.h \
+  /usr/include/c++/11/sstream \
+  /usr/include/c++/11/bits/sstream.tcc \
+  /usr/include/c++/11/codecvt \
+  /usr/include/c++/11/bits/fs_dir.h \
+  /usr/include/c++/11/bits/fs_ops.h \
+  ../common_libs/include/resources/GrdEnum.h \
   ../common_libs/include/Protocol.h \
   /usr/include/c++/11/queue \
   /usr/include/c++/11/deque \
@@ -563,30 +587,6 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
   ../common_libs/include/socket.h \
   ../common_libs/include/messages/server/GameInfo.h \
   ../common_libs/include/messages/server/InitGameEnum.h \
-  ../common_libs/include/ParseMapFromFile.h \
-  /usr/include/c++/11/fstream \
-  /usr/include/c++/11/bits/codecvt.h \
-  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
-  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
-  /usr/include/c++/11/bits/fstream.tcc \
-  /usr/include/c++/11/filesystem \
-  /usr/include/c++/11/bits/fs_fwd.h \
-  /usr/include/c++/11/bits/fs_path.h \
-  /usr/include/c++/11/locale \
-  /usr/include/c++/11/bits/locale_facets_nonio.h \
-  /usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h \
-  /usr/include/x86_64-linux-gnu/c++/11/bits/messages_members.h \
-  /usr/include/libintl.h \
-  /usr/include/c++/11/bits/locale_facets_nonio.tcc \
-  /usr/include/c++/11/bits/locale_conv.h \
-  /usr/include/c++/11/iomanip \
-  /usr/include/c++/11/bits/quoted_string.h \
-  /usr/include/c++/11/sstream \
-  /usr/include/c++/11/bits/sstream.tcc \
-  /usr/include/c++/11/codecvt \
-  /usr/include/c++/11/bits/fs_dir.h \
-  /usr/include/c++/11/bits/fs_ops.h \
-  ../common_libs/include/resources/GrdEnum.h \
   ../common_libs/include/messages/user_actions/UserAction.h \
   ../common_libs/include/messages/user_actions/ActionType.h \
   ../common_libs/include/messages/server/GameUpdate.h \
@@ -603,6 +603,48 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
   /usr/include/c++/11/bits/std_thread.h \
   /usr/include/c++/11/bits/this_thread_sleep.h \
   ../client/include/client_receiver.h \
+  ../client/include/client_renderer.h \
+  ../SDL2pp/SDL2pp/SDL2pp.hh \
+  SDL2pp/SDL2pp/Config.hh \
+  ../SDL2pp/SDL2pp/SDL.hh \
+  /usr/include/SDL2/SDL_stdinc.h \
+  SDL2pp/SDL2pp/Export.hh \
+  ../SDL2pp/SDL2pp/Exception.hh \
+  ../SDL2pp/SDL2pp/Optional.hh \
+  /usr/include/c++/11/optional \
+  ../SDL2pp/SDL2pp/AudioDevice.hh \
+  /usr/include/SDL2/SDL_audio.h \
+  /usr/include/SDL2/SDL_version.h \
+  ../SDL2pp/SDL2pp/AudioSpec.hh \
+  ../SDL2pp/SDL2pp/Wav.hh \
+  ../SDL2pp/SDL2pp/Window.hh \
+  /usr/include/SDL2/SDL_video.h \
+  ../SDL2pp/SDL2pp/Point.hh \
+  /usr/include/SDL2/SDL_rect.h \
+  ../SDL2pp/SDL2pp/Renderer.hh \
+  /usr/include/SDL2/SDL_blendmode.h \
+  ../SDL2pp/SDL2pp/Rect.hh \
+  ../SDL2pp/SDL2pp/Color.hh \
+  /usr/include/SDL2/SDL_pixels.h \
+  ../SDL2pp/SDL2pp/Surface.hh \
+  ../SDL2pp/SDL2pp/Texture.hh \
+  ../SDL2pp/SDL2pp/RWops.hh \
+  /usr/include/SDL2/SDL_rwops.h \
+  ../SDL2pp/SDL2pp/ContainerRWops.hh \
+  ../SDL2pp/SDL2pp/StreamRWops.hh \
+  /usr/include/c++/11/cassert \
+  ../SDL2pp/SDL2pp/SDLTTF.hh \
+  ../SDL2pp/SDL2pp/Font.hh \
+  /usr/local/include/SDL2/SDL_ttf.h \
+  /usr/include/SDL2/begin_code.h \
+  /usr/include/SDL2/close_code.h \
+  ../SDL2pp/SDL2pp/SDLImage.hh \
+  ../SDL2pp/SDL2pp/Chunk.hh \
+  /usr/local/include/SDL2/SDL_mixer.h \
+  /usr/include/SDL2/SDL_endian.h \
+  ../SDL2pp/SDL2pp/Mixer.hh \
+  ../SDL2pp/SDL2pp/Music.hh \
+  ../SDL2pp/SDL2pp/SDLMixer.hh \
   ../client/include/GameClient.h \
   /usr/include/SDL2/SDL_image.h \
   /usr/include/SDL2/SDL.h \
@@ -610,7 +652,6 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
   /usr/include/SDL2/SDL_render.h \
   ../client/include/engine/graphics/Animation.h \
   ../client/include/engine/graphics/Texture.h \
-  /usr/include/SDL2/SDL_pixels.h \
   ../client/include/engine/entities/TexturePaths.h \
   ../client/include/engine/utils/WorldScale.h \
   ../client/include/engine/entities/grd/GrdLarge.h
@@ -619,6 +660,50 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 ../client/include/engine/entities/TexturePaths.h:
 
 ../client/include/engine/entities/worms/Worm.h:
+
+../SDL2pp/SDL2pp/Mixer.hh:
+
+../SDL2pp/SDL2pp/Chunk.hh:
+
+/usr/local/include/SDL2/SDL_ttf.h:
+
+../SDL2pp/SDL2pp/Font.hh:
+
+../SDL2pp/SDL2pp/SDLTTF.hh:
+
+/usr/include/c++/11/cassert:
+
+../SDL2pp/SDL2pp/ContainerRWops.hh:
+
+../SDL2pp/SDL2pp/RWops.hh:
+
+../SDL2pp/SDL2pp/Texture.hh:
+
+../SDL2pp/SDL2pp/Color.hh:
+
+../SDL2pp/SDL2pp/Rect.hh:
+
+../SDL2pp/SDL2pp/Renderer.hh:
+
+../SDL2pp/SDL2pp/Point.hh:
+
+../SDL2pp/SDL2pp/Window.hh:
+
+../SDL2pp/SDL2pp/Wav.hh:
+
+../SDL2pp/SDL2pp/AudioSpec.hh:
+
+/usr/local/include/SDL2/SDL_mixer.h:
+
+../SDL2pp/SDL2pp/Exception.hh:
+
+SDL2pp/SDL2pp/Export.hh:
+
+../SDL2pp/SDL2pp/SDL.hh:
+
+SDL2pp/SDL2pp/Config.hh:
+
+../SDL2pp/SDL2pp/SDL2pp.hh:
 
 ../client/include/client_receiver.h:
 
@@ -629,6 +714,8 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 ../common_libs/include/Thread.h:
 
 ../client/include/EventSender.h:
+
+/usr/include/c++/11/optional:
 
 /usr/include/c++/11/condition_variable:
 
@@ -641,40 +728,6 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 ../common_libs/include/messages/user_actions/ActionType.h:
 
 ../common_libs/include/messages/user_actions/UserAction.h:
-
-../common_libs/include/resources/GrdEnum.h:
-
-/usr/include/c++/11/bits/fs_ops.h:
-
-/usr/include/c++/11/bits/fs_dir.h:
-
-/usr/include/c++/11/bits/sstream.tcc:
-
-/usr/include/c++/11/sstream:
-
-/usr/include/c++/11/bits/quoted_string.h:
-
-/usr/include/c++/11/bits/locale_conv.h:
-
-/usr/include/c++/11/bits/locale_facets_nonio.tcc:
-
-/usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h:
-
-/usr/include/c++/11/bits/locale_facets_nonio.h:
-
-/usr/include/c++/11/locale:
-
-/usr/include/c++/11/bits/fs_path.h:
-
-/usr/include/c++/11/filesystem:
-
-/usr/include/c++/11/bits/fstream.tcc:
-
-/usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h:
-
-/usr/include/c++/11/fstream:
-
-../common_libs/include/ParseMapFromFile.h:
 
 ../common_libs/include/socket.h:
 
@@ -695,6 +748,38 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 /usr/include/linux/posix_types.h:
 
 /usr/include/x86_64-linux-gnu/bits/sockaddr.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h:
+
+/usr/include/x86_64-linux-gnu/sys/socket.h:
+
+/usr/include/c++/11/bits/stl_queue.h:
+
+/usr/include/c++/11/bits/deque.tcc:
+
+/usr/include/c++/11/bits/stl_deque.h:
+
+/usr/include/c++/11/queue:
+
+../common_libs/include/resources/GrdEnum.h:
+
+../SDL2pp/SDL2pp/Surface.hh:
+
+/usr/include/c++/11/bits/fs_ops.h:
+
+/usr/include/c++/11/bits/fs_dir.h:
+
+/usr/include/c++/11/bits/sstream.tcc:
+
+/usr/include/c++/11/sstream:
+
+/usr/include/c++/11/bits/quoted_string.h:
+
+/usr/include/c++/11/bits/locale_conv.h:
+
+/usr/include/c++/11/bits/locale_facets_nonio.tcc:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qstringalgorithms.h:
 
@@ -738,6 +823,8 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 
 /usr/include/stdint.h:
 
+../SDL2pp/SDL2pp/SDLImage.hh:
+
 /usr/include/c++/11/bits/ptr_traits.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/avx2intrin.h:
@@ -745,6 +832,8 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 /usr/include/c++/11/bits/basic_ios.tcc:
 
 /usr/include/SDL2/SDL_events.h:
+
+../SDL2pp/SDL2pp/Optional.hh:
 
 /usr/include/c++/11/bits/hashtable_policy.h:
 
@@ -777,6 +866,8 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qsystemdetection.h:
 
 /usr/include/c++/11/istream:
+
+../common_libs/include/ParseMapFromFile.h:
 
 ../client/include/engine/graphics/Texture.h:
 
@@ -848,6 +939,10 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qiterator.h:
 
+/usr/include/c++/11/deque:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qprocessordetection.h:
+
 /usr/include/asm-generic/errno.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
@@ -869,6 +964,8 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 /usr/include/alloca.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512ifmavlintrin.h:
+
+/usr/include/c++/11/bits/fs_path.h:
 
 /usr/include/x86_64-linux-gnu/bits/byteswap.h:
 
@@ -897,6 +994,8 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qstring.h:
 
 /usr/include/SDL2/SDL_gesture.h:
+
+/usr/include/c++/11/locale:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/avx512vbmivlintrin.h:
 
@@ -956,8 +1055,6 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
 
-/usr/include/c++/11/bits/stl_queue.h:
-
 /usr/include/asm-generic/sockios.h:
 
 /usr/include/c++/11/bits/stl_tempbuf.h:
@@ -971,6 +1068,10 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/uintrintrin.h:
+
+/usr/include/x86_64-linux-gnu/bits/socket.h:
+
+/usr/include/x86_64-linux-gnu/bits/long-double.h:
 
 /usr/include/c++/11/bits/stl_algobase.h:
 
@@ -1027,6 +1128,8 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 /usr/include/c++/11/chrono:
 
 /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
+
+../SDL2pp/SDL2pp/AudioDevice.hh:
 
 /usr/include/stdc-predef.h:
 
@@ -1093,10 +1196,6 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 /usr/include/c++/11/bits/memoryfwd.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/prfchwintrin.h:
-
-/usr/include/x86_64-linux-gnu/sys/socket.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h:
 
 /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
 
@@ -1184,6 +1283,8 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/types.h:
 
+../SDL2pp/SDL2pp/Music.hh:
+
 /usr/lib/gcc/x86_64-linux-gnu/11/include/bmiintrin.h:
 
 /usr/include/c++/11/unordered_map:
@@ -1258,6 +1359,12 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 
 /usr/include/linux/limits.h:
 
+../common_libs/include/Protocol.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/11/include/amxtileintrin.h:
+
+/usr/include/c++/11/bits/shared_ptr_base.h:
+
 /usr/include/c++/11/bits/locale_classes.h:
 
 /usr/include/c++/11/bits/charconv.h:
@@ -1277,8 +1384,6 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qboxlayout.h:
 
 /usr/include/x86_64-linux-gnu/gnu/stubs.h:
-
-/usr/include/c++/11/bits/stl_deque.h:
 
 /usr/include/c++/11/bits/algorithmfwd.h:
 
@@ -1356,8 +1461,6 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qbytearraylist.h:
 
-/usr/include/c++/11/bits/deque.tcc:
-
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qstringlist.h:
 
 /usr/include/SDL2/SDL_sensor.h:
@@ -1405,6 +1508,8 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qversiontagging.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtGui/qwindowdefs.h:
+
+../SDL2pp/SDL2pp/StreamRWops.hh:
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qpair.h:
 
@@ -1548,8 +1653,6 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 
 /usr/include/c++/11/bits/shared_ptr_atomic.h:
 
-/usr/include/c++/11/queue:
-
 /usr/include/SDL2/SDL_cpuinfo.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/ia32intrin.h:
@@ -1612,6 +1715,8 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/xsaveintrin.h:
 
+../SDL2pp/SDL2pp/SDLMixer.hh:
+
 /usr/lib/gcc/x86_64-linux-gnu/11/include/xsavecintrin.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/error_t.h:
@@ -1623,6 +1728,10 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 /usr/lib/gcc/x86_64-linux-gnu/11/include/emmintrin.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/xmmintrin.h:
+
+/usr/include/netinet/in.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/11/include/pmmintrin.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtGui/qtransform.h:
 
@@ -1754,10 +1863,6 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/qt5/QtGui/qmatrix.h:
 
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qprocessordetection.h:
-
-/usr/include/c++/11/deque:
-
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qscopedpointer.h:
 
 /usr/include/c++/11/bits/allocator.h:
@@ -1767,6 +1872,16 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 /usr/include/c++/11/iosfwd:
 
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton:
+
+/usr/include/x86_64-linux-gnu/bits/socket_type.h:
+
+/usr/include/SDL2/SDL_main.h:
+
+/usr/include/c++/11/bits/exception_defines.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/11/include/lwpintrin.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtGui/qimage.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtGui/qpixelformat.h:
 
@@ -1784,15 +1899,13 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/qt5/QtGui/qfontinfo.h:
 
-/usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlabel.h:
-
 /usr/include/x86_64-linux-gnu/qt5/QtGui/qicon.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlayoutitem.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QLineEdit:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qbytearray.h:
 
@@ -1804,26 +1917,16 @@ CMakeFiles/worms-client.dir/client/src/main.cpp.o: ../client/src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/qt5/QtGui/qpen.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/11/include/amxtileintrin.h:
+/usr/include/c++/11/fstream:
 
-/usr/include/c++/11/bits/shared_ptr_base.h:
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlabel.h:
 
-../common_libs/include/Protocol.h:
+/usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/11/include/pmmintrin.h:
+/usr/include/c++/11/bits/fstream.tcc:
 
-/usr/include/netinet/in.h:
+../client/include/client_renderer.h:
 
-/usr/include/x86_64-linux-gnu/bits/long-double.h:
+/usr/include/c++/11/filesystem:
 
-/usr/include/x86_64-linux-gnu/bits/socket.h:
-
-/usr/include/SDL2/SDL_main.h:
-
-/usr/include/c++/11/bits/exception_defines.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/11/include/lwpintrin.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtGui/qimage.h:
-
-/usr/include/x86_64-linux-gnu/bits/socket_type.h:
+/usr/include/c++/11/bits/locale_facets_nonio.h:

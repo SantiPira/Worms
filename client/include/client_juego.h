@@ -6,6 +6,7 @@
 #include "../../common_libs/include/ProtectedQueue.h"
 #include "EventSender.h"
 #include "client_receiver.h"
+#include "client_renderer.h"
 
 #include <iostream>
 #include <vector>
