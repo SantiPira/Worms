@@ -2,7 +2,7 @@
 
 GrdLarge::GrdLarge(SDL_Renderer *renderer, int posX, int posY) : m_Renderer(renderer) {
     m_DestGrdLRect = SDL_Rect{static_cast<int>(WorldScale::getPixelScale(posX)),
-                              static_cast<int>(WorldScale::getPixelScale(posY) + 80), 512, 40};
+                              static_cast<int>(512 - WorldScale::getPixelScale(posY)), 256, 27};
     //m_DestGrdLRect = SDL_Rect{static_cast<int>((posX / 2) * 25.6), static_cast<int>(posY * 25.6), 256, 20};
 }
 

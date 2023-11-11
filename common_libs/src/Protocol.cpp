@@ -19,6 +19,17 @@ uint16_t Protocol::recvTwoBytes() {
     return ntohs(aux);
 }
 
+uint32_t Protocol::recvFourBytes() {
+    uint32_t aux;
+    socket.recvall(&aux, 4, &wasClosed);
+    return ntohl(aux);
+}
+
+float Protocol::recvFloat() {
+    uint32_t aux = recvFourBytes();
+    return *reinterpret_cast<float*>(&aux);
+}
+
 std::string Protocol::recvString() {
     uint16_t size = recvTwoBytes();
     std::vector<char> messageFromServer(size + 1);
@@ -36,6 +47,20 @@ void Protocol::sendTwoBytes(uint16_t bytes) {
     if (!wasClosed) {
         uint16_t aux = htons(bytes);
         socket.sendall(&aux, 2, &wasClosed);
+    }
+}
+
+void Protocol::sendFourBytes(uint32_t bytes) {
+    if (!wasClosed) {
+        uint32_t aux = htonl(bytes);
+        socket.sendall(&aux, 4, &wasClosed);
+    }
+}
+
+void Protocol::sendFloat(float f) {
+    if (!wasClosed) {
+        uint32_t aux = htonl(*reinterpret_cast<uint32_t*>(&f));
+        socket.sendall(&aux, 4, &wasClosed);
     }
 }
 
@@ -72,8 +97,8 @@ void Protocol::sendMap(std::reference_wrapper<std::vector<Grd>> map) {
 void Protocol::sendGameUpdate(GameUpdate &update) {
     sendByte(update.player_id);
     sendByte(update.action);
-    sendTwoBytes(update.x_pos);
-    sendTwoBytes(update.y_pos);
+    sendFloat(update.x_pos);
+    sendFloat(update.y_pos);
 }
 
 GameInfo Protocol::recvGameInfo() {
@@ -108,8 +133,8 @@ GameUpdate Protocol::recvGameUpdate() {
     GameUpdate update{};
     update.player_id = recvByte();
     update.action = GameAction(recvByte());
-    update.x_pos = recvTwoBytes();
-    update.y_pos = recvTwoBytes();
+    update.x_pos = recvFloat();
+    update.y_pos = recvFloat();
     return update;
 }
 
@@ -142,4 +167,7 @@ UserAction Protocol::recvUserAction() {
     }
     return userAction;
 }
+
+
+
 

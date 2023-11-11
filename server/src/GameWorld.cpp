@@ -19,7 +19,11 @@ std::vector<GameUpdate> GameWorld::UpdateWorld(std::reference_wrapper<std::vecto
         for (auto& action : userActions.get()) {
             if (action.getIdPlayer() == worm.first) {
                 if (action.getAction() == MOVE) {
-                    worm.second->SetLinearVelocity(b2Vec2(5.0f, 0));
+                    if (action.getParam1() == RIGHT) {
+                        worm.second->SetLinearVelocity(b2Vec2(5.0f, 0));
+                    } else {
+                        worm.second->SetLinearVelocity(b2Vec2(-5.0f, 0));
+                    }
                 } else if (action.getAction() == STOP_MOVE) {
                     worm.second->SetLinearVelocity(b2Vec2(0, 0));
                 }
@@ -29,9 +33,20 @@ std::vector<GameUpdate> GameWorld::UpdateWorld(std::reference_wrapper<std::vecto
     m_world.Step(timeStep,velocityIterations,positionIterations);
     for (auto& worm : worms) {
         b2Vec2 position = worm.second->GetPosition();
+        b2Vec2 velocity = worm.second->GetLinearVelocity();
         std::cout << " Position: " << position.x << " " << position.y << std::endl;
-        GameUpdate gameUpdate{static_cast<uint8_t>(worm.first), WORM_MOVE, position.x, position.y};
-        gameUpdates.push_back(gameUpdate);
+        if (velocity.x < 0) {
+            GameUpdate gameUpdate{static_cast<uint8_t>(worm.first), WORM_MOVE_LEFT, position.x, position.y};
+            gameUpdates.push_back(gameUpdate);
+        } else if (velocity.x > 0) {
+            GameUpdate gameUpdate{static_cast<uint8_t>(worm.first), WORM_MOVE_RIGHT, position.x, position.y};
+            gameUpdates.push_back(gameUpdate);
+        } else {
+            GameUpdate gameUpdate{static_cast<uint8_t>(worm.first), WORM_IDLE, position.x, position.y};
+            gameUpdates.push_back(gameUpdate);
+        }
+//        GameUpdate gameUpdate{static_cast<uint8_t>(worm.first), WORM_MOVE, position.x, position.y};
+//        gameUpdates.push_back(gameUpdate);
     }
 
     return gameUpdates;
@@ -45,7 +60,7 @@ void GameWorld::SetGirder(const Grd& girder) {
         b2Body * body = m_world.CreateBody(&bd); 
         b2PolygonShape shape;
         b2FixtureDef myFixtureDef;
-        shape.SetAsBox(5.0f,.25f);
+        shape.SetAsBox(5.0f,0.50f);
         myFixtureDef.shape = &shape;
         myFixtureDef.density = 1;
         body->CreateFixture(&myFixtureDef);
@@ -82,14 +97,15 @@ void GameWorld::SetWorm(const int& player_number, const float & x_pos, const flo
     b2Body * body;
 
 	b2BodyDef bd;
-	bd.position.Set(x_pos, y_pos);
+	bd.position.Set(x_pos, y_pos + 0.50f); //10 11
 	bd.type = b2_dynamicBody;
 	bd.fixedRotation = true;
 	bd.allowSleep = false;
 	body = m_world.CreateBody(&bd);
 	b2PolygonShape shape;
-	shape.SetAsBox(0.5f, 0.5f);
+	shape.SetAsBox(1.0f, 1.0f);
 	b2FixtureDef fd;
+    fd.friction = 0.0f;
 	fd.shape = &shape;
 	fd.density = 20.0f;
 	body->CreateFixture(&fd);

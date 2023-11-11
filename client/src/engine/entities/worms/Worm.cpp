@@ -1,9 +1,9 @@
 #include "engine/entities/worms/Worm.h"
 
-Worm::Worm(SDL_Renderer *renderer, float posX, float posY) : m_Renderer(renderer), m_WormXPosition(posX),
-    m_BlendMode({true, 128, 128, 192}) {
+Worm::Worm(SDL_Renderer *renderer, float posX, float posY) : m_Renderer(renderer), m_WormWidth(60), m_WormHeight(60),
+    m_WormXPosition(posX), m_BlendMode({true, 128, 128, 192}) {
     m_DestWormRect = SDL_Rect{static_cast<int>(WorldScale::getPixelScale(posX)),
-                              static_cast<int>(WorldScale::getPixelScale(posY)), 26, 26};
+                              static_cast<int>(512 - WorldScale::getPixelScale(posY)), m_WormWidth, m_WormHeight};
 }
 
 void Worm::init() {
@@ -19,19 +19,31 @@ void Worm::release() {
     delete m_WormAnimation;
 }
 
-void Worm::update(double elapsedSeconds, float posX, float posY) {
+void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
     m_WormAnimation->update(elapsedSeconds);
-    m_DestWormRect.x = static_cast<int>(WorldScale::getPixelScale(posX));
-    int m = 512 / 2;
-    int pixelScale = static_cast<int>(WorldScale::getPixelScale(posY));
-    if (pixelScale > m) {
-        int diff = pixelScale - m;
-        m_DestWormRect.y = m - diff;
+    m_Dir = gameUpdate.action;
+    float tempX = WorldScale::getPixelScale(gameUpdate.x_pos);
+    float tempY = 512 - WorldScale::getPixelScale(gameUpdate.y_pos);
+    if (tempX + m_WormWidth > 512) {
+        m_DestWormRect.x = 512 - m_WormWidth;
+    } else if (tempX < 0) {
+        m_DestWormRect.x = 0;
     } else {
-        m_DestWormRect.y = pixelScale;
+        m_DestWormRect.x = tempX;
+    }
+    if (tempY + m_WormHeight > 512) {
+        m_DestWormRect.y = 512 - m_WormHeight;
+    } else if (tempY < 0) {
+        m_DestWormRect.y = 0;
+    } else {
+        m_DestWormRect.y = tempY;
     }
 }
 
 void Worm::render() {
-    m_WormAnimation->render(&m_DestWormRect, true);
+    bool isFlip = true;
+    if (m_Dir == WORM_MOVE_LEFT) {
+        isFlip = false;
+    }
+    m_WormAnimation->render(&m_DestWormRect, isFlip);
 }

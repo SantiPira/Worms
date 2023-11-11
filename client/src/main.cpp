@@ -26,20 +26,22 @@ int main(int argc, char *argv[]) {
             eventSender.start();
             receiver.start();
             while (game.IsRunning()) {
-                std::vector<GameUpdate> serverUpdates;
+                GameUpdate svUpdate{};
                 auto current = std::chrono::system_clock::now();
                 std::chrono::duration<double> elapsedSeconds = current - lastTime;
-                gameUpdates.try_pop(serverUpdates, 10);
+                //game.Update(elapsedSeconds.count(), serverUpdate);
+
+//                game.Update(elapsedSeconds.count(), gameUpdate);
+//                game.Render();
+                gameUpdates.try_pop(svUpdate);
                 //game.HandleEvents();
 
-                for (auto &serverUpdate : serverUpdates) {
-                    game.Update(elapsedSeconds.count(), serverUpdate);
-                    game.Render();
-                }
+
+                game.Update(elapsedSeconds.count(), svUpdate);
+                game.Render();
+
                 lastTime = current;
-
             }
-
             game.Release();
             receiver.join();
             eventSender.join();

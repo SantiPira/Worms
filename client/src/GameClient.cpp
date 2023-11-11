@@ -11,13 +11,9 @@ void GameClient::Init(const std::vector<Grd>& vector) {
         m_GrdLarge.push_back(grdL);
     }
 
-    Worm* worm = new Worm(_renderer, 10, 8.5);
+    Worm* worm = new Worm(_renderer, 10, 12);
     worm->init();
     m_Worms.push_back(worm);
-
-    Worm* worm2 = new Worm(_renderer, 0, 8.5);
-    worm2->init();
-    m_Worms.push_back(worm2);
 
     _isRunning = true;
 }
@@ -32,7 +28,7 @@ void GameClient::InitSDL() {
 }
 
 void GameClient::CreateWindowAndRender() {
-    SDL_CreateWindowAndRenderer(1024, 1024, SDL_WINDOW_SHOWN, &_window, &_renderer);
+    SDL_CreateWindowAndRenderer(512, 512, SDL_WINDOW_SHOWN, &_window, &_renderer);
     if (_window == NULL || _renderer == NULL) {
         //throw SDL_Exception(SDL_GetError());
         std::cout << "Exception" << std::endl;
@@ -52,7 +48,7 @@ void GameClient::HandleEvents() {
 
 void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
     for (auto& worm : m_Worms) {
-        worm->update(elapsedSeconds, gameUpdate.x_pos, gameUpdate.y_pos);
+        worm->update(elapsedSeconds, gameUpdate);
     }
 }
 

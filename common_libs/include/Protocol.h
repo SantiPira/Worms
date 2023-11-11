@@ -22,9 +22,13 @@ private:
     /* private methods don't use them, and if you do it use wisely */
     void sendByte(uint8_t byte);
     void sendTwoBytes(uint16_t bytes);
+    void sendFourBytes(uint32_t bytes);
     void sendString(const std::string& message);
+    void sendFloat(float f);
     uint8_t recvByte();
     uint16_t recvTwoBytes();
+    uint32_t recvFourBytes();
+    float recvFloat();
     std::string recvString();
 public:
     explicit Protocol(Socket socket);

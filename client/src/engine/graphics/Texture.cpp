@@ -18,7 +18,7 @@ void Texture::init() {
 
 void Texture::setSourceRect(const SDL_Rect *rect) {
     m_SourceRect.x = rect->x;
-    m_SourceRect.x = rect->x;
+    m_SourceRect.y = rect->y;
     m_SourceRect.w = rect->w;
     m_SourceRect.h = rect->h;
 }
