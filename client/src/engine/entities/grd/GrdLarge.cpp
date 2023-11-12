@@ -9,7 +9,7 @@ GrdLarge::GrdLarge(SDL_Renderer *renderer, int posX, int posY) : m_Renderer(rend
 
 void GrdLarge::init() {
     BlendMode blendMode = {false, 128, 128, 192};
-    m_GrdLTexture = new Texture(std::filesystem::current_path().concat(Fondo_Cielo.c_str()).c_str(),
+    m_GrdLTexture = new Texture(std::filesystem::current_path().concat(Map_Grdl_Large_Horizontal.c_str()).c_str(),
                                 m_Renderer, blendMode);
     m_GrdLTexture->init();
 }

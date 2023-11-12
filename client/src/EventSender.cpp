@@ -5,14 +5,18 @@ EventSender::EventSender(Protocol& protocol, int idPlayer, ProtectedQueue<std::s
     m_SettingsQueue(settingsQueue) {}
 
 void EventSender::run() {
+
     while (isRunning()) {
         SDL_Event event;
         SDL_WaitEvent(&event);
+
         if (event.type == SDL_QUIT) {
             stop();
             break;
         }
+
         SDL_Keycode key = event.key.keysym.sym;
+        
         if (event.type == SDL_KEYDOWN && event.key.repeat == 0) {
             if (key == SDLK_d) {
                 std::cout << "enviando accion de moverse a la derecha" << std::endl;

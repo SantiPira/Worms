@@ -32,13 +32,6 @@ class ClientRenderer: public Thread {
     void run() override;
 
 
-
-//GUIA DE USUARIO
-//MANUAL DE PROYECTO.
-//Docu tecnica.
-//Instalador.
-
-
 };
 
 

@@ -1,5 +1,7 @@
 #include "engine/graphics/Animation.h"
 
+#include <iostream>
+
 Animation::Animation(std::string path, SDL_Renderer *renderer, int frames, float duration, int frameHeight,
                      int frameWidth, BlendMode blendMode) :
                      m_Texture(new Texture(std::move(path), renderer, std::move(blendMode))),

@@ -12,13 +12,10 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 add_subdirectory(SDL2pp)
 add_subdirectory(Box2D)
 
-add_definitions(-DDATA_PATH="${PROJECT_SOURCE_DIR}/data")
-
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
 file(GLOB_RECURSE COMMON_SRCS ./common_libs/src/*.cpp)
 add_library(libcommon STATIC ${COMMON_SRCS})
-
 
 include_directories(${CMAKE_SOURCE_DIR}/client/include)
 include_directories(${CMAKE_SOURCE_DIR}/editor/include)

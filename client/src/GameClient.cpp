@@ -1,5 +1,8 @@
 #include "../include/GameClient.h"
 
+
+GameClient::GameClient(ProtectedQueue<GameUpdate>& updaptesQueue): gameUpdates(updaptesQueue) {}
+
 void GameClient::Init(const std::vector<Grd> vector) {
     InitSDL();
     CreateWindowAndRender();
@@ -11,7 +14,9 @@ void GameClient::Init(const std::vector<Grd> vector) {
         m_GrdLarge.push_back(grdL);
     }
 
+    //std::cout << "Voy a intentar crear un gusano\n";
     Worm* worm = new Worm(_renderer, 10, 8.5);
+    //std::cout << "hice un new gusano\n";
     worm->init();
     m_Worms.push_back(worm);
 

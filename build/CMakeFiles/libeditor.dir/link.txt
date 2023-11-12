@@ -1,2 +1,0 @@
-/usr/bin/ar qc liblibeditor.a CMakeFiles/libeditor.dir/editor/src/FactoryTexture.cpp.o CMakeFiles/libeditor.dir/editor/src/ToolBar.cpp.o CMakeFiles/libeditor.dir/editor/src/WriteOnDisk.cpp.o
-/usr/bin/ranlib liblibeditor.a
