@@ -31,3 +31,9 @@ void Worm::update(double elapsedSeconds) {
 void Worm::render() {
     m_WormAnimation->render(&m_DestWormRect, true);
 }
+
+void Worm::update_worm_position(float posX, float posY) {
+    
+    this->m_DestWormRect = SDL_Rect{static_cast<int>(WorldScale::getPixelScale(posX)),
+                            static_cast<int>(WorldScale::getPixelScale(posY)), 60, 60};
+}

@@ -12,6 +12,7 @@ private:
     Animation* m_WormAnimation;
     SDL_Rect m_DestWormRect;
     float m_WormXPosition;
+    //float m_WormYposition;
     BlendMode m_BlendMode;
 
 public:
@@ -21,4 +22,6 @@ public:
     void release();
     void update(double elapsedSeconds);
     void render();
+    void update_worm_position(float posX, float posY);
+
 };

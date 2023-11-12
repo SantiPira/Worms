@@ -1,8 +1,29 @@
 #include "../include/GameClient.h"
 
 
+void GameClient::getGameUpdates() {
+
+    /*
+
+   GameUpdate update = this->gameUpdates.try_pop();
+
+
+    if (  update.action == MOVER GUSANO ) {
+
+        this->m_Worms[update.player_id]->update_worm_position(update.x_pos, update.y_pos); 
+
+    }
+
+    */
+}
+
+
+
+//
+
 GameClient::GameClient(ProtectedQueue<GameUpdate>& updaptesQueue): gameUpdates(updaptesQueue) {}
 
+//Todo lo referente a inicializar el mapa!
 void GameClient::Init(const std::vector<Grd> vector) {
     InitSDL();
     CreateWindowAndRender();
@@ -56,6 +77,9 @@ void GameClient::HandleEvents() {
 }
 
 void GameClient::Update(double elapsedSeconds) {
+
+    //getGameUpdates
+
     for (auto& worm : m_Worms) {
         worm->update(elapsedSeconds);
     }

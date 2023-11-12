@@ -30,6 +30,9 @@ public:
     bool IsRunning();
 
 private:
+
+    void getGameUpdates();
+
     void InitSDL();
 
     void CreateWindowAndRender();
