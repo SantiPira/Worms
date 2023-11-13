@@ -5,7 +5,6 @@
 #include "../../common_libs/include/ProtectedQueue.h"
 #include "EventSender.h"
 #include "client_receiver.h"
-
 #include <iostream>
 
 class Juego{
@@ -16,6 +15,8 @@ class Juego{
     ClientReceiver* receptor_de_mensajes{NULL};
     bool inicio_el_juego{false};
     ProtectedQueue<std::string> cola_de_mensajes;
+    int m_Players{};
+    int m_IdPlayer{};
 
     public:
 
@@ -23,7 +24,7 @@ class Juego{
 
     void iniciar_juego();
 
-    void joinGame();
+    void joinGame(int idGame, int cantPlayers);
 
     GameInfo getGamesInfo();
 
@@ -31,8 +32,10 @@ class Juego{
 
     void menu_window();
 
-
     Protocol *getProtocol();
+
+    [[nodiscard]] int getPlayers() const;
+    [[nodiscard]] int getIdPlayer() const;
 };
 
 #endif // CLIENT_JUEGO_H

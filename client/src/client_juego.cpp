@@ -24,19 +24,25 @@ void Juego::menu_window(){
 }
 
 void Juego::createGame(const std::string& mapa, const std::string& nombre, const std::string& cantidad_jugadores) {
-    GameProperty gameProperty(0, nombre, mapa, std::stoi(cantidad_jugadores));
+    m_Players = std::stoi(cantidad_jugadores);
+    GameProperty gameProperty(0, nombre, mapa, 0, std::stoi(cantidad_jugadores));
     GameInfo gameInfo(InitGameEnum::CREATE_GAME, {gameProperty});
     m_Protocol.sendGameInfo(std::ref(gameInfo));
-    //GameInfo serverResponse = m_Protocol.recvGameInfo();
+    GameInfo serverResponse = m_Protocol.recvGameInfo();
+    m_IdPlayer = serverResponse.getGameProperties().at(0).m_IdPlayer;
     std::cout<<"El mapa es: "<<mapa<<std::endl;
     std::cout<<"El nombre es: "<<nombre<<std::endl;
     std::cout<<"La cantidad de jugadores es: "<<cantidad_jugadores<<std::endl;
 }
 
-void Juego::joinGame() {
-
-
-
+void Juego::joinGame(int idGame, int players) {
+    m_Players = players;
+    GameProperty gameProperty(idGame, "", "", 0, 0);
+    GameInfo gameInfo(InitGameEnum::JOIN_GAME, {gameProperty});
+    m_Protocol.sendGameInfo(std::ref(gameInfo));
+    GameInfo serverResponse = m_Protocol.recvGameInfo();
+    m_IdPlayer = serverResponse.getGameProperties().at(0).m_IdPlayer;
+    std::cout<<"El id del juego es: "<<idGame<<std::endl;
 }
 
 void Juego::iniciar_juego() {
@@ -51,5 +57,13 @@ void Juego::iniciar_juego() {
 
 Protocol *Juego::getProtocol() {
     return &m_Protocol;
+}
+
+int Juego::getPlayers() const {
+    return m_Players;
+}
+
+int Juego::getIdPlayer() const {
+    return m_IdPlayer;
 }
 

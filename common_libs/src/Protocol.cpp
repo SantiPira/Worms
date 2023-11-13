@@ -81,7 +81,9 @@ void Protocol::sendGameInfo(GameInfo& gameInfo) {
         sendByte(gameProperty.m_idGame);
         sendString(gameProperty.m_GameName);
         sendString(gameProperty.m_MapName);
+        sendByte(gameProperty.m_PlayersConnected);
         sendByte(gameProperty.m_Players);
+        sendByte(gameProperty.m_IdPlayer);
     }
 }
 
@@ -111,7 +113,9 @@ GameInfo Protocol::recvGameInfo() {
         std::string gameName = recvString();
         std::string mapName = recvString();
         int players = recvByte();
-        gameProperties.emplace_back(idGame, gameName, mapName, players);
+        int playersConnected = recvByte();
+        int idPlayer = recvByte();
+        gameProperties.emplace_back(idGame, gameName, mapName, players, playersConnected, idPlayer);
     }
     gameInfo.setGameProperties(gameProperties);
     return gameInfo;

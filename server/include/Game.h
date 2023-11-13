@@ -25,7 +25,7 @@ public:
     int getIdGame() const;
     std::string getGameName() const;
     std::string getMapName() const;
-    int getPlayers();
+    int getPlayers() const;
     int addPlayer(ProtectedQueue<GameUpdate>* qClientUpdates);
     ProtectedQueue<UserAction>* getInputActions();
     void stop();

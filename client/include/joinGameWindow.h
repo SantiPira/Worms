@@ -21,9 +21,11 @@ public:
 private:
     QPushButton buttonCreateGame;
     QLineEdit editGameName;
+    int idGame{};
+    std::unordered_map<int, GameProperty> m_GameProperties;
 
 public slots:
-    void slotJoinGame();
+    void slotJoinGame(QListWidgetItem *selectedItem);
 };
 
 #endif // JOINGAMEWINDOW_H_

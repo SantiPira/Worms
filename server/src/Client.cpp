@@ -44,6 +44,8 @@ void Client::lobbyGame() {
                                                  clientResponse.getGameProperties()[0].m_MapName,
                                                  clientResponse.getGameProperties()[0].m_Players);
                 m_IdPlayer = m_Matches->addPlayer(m_IdGame, &m_UpdatesGame);
+                GameInfo response(InitGameEnum::ID_PLAYER, m_IdPlayer);
+                m_Protocol.sendGameInfo(response);
                 m_InputActions = m_Matches->getInputActionGame(m_IdGame);
                 hasGame = true;
                 break;
@@ -51,6 +53,8 @@ void Client::lobbyGame() {
             case JOIN_GAME: {
                 m_IdGame = clientResponse.getGameProperties()[0].m_idGame;
                 m_IdPlayer = m_Matches->addPlayer(m_IdGame, &m_UpdatesGame);
+                GameInfo response(InitGameEnum::ID_PLAYER, m_IdPlayer);
+                m_Protocol.sendGameInfo(response);
                 m_InputActions = m_Matches->getInputActionGame(m_IdGame);
                 hasGame = true;
                 break;

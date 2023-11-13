@@ -1,19 +1,21 @@
 #include "../include/GameClient.h"
 
-void GameClient::Init(const std::vector<Grd>& vector) {
+void GameClient::Init(const std::vector<Grd>& vector, int idPlayer, std::vector<GameUpdate>& initInfo) {
     InitSDL();
     CreateWindowAndRender();
     SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
-
+    m_IdPlayer = idPlayer;
     for (auto& grd : vector) {
         auto* grdL = new GrdLarge(_renderer, grd.x, grd.y);
         grdL->init();
         m_GrdLarge.push_back(grdL);
     }
 
-    Worm* worm = new Worm(_renderer, 10, 12);
-    worm->init();
-    m_Worms.push_back(worm);
+    for (auto& gameUpdate : initInfo) {
+        auto* worm = new Worm(_renderer, gameUpdate.x_pos, gameUpdate.y_pos);
+        worm->init();
+        m_Worms.insert(std::make_pair(gameUpdate.player_id, worm));
+    }
 
     _isRunning = true;
 }
@@ -47,9 +49,7 @@ void GameClient::HandleEvents() {
 }
 
 void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
-    for (auto& worm : m_Worms) {
-        worm->update(elapsedSeconds, gameUpdate);
-    }
+    m_Worms.at(gameUpdate.player_id)->update(elapsedSeconds, gameUpdate);
 }
 
 void GameClient::Render() {
@@ -60,7 +60,7 @@ void GameClient::Render() {
     }
 
     for (auto& worm : m_Worms) {
-        worm->render();
+        worm.second->render();
     }
     SDL_RenderPresent(_renderer);
 }
@@ -74,3 +74,4 @@ void GameClient::Release() {
 bool GameClient::IsRunning() {
     return _isRunning;
 }
+

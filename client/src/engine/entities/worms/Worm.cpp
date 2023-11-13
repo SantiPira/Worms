@@ -21,22 +21,24 @@ void Worm::release() {
 
 void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
     m_WormAnimation->update(elapsedSeconds);
-    m_Dir = gameUpdate.action;
-    float tempX = WorldScale::getPixelScale(gameUpdate.x_pos);
-    float tempY = 512 - WorldScale::getPixelScale(gameUpdate.y_pos);
-    if (tempX + m_WormWidth > 512) {
-        m_DestWormRect.x = 512 - m_WormWidth;
-    } else if (tempX < 0) {
-        m_DestWormRect.x = 0;
-    } else {
-        m_DestWormRect.x = tempX;
-    }
-    if (tempY + m_WormHeight > 512) {
-        m_DestWormRect.y = 512 - m_WormHeight;
-    } else if (tempY < 0) {
-        m_DestWormRect.y = 0;
-    } else {
-        m_DestWormRect.y = tempY;
+    if (gameUpdate.action != WORM_NONE) {
+        m_Dir = gameUpdate.action;
+        float tempX = WorldScale::getPixelScale(gameUpdate.x_pos);
+        float tempY = 512 - WorldScale::getPixelScale(gameUpdate.y_pos);
+        if (tempX + m_WormWidth > 512) {
+            m_DestWormRect.x = 512 - m_WormWidth;
+        } else if (tempX < 0) {
+            m_DestWormRect.x = 0;
+        } else {
+            m_DestWormRect.x = tempX;
+        }
+        if (tempY + m_WormHeight > 512) {
+            m_DestWormRect.y = 512 - m_WormHeight;
+        } else if (tempY < 0) {
+            m_DestWormRect.y = 0;
+        } else {
+            m_DestWormRect.y = tempY;
+        }
     }
 }
 

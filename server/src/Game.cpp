@@ -44,8 +44,8 @@ void Game::run() {
     }
 }
 
-int Game::getPlayers() {
-    return m_QClientUpdates.size();
+int Game::getPlayers() const {
+    return m_Players;
 }
 
 int Game::addPlayer(ProtectedQueue<GameUpdate> *qClientUpdates) {
@@ -97,7 +97,8 @@ std::unordered_map<int, ProtectedQueue<GameUpdate>*>* Game::getClientUpdates() {
 void Game::setupWorld() {
     this->world.Setup();
     for (auto& clientId : m_QClientUpdates) {
-        world.SetWorm(clientId.first,10.0f, 11.0f);//cambiar por posicion random
+        float randPosX = static_cast<float>(rand() % 20);
+        world.SetWorm(clientId.first,randPosX, 11.0f);//cambiar por posicion random
     }
 }
 

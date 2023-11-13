@@ -2,8 +2,19 @@
 
 GameInfo::GameInfo() : m_IdAction(InitGameEnum::INVALID) {}
 
-GameProperty::GameProperty(int idGame, std::string gameName, std::string mapName, int players) : m_idGame(idGame),
-    m_GameName(std::move(gameName)), m_MapName(std::move(mapName)), m_Players(players) {}
+GameInfo::GameInfo(InitGameEnum idAction, int idPlayer) {
+    m_IdAction = idAction;
+    m_GameProperties.emplace_back(idPlayer);
+}
+
+GameProperty::GameProperty(int idGame, std::string gameName, std::string mapName, int playersConnected, int players)
+    : m_idGame(idGame), m_GameName(std::move(gameName)), m_MapName(std::move(mapName)),
+    m_PlayersConnected(playersConnected), m_Players(players) {}
+
+GameProperty::GameProperty(int idGame, std::string gameName, std::string mapName, int playersConnected, int players,
+                           int idPlayer) : m_idGame(idGame), m_GameName(std::move(gameName)),
+                           m_MapName(std::move(mapName)), m_PlayersConnected(playersConnected), m_Players(players),
+                           m_IdPlayer(idPlayer) {}
 
 GameInfo::GameInfo(InitGameEnum idAction, std::vector<GameProperty> gameProperties) : m_IdAction(idAction),
     m_GameProperties(std::move(gameProperties)) {}
@@ -23,4 +34,5 @@ void GameInfo::setGameProperties(std::vector<GameProperty> gameProperties) {
 std::vector<GameProperty> GameInfo::getGameProperties() const {
     return m_GameProperties;
 }
+
 

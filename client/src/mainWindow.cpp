@@ -50,3 +50,11 @@ MainWindow::~MainWindow() {
 bool MainWindow::isLobby() {
     return m_Lobby.load();
 }
+
+int MainWindow::getCantPlayers() const {
+    return this->juego->getPlayers();
+}
+
+int MainWindow::getIdPlayer() const {
+    return this->juego->getIdPlayer();
+}

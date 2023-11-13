@@ -5,7 +5,8 @@
 enum ActionType : uint8_t {
     MOVE = 0X00,
     STOP_MOVE = 0X01,
-    NONE = 0X02
+    JUMP = 0X02,
+    NONE = 0X03
 };
 
 

@@ -31,8 +31,10 @@ std::vector<GameProperty> MatchesMonitor::getGameProperties() {
     std::lock_guard<std::mutex> lock(m_Mutex);
     std::vector<GameProperty> gameProperties;
     for (auto& game : m_Games) {
-        gameProperties.emplace_back(GameProperty{game.second->getIdGame(), game.second->getGameName(),
-                                         game.second->getMapName(), game.second->getPlayers()});
+        gameProperties.emplace_back(game.second->getIdGame(), game.second->getGameName(),
+                                         game.second->getMapName(),
+                                         static_cast<int>(game.second->getClientUpdates()->size()),
+                                         game.second->getPlayers());
     }
     return gameProperties;
 }

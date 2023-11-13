@@ -22,12 +22,16 @@ void EventSender::run() {
                 std::cout << "enviando accion de moverse a la izquierda" << std::endl;
                 UserAction userAction(ActionType::MOVE, m_IdPlayer, Direction::LEFT);
                 m_Protocol.sendUserAction(userAction);
-            } else {
+            } else if (key == SDLK_SPACE) {
+                std::cout << "enviando accion de saltar" << std::endl;
+                UserAction userAction(ActionType::JUMP, m_IdPlayer);
+                m_Protocol.sendUserAction(userAction);
+            }else {
                 std::cout << "key no mapeada: " << key << std::endl;
             }
         } else if (event.type == SDL_KEYUP && event.key.repeat == 0) {
             if (key == SDLK_d || key == SDLK_a) {
-                std::cout << "enviando accion de parar de moverse" << std::endl;
+                std::cout << "enviando accion de dejar de moverse" << std::endl;
                 UserAction userAction(ActionType::STOP_MOVE, m_IdPlayer);
                 m_Protocol.sendUserAction(userAction);
             } else {

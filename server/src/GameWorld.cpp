@@ -14,41 +14,67 @@ void GameWorld::Setup() {
 }
 
 std::vector<GameUpdate> GameWorld::UpdateWorld(std::reference_wrapper<std::vector<UserAction>> userActions) {
-    std::vector<GameUpdate> gameUpdates;
-    for (auto& worm : worms) {
-        for (auto& action : userActions.get()) {
-            if (action.getIdPlayer() == worm.first) {
-                if (action.getAction() == MOVE) {
-                    if (action.getParam1() == RIGHT) {
-                        worm.second->SetLinearVelocity(b2Vec2(5.0f, 0));
-                    } else {
-                        worm.second->SetLinearVelocity(b2Vec2(-5.0f, 0));
-                    }
-                } else if (action.getAction() == STOP_MOVE) {
-                    worm.second->SetLinearVelocity(b2Vec2(0, 0));
+    for (auto& action : userActions.get()) {
+        b2Body * worm = worms.at(action.getIdPlayer());
+        switch (action.getAction())
+        {
+            case MOVE:
+                float movement_velocity;
+                if(action.getParam1() == RIGHT) {
+                    movement_velocity = 5.0f;
+                } else {
+                    movement_velocity = -5.0f;
                 }
+                worm->SetLinearVelocity(b2Vec2(movement_velocity, 0));
+                break;
+            case STOP_MOVE:
+                worm->SetLinearVelocity(b2Vec2(0, 0));
+                break;
+            case JUMP:
+            {
+                b2Vec2 vel = worm->GetLinearVelocity();
+                float epsilon = 0.1f; // Un pequeño valor para manejar errores de precisión
+                if (std::abs(vel.y) < epsilon) {
+                    // El cuerpo está en reposo en el eje Y y puede saltar
+                    float impulse = worm->GetMass() * 5;
+                    vel.y = impulse;
+                    worm->ApplyLinearImpulse(vel, worm->GetWorldCenter(), true);
+                }
+                break;
             }
+            default:
+                break;
         }
     }
     m_world.Step(timeStep,velocityIterations,positionIterations);
-    for (auto& worm : worms) {
-        b2Vec2 position = worm.second->GetPosition();
-        b2Vec2 velocity = worm.second->GetLinearVelocity();
-        std::cout << " Position: " << position.x << " " << position.y << std::endl;
-        if (velocity.x < 0) {
-            GameUpdate gameUpdate{static_cast<uint8_t>(worm.first), WORM_MOVE_LEFT, position.x, position.y};
-            gameUpdates.push_back(gameUpdate);
-        } else if (velocity.x > 0) {
-            GameUpdate gameUpdate{static_cast<uint8_t>(worm.first), WORM_MOVE_RIGHT, position.x, position.y};
-            gameUpdates.push_back(gameUpdate);
-        } else {
-            GameUpdate gameUpdate{static_cast<uint8_t>(worm.first), WORM_IDLE, position.x, position.y};
-            gameUpdates.push_back(gameUpdate);
-        }
-//        GameUpdate gameUpdate{static_cast<uint8_t>(worm.first), WORM_MOVE, position.x, position.y};
-//        gameUpdates.push_back(gameUpdate);
-    }
 
+    std::vector<GameUpdate> gameUpdates;
+    for (auto& worm : worms) {
+        GameUpdate gameState{};
+        int id = worm.first;
+        gameState.player_id = id;
+        b2Vec2 position = worm.second->GetPosition();
+        gameState.x_pos = position.x;
+        gameState.y_pos = position.y;
+        b2Vec2 tempPosition = wormsPositions.at(id);
+        if (tempPosition != position) {
+            std::cout << "ID [" << id << "] - POS (" << position.x << ", " << position.y << ")" << std::endl;
+            wormsPositions.at(id) = position;
+        }
+        b2Vec2 vLineal = worm.second->GetLinearVelocity();
+        if (vLineal.x > 0) {
+            gameState.action = WORM_MOVE_RIGHT;
+        } else if (vLineal.x < 0) {
+            gameState.action = WORM_MOVE_LEFT;
+        } else if (vLineal.y > 0) {
+            gameState.action = WORM_JUMP;
+        } else if (vLineal.y < 0) {
+            gameState.action = WORM_FALL;
+        } else {
+            gameState.action = WORM_NONE;
+        }
+        gameUpdates.push_back(gameState);
+    }
     return gameUpdates;
 }
 
@@ -103,7 +129,7 @@ void GameWorld::SetWorm(const int& player_number, const float & x_pos, const flo
 	bd.allowSleep = false;
 	body = m_world.CreateBody(&bd);
 	b2PolygonShape shape;
-	shape.SetAsBox(1.0f, 1.0f);
+	shape.SetAsBox(0.5f, 1.0f);
 	b2FixtureDef fd;
     fd.friction = 0.0f;
 	fd.shape = &shape;
@@ -111,6 +137,8 @@ void GameWorld::SetWorm(const int& player_number, const float & x_pos, const flo
 	body->CreateFixture(&fd);
 
     worms.insert(std::make_pair(player_number, body)); //worms.size()
+    wormsPositions.insert(std::make_pair(player_number, b2Vec2(x_pos, y_pos)));
+    std::cout << "ID [" << player_number << "] - POS (" << x_pos << ", " << y_pos << ")" << std::endl;
 }
 
 std::vector<GameUpdate> GameWorld::getWormsPosition() const {

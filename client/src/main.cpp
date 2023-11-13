@@ -13,29 +13,31 @@ int main(int argc, char *argv[]) {
         app.exec();
         try {
             Protocol* protocol = window_connect.getProtocol();
+            int players = window_connect.getCantPlayers();
             const std::vector<Grd> &map = protocol->recvMap();
-            GameUpdate gameUpdate = protocol->recvGameUpdate();
+            //GameUpdate gameUpdate = protocol->recvGameUpdate();
             ProtectedQueue<std::string> settingsQueue(100);
             ProtectedQueue<GameUpdate> gameUpdates(100);
-            gameUpdates.push(gameUpdate);
-            EventSender eventSender(*protocol, gameUpdate.player_id, std::ref(settingsQueue));
+            std::vector<GameUpdate> initInfo;
+            for (int i = 0; i < players; i++) {
+                initInfo.push_back(protocol->recvGameUpdate());
+            }
+            int idPlayer = window_connect.getIdPlayer();
+            std::cout << "El id del jugador es: " << idPlayer << std::endl;
+            EventSender eventSender(*protocol, idPlayer, std::ref(settingsQueue));
             ClientReceiver receiver(*protocol, std::ref(gameUpdates));
             auto game = GameClient();
-            game.Init(map);
-            auto lastTime = std::chrono::system_clock::now();
+            game.Init(map, idPlayer, std::ref(initInfo));
             eventSender.start();
             receiver.start();
+
+            auto lastTime = std::chrono::system_clock::now();
             while (game.IsRunning()) {
                 GameUpdate svUpdate{};
                 auto current = std::chrono::system_clock::now();
                 std::chrono::duration<double> elapsedSeconds = current - lastTime;
-                //game.Update(elapsedSeconds.count(), serverUpdate);
 
-//                game.Update(elapsedSeconds.count(), gameUpdate);
-//                game.Render();
                 gameUpdates.try_pop(svUpdate);
-                //game.HandleEvents();
-
 
                 game.Update(elapsedSeconds.count(), svUpdate);
                 game.Render();

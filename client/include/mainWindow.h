@@ -17,6 +17,10 @@ public:
     Protocol* getProtocol();
     bool isLobby();
     ~MainWindow() override;
+
+    int getCantPlayers() const;
+    int getIdPlayer() const;
+
 private slots:
     void switchToGame();
     

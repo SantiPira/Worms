@@ -7,7 +7,8 @@ enum InitGameEnum : uint8_t {
     JOIN_GAME = 0x01,
     LIST_GAMES = 0x02,
     QUIT = 0x03,
-    INVALID = 0x04
+    INVALID = 0x04,
+    ID_PLAYER = 0x05
 };
 
 [[maybe_unused]] inline InitGameEnum getAction(uint8_t action) {

@@ -22,6 +22,7 @@ private:
     const std::string& map_path; 
     std::unordered_map<int,b2Body*> worms; // Deberia ser un int, Worm donde Worm tenga dentro un b2Body
     int i = 0;
+    std::unordered_map<int, b2Vec2> wormsPositions;
 public:
 
     GameWorld(const std::string &map_path);
