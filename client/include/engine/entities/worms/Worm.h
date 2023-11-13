@@ -13,13 +13,15 @@
 class Worm {
 private:
     SDL_Renderer* m_Renderer;
-    Animation* m_WormAnimation;
+    Animation* m_WormAnimation{};
     std::unordered_map<SpritesEnum, Animation*> m_SpritesMap;
-    SDL_Rect m_DestWormRect;
-    int m_WormWidth;
-    int m_WormHeight;
+    SDL_Rect m_DestWormRect{};
+    int m_WormWidth{};
+    int m_WormHeight{};
     float m_WormXPosition;
-    BlendMode m_BlendMode;
+    float m_WormYPosition;
+    BlendMode m_BlendMode{};
+    SpritesEnum m_CurrentSprite;
 
 public:
     Worm(SDL_Renderer* renderer, float posX, float posY);
@@ -30,5 +32,7 @@ public:
     void render();
 
     GameAction m_Dir;
-    Animation* m_CurrentAnimation;
+    Animation* m_CurrentAnimation{};
+
+    void moveNormalWorm(const GameUpdate& gameUpdate);
 };

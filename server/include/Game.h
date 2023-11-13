@@ -1,6 +1,7 @@
 #pragma once
 
 #include <atomic>
+#include <unordered_set>
 #include "../../common_libs/include/Thread.h"
 #include "world/GameWorld.h"
 #include "messages/user_actions/UserAction.h"
@@ -41,6 +42,7 @@ public:
     void updateWorld();
 
 private:
+    void pushSetToClients(std::reference_wrapper<std::unordered_set<GameUpdate, GameUpdateHash>> updates);
     void pushUpdatesToClients(std::reference_wrapper<std::vector<GameUpdate>> updates);
     void pushUpdateToClients(GameUpdate& update);
 };

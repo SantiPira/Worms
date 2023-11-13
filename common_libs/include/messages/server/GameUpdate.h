@@ -2,6 +2,8 @@
 
 #include "GameActionEnum.h"
 #include "../user_actions/Weapon.h"
+#include <unordered_set>
+
 
 struct GameUpdate {
     uint8_t player_id;
@@ -26,4 +28,23 @@ struct GameUpdate {
             player_id(player_id), m_Move(action), x_pos(x_pos), y_pos(y_pos), m_Weapon(weapon),
             m_ActionWeapon(actionWeapon) {}
 
+
+    bool operator==(const GameUpdate& gameUpdate) const {
+        return player_id == gameUpdate.player_id && m_Move == gameUpdate.m_Move && x_pos == gameUpdate.x_pos &&
+               y_pos == gameUpdate.y_pos && m_Weapon == gameUpdate.m_Weapon &&
+               m_ActionWeapon == gameUpdate.m_ActionWeapon;
+    }
+};
+
+struct GameUpdateHash {
+    std::size_t operator()(const GameUpdate& gameUpdate) const {
+        std::size_t h1 = std::hash<uint8_t>{}(gameUpdate.player_id);
+        std::size_t h2 = std::hash<int>{}(static_cast<int>(gameUpdate.m_Move));
+        std::size_t h3 = std::hash<float>{}(gameUpdate.x_pos);
+        std::size_t h4 = std::hash<float>{}(gameUpdate.y_pos);
+        std::size_t h5 = std::hash<int>{}(static_cast<int>(gameUpdate.m_Weapon));
+        std::size_t h6 = std::hash<int>{}(static_cast<int>(gameUpdate.m_ActionWeapon));
+
+        return h1 ^ h2 ^ h3 ^ h4 ^ h5 ^ h6;
+    }
 };

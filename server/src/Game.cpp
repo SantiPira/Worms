@@ -24,7 +24,8 @@ void Game::run() {
             //Ver como se estan almacenando los mensajes en el vector, si hay repetidos etc... y como llega al pushUpdateToClients..
             //m_InputActions.try_pop(std::ref(updates), m_PopMessageQuantity);
             std::vector<UserAction> userActions;
-            std::vector<GameUpdate> updates;
+            //std::vector<GameUpdate> updates;
+            std::unordered_set<GameUpdate, GameUpdateHash> updates;
             m_InputActions.try_pop(std::ref(userActions), m_PopMessageQuantity);
             if (userActions.empty()) {
                 userActions.emplace_back();
@@ -36,11 +37,11 @@ void Game::run() {
                     auto wormPositions = world.getWormsPosition();
                     pushUpdatesToClients(std::ref(wormPositions));
                 } else {
-                    updates.push_back(world.execute(instruction, userAction.getIdPlayer()));
+                    updates.insert(world.execute(instruction, userAction.getIdPlayer()));
                 }
                 delete instruction; //TODO: unique_pointer
             }
-            pushUpdatesToClients(std::ref(updates));
+            pushSetToClients(std::ref(updates));
             //auto updates = world.UpdateWorld(std::ref(userActions));
 
 
@@ -98,6 +99,14 @@ std::string Game::getMapName() const {
 void Game::pushUpdateToClients(GameUpdate &update) {
     for (auto& clientUpdate : m_QClientUpdates) {
         clientUpdate.second->push(std::ref(update));
+    }
+}
+
+void Game::pushSetToClients(std::reference_wrapper<std::unordered_set<GameUpdate, GameUpdateHash>> updates) {
+    for (auto& clientQueue : m_QClientUpdates) {
+        for (auto& update : updates.get()) {
+            clientQueue.second->push(std::ref(update));
+        }
     }
 }
 
