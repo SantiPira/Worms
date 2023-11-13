@@ -33,3 +33,11 @@ void Animation::release() {
     m_Texture->release();
     delete m_Texture;
 }
+
+int Animation::getWormWidth() const {
+    return m_FrameWidth;
+}
+
+int Animation::getWormHeight() const {
+    return m_FrameHeight;
+}

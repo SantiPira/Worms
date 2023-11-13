@@ -17,15 +17,34 @@ void Game::run() {
         auto update = world.getWormsPosition();
         pushUpdatesToClients(std::ref(update));
     }
+    InstructionFactory instructionFactory;
     while (m_KeepRunning) {
 
         //while (turnHandler.isValidTurn()) {
             //Ver como se estan almacenando los mensajes en el vector, si hay repetidos etc... y como llega al pushUpdateToClients..
             //m_InputActions.try_pop(std::ref(updates), m_PopMessageQuantity);
             std::vector<UserAction> userActions;
+            std::vector<GameUpdate> updates;
             m_InputActions.try_pop(std::ref(userActions), m_PopMessageQuantity);
-            auto updates = world.UpdateWorld(std::ref(userActions));
+            if (userActions.empty()) {
+                userActions.emplace_back();
+            }
+            for (auto& userAction : userActions) {
+                auto* instruction = instructionFactory.createInstruction(userAction);
+                if (userAction.getAction() == NONE) {
+                    world.step();
+                    auto wormPositions = world.getWormsPosition();
+                    pushUpdatesToClients(std::ref(wormPositions));
+                } else {
+                    updates.push_back(world.execute(instruction, userAction.getIdPlayer()));
+                }
+                delete instruction; //TODO: unique_pointer
+            }
             pushUpdatesToClients(std::ref(updates));
+            //auto updates = world.UpdateWorld(std::ref(userActions));
+
+
+            //pushUpdatesToClients();
             //TODO: Revisar esto, pero creo que deberia estar bien, el loop del turnHandler no esta mal, ya que administra de quien es el turno.
             std::chrono::steady_clock::time_point start_time = std::chrono::steady_clock::now();
             // Espero hasta que pase 1/60 segundos

@@ -22,4 +22,8 @@ public:
     void release();
     void update(double elapsedSeconds);
     void render(const SDL_Rect *destRect, bool isFlip) const;
+
+    int getWormWidth() const;
+
+    int getWormHeight() const;
 };

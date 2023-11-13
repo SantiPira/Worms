@@ -2,8 +2,9 @@
 
 #include <atomic>
 #include "../../common_libs/include/Thread.h"
-#include "GameWorld.h"
+#include "world/GameWorld.h"
 #include "messages/user_actions/UserAction.h"
+#include "world/instructions/InstructionFactory.h"
 
 #define MAX_TURN_SECONDS 120
 

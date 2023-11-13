@@ -26,7 +26,19 @@ void EventSender::run() {
                 std::cout << "enviando accion de saltar" << std::endl;
                 UserAction userAction(ActionType::JUMP, m_IdPlayer);
                 m_Protocol.sendUserAction(userAction);
-            }else {
+            } else if (key == SDLK_c) {
+                std::cout << "enviando accion de atacar" << std::endl;
+                UserAction userAction(ActionType::ATTACK, m_IdPlayer);
+                m_Protocol.sendUserAction(userAction);
+            } else if (key == SDLK_h) {
+                std::cout << "Sacando Hacha" << std::endl;
+                UserAction userAction(ActionType::SET_WEAPON, m_IdPlayer, Weapon::AXE); // TIPO DE ARMA
+                m_Protocol.sendUserAction(userAction);
+            } else if (key == SDLK_j) {
+                std::cout << "Guardando Hacha" << std::endl;
+                UserAction userAction(ActionType::UNSET_WEAPON, m_IdPlayer); // TIPO DE ARMA
+                m_Protocol.sendUserAction(userAction);
+            } else {
                 std::cout << "key no mapeada: " << key << std::endl;
             }
         } else if (event.type == SDL_KEYUP && event.key.repeat == 0) {

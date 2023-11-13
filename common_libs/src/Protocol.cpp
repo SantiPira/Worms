@@ -98,9 +98,11 @@ void Protocol::sendMap(std::reference_wrapper<std::vector<Grd>> map) {
 
 void Protocol::sendGameUpdate(GameUpdate &update) {
     sendByte(update.player_id);
-    sendByte(update.action);
+    sendByte(update.m_Move);
     sendFloat(update.x_pos);
     sendFloat(update.y_pos);
+    sendByte(update.m_Weapon);
+    sendByte(update.m_ActionWeapon);
 }
 
 GameInfo Protocol::recvGameInfo() {
@@ -136,9 +138,11 @@ std::vector<Grd> Protocol::recvMap() {
 GameUpdate Protocol::recvGameUpdate() {
     GameUpdate update{};
     update.player_id = recvByte();
-    update.action = GameAction(recvByte());
+    update.m_Move = GameAction(recvByte());
     update.x_pos = recvFloat();
     update.y_pos = recvFloat();
+    update.m_Weapon = Weapon(recvByte());
+    update.m_ActionWeapon = GameAction(recvByte());
     return update;
 }
 
@@ -157,18 +161,16 @@ bool Protocol::isClosed() const { return wasClosed; }
 void Protocol::sendUserAction(UserAction action) {
     sendByte(action.getAction());
     sendByte(action.getIdPlayer());
-    if (action.getAction() == ActionType::MOVE) {
-        sendByte(action.getParam1());
-    }
+    sendByte(action.getParam1());
+    sendByte(action.getParam2());
 }
 
 UserAction Protocol::recvUserAction() {
     UserAction userAction;
     userAction.setAction(ActionType(recvByte()));
     userAction.setIdPlayer(recvByte());
-    if (userAction.getAction() == ActionType::MOVE) {
-        userAction.setParam1(recvByte());
-    }
+    userAction.setParam1(recvByte());
+    userAction.setParam2(recvByte());
     return userAction;
 }
 
