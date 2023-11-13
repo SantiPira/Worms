@@ -24,8 +24,8 @@ class ClientRenderer: public Thread {
     ProtectedQueue<std::string>& message_queue;
     atomic<bool>& keep_playing;
     MapInfo& map_info;
-
     Protocol& protocol;
+    
     public:
 
     ClientRenderer(ProtectedQueue<std::string>& queue, std::atomic<bool>& game_status, MapInfo& map_info, Protocol& protocol);

@@ -45,16 +45,22 @@ void Juego::createGame(const std::string& mapa, const std::string& nombre, const
 }
 
 void Juego::getMapInfo(const string &cantidad_jugadores, MapInfo &mapInfo) {
+    
     vector<Grd> map = m_Protocol.recvMap();
+
     mapInfo.cantBeams = map.size();
     mapInfo.grd = map;
     mapInfo.cantWorms = stoi(cantidad_jugadores);
+
     for (int i = 0; i < mapInfo.cantWorms; i++) {
         mapInfo.worms.push_back(m_Protocol.recvGameUpdate());
     }
 }
 
 void Juego::joinGame() {
+
+
+    //Hacer con la cantidad de jugadores.
 
     MapInfo mapInfo;
     getMapInfo("2", mapInfo); // Aca deberia existir la cantidad de jugadores para el mapa.

@@ -13,14 +13,20 @@ void ClientRenderer::run() {
 
     //Info inicial.
     GameUpdate gameUpdate = protocol.recvGameUpdate();
-
-    
     gameUpdates.push(gameUpdate);
 
     EventSender eventSender(protocol, gameUpdate.player_id, std::ref(settingsQueue));
     ClientReceiver receiver(protocol, std::ref(gameUpdates));
 
+    for (int i = 0; i < this->map_info.grd.size(); i++) {
+        
+    }
+
+
     game.Init(this->map_info.grd);
+
+
+
 
     eventSender.start();
     receiver.start();
