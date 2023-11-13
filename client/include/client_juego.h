@@ -7,6 +7,7 @@
 #include "EventSender.h"
 #include "client_receiver.h"
 #include "client_renderer.h"
+#include "MapInfo.h"
 
 #include <iostream>
 #include <vector>
@@ -20,7 +21,7 @@ class Juego{
     ClientReceiver* receptor_de_mensajes{NULL};
     std::atomic<bool> inicio_el_juego{false};
     ProtectedQueue<std::string> cola_de_mensajes;
-    std::vector<Grd> map_info;
+    MapInfo map_info;
     ClientRenderer* game_renderer;
 
 
@@ -38,6 +39,8 @@ class Juego{
 
 
     Protocol *getProtocol();
+
+    void getMapInfo(const string &cantidad_jugadores, MapInfo &mapInfo);
 };
 
 #endif // CLIENT_JUEGO_H

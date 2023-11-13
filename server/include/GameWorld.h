@@ -8,7 +8,7 @@
 #include <unordered_map>
 
 class GameWorld {
-private:
+ private:
     int beams;
     int players;
     const float width;
@@ -20,13 +20,14 @@ private:
     b2World m_world;
     const std::string& map_path; 
     std::unordered_map<int,b2Body*> worms;
-public:
 
+ public:
     GameWorld(const std::string &map_path);
     void Setup();
     GameUpdate UpdateWorld();
     void SetGirder(const Grd& girder);
     void StartWorld();
     void SetWorm(const int& player_number, const float & x_pos, const float& y_pos);
+    std::vector<GameUpdate> getWormPositions() const;
 
 };

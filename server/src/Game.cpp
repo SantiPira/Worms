@@ -8,6 +8,10 @@ Game::Game(int id, std::string gameName, std::string mapName, int players) : m_I
 
 void Game::run() {
     setupWorld();
+    {
+        auto wormsPositions = world.getWormPositions();
+        pushUpdatesToClients(std::ref(wormsPositions));
+    }
     GameUpdate update{};
     update.action = TURN_INFO;
     update.player_id = 0;
@@ -99,3 +103,4 @@ void Game::setupWorld() {
 void Game::updateWorld() {
     world.UpdateWorld();
 }
+

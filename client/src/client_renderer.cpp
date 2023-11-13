@@ -1,6 +1,6 @@
 #include "client_renderer.h"
 
-ClientRenderer::ClientRenderer(ProtectedQueue<std::string>& queue, std::atomic<bool>& game_status, std::vector<Grd>& map_info, Protocol& protocol): 
+ClientRenderer::ClientRenderer(ProtectedQueue<std::string>& queue, std::atomic<bool>& game_status, MapInfo& map_info, Protocol& protocol):
 message_queue(queue), keep_playing(game_status), map_info(map_info), protocol(protocol) {}
 
 void ClientRenderer::run() { 
@@ -20,7 +20,7 @@ void ClientRenderer::run() {
     EventSender eventSender(protocol, gameUpdate.player_id, std::ref(settingsQueue));
     ClientReceiver receiver(protocol, std::ref(gameUpdates));
 
-    game.Init(this->map_info);
+    game.Init(this->map_info.grd);
 
     eventSender.start();
     receiver.start();

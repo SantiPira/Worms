@@ -48,6 +48,4 @@ private:
     void destroyClient();
 
     bool isRunning();
-
-    void initGame();
 };

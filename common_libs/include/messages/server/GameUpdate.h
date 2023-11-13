@@ -7,4 +7,5 @@ struct GameUpdate {
     GameAction action;
     float x_pos;
     float y_pos;
+    uint8_t cantMessages;
 };

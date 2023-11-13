@@ -13,6 +13,7 @@
 #include "client_receiver.h"
 #include "messages/server/GameUpdate.h"
 #include "Protocol.h"
+#include "MapInfo.h"
 
 
 using namespace SDL2pp;
@@ -22,12 +23,12 @@ class ClientRenderer: public Thread {
     private:
     ProtectedQueue<std::string>& message_queue;
     atomic<bool>& keep_playing;
-    std::vector<Grd>& map_info;
+    MapInfo& map_info;
 
     Protocol& protocol;
     public:
 
-    ClientRenderer(ProtectedQueue<std::string>& queue, std::atomic<bool>& game_status, std::vector<Grd>& map_info, Protocol& protocol); 
+    ClientRenderer(ProtectedQueue<std::string>& queue, std::atomic<bool>& game_status, MapInfo& map_info, Protocol& protocol);
 
     void run() override;
 

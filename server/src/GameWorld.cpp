@@ -79,3 +79,13 @@ void GameWorld::SetWorm(const int& player_number, const float & x_pos, const flo
     worms.insert(std::make_pair(player_number, body)); //worms.size()
 }
 
+std::vector<GameUpdate> GameWorld::getWormPositions() const {
+    std::vector<GameUpdate> gameUpdates;
+    for (auto& worm : worms) {
+        b2Vec2 position = worm.second->GetPosition();
+        GameUpdate gameUpdate{static_cast<uint8_t>(worm.first), GAME_INFO, position.x, position.y};
+        gameUpdates.push_back(gameUpdate);
+    }
+    return gameUpdates;
+}
+

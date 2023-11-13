@@ -34,9 +34,8 @@ void Juego::createGame(const std::string& mapa, const std::string& nombre, const
     
     //this->map_info = this->m_Protocol.recvMap();
     //std::cout << "RECIBIR EL MAPA";
-                
-    this->map_info = m_Protocol.recvMap();
-
+    MapInfo mapInfo;
+    getMapInfo(cantidad_jugadores, mapInfo);
     this->game_renderer = new ClientRenderer(this->cola_de_mensajes,this->inicio_el_juego, this->map_info, m_Protocol);
     this->game_renderer->start();
 
@@ -45,9 +44,20 @@ void Juego::createGame(const std::string& mapa, const std::string& nombre, const
 
 }
 
+void Juego::getMapInfo(const string &cantidad_jugadores, MapInfo &mapInfo) {
+    vector<Grd> map = m_Protocol.recvMap();
+    mapInfo.cantBeams = map.size();
+    mapInfo.grd = map;
+    mapInfo.cantWorms = stoi(cantidad_jugadores);
+    for (int i = 0; i < mapInfo.cantWorms; i++) {
+        mapInfo.worms.push_back(m_Protocol.recvGameUpdate());
+    }
+}
+
 void Juego::joinGame() {
 
-    this->map_info = m_Protocol.recvMap();
+    MapInfo mapInfo;
+    getMapInfo("2", mapInfo); // Aca deberia existir la cantidad de jugadores para el mapa.
 
     this->game_renderer = new ClientRenderer(this->cola_de_mensajes,this->inicio_el_juego, this->map_info, m_Protocol);
     this->game_renderer->start();

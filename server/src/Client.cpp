@@ -11,7 +11,16 @@ void Client::run() {
             lobbyGame();
         }
         if (hasGame) {
-            initGame();
+            m_Sender.setPlayerId(m_IdPlayer);
+            m_Sender.start();
+            //Receiver state
+            while (isRunning()) {
+                //handlerInitGame->handle(std::ref(clientInitGame));
+                //clientInitGame.executeAction(std::ref(m_Matches), std::ref(m_UpdatesGame), idPlayer, idGame);
+                m_InputActions->push("clientResponse");
+            }
+            m_Sender.stop();
+            m_Sender.join();
         }
 
     } catch (const LibError& e) {
@@ -23,20 +32,6 @@ void Client::run() {
     }
 }
 
-void Client::initGame() {
-    sendMap();
-    m_Sender.setPlayerId(m_IdPlayer);
-    m_Sender.start();
-    //Receiver state
-    while (isRunning()) {
-        //handlerInitGame->handle(std::ref(clientInitGame));
-        //clientInitGame.executeAction(std::ref(m_Matches), std::ref(m_UpdatesGame), idPlayer, idGame);
-        m_InputActions->push("clientResponse");
-    }
-    m_Sender.stop();
-    m_Sender.join();
-}
-
 void Client::lobbyGame() {
     GameInfo clientResponse = m_Protocol.recvGameInfo();
     if (!m_Protocol.isClosed()) {
@@ -45,6 +40,7 @@ void Client::lobbyGame() {
                 m_IdGame = m_Matches->createGame(clientResponse.getGameProperties()[0].m_GameName,
                                                  clientResponse.getGameProperties()[0].m_MapName,
                                                  clientResponse.getGameProperties()[0].m_Players);
+                sendMap();
                 m_IdPlayer = m_Matches->addPlayer(m_IdGame, &m_UpdatesGame);
                 m_InputActions = m_Matches->getInputActionGame(m_IdGame);
                 hasGame = true;
