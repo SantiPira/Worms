@@ -13,7 +13,7 @@ struct GameUpdate {
     Weapon m_Weapon;
     GameAction m_ActionWeapon;
 
-    GameUpdate() : player_id(0), m_Move(WORM_NONE), x_pos(0), y_pos(0), m_Weapon(NO_WEAPON),
+    GameUpdate() : player_id(0), m_Move(INVALID_ACTION), x_pos(0), y_pos(0), m_Weapon(NO_WEAPON),
         m_ActionWeapon(NO_HAS_WEAPON) {}
 
     GameUpdate(uint8_t player_id, GameAction action, float x_pos, float y_pos) :

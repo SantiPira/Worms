@@ -163,7 +163,7 @@ GameUpdate WWorm::getUpdate() const {
     } else if (velocity.y < 0) {
         move = WORM_FALL;
     } else {
-        move = WORM_NONE;
+        move = WORM_MOVE_RIGHT;
     }
 //    gameUpdate.player_id = m_Id;
     posX = getPosition().x;

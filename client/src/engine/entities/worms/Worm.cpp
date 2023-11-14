@@ -66,7 +66,7 @@ void Worm::render() {
 void Worm::moveNormalWorm(const GameUpdate& gameUpdate) {
     m_Dir = gameUpdate.m_Move;
     float tempX = WorldScale::getPixelScale(gameUpdate.x_pos);
-    float tempY = 512 - WorldScale::getPixelScale(gameUpdate.y_pos);
+    float tempY = 512 - WorldScale::getPixelScale(gameUpdate.y_pos + 0.1f);
     int wormWidth = m_CurrentAnimation->getWormWidth();
     int wormHeight = m_CurrentAnimation->getWormHeight();
     if (tempX + wormWidth > 512) {
@@ -81,26 +81,3 @@ void Worm::moveNormalWorm(const GameUpdate& gameUpdate) {
     }
     m_CurrentAnimation->setPositions(tempX, tempY);
 }
-
-
-/*m_Dir = gameUpdate.m_Move;
-            float tempX = WorldScale::getPixelScale(gameUpdate.x_pos - 0.50f);
-            float tempY = 512 - WorldScale::getPixelScale(gameUpdate.y_pos + 1.0f);
-            int wormWidth = m_CurrentAnimation->getWormWidth();
-            int wormHeight = m_CurrentAnimation->getWormHeight();
-            if (tempX + wormWidth > 512) {
-                m_DestWormRect.x = 512 - wormWidth;
-            } else if (tempX < 0) {
-                m_DestWormRect.x = 0;
-            } else {
-                m_DestWormRect.x = tempX;
-            }
-            if (tempY + wormHeight > 512) {
-                m_DestWormRect.y = 512 - wormHeight;
-            } else if (tempY < 0) {
-                m_DestWormRect.y = 0;
-            } else {
-                m_DestWormRect.y = tempY;
-            }
-            m_DestWormRect.w = m_CurrentAnimation->getWormWidth();
-            m_DestWormRect.h = m_CurrentAnimation->getWormHeight();*/
