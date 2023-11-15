@@ -11,6 +11,7 @@ class Animation {
     float m_Duration;
     double m_CurrentTime;
     SDL_Rect m_SourceRect;
+    int m_InitYSprite;
     SDL_Rect m_DestRect;
     int m_FrameHeight;
     int m_FrameWidth;
@@ -20,8 +21,8 @@ class Animation {
     float m_PosY;
 
 public:
-    Animation(std::string path, SDL_Renderer *renderer, int frames, float duration, int frameHeight, int frameWidth,
-              BlendMode blendMode, int width, int height, float posX, float posY);
+    Animation(std::string path, SDL_Renderer *renderer, int frames, float duration, SDL_Rect srcRect, int initYSprite,
+              int frameHeight, int frameWidth, BlendMode blendMode, int width, int height, float posX, float posY);
 
     void init();
     void release();

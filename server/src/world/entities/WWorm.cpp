@@ -3,7 +3,7 @@
 WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY) {
     m_World = world;
     m_Width = 0.50f; //Valores cargados por config?
-    m_Height = 1.0f; //Valores cargados por config?
+    m_Height = 0.80f; //Valores cargados por config?
     b2BodyDef bd;
     bd.position.Set(posX, posY + m_Width);
     bd.type = b2_dynamicBody;
@@ -165,7 +165,7 @@ GameUpdate WWorm::getUpdate() const {
     } else {
         move = WORM_MOVE_RIGHT;
     }
-//    gameUpdate.player_id = m_Id;
+
     posX = getPosition().x;
     posY = getPosition().y;
 

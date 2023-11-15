@@ -10,7 +10,7 @@ std::vector<Grd> ParseMapFromFile::parse(const std::string& mapName) {
     std::vector<Grd> grds;
     inputFile >> numGrds;
     for (int i = 0; i < numGrds; i++) {
-        int x, y;
+        float x, y;
         int type;
         inputFile >> type >> x >> y;
         grds.emplace_back(type, x, y);
@@ -19,7 +19,7 @@ std::vector<Grd> ParseMapFromFile::parse(const std::string& mapName) {
     return grds;
 }
 
-Grd::Grd(int grdType, int posX, int posY) {
+Grd::Grd(int grdType, float posX, float posY) {
     this->grdType = static_cast<GrdEnum>(grdType);
     this->x = posX;
     this->y = posY;

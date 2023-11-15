@@ -16,7 +16,7 @@ void GameWorld::Setup() {
 void GameWorld::SetGirder(const Grd& girder) {
     if(girder.grdType == GRD_LARGE_HORIZONTAL) {
         b2BodyDef bd;
-        bd.position.Set(float(girder.x + (5.0f)),float(girder.y));
+        bd.position.Set(girder.x, girder.y);
         bd.type = b2_staticBody;
         b2Body * body = m_world.CreateBody(&bd); 
         b2PolygonShape shape;

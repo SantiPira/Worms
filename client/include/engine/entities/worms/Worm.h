@@ -2,9 +2,9 @@
 
 #include <SDL_render.h>
 #include "SpritesEnum.h"
+#include "utils/WorldScale.h"
 #include "engine/graphics/Animation.h"
 #include "engine/entities/TexturePaths.h"
-#include "engine/utils/WorldScale.h"
 #include "messages/server/GameUpdate.h"
 #include "messages/user_actions/Weapon.h"
 #include <filesystem>
@@ -22,6 +22,10 @@ private:
     float m_WormYPosition;
     BlendMode m_BlendMode{};
     SpritesEnum m_CurrentSprite;
+    float m_Widht;
+    float m_Height;
+    // Widht y Height corresponden a las dimensiones que tiene el gusano en el World
+    // Se podria enviar del servidor al cliente al momento de iniciar/crear el gusano.
 
 public:
     Worm(SDL_Renderer* renderer, float posX, float posY);
