@@ -12,24 +12,42 @@
 #include "../../common_libs/include/Thread.h"
 #include "../../common_libs/include/liberror.h"
 #include "../../common_libs/include/socket.h"
+#include "../../common_libs/include/ParseMapFromFile.h"
 #include "ClientSender.h"
-#include "Games.h"
+#include "MatchesMonitor.h"
+#include "messages/server/InitGameEnum.h"
+
 
 class Client : public Thread {
 private:
     Protocol m_Protocol;
     std::atomic<bool> m_KeepRunning;
-    Games* m_Games;
-    int idGame;
+    MatchesMonitor* m_Matches;
+    int m_IdGame{};
+    int m_IdPlayer{};
     bool hasGame = false;
+    ProtectedQueue<GameUpdate> m_UpdatesGame;
+    ProtectedQueue<UserAction>* m_InputActions{};
+    ClientSender m_Sender;
 public:
-    Client(Socket peer, Games* games);
+    Client(Socket peer, MatchesMonitor* games);
     bool isDead();
     void stop();
     void kill();
-    virtual void run() override;
-
+    void run() override;
+    [[nodiscard]] int getIdPlayer() const;
+    [[nodiscard]] int getIdGame() const;
     ~Client() override = default;
     Client(const Client&) = delete;
     Client(Client&& other) = delete;
+private:
+    void sendMap();
+
+    void lobbyGame();
+
+    void destroyClient();
+
+    bool isRunning();
+
+    void initGame();
 };

@@ -19,12 +19,23 @@ uint16_t Protocol::recvTwoBytes() {
     return ntohs(aux);
 }
 
-void Protocol::recvMessage(std::string& message) {
+uint32_t Protocol::recvFourBytes() {
+    uint32_t aux;
+    socket.recvall(&aux, 4, &wasClosed);
+    return ntohl(aux);
+}
+
+float Protocol::recvFloat() {
+    uint32_t aux = recvFourBytes();
+    return *reinterpret_cast<float*>(&aux);
+}
+
+std::string Protocol::recvString() {
     uint16_t size = recvTwoBytes();
     std::vector<char> messageFromServer(size + 1);
     socket.recvall(messageFromServer.data(), size, &wasClosed);
     messageFromServer[size] = '\0';
-    message = std::string(messageFromServer.data());
+    return messageFromServer.data();
 }
 
 void Protocol::sendByte(uint8_t byte) {
@@ -39,7 +50,21 @@ void Protocol::sendTwoBytes(uint16_t bytes) {
     }
 }
 
-void Protocol::sendMessage(const std::string& message) {
+void Protocol::sendFourBytes(uint32_t bytes) {
+    if (!wasClosed) {
+        uint32_t aux = htonl(bytes);
+        socket.sendall(&aux, 4, &wasClosed);
+    }
+}
+
+void Protocol::sendFloat(float f) {
+    if (!wasClosed) {
+        uint32_t aux = htonl(*reinterpret_cast<uint32_t*>(&f));
+        socket.sendall(&aux, 4, &wasClosed);
+    }
+}
+
+void Protocol::sendString(const std::string &message) {
     uint16_t size = message.size();
     sendTwoBytes(size);
     socket.sendall(message.c_str(), size, &wasClosed);
@@ -49,21 +74,77 @@ void Protocol::sendMessage(const std::string& message) {
  * PUBLIC METHODS
  * */
 
-/*------------------------------------SERVER METHODS------------------------------------*/
-void Protocol::sendMessage(InfoServer& infoServer) {
-    sendByte(infoServer.getIdMessage());
-    sendByte(infoServer.getGames());
-    for (auto& player : infoServer.getPlayers()) {
-        sendTwoBytes(player);
+void Protocol::sendGameInfo(GameInfo& gameInfo) {
+    sendByte(gameInfo.getIdAction());
+    sendByte(gameInfo.getGameProperties().size());
+    for (auto& gameProperty : gameInfo.getGameProperties()) {
+        sendByte(gameProperty.m_idGame);
+        sendString(gameProperty.m_GameName);
+        sendString(gameProperty.m_MapName);
+        sendByte(gameProperty.m_PlayersConnected);
+        sendByte(gameProperty.m_Players);
+        sendByte(gameProperty.m_IdPlayer);
     }
 }
 
-/*------------------------------------END SERVER METHODS------------------------------------*/
+void Protocol::sendMap(std::reference_wrapper<std::vector<Grd>> map) {
+    sendByte(map.get().size());
+    for (auto& grd : map.get()) {
+        sendByte(grd.grdType);
+        sendTwoBytes(grd.x);
+        sendTwoBytes(grd.y);
+    }
+}
 
-/*------------------------------------CLIENT METHODS------------------------------------*/
+void Protocol::sendGameUpdate(GameUpdate &update) {
+    sendByte(update.player_id);
+    sendByte(update.m_Move);
+    sendFloat(update.x_pos);
+    sendFloat(update.y_pos);
+    sendByte(update.m_Weapon);
+    sendByte(update.m_ActionWeapon);
+}
 
+GameInfo Protocol::recvGameInfo() {
+    GameInfo gameInfo;
+    gameInfo.setIdAction(InitGameEnum(recvByte()));
+    uint8_t size = recvByte();
+    std::vector<GameProperty> gameProperties;
+    for (int i = 0; i < size; i++) {
+        int idGame = recvByte();
+        std::string gameName = recvString();
+        std::string mapName = recvString();
+        int players = recvByte();
+        int playersConnected = recvByte();
+        int idPlayer = recvByte();
+        gameProperties.emplace_back(idGame, gameName, mapName, players, playersConnected, idPlayer);
+    }
+    gameInfo.setGameProperties(gameProperties);
+    return gameInfo;
+}
 
-/*------------------------------------END CLIENT METHODS------------------------------------*/
+std::vector<Grd> Protocol::recvMap() {
+    std::vector<Grd> map;
+    uint8_t size = recvByte();
+    for (int i = 0; i < size; i++) {
+        uint8_t grdType = recvByte();
+        uint16_t x = recvTwoBytes();
+        uint16_t y = recvTwoBytes();
+        map.emplace_back(grdType, x, y);
+    }
+    return map;
+}
+
+GameUpdate Protocol::recvGameUpdate() {
+    GameUpdate update{};
+    update.player_id = recvByte();
+    update.m_Move = GameAction(recvByte());
+    update.x_pos = recvFloat();
+    update.y_pos = recvFloat();
+    update.m_Weapon = Weapon(recvByte());
+    update.m_ActionWeapon = GameAction(recvByte());
+    return update;
+}
 
 void Protocol::close() { socket.close(); }
 void Protocol::shutdown(int mode) { socket.shutdown(mode); }
@@ -77,18 +158,22 @@ Protocol::~Protocol() {
 }
 bool Protocol::isClosed() const { return wasClosed; }
 
-void Protocol::recvClientRequest(ClientRequest& clientRequest) {
-    uint8_t action = recvByte();
-    clientRequest.setAction(action);
+void Protocol::sendUserAction(UserAction action) {
+    sendByte(action.getAction());
+    sendByte(action.getIdPlayer());
+    sendByte(action.getParam1());
+    sendByte(action.getParam2());
 }
 
-/*void Protocol::sendMessage(ToClientMessage &message) {
-    message.serialize(*this);
+UserAction Protocol::recvUserAction() {
+    UserAction userAction;
+    userAction.setAction(ActionType(recvByte()));
+    userAction.setIdPlayer(recvByte());
+    userAction.setParam1(recvByte());
+    userAction.setParam2(recvByte());
+    return userAction;
 }
 
-void Protocol::receiveMessage(ClientMessage &clientMessage) {
-    clientMessage.deserialize(*this);
-}*/
 
 
 

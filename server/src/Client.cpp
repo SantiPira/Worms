@@ -1,39 +1,72 @@
 #include "../include/Client.h"
-#include "../../common_libs/include/InfoServer.h"
-#include "../../common_libs/include/ClientRequest.h"
-#include <iostream>
 
-Client::Client(Socket peer, Games* games) : m_Protocol(std::move(peer)), m_KeepRunning(true), m_Games(games) {}
+#define ID_PLAYER_INVALID (-1)
+
+Client::Client(Socket peer, MatchesMonitor* matches) : m_Protocol(std::move(peer)), m_KeepRunning(true),
+    m_Matches(matches), m_UpdatesGame(100), m_Sender(std::ref(m_Protocol), &m_UpdatesGame, ID_PLAYER_INVALID) {}
 
 void Client::run() {
-    std::cout << "Client running" << std::endl;
-    InfoServer infoServer(0x00, m_Games->getGames(), m_Games->getAllPlayers());
-    m_Protocol.sendMessage(std::ref(infoServer));
-    ClientRequest clientRequest;
-    m_Protocol.recvClientRequest(clientRequest);
-    while (m_KeepRunning && !clientRequest.isQuit()) {
-        switch (clientRequest.getAction()) {
-            case 0x01: {
-                idGame = m_Games->createGame();
+    try {
+        while (isRunning() && !hasGame) {
+            lobbyGame();
+        }
+        if (hasGame) {
+            initGame();
+        }
+
+    } catch (const LibError& e) {
+        std::cerr << "LibError exception e.what(): " << e.what() << std::endl;
+        destroyClient();
+    } catch (const std::exception &e1) {
+        std::cerr << "Unexpected error e.what(): " << e1.what() << std::endl;
+        destroyClient();
+    }
+}
+
+void Client::initGame() {
+    sendMap();
+    m_Sender.setPlayerId(m_IdPlayer);
+    m_Sender.start();
+    //Receiver state
+    while (isRunning()) {
+        m_InputActions->push(m_Protocol.recvUserAction());
+    }
+    m_Sender.stop();
+    m_Sender.join();
+}
+
+void Client::lobbyGame() {
+    GameInfo clientResponse = m_Protocol.recvGameInfo();
+    if (!m_Protocol.isClosed()) {
+        switch (clientResponse.getIdAction()) {
+            case CREATE_GAME: {
+                m_IdGame = m_Matches->createGame(clientResponse.getGameProperties()[0].m_GameName,
+                                                 clientResponse.getGameProperties()[0].m_MapName,
+                                                 clientResponse.getGameProperties()[0].m_Players);
+                m_IdPlayer = m_Matches->addPlayer(m_IdGame, &m_UpdatesGame);
+                GameInfo response(InitGameEnum::ID_PLAYER, m_IdPlayer);
+                m_Protocol.sendGameInfo(response);
+                m_InputActions = m_Matches->getInputActionGame(m_IdGame);
                 hasGame = true;
                 break;
             }
-            case 0x02: {
-                m_Protocol.recvClientRequest(clientRequest);
-                m_Games->addPlayer(idGame);
+            case JOIN_GAME: {
+                m_IdGame = clientResponse.getGameProperties()[0].m_idGame;
+                m_IdPlayer = m_Matches->addPlayer(m_IdGame, &m_UpdatesGame);
+                GameInfo response(InitGameEnum::ID_PLAYER, m_IdPlayer);
+                m_Protocol.sendGameInfo(response);
+                m_InputActions = m_Matches->getInputActionGame(m_IdGame);
                 hasGame = true;
                 break;
             }
-            case 0x03: {
-                //gamesAvailables.setGames(m_Games->getAllPlayers());
-                //gamesAvailables.setGamesAvailables(m_Games->getGames());
-                m_Protocol.sendMessage(std::ref(infoServer));
+            case LIST_GAMES: {
+                GameInfo gameInfo(LIST_GAMES, m_Matches->getGameProperties());
+                m_Protocol.sendGameInfo(std::ref(gameInfo));
             }
             default: {
                 break;
             }
         }
-        m_Protocol.recvClientRequest(clientRequest);
     }
 }
 
@@ -46,6 +79,34 @@ void Client::stop() {
 }
 
 void Client::kill() {
+    m_KeepRunning.store(false);
     m_Protocol.shutdown(SHUT_RDWR);
     m_Protocol.close();
 }
+
+void Client::sendMap() {
+    std::vector<Grd> map = ParseMapFromFile::parse(m_Matches->getMapName(m_IdGame));
+    m_Protocol.sendMap(std::ref(map));
+}
+
+void Client::destroyClient() {
+    if (m_KeepRunning.load()) {
+        kill();
+    }
+    if (hasGame) {
+        m_Matches->removePlayer(m_IdGame, m_IdPlayer);
+    }
+}
+
+int Client::getIdPlayer() const {
+    return m_IdPlayer;
+}
+
+int Client::getIdGame() const {
+    return m_IdGame;
+}
+
+bool Client::isRunning() {
+    return m_KeepRunning.load() && !m_Protocol.isClosed();
+}
+

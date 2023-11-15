@@ -30,7 +30,7 @@ void Server::reapDead() {
     for (auto it = m_Clients.begin(); it != m_Clients.end();) {
         if (it->isDead()) {
             it->join();
-            //m_Lobby.removeClient(it->getIdClient());
+            m_Games.removePlayer(it->getIdGame(), it->getIdPlayer());
             it = m_Clients.erase(it);
         } else {
             ++it;
@@ -49,7 +49,6 @@ void Server::killAll() {
         if (!it->isDead()) {
             it->kill();
         }
-        //m_Lobby.removeClient(it->getIdClient());
         it->join();
         it = m_Clients.erase(it);
     }
@@ -58,6 +57,6 @@ void Server::killAll() {
 void Server::unexpectedError() {
     stop();
     killAll();
-    throw LibError(1, "Error desconocido en el servidor"); //TODO: Change this exception for a more specific one
+    throw UnExpectedException("Unexpected error");
 }
 
