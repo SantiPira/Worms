@@ -9,7 +9,6 @@
 #include "engine/entities/grd/GrdLarge.h"
 #include "messages/server/GameUpdate.h"
 #include <unordered_map>
-
 #include <vector>
 
 class GameClient {
