@@ -1,10 +1,11 @@
 #include "engine/entities/grd/GrdLarge.h"
 
-GrdLarge::GrdLarge(SDL_Renderer *renderer, float posX, float posY) : m_Renderer(renderer) {
-    m_DestGrdLRect = SDL_Rect{static_cast<int>(WorldScale::worldToPixelX(posX, m_GrdLWidth)),
-                              static_cast<int>(WorldScale::worldToPixelY(posY, m_GrdLHeight)),
-                              static_cast<int>(m_GrdLWidth),
-                              static_cast<int>(m_GrdLHeight)};
+GrdLarge::GrdLarge(SDL_Renderer *renderer, float posX, float posY, float w, float h) : m_Renderer(renderer),
+    m_GrdLWidth(WorldScale::toPixel(w)), m_GrdLHeight(WorldScale::toPixel(h)) {
+
+    m_DestGrdLRect = {static_cast<int>(WorldScale::worldToPixelX(posX, m_GrdLWidth)),
+                      static_cast<int>(WorldScale::worldToPixelY(posY, m_GrdLHeight)),
+                      static_cast<int>(m_GrdLWidth), static_cast<int>(m_GrdLHeight)};
 }
 
 void GrdLarge::init() {

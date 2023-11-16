@@ -8,9 +8,12 @@
 
 struct Grd {
     Grd(int grdType, float posX, float posY);
+    Grd(int grdType, float posX, float posY, float w, float h);
     GrdEnum grdType;
     float x;
     float y;
+    float width;
+    float height;
 };
 
 class ParseMapFromFile {

@@ -180,6 +180,8 @@ GameUpdate WWorm::getUpdate() const {
     gameUpdate.y_pos = posY;
     gameUpdate.m_Weapon = m_Weapon;
     gameUpdate.m_ActionWeapon = actionWeapon;
+    gameUpdate.width = m_Width * 2;
+    gameUpdate.height = m_Height * 2;
     return gameUpdate;
 }
 

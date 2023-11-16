@@ -24,3 +24,11 @@ Grd::Grd(int grdType, float posX, float posY) {
     this->x = posX;
     this->y = posY;
 }
+
+Grd::Grd(int grdType, float posX, float posY, float w, float h) {
+    this->grdType = static_cast<GrdEnum>(grdType);
+    this->x = posX;
+    this->y = posY;
+    this->width = w;
+    this->height = h;
+}

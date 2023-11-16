@@ -1,19 +1,15 @@
 #include "engine/graphics/Animation.h"
 
-Animation::Animation(std::string path, SDL_Renderer *renderer, int frames, float duration, SDL_Rect srcRect,
-                     int initYSprite, int frameHeight, int frameWidth, BlendMode blendMode,
-                     int width, int height, float posX, float posY) :
+Animation::Animation(std::string path, SDL_Renderer *renderer, BlendMode blendMode, int frames,
+                     int distanceBetweenFrames, int frameWidth, int frameHeight, float duration, SDL_Rect srcRect,
+                     int initYSprite, SDL_Rect destRect) :
                      m_Texture(new Texture(std::move(path), renderer, blendMode)),
-                     m_Frames(frames), m_Duration(duration), m_CurrentTime(0.0f), m_SourceRect(srcRect),
-                     m_InitYSprite(initYSprite), m_FrameHeight(frameHeight), m_FrameWidth(frameWidth), m_Width(width),
-                     m_Height(height), m_PosX(posX), m_PosY(posY) {}
+                     m_Frames(frames), m_DistanceBetweenFrames(distanceBetweenFrames), m_FrameWidth(frameWidth),
+                     m_FrameHeight(frameHeight), m_Duration(duration), m_CurrentTime(0.0f), m_SourceRect(srcRect),
+                     m_InitYSprite(initYSprite), m_DestRect(destRect) {}
 
 void Animation::init() {
     m_Texture->init();
-    m_DestRect.x = m_PosX;
-    m_DestRect.y = m_PosY;
-    m_DestRect.w = m_Width;
-    m_DestRect.h = m_Height;
 }
 
 void Animation::update(double elapsedSeconds) {
@@ -25,7 +21,7 @@ void Animation::update(double elapsedSeconds) {
 
     auto frameIndex = int(m_CurrentTime / m_Duration * m_Frames);
 
-    m_SourceRect.y = (frameIndex * m_FrameHeight) + m_InitYSprite;
+    m_SourceRect.y = (frameIndex * m_DistanceBetweenFrames) + m_InitYSprite;
     m_Texture->setSourceRect(&m_SourceRect);
 }
 
@@ -33,20 +29,30 @@ void Animation::render(bool isFlip) const {
     m_Texture->render(&m_DestRect, isFlip);
 }
 
-void Animation::release() {
-    m_Texture->release();
-    delete m_Texture;
-}
-
-int Animation::getWormWidth() const {
-    return m_Width;
-}
-
-int Animation::getWormHeight() const {
-    return m_Height;
-}
-
 void Animation::setPositions(float x, float y) {
     m_DestRect.x = x;
     m_DestRect.y = y;
 }
+
+void Animation::setDestDimensions(int width, int height) {
+    m_DestRect.w = width;
+    m_DestRect.h = height;
+}
+
+void Animation::setDestRect(SDL_Rect destRect) {
+    //CORRECT POSITIONS
+    if (destRect.x < 0) destRect.x = 0;
+    if (destRect.y < 0) destRect.y = 0;
+    if (destRect.x + destRect.w > 512) destRect.x = 512 - destRect.w;
+    if (destRect.y + destRect.h > 512) destRect.y = 512 - destRect.h;
+    m_DestRect = destRect;
+}
+
+SDL_Rect &Animation::getDestRect() {
+    return m_DestRect;
+}
+
+Animation::~Animation() {
+    delete m_Texture;
+}
+

@@ -36,3 +36,7 @@ void Texture::release() {
     SDL_DestroyTexture(m_Texture);
     m_Texture = nullptr;
 }
+
+Texture::~Texture() {
+    release();
+}

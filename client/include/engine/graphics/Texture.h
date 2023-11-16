@@ -27,4 +27,6 @@ class Texture {
     void release();
     void setSourceRect(const SDL_Rect *rect);
     void render(const SDL_Rect *destRect, bool isFlip) const;
+
+    ~Texture();
 };

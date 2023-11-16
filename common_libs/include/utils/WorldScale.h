@@ -8,7 +8,10 @@ public:
  * Para que este cuando obtenga el SDL_Rect pueda usar estos 2 metodos para escribir en el Archivo de Mapas.*/
     static float pixelToWorldX(float initPixelValue, float width);
     static float pixelToWorldY(float initPixelValue, float height);
-private:
+    static float toPixel(float initWorldValue);
+public:
     static const float worldScaleMeasure;
     static const float heightWindow;
+    static const float worldToPixelWidthWorm;
+    static const float worldToPixelHeightWorm;
 };

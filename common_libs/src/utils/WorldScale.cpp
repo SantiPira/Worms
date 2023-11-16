@@ -1,7 +1,9 @@
 #include "../include/utils/WorldScale.h"
 
 const float WorldScale::worldScaleMeasure = 25.6f;
-const float WorldScale::heightWindow = 512;
+const float WorldScale::heightWindow = 512.0f;
+const float WorldScale::worldToPixelWidthWorm = 40.96f;
+const float WorldScale::worldToPixelHeightWorm = 25.6f;
 
 float WorldScale::pixelToWorldX(float initPixelValue, float width) {
     float scaledValue = initPixelValue / worldScaleMeasure;
@@ -21,5 +23,11 @@ float WorldScale::worldToPixelX(float initWorldValue, float width) {
 
 float WorldScale::worldToPixelY(float initWorldValue, float height) {
     float scaledValue = worldScaleMeasure * initWorldValue;
-    return heightWindow - (scaledValue - (height / 2));
+    float m = heightWindow - scaledValue;
+    float n = height / 2;
+    return m - n;
+}
+
+float WorldScale::toPixel(float initWorldValue) {
+    return worldScaleMeasure * initWorldValue;
 }

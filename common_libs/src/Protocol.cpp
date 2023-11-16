@@ -91,8 +91,10 @@ void Protocol::sendMap(std::reference_wrapper<std::vector<Grd>> map) {
     sendByte(map.get().size());
     for (auto& grd : map.get()) {
         sendByte(grd.grdType);
-        sendTwoBytes(grd.x);
-        sendTwoBytes(grd.y);
+        sendFloat(grd.x);
+        sendFloat(grd.y);
+        sendFloat(grd.width);
+        sendFloat(grd.height);
     }
 }
 
@@ -101,6 +103,8 @@ void Protocol::sendGameUpdate(GameUpdate &update) {
     sendByte(update.m_Move);
     sendFloat(update.x_pos);
     sendFloat(update.y_pos);
+    sendFloat(update.width);
+    sendFloat(update.height);
     sendByte(update.m_Weapon);
     sendByte(update.m_ActionWeapon);
 }
@@ -128,9 +132,11 @@ std::vector<Grd> Protocol::recvMap() {
     uint8_t size = recvByte();
     for (int i = 0; i < size; i++) {
         uint8_t grdType = recvByte();
-        uint16_t x = recvTwoBytes();
-        uint16_t y = recvTwoBytes();
-        map.emplace_back(grdType, x, y);
+        float x = recvFloat();
+        float y = recvFloat();
+        float w = recvFloat();
+        float h = recvFloat();
+        map.emplace_back(grdType, x, y, w, h);
     }
     return map;
 }
@@ -141,6 +147,8 @@ GameUpdate Protocol::recvGameUpdate() {
     update.m_Move = GameAction(recvByte());
     update.x_pos = recvFloat();
     update.y_pos = recvFloat();
+    update.width = recvFloat();
+    update.height = recvFloat();
     update.m_Weapon = Weapon(recvByte());
     update.m_ActionWeapon = GameAction(recvByte());
     return update;

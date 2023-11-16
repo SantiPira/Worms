@@ -12,11 +12,11 @@ class GrdLarge {
     SDL_Renderer* m_Renderer;
     Texture* m_GrdLTexture{};
     SDL_Rect m_DestGrdLRect{};
-    float m_GrdLWidth = 256.0f;
-    float m_GrdLHeight = 27.0f;
+    float m_GrdLWidth{};
+    float m_GrdLHeight{};
 
  public:
-    GrdLarge(SDL_Renderer* renderer, float posX, float posY);
+    GrdLarge(SDL_Renderer* renderer, float posX, float posY, float w, float h);
 
     void init();
     void release();

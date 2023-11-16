@@ -15,8 +15,6 @@ class GameClient {
 public:
     void Init(const std::vector<Grd>& vector, int idPlayer, std::vector<GameUpdate>& initInfo);
 
-    void HandleEvents();
-
     void Update(double elapsedSeconds, const GameUpdate& gameUpdate);
 
     void Render();
