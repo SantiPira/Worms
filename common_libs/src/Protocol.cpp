@@ -107,6 +107,7 @@ void Protocol::sendGameUpdate(GameUpdate &update) {
     sendFloat(update.height);
     sendByte(update.m_Weapon);
     sendByte(update.m_ActionWeapon);
+    sendByte(update.m_Health);
 }
 
 GameInfo Protocol::recvGameInfo() {
@@ -151,6 +152,7 @@ GameUpdate Protocol::recvGameUpdate() {
     update.height = recvFloat();
     update.m_Weapon = Weapon(recvByte());
     update.m_ActionWeapon = GameAction(recvByte());
+    update.m_Health = recvByte();
     return update;
 }
 

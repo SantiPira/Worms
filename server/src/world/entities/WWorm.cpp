@@ -9,6 +9,7 @@ WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY) {
     bd.type = b2_dynamicBody;
     bd.fixedRotation = true;
     bd.allowSleep = false;
+    bd.userData.pointer = reinterpret_cast<uintptr_t>(this);
     m_Body = m_World->CreateBody(&bd);
     b2PolygonShape shape;
     shape.SetAsBox(m_Width, m_Height);
@@ -17,6 +18,7 @@ WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY) {
     fd.shape = &shape;
     fd.density = 20.0f;
     m_Body->CreateFixture(&fd);
+
 
     this->m_Id = id;
     this->m_Position = b2Vec2(0, 0);
@@ -102,6 +104,7 @@ void WWorm::setPosition(b2Vec2 position) {
 void WWorm::setVelocity(b2Vec2 velocity) {
     this->m_Velocity = velocity;
     this->m_Body->SetLinearVelocity(m_Velocity);
+    this->m_IsMoving = true;
 }
 
 void WWorm::setAngle(float angle) {
@@ -150,20 +153,21 @@ void WWorm::setIsShooting(bool isShooting) {
 
 GameUpdate WWorm::getUpdate() const {
     GameUpdate gameUpdate;
-    GameAction move;
+    GameAction move = WORM_MOVE_RIGHT;
     GameAction actionWeapon;
     float posX, posY;
     b2Vec2 velocity = m_Body->GetLinearVelocity();
     if (velocity.x > 0) {
         move = WORM_MOVE_RIGHT;
-    } else if (velocity.x < 0) {
+    }
+    if (velocity.x < 0) {
         move = WORM_MOVE_LEFT;
-    } else if (velocity.y > 0) {
+    }
+    if (velocity.y > 0 || (velocity.y > 0 && m_IsMoving)) {
         move = WORM_JUMP;
-    } else if (velocity.y < 0) {
-        move = WORM_FALL;
-    } else {
-        move = WORM_MOVE_RIGHT;
+    }
+    if (velocity.y < 0) {
+        move = WORM_JUMP;
     }
 
     posX = getPosition().x;
@@ -182,13 +186,13 @@ GameUpdate WWorm::getUpdate() const {
     gameUpdate.m_ActionWeapon = actionWeapon;
     gameUpdate.width = m_Width * 2;
     gameUpdate.height = m_Height * 2;
+    gameUpdate.m_Health = m_Health;
     return gameUpdate;
 }
 
 void WWorm::jump(b2Vec2 vel) {
     m_Body->ApplyLinearImpulse(vel, m_Body->GetWorldCenter(), true);
     this->m_IsJumping = true;
-    this->m_IsMoving = false;
 }
 
 void WWorm::stopMove() {
@@ -203,6 +207,19 @@ void WWorm::stopMove() {
 void WWorm::attack() {
     std::cout << "Esta atacando en Direction: " << static_cast<int>(m_Dir) << std::endl;
     m_IsAttacking = true;
+    b2Vec2 attackerPosition = m_Body->GetPosition();
+    for (b2Body* worm = m_World->GetBodyList(); worm; worm = worm->GetNext()) {
+        WWorm* w = reinterpret_cast<WWorm*>(worm->GetUserData().pointer);
+        //TODO: Este condicional esta bien, es para verificar que el body no sea el mismo.
+        if (w != nullptr && w->getId() != m_Id) {
+            b2Vec2 position = w->getBody()->GetPosition();
+            float distance = b2Distance(attackerPosition, position);
+            if (distance <= 1.5f) {
+                w->setHealth(w->getHealth() - 10);
+                std::cout << "Le pego a un worm" << std::endl;
+            }
+        }
+    }
 }
 
 Weapon WWorm::getWeapon() const {

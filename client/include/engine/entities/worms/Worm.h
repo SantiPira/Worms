@@ -1,10 +1,12 @@
 #pragma once
 
 #include <SDL_render.h>
+#include <iostream>
 #include "SpritesEnum.h"
 #include "utils/WorldScale.h"
 #include "engine/graphics/Animation.h"
 #include "engine/entities/TexturePaths.h"
+#include "Skins.h"
 #include "messages/server/GameUpdate.h"
 #include "messages/user_actions/Weapon.h"
 #include <filesystem>
@@ -22,8 +24,10 @@ class Worm {
     GameAction m_Dir;
 
 private:
-    std::unique_ptr<Animation> getWaccuseAnimation();
-    std::unique_ptr<Animation> getWaccuseAxeAnimation();
+    std::unique_ptr<Animation> getWaccuseAnimation(const std::string& spritePath, BlendMode blendMode, int frames,
+                                                   int distanceBetweenFrames,
+                                                   int frameWidth, int frameHeight, float duration, SDL_Rect srcRect,
+                                                   int initYSprite, SDL_Rect destRect);
 
  public:
     Worm(SDL_Renderer *renderer, float posX, float posY, float d, float d1);

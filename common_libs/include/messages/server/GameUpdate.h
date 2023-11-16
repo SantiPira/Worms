@@ -14,26 +14,28 @@ struct GameUpdate {
     float height;
     Weapon m_Weapon;
     GameAction m_ActionWeapon;
+    uint8_t m_Health;
 
     GameUpdate() : player_id(0), m_Move(INVALID_ACTION), x_pos(0), y_pos(0), width(0.0f), height(0.0f),
-        m_Weapon(NO_WEAPON), m_ActionWeapon(NO_HAS_WEAPON) {}
-
-    GameUpdate(uint8_t player_id, GameAction action, float x_pos, float y_pos, float width, float height) :
-            player_id(player_id), m_Move(action), x_pos(x_pos), y_pos(y_pos), width(width), height(height),
-            m_Weapon(NO_WEAPON), m_ActionWeapon(NO_HAS_WEAPON) {}
+        m_Weapon(NO_WEAPON), m_ActionWeapon(NO_HAS_WEAPON), m_Health(0) {}
 
     GameUpdate(uint8_t player_id, GameAction action, float x_pos, float y_pos, float width, float height,
-               Weapon weapon) : player_id(player_id), m_Move(action), x_pos(x_pos), y_pos(y_pos), width(width), height(height),
-               m_Weapon(weapon), m_ActionWeapon(HAS_WEAPON_AND_NO_ATTACK) {}
+               uint8_t health) : player_id(player_id), m_Move(action), x_pos(x_pos), y_pos(y_pos), width(width), height(height),
+            m_Weapon(NO_WEAPON), m_ActionWeapon(NO_HAS_WEAPON), m_Health(health) {}
+
+    GameUpdate(uint8_t player_id, GameAction action, float x_pos, float y_pos, float width, float height,
+               Weapon weapon, uint8_t health) : player_id(player_id), m_Move(action), x_pos(x_pos), y_pos(y_pos), width(width), height(height),
+               m_Weapon(weapon), m_ActionWeapon(HAS_WEAPON_AND_NO_ATTACK), m_Health(health) {}
 
     GameUpdate(uint8_t player_id, GameAction action, float x_pos, float y_pos, float width, float height, Weapon weapon,
-               GameAction actionWeapon) : player_id(player_id), m_Move(action), x_pos(x_pos), y_pos(y_pos),
-               width(width), height(height), m_Weapon(weapon), m_ActionWeapon(actionWeapon) {}
+               GameAction actionWeapon, uint8_t health) : player_id(player_id), m_Move(action), x_pos(x_pos), y_pos(y_pos),
+               width(width), height(height), m_Weapon(weapon), m_ActionWeapon(actionWeapon), m_Health(health) {}
 
     bool operator==(const GameUpdate& gameUpdate) const {
         return player_id == gameUpdate.player_id && m_Move == gameUpdate.m_Move && x_pos == gameUpdate.x_pos &&
                y_pos == gameUpdate.y_pos && width == gameUpdate.width && height == gameUpdate.height
-               && m_Weapon == gameUpdate.m_Weapon && m_ActionWeapon == gameUpdate.m_ActionWeapon;
+               && m_Weapon == gameUpdate.m_Weapon && m_ActionWeapon == gameUpdate.m_ActionWeapon
+               && m_Health == gameUpdate.m_Health;
     }
 };
 
@@ -47,7 +49,8 @@ struct GameUpdateHash {
         std::size_t h6 = std::hash<float>{}(gameUpdate.height);
         std::size_t h7 = std::hash<int>{}(static_cast<int>(gameUpdate.m_Weapon));
         std::size_t h8 = std::hash<int>{}(static_cast<int>(gameUpdate.m_ActionWeapon));
+        std::size_t h9 = std::hash<uint8_t>{}(gameUpdate.m_Health);
 
-        return h1 ^ h2 ^ h3 ^ h4 ^ h5 ^ h6 ^ h7 ^ h8;
+        return h1 ^ h2 ^ h3 ^ h4 ^ h5 ^ h6 ^ h7 ^ h8 ^ h9;
     }
 };
