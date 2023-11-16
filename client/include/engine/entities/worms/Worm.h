@@ -8,6 +8,7 @@
 #include "engine/entities/TexturePaths.h"
 #include "Skins.h"
 #include "messages/server/GameUpdate.h"
+#include "messages/user_actions/ActionType.h"
 #include "messages/user_actions/Weapon.h"
 #include <filesystem>
 #include <unordered_map>
@@ -21,7 +22,7 @@ class Worm {
     SpritesEnum m_CurrentSprite;
     float m_Widht;
     float m_Height;
-    GameAction m_Dir;
+    Direction m_Dir;
 
 private:
     std::unique_ptr<Animation> getWaccuseAnimation(const std::string& spritePath, BlendMode blendMode, int frames,

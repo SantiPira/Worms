@@ -50,6 +50,7 @@ void Worm::init() {
 }
 
 void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
+    m_Dir = gameUpdate.m_Dir;
     if (gameUpdate.m_Move == GameAction::WORM_NONE) {
         m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
     } else {
@@ -70,7 +71,6 @@ void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
         m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
         if (gameUpdate.m_Move != WORM_NONE) {
             if (m_CurrentSprite == SpritesEnum::SPRITE_WALK || m_CurrentSprite == SpritesEnum::SPRITE_JUMPING) {
-                m_Dir = gameUpdate.m_Move;
                 float tempX = WorldScale::worldToPixelX(gameUpdate.x_pos, WorldScale::toPixel(gameUpdate.width));
                 float tempY = WorldScale::worldToPixelY(gameUpdate.y_pos, WorldScale::toPixel(gameUpdate.height));
                 m_SpritesMap.at(m_CurrentSprite)->setPositions(tempX, tempY);
@@ -85,7 +85,7 @@ void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
 
 void Worm::render() {
     bool isFlip = true;
-    if (m_Dir == WORM_MOVE_LEFT) {
+    if (m_Dir == Direction::LEFT) {
         isFlip = false;
     }
     m_SpritesMap.at(m_CurrentSprite)->render(isFlip);

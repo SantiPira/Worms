@@ -1,6 +1,6 @@
 #include "world/entities/WWorm.h"
 
-WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY) {
+WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRight) {
     m_World = world;
     m_Width = 0.50f; //Valores cargados por config?
     m_Height = 0.80f; //Valores cargados por config?
@@ -29,12 +29,13 @@ WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY) {
     this->m_Ammo = 50;     //Valores cargados por config?
     this->m_Score = 0;
     this->m_IsDead = false;
-    this->m_IsFacingRight = true;
     this->m_IsMoving = false;
     this->m_IsJumping = false;
     this->m_IsFalling = false;
     this->m_IsShooting = false;
     this->m_Weapon = Weapon::NO_WEAPON;
+    this->m_IsFacingRight = isFacingRight;
+    this->m_Dir = isFacingRight ? Direction::RIGHT : Direction::LEFT;
 }
 
 [[maybe_unused]] uint8_t WWorm::getId() const {
@@ -187,6 +188,7 @@ GameUpdate WWorm::getUpdate() const {
     gameUpdate.width = m_Width * 2;
     gameUpdate.height = m_Height * 2;
     gameUpdate.m_Health = m_Health;
+    gameUpdate.m_Dir = m_Dir;
     return gameUpdate;
 }
 

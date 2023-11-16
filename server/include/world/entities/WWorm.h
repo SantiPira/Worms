@@ -31,7 +31,7 @@ private:
     bool m_IsAttacking;
 
 public:
-    WWorm(b2World* world, uint8_t id, float posX, float posY);
+    WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRight);
 
     [[maybe_unused]] [[nodiscard]] uint8_t getId() const;
     [[nodiscard]] b2Body* getBody() const;
