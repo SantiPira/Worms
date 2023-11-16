@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GameActionEnum.h"
-#include "../user_actions/Weapon.h"
+#include "../user_actions/WeaponID.h"
 #include "messages/user_actions/ActionType.h"
 #include <unordered_set>
 
@@ -13,7 +13,7 @@ struct GameUpdate {
     float y_pos;
     float width;
     float height;
-    Weapon m_Weapon;
+    WeaponID m_Weapon;
     GameAction m_ActionWeapon;
     uint8_t m_Health;
     Direction  m_Dir;
@@ -26,10 +26,10 @@ struct GameUpdate {
             m_Weapon(NO_WEAPON), m_ActionWeapon(NO_HAS_WEAPON), m_Health(health), m_Dir(dir) {}
 
     GameUpdate(uint8_t player_id, GameAction action, float x_pos, float y_pos, float width, float height,
-               Weapon weapon, uint8_t health, Direction dir) : player_id(player_id), m_Move(action), x_pos(x_pos), y_pos(y_pos), width(width), height(height),
+               WeaponID weapon, uint8_t health, Direction dir) : player_id(player_id), m_Move(action), x_pos(x_pos), y_pos(y_pos), width(width), height(height),
                m_Weapon(weapon), m_ActionWeapon(HAS_WEAPON_AND_NO_ATTACK), m_Health(health), m_Dir(dir) {}
 
-    GameUpdate(uint8_t player_id, GameAction action, float x_pos, float y_pos, float width, float height, Weapon weapon,
+    GameUpdate(uint8_t player_id, GameAction action, float x_pos, float y_pos, float width, float height, WeaponID weapon,
                GameAction actionWeapon, uint8_t health, Direction dir) : player_id(player_id), m_Move(action), x_pos(x_pos), y_pos(y_pos),
                width(width), height(height), m_Weapon(weapon), m_ActionWeapon(actionWeapon), m_Health(health), m_Dir(dir) {}
 

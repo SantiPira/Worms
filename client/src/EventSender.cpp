@@ -32,7 +32,7 @@ void EventSender::run() {
                 m_Protocol.sendUserAction(userAction);
             } else if (key == SDLK_h) {
                 std::cout << "Sacando Hacha" << std::endl;
-                UserAction userAction(ActionType::SET_WEAPON, m_IdPlayer, Weapon::AXE); // TIPO DE ARMA
+                UserAction userAction(ActionType::SET_WEAPON, m_IdPlayer, WeaponID::AXE); // TIPO DE ARMA
                 m_Protocol.sendUserAction(userAction);
             } else if (key == SDLK_j) {
                 std::cout << "Guardando Hacha" << std::endl;

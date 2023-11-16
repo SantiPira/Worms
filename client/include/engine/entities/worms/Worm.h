@@ -9,7 +9,7 @@
 #include "Skins.h"
 #include "messages/server/GameUpdate.h"
 #include "messages/user_actions/ActionType.h"
-#include "messages/user_actions/Weapon.h"
+#include "messages/user_actions/WeaponID.h"
 #include <filesystem>
 #include <unordered_map>
 

@@ -33,7 +33,7 @@ WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRi
     this->m_IsJumping = false;
     this->m_IsFalling = false;
     this->m_IsShooting = false;
-    this->m_Weapon = Weapon::NO_WEAPON;
+    this->m_Weapon = WeaponID::NO_WEAPON;
     this->m_IsFacingRight = isFacingRight;
     this->m_Dir = isFacingRight ? Direction::RIGHT : Direction::LEFT;
 }
@@ -155,7 +155,7 @@ void WWorm::setIsShooting(bool isShooting) {
 GameUpdate WWorm::getUpdate() const {
     GameUpdate gameUpdate;
     GameAction move = WORM_MOVE_RIGHT;
-    GameAction actionWeapon;
+    //GameAction actionWeapon;
     float posX, posY;
     b2Vec2 velocity = m_Body->GetLinearVelocity();
     if (velocity.x > 0) {
@@ -174,17 +174,17 @@ GameUpdate WWorm::getUpdate() const {
     posX = getPosition().x;
     posY = getPosition().y;
 
-    if (m_Weapon != Weapon::NO_WEAPON) {
-        actionWeapon = m_IsAttacking ? GameAction::HAS_WEAPON_AND_ATTACK : GameAction::HAS_WEAPON_AND_NO_ATTACK;
-    } else {
-        actionWeapon = GameAction::NO_HAS_WEAPON;
-    }
+//    if (m_Weapon != Weapon::NO_WEAPON) {
+//        actionWeapon = m_IsAttacking ? GameAction::HAS_WEAPON_AND_ATTACK : GameAction::HAS_WEAPON_AND_NO_ATTACK;
+//    } else {
+//        actionWeapon = GameAction::NO_HAS_WEAPON;
+//    }
     gameUpdate.player_id = m_Id;
     gameUpdate.m_Move = move;
     gameUpdate.x_pos = posX;
     gameUpdate.y_pos = posY;
     gameUpdate.m_Weapon = m_Weapon;
-    gameUpdate.m_ActionWeapon = actionWeapon;
+    gameUpdate.m_ActionWeapon = m_IsAttacking ? GameAction::HAS_WEAPON_AND_ATTACK : GameAction::HAS_WEAPON_AND_NO_ATTACK;
     gameUpdate.width = m_Width * 2;
     gameUpdate.height = m_Height * 2;
     gameUpdate.m_Health = m_Health;
@@ -207,28 +207,25 @@ void WWorm::stopMove() {
 }
 
 void WWorm::attack() {
-    std::cout << "Esta atacando en Direction: " << static_cast<int>(m_Dir) << std::endl;
+    WeaponFactory weaponFactory;
     m_IsAttacking = true;
     b2Vec2 attackerPosition = m_Body->GetPosition();
     for (b2Body* worm = m_World->GetBodyList(); worm; worm = worm->GetNext()) {
-        WWorm* w = reinterpret_cast<WWorm*>(worm->GetUserData().pointer);
-        //TODO: Este condicional esta bien, es para verificar que el body no sea el mismo.
+        auto* w = reinterpret_cast<WWorm*>(worm->GetUserData().pointer);
         if (w != nullptr && w->getId() != m_Id) {
             b2Vec2 position = w->getBody()->GetPosition();
-            float distance = b2Distance(attackerPosition, position);
-            if (distance <= 1.5f) {
-                w->setHealth(w->getHealth() - 10);
-                std::cout << "Le pego a un worm" << std::endl;
-            }
+            std::unique_ptr<Weapon> weaponPtr(weaponFactory.createWeapon(m_Weapon, attackerPosition, position));
+            std::cout << "Worm " << this->m_Id << " is attacking worm " << w->getId() << std::endl;
+            weaponPtr->attack(w);
         }
     }
 }
 
-Weapon WWorm::getWeapon() const {
+WeaponID WWorm::getWeapon() const {
     return this->m_Weapon;
 }
 
-void WWorm::setWeapon(Weapon weapon) {
+void WWorm::setWeapon(WeaponID weapon) {
     this->m_Weapon = weapon;
 }
 
@@ -246,4 +243,21 @@ bool WWorm::getIsAttacking() const {
 
 void WWorm::setIsAttacking(bool isAttacking) {
     this->m_IsAttacking = isAttacking;
+}
+
+void WWorm::receiveDamage(int damage) {
+    this->m_IsGettingDamage = true;
+    this->m_Health -= damage;
+    if (this->m_Health <= 0) {
+        this->m_IsDead = true;
+    }
+    std::cout << "Worm " << this->m_Id << " received " << damage << " damage. Health: " << this->m_Health << std::endl;
+}
+
+bool WWorm::getIsGettingDamage() const {
+    return this->m_IsGettingDamage;
+}
+
+void WWorm::setIsGettingDamage(bool isGettingDamage) {
+    this->m_IsGettingDamage = isGettingDamage;
 }

@@ -13,7 +13,7 @@ IWormInstruction* InstructionFactory::createInstruction(UserAction userAction) {
         case ATTACK:
             return new WormAttack(userAction.getIdPlayer());
         case SET_WEAPON:
-            return new WormSetWeapon(userAction.getIdPlayer(), Weapon(userAction.getParam1()));
+            return new WormSetWeapon(userAction.getIdPlayer(), WeaponID(userAction.getParam1()));
         case UNSET_WEAPON:
             return new WormUnSetWeapon(userAction.getIdPlayer());
         default:

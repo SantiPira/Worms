@@ -2,9 +2,10 @@
 
 #include "../../../../Box2D/include/box2d/box2d.h"
 #include "messages/server/GameUpdate.h"
+#include "world/entities/weapons/WeaponFactory.h"
 #include "messages/user_actions/ActionType.h"
-#include "messages/user_actions/Weapon.h"
 #include <iostream>
+#include <memory>
 
 class WWorm {
 private:
@@ -26,7 +27,8 @@ private:
     bool m_IsJumping;
     bool m_IsFalling;
     bool m_IsShooting;
-    Weapon m_Weapon;
+    bool m_IsGettingDamage;
+    WeaponID m_Weapon;
     Direction m_Dir;
     bool m_IsAttacking;
 
@@ -48,9 +50,10 @@ public:
     [[nodiscard]] bool getIsJumping() const;
     [[nodiscard]] bool getIsFalling() const;
     [[nodiscard]] bool getIsShooting() const;
-    [[nodiscard]] Weapon getWeapon() const;
+    [[nodiscard]] WeaponID getWeapon() const;
     [[nodiscard]] Direction getDirection() const;
     [[nodiscard]] bool getIsAttacking() const;
+    [[nodiscard]] bool getIsGettingDamage() const;
 
     void setPosition(b2Vec2 position);
     void setVelocity(b2Vec2 velocity);
@@ -65,9 +68,10 @@ public:
     void setIsJumping(bool isJumping);
     void setIsFalling(bool isFalling);
     void setIsShooting(bool isShooting);
-    void setWeapon(Weapon weapon);
+    void setWeapon(WeaponID weapon);
     void setDirection(Direction dir);
     void setIsAttacking(bool isAttacking);
+    void setIsGettingDamage(bool isGettingDamage);
 
     [[nodiscard]] GameUpdate getUpdate() const;
 
@@ -76,4 +80,7 @@ public:
     void stopMove();
 
     void attack();
+
+    void receiveDamage(int damage);
+
 };

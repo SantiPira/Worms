@@ -57,15 +57,15 @@ void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
         if (gameUpdate.m_Health < 100) {
             std::cout << "Worm " << gameUpdate.player_id << " has " << gameUpdate.m_Health << " health" << std::endl;
         }
-        Weapon weapon(gameUpdate.m_Weapon);
-        if (weapon == Weapon::NO_WEAPON) {
+        WeaponID weapon(gameUpdate.m_Weapon);
+        if (weapon == WeaponID::NO_WEAPON) {
             if (gameUpdate.m_Move == GameAction::WORM_JUMP) {
                 m_CurrentSprite = SpritesEnum::SPRITE_JUMPING;
             } else {
                 m_CurrentSprite = SpritesEnum::SPRITE_WALK;
             }
         }
-        if (weapon == Weapon::AXE) {
+        if (weapon == WeaponID::AXE) {
             m_CurrentSprite = SpritesEnum::SPRITE_AXE_WALK;
         }
         m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);

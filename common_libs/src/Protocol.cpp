@@ -151,7 +151,7 @@ GameUpdate Protocol::recvGameUpdate() {
     update.y_pos = recvFloat();
     update.width = recvFloat();
     update.height = recvFloat();
-    update.m_Weapon = Weapon(recvByte());
+    update.m_Weapon = WeaponID(recvByte());
     update.m_ActionWeapon = GameAction(recvByte());
     update.m_Health = recvByte();
     update.m_Dir = Direction(recvByte());
