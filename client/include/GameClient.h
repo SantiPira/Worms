@@ -12,6 +12,7 @@
 #include "messages/server/GameUpdate.h"
 #include <unordered_map>
 #include <vector>
+#include "../include/camara.h"
 
 struct WormDie {
     int idPlayer;
@@ -33,6 +34,7 @@ class GameClient {
 
     SDL2pp::Mixer *mixer;
     SDL2pp::Chunk *chunk;
+    Camara* camara;
 
  private:
     void InitSDL();
@@ -40,6 +42,8 @@ class GameClient {
     void CreateWindowAndRender();
 
     void InitMixerAndChunk();
+
+    void InitCamera();
 
  public:
     void Init(const std::vector<Grd>& vector, int idPlayer, std::vector<GameUpdate>& initInfo);

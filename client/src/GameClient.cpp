@@ -5,6 +5,7 @@ void GameClient::Init(const std::vector<Grd>& vector, int idPlayer, std::vector<
     InitSDL();
     CreateWindowAndRender();
     InitMixerAndChunk();
+    InitCamera();
     SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
     m_IdPlayer = idPlayer;
     for (auto& grd : vector) {
@@ -26,7 +27,12 @@ void GameClient::Init(const std::vector<Grd>& vector, int idPlayer, std::vector<
     sky->setSourceRect(&m_SourceRect);      
 
     //Corro el audio con el chunk
-    mixer->PlayChannel(-1, *chunk, -1);
+    //mixer->PlayChannel(-1, *chunk, -1);
+}
+
+void GameClient::InitCamera(){
+    camara = new Camara(_renderer);
+    camara->setWorm(m_Worms.at(m_IdPlayer));
 }
 
 void GameClient::InitSDL() {
@@ -67,6 +73,7 @@ void GameClient::Render(const WormDie& wormDie) {
     const SDL_Rect m_DestRect = {0, 0, 512, 512};
     sky->render(&m_DestRect, false);
 
+
     for (auto& grdL : m_GrdLarge) {
         grdL->render();
     }
@@ -81,7 +88,11 @@ void GameClient::Render(const WormDie& wormDie) {
         delete m_Worms.at(wormDie.idPlayer);
         m_Worms.erase(wormDie.idPlayer);
     }
+
+    camara->updateCamera();
+
     SDL_RenderPresent(_renderer);
+
 }
 
 void GameClient::Release() {
