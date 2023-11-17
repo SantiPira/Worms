@@ -1,4 +1,5 @@
 #include "../include/GameClient.h"
+#include "engine/entities/worms/Skins.h"
 
 void GameClient::Init(const std::vector<Grd>& vector, int idPlayer, std::vector<GameUpdate>& initInfo) {
     InitSDL();
@@ -16,6 +17,15 @@ void GameClient::Init(const std::vector<Grd>& vector, int idPlayer, std::vector<
         worm->init();
         m_Worms.insert(std::make_pair(gameUpdate.player_id, worm));
     }
+
+    //Inicializo el cielo
+    const SDL_Rect m_SourceRect = {0, 0, 4096, 2034};
+    sky = new Texture(std::filesystem::current_path().concat(Cloud_Sky.c_str()).c_str(), _renderer, {false, 128, 128, 192});
+    sky->init();
+    sky->setSourceRect(&m_SourceRect);    
+
+
+
 }
 
 void GameClient::InitSDL() {
@@ -44,6 +54,11 @@ void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
 
 void GameClient::Render(const WormDie& wormDie) {
     SDL_RenderClear(_renderer);
+
+    //renderizar fondo.
+
+    const SDL_Rect m_DestRect = {0, 0, 512, 512};
+    sky->render(&m_DestRect, false);
 
     for (auto& grdL : m_GrdLarge) {
         grdL->render();

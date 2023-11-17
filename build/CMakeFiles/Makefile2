@@ -143,7 +143,7 @@ SDL2pp/clean: SDL2pp/CMakeFiles/SDL2pp.dir/clean
 CMakeFiles/libcommon.dir/all: SDL2pp/CMakeFiles/SDL2pp.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libcommon.dir/build.make CMakeFiles/libcommon.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libcommon.dir/build.make CMakeFiles/libcommon.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=70,71,72,73,74,75,76,77 "Built target libcommon"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=68,69,70,71,72,73,74,75 "Built target libcommon"
 .PHONY : CMakeFiles/libcommon.dir/all
 
 # Build rule for subdir invocation for target.
@@ -170,12 +170,12 @@ CMakeFiles/libserver.dir/all: CMakeFiles/libcommon.dir/all
 CMakeFiles/libserver.dir/all: SDL2pp/CMakeFiles/SDL2pp.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libserver.dir/build.make CMakeFiles/libserver.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libserver.dir/build.make CMakeFiles/libserver.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=81,82,83,84,85,86,87,88,89,90,91,92,93,94,95 "Built target libserver"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95 "Built target libserver"
 .PHONY : CMakeFiles/libserver.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/libserver.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles 42
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles 43
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/libserver.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles 0
 .PHONY : CMakeFiles/libserver.dir/rule
@@ -197,12 +197,12 @@ CMakeFiles/libeditor.dir/all: CMakeFiles/libcommon.dir/all
 CMakeFiles/libeditor.dir/all: SDL2pp/CMakeFiles/SDL2pp.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libeditor.dir/build.make CMakeFiles/libeditor.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libeditor.dir/build.make CMakeFiles/libeditor.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=78,79,80 "Built target libeditor"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=76,77,78,79 "Built target libeditor"
 .PHONY : CMakeFiles/libeditor.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/libeditor.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles 30
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles 31
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/libeditor.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles 0
 .PHONY : CMakeFiles/libeditor.dir/rule
@@ -224,12 +224,12 @@ CMakeFiles/libclient.dir/all: CMakeFiles/libcommon.dir/all
 CMakeFiles/libclient.dir/all: SDL2pp/CMakeFiles/SDL2pp.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=57,58,59,60,61,62,63,64,65,66,67,68,69 "Built target libclient"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=57,58,59,60,61,62,63,64,65,66,67 "Built target libclient"
 .PHONY : CMakeFiles/libclient.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/libclient.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles 40
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles 38
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/libclient.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles 0
 .PHONY : CMakeFiles/libclient.dir/rule
@@ -257,7 +257,7 @@ CMakeFiles/worms-client.dir/all: SDL2pp/CMakeFiles/SDL2pp.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/worms-client.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles 41
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles 39
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/worms-client.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles 0
 .PHONY : CMakeFiles/worms-client.dir/rule
@@ -285,7 +285,7 @@ CMakeFiles/worms-server.dir/all: SDL2pp/CMakeFiles/SDL2pp.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/worms-server.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles 44
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles 45
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/worms-server.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles 0
 .PHONY : CMakeFiles/worms-server.dir/rule
@@ -313,7 +313,7 @@ CMakeFiles/worms-editor.dir/all: SDL2pp/CMakeFiles/SDL2pp.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/worms-editor.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles 32
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles 33
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/worms-editor.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles 0
 .PHONY : CMakeFiles/worms-editor.dir/rule

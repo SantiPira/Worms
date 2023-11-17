@@ -15,6 +15,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/libcommon.dir/common_libs/src/resolvererror.cpp.o.d"
   "CMakeFiles/libcommon.dir/common_libs/src/socket.cpp.o"
   "CMakeFiles/libcommon.dir/common_libs/src/socket.cpp.o.d"
+  "CMakeFiles/libcommon.dir/common_libs/src/utils/WorldScale.cpp.o"
+  "CMakeFiles/libcommon.dir/common_libs/src/utils/WorldScale.cpp.o.d"
   "liblibcommon.a"
   "liblibcommon.pdb"
 )

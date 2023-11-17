@@ -7,6 +7,7 @@
 #include "engine/entities/worms/Worm.h"
 #include "ParseMapFromFile.h"
 #include "engine/entities/grd/GrdLarge.h"
+#include "engine/graphics/Texture.h"
 #include "messages/server/GameUpdate.h"
 #include <unordered_map>
 #include <vector>
@@ -27,6 +28,7 @@ class GameClient {
     std::unordered_map<int, Worm*> m_Worms;
     std::vector<Grd> m_Grd;
     std::vector<GrdLarge*> m_GrdLarge;
+    Texture* sky;
 
  private:
     void InitSDL();

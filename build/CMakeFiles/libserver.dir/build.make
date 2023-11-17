@@ -195,10 +195,38 @@ CMakeFiles/libserver.dir/server/src/world/entities/WWorm.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/libserver.dir/server/src/world/entities/WWorm.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/entities/WWorm.cpp -o CMakeFiles/libserver.dir/server/src/world/entities/WWorm.cpp.s
 
+CMakeFiles/libserver.dir/server/src/world/entities/weapons/Axe.cpp.o: CMakeFiles/libserver.dir/flags.make
+CMakeFiles/libserver.dir/server/src/world/entities/weapons/Axe.cpp.o: ../server/src/world/entities/weapons/Axe.cpp
+CMakeFiles/libserver.dir/server/src/world/entities/weapons/Axe.cpp.o: CMakeFiles/libserver.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/libserver.dir/server/src/world/entities/weapons/Axe.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libserver.dir/server/src/world/entities/weapons/Axe.cpp.o -MF CMakeFiles/libserver.dir/server/src/world/entities/weapons/Axe.cpp.o.d -o CMakeFiles/libserver.dir/server/src/world/entities/weapons/Axe.cpp.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/entities/weapons/Axe.cpp
+
+CMakeFiles/libserver.dir/server/src/world/entities/weapons/Axe.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libserver.dir/server/src/world/entities/weapons/Axe.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/entities/weapons/Axe.cpp > CMakeFiles/libserver.dir/server/src/world/entities/weapons/Axe.cpp.i
+
+CMakeFiles/libserver.dir/server/src/world/entities/weapons/Axe.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/libserver.dir/server/src/world/entities/weapons/Axe.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/entities/weapons/Axe.cpp -o CMakeFiles/libserver.dir/server/src/world/entities/weapons/Axe.cpp.s
+
+CMakeFiles/libserver.dir/server/src/world/entities/weapons/WeaponFactory.cpp.o: CMakeFiles/libserver.dir/flags.make
+CMakeFiles/libserver.dir/server/src/world/entities/weapons/WeaponFactory.cpp.o: ../server/src/world/entities/weapons/WeaponFactory.cpp
+CMakeFiles/libserver.dir/server/src/world/entities/weapons/WeaponFactory.cpp.o: CMakeFiles/libserver.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/libserver.dir/server/src/world/entities/weapons/WeaponFactory.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libserver.dir/server/src/world/entities/weapons/WeaponFactory.cpp.o -MF CMakeFiles/libserver.dir/server/src/world/entities/weapons/WeaponFactory.cpp.o.d -o CMakeFiles/libserver.dir/server/src/world/entities/weapons/WeaponFactory.cpp.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/entities/weapons/WeaponFactory.cpp
+
+CMakeFiles/libserver.dir/server/src/world/entities/weapons/WeaponFactory.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libserver.dir/server/src/world/entities/weapons/WeaponFactory.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/entities/weapons/WeaponFactory.cpp > CMakeFiles/libserver.dir/server/src/world/entities/weapons/WeaponFactory.cpp.i
+
+CMakeFiles/libserver.dir/server/src/world/entities/weapons/WeaponFactory.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/libserver.dir/server/src/world/entities/weapons/WeaponFactory.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/entities/weapons/WeaponFactory.cpp -o CMakeFiles/libserver.dir/server/src/world/entities/weapons/WeaponFactory.cpp.s
+
 CMakeFiles/libserver.dir/server/src/world/instructions/InstructionFactory.cpp.o: CMakeFiles/libserver.dir/flags.make
 CMakeFiles/libserver.dir/server/src/world/instructions/InstructionFactory.cpp.o: ../server/src/world/instructions/InstructionFactory.cpp
 CMakeFiles/libserver.dir/server/src/world/instructions/InstructionFactory.cpp.o: CMakeFiles/libserver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/libserver.dir/server/src/world/instructions/InstructionFactory.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/libserver.dir/server/src/world/instructions/InstructionFactory.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libserver.dir/server/src/world/instructions/InstructionFactory.cpp.o -MF CMakeFiles/libserver.dir/server/src/world/instructions/InstructionFactory.cpp.o.d -o CMakeFiles/libserver.dir/server/src/world/instructions/InstructionFactory.cpp.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/instructions/InstructionFactory.cpp
 
 CMakeFiles/libserver.dir/server/src/world/instructions/InstructionFactory.cpp.i: cmake_force
@@ -212,7 +240,7 @@ CMakeFiles/libserver.dir/server/src/world/instructions/InstructionFactory.cpp.s:
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormAttack.cpp.o: CMakeFiles/libserver.dir/flags.make
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormAttack.cpp.o: ../server/src/world/instructions/impl/WormAttack.cpp
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormAttack.cpp.o: CMakeFiles/libserver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormAttack.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormAttack.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormAttack.cpp.o -MF CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormAttack.cpp.o.d -o CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormAttack.cpp.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/instructions/impl/WormAttack.cpp
 
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormAttack.cpp.i: cmake_force
@@ -226,7 +254,7 @@ CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormAttack.cpp.s: cm
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormJump.cpp.o: CMakeFiles/libserver.dir/flags.make
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormJump.cpp.o: ../server/src/world/instructions/impl/WormJump.cpp
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormJump.cpp.o: CMakeFiles/libserver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormJump.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormJump.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormJump.cpp.o -MF CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormJump.cpp.o.d -o CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormJump.cpp.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/instructions/impl/WormJump.cpp
 
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormJump.cpp.i: cmake_force
@@ -240,7 +268,7 @@ CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormJump.cpp.s: cmak
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormMove.cpp.o: CMakeFiles/libserver.dir/flags.make
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormMove.cpp.o: ../server/src/world/instructions/impl/WormMove.cpp
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormMove.cpp.o: CMakeFiles/libserver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormMove.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormMove.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormMove.cpp.o -MF CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormMove.cpp.o.d -o CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormMove.cpp.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/instructions/impl/WormMove.cpp
 
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormMove.cpp.i: cmake_force
@@ -254,7 +282,7 @@ CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormMove.cpp.s: cmak
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormNone.cpp.o: CMakeFiles/libserver.dir/flags.make
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormNone.cpp.o: ../server/src/world/instructions/impl/WormNone.cpp
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormNone.cpp.o: CMakeFiles/libserver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormNone.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormNone.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormNone.cpp.o -MF CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormNone.cpp.o.d -o CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormNone.cpp.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/instructions/impl/WormNone.cpp
 
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormNone.cpp.i: cmake_force
@@ -268,7 +296,7 @@ CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormNone.cpp.s: cmak
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormSetWeapon.cpp.o: CMakeFiles/libserver.dir/flags.make
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormSetWeapon.cpp.o: ../server/src/world/instructions/impl/WormSetWeapon.cpp
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormSetWeapon.cpp.o: CMakeFiles/libserver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormSetWeapon.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormSetWeapon.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormSetWeapon.cpp.o -MF CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormSetWeapon.cpp.o.d -o CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormSetWeapon.cpp.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/instructions/impl/WormSetWeapon.cpp
 
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormSetWeapon.cpp.i: cmake_force
@@ -282,7 +310,7 @@ CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormSetWeapon.cpp.s:
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormStopMove.cpp.o: CMakeFiles/libserver.dir/flags.make
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormStopMove.cpp.o: ../server/src/world/instructions/impl/WormStopMove.cpp
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormStopMove.cpp.o: CMakeFiles/libserver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormStopMove.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormStopMove.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormStopMove.cpp.o -MF CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormStopMove.cpp.o.d -o CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormStopMove.cpp.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/instructions/impl/WormStopMove.cpp
 
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormStopMove.cpp.i: cmake_force
@@ -296,7 +324,7 @@ CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormStopMove.cpp.s: 
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormUnSetWeapon.cpp.o: CMakeFiles/libserver.dir/flags.make
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormUnSetWeapon.cpp.o: ../server/src/world/instructions/impl/WormUnSetWeapon.cpp
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormUnSetWeapon.cpp.o: CMakeFiles/libserver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormUnSetWeapon.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormUnSetWeapon.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormUnSetWeapon.cpp.o -MF CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormUnSetWeapon.cpp.o.d -o CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormUnSetWeapon.cpp.o -c /home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/instructions/impl/WormUnSetWeapon.cpp
 
 CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormUnSetWeapon.cpp.i: cmake_force
@@ -318,6 +346,8 @@ libserver_OBJECTS = \
 "CMakeFiles/libserver.dir/server/src/TurnMonitor.cpp.o" \
 "CMakeFiles/libserver.dir/server/src/world/GameWorld.cpp.o" \
 "CMakeFiles/libserver.dir/server/src/world/entities/WWorm.cpp.o" \
+"CMakeFiles/libserver.dir/server/src/world/entities/weapons/Axe.cpp.o" \
+"CMakeFiles/libserver.dir/server/src/world/entities/weapons/WeaponFactory.cpp.o" \
 "CMakeFiles/libserver.dir/server/src/world/instructions/InstructionFactory.cpp.o" \
 "CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormAttack.cpp.o" \
 "CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormJump.cpp.o" \
@@ -339,6 +369,8 @@ liblibserver.a: CMakeFiles/libserver.dir/server/src/TurnHandler.cpp.o
 liblibserver.a: CMakeFiles/libserver.dir/server/src/TurnMonitor.cpp.o
 liblibserver.a: CMakeFiles/libserver.dir/server/src/world/GameWorld.cpp.o
 liblibserver.a: CMakeFiles/libserver.dir/server/src/world/entities/WWorm.cpp.o
+liblibserver.a: CMakeFiles/libserver.dir/server/src/world/entities/weapons/Axe.cpp.o
+liblibserver.a: CMakeFiles/libserver.dir/server/src/world/entities/weapons/WeaponFactory.cpp.o
 liblibserver.a: CMakeFiles/libserver.dir/server/src/world/instructions/InstructionFactory.cpp.o
 liblibserver.a: CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormAttack.cpp.o
 liblibserver.a: CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormJump.cpp.o
@@ -349,7 +381,7 @@ liblibserver.a: CMakeFiles/libserver.dir/server/src/world/instructions/impl/Worm
 liblibserver.a: CMakeFiles/libserver.dir/server/src/world/instructions/impl/WormUnSetWeapon.cpp.o
 liblibserver.a: CMakeFiles/libserver.dir/build.make
 liblibserver.a: CMakeFiles/libserver.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX static library liblibserver.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Linking CXX static library liblibserver.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/libserver.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/libserver.dir/link.txt --verbose=$(VERBOSE)
 

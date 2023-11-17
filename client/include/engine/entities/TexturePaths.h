@@ -17,3 +17,5 @@ inline extern const std::string Map_Grds_Small_Diagonal_2 = "/resources/Weapons/
 inline extern const std::string Worm_Sprite_Waccuse = "/resources/Worms/waccuse.png";
 inline extern const std::string Worm_Sprite_Axe_Walk = "/resources/Worms/waxebk2.png";
 inline extern const std::string Worm_Sprite_Axe_Attack = "/resources/Worms/waxeswn.png";
+
+inline extern const std::string Cloud_Sky = "/resources/Fondos/cielo.png";

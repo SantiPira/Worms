@@ -32,3 +32,4 @@ struct BlobSkin {
     float deltaPosX = 25.6f;
     float deltaPosY = 40.96f;
 };
+

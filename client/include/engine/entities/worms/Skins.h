@@ -80,3 +80,19 @@ struct WaccuseGettingDamage {
     float deltaPosX = 25.6f;
     float deltaPosY = 40.96f;
 };
+
+/*
+struct SkySking {
+    const std::string spritePath = "../../resources/Fondos/cielo.png"
+    BlendMode blendMode = {false, 128, 128, 192};
+    int frames = 1;
+    int distanceBetweenFrames = 0;
+    int frameWidth = 4096;
+    int frameHeight = 2304;
+    float duration = 1.0f;
+    SDL_Rect srcRect = {0, 0, 512, 512};
+    int initYSprite = 17;
+    float deltaPosX = 25.6f;
+    float deltaPosY = 40.96f;
+};
+*/

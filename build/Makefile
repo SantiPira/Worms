@@ -350,30 +350,6 @@ client/src/GameClient.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/GameClient.cpp.s
 .PHONY : client/src/GameClient.cpp.s
 
-client/src/PruebaClient.o: client/src/PruebaClient.cpp.o
-.PHONY : client/src/PruebaClient.o
-
-# target to build an object file
-client/src/PruebaClient.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/PruebaClient.cpp.o
-.PHONY : client/src/PruebaClient.cpp.o
-
-client/src/PruebaClient.i: client/src/PruebaClient.cpp.i
-.PHONY : client/src/PruebaClient.i
-
-# target to preprocess a source file
-client/src/PruebaClient.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/PruebaClient.cpp.i
-.PHONY : client/src/PruebaClient.cpp.i
-
-client/src/PruebaClient.s: client/src/PruebaClient.cpp.s
-.PHONY : client/src/PruebaClient.s
-
-# target to generate assembly for a file
-client/src/PruebaClient.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/PruebaClient.cpp.s
-.PHONY : client/src/PruebaClient.cpp.s
-
 client/src/client_juego.o: client/src/client_juego.cpp.o
 .PHONY : client/src/client_juego.o
 
@@ -541,30 +517,6 @@ client/src/engine/graphics/Texture.s: client/src/engine/graphics/Texture.cpp.s
 client/src/engine/graphics/Texture.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/engine/graphics/Texture.cpp.s
 .PHONY : client/src/engine/graphics/Texture.cpp.s
-
-client/src/engine/utils/WorldScale.o: client/src/engine/utils/WorldScale.cpp.o
-.PHONY : client/src/engine/utils/WorldScale.o
-
-# target to build an object file
-client/src/engine/utils/WorldScale.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/engine/utils/WorldScale.cpp.o
-.PHONY : client/src/engine/utils/WorldScale.cpp.o
-
-client/src/engine/utils/WorldScale.i: client/src/engine/utils/WorldScale.cpp.i
-.PHONY : client/src/engine/utils/WorldScale.i
-
-# target to preprocess a source file
-client/src/engine/utils/WorldScale.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/engine/utils/WorldScale.cpp.i
-.PHONY : client/src/engine/utils/WorldScale.cpp.i
-
-client/src/engine/utils/WorldScale.s: client/src/engine/utils/WorldScale.cpp.s
-.PHONY : client/src/engine/utils/WorldScale.s
-
-# target to generate assembly for a file
-client/src/engine/utils/WorldScale.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libclient.dir/build.make CMakeFiles/libclient.dir/client/src/engine/utils/WorldScale.cpp.s
-.PHONY : client/src/engine/utils/WorldScale.cpp.s
 
 client/src/joinGameWindow.o: client/src/joinGameWindow.cpp.o
 .PHONY : client/src/joinGameWindow.o
@@ -853,6 +805,30 @@ common_libs/src/socket.s: common_libs/src/socket.cpp.s
 common_libs/src/socket.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libcommon.dir/build.make CMakeFiles/libcommon.dir/common_libs/src/socket.cpp.s
 .PHONY : common_libs/src/socket.cpp.s
+
+common_libs/src/utils/WorldScale.o: common_libs/src/utils/WorldScale.cpp.o
+.PHONY : common_libs/src/utils/WorldScale.o
+
+# target to build an object file
+common_libs/src/utils/WorldScale.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libcommon.dir/build.make CMakeFiles/libcommon.dir/common_libs/src/utils/WorldScale.cpp.o
+.PHONY : common_libs/src/utils/WorldScale.cpp.o
+
+common_libs/src/utils/WorldScale.i: common_libs/src/utils/WorldScale.cpp.i
+.PHONY : common_libs/src/utils/WorldScale.i
+
+# target to preprocess a source file
+common_libs/src/utils/WorldScale.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libcommon.dir/build.make CMakeFiles/libcommon.dir/common_libs/src/utils/WorldScale.cpp.i
+.PHONY : common_libs/src/utils/WorldScale.cpp.i
+
+common_libs/src/utils/WorldScale.s: common_libs/src/utils/WorldScale.cpp.s
+.PHONY : common_libs/src/utils/WorldScale.s
+
+# target to generate assembly for a file
+common_libs/src/utils/WorldScale.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libcommon.dir/build.make CMakeFiles/libcommon.dir/common_libs/src/utils/WorldScale.cpp.s
+.PHONY : common_libs/src/utils/WorldScale.cpp.s
 
 editor/src/FactoryTexture.o: editor/src/FactoryTexture.cpp.o
 .PHONY : editor/src/FactoryTexture.o
@@ -1190,6 +1166,54 @@ server/src/world/entities/WWorm.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libserver.dir/build.make CMakeFiles/libserver.dir/server/src/world/entities/WWorm.cpp.s
 .PHONY : server/src/world/entities/WWorm.cpp.s
 
+server/src/world/entities/weapons/Axe.o: server/src/world/entities/weapons/Axe.cpp.o
+.PHONY : server/src/world/entities/weapons/Axe.o
+
+# target to build an object file
+server/src/world/entities/weapons/Axe.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libserver.dir/build.make CMakeFiles/libserver.dir/server/src/world/entities/weapons/Axe.cpp.o
+.PHONY : server/src/world/entities/weapons/Axe.cpp.o
+
+server/src/world/entities/weapons/Axe.i: server/src/world/entities/weapons/Axe.cpp.i
+.PHONY : server/src/world/entities/weapons/Axe.i
+
+# target to preprocess a source file
+server/src/world/entities/weapons/Axe.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libserver.dir/build.make CMakeFiles/libserver.dir/server/src/world/entities/weapons/Axe.cpp.i
+.PHONY : server/src/world/entities/weapons/Axe.cpp.i
+
+server/src/world/entities/weapons/Axe.s: server/src/world/entities/weapons/Axe.cpp.s
+.PHONY : server/src/world/entities/weapons/Axe.s
+
+# target to generate assembly for a file
+server/src/world/entities/weapons/Axe.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libserver.dir/build.make CMakeFiles/libserver.dir/server/src/world/entities/weapons/Axe.cpp.s
+.PHONY : server/src/world/entities/weapons/Axe.cpp.s
+
+server/src/world/entities/weapons/WeaponFactory.o: server/src/world/entities/weapons/WeaponFactory.cpp.o
+.PHONY : server/src/world/entities/weapons/WeaponFactory.o
+
+# target to build an object file
+server/src/world/entities/weapons/WeaponFactory.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libserver.dir/build.make CMakeFiles/libserver.dir/server/src/world/entities/weapons/WeaponFactory.cpp.o
+.PHONY : server/src/world/entities/weapons/WeaponFactory.cpp.o
+
+server/src/world/entities/weapons/WeaponFactory.i: server/src/world/entities/weapons/WeaponFactory.cpp.i
+.PHONY : server/src/world/entities/weapons/WeaponFactory.i
+
+# target to preprocess a source file
+server/src/world/entities/weapons/WeaponFactory.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libserver.dir/build.make CMakeFiles/libserver.dir/server/src/world/entities/weapons/WeaponFactory.cpp.i
+.PHONY : server/src/world/entities/weapons/WeaponFactory.cpp.i
+
+server/src/world/entities/weapons/WeaponFactory.s: server/src/world/entities/weapons/WeaponFactory.cpp.s
+.PHONY : server/src/world/entities/weapons/WeaponFactory.s
+
+# target to generate assembly for a file
+server/src/world/entities/weapons/WeaponFactory.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libserver.dir/build.make CMakeFiles/libserver.dir/server/src/world/entities/weapons/WeaponFactory.cpp.s
+.PHONY : server/src/world/entities/weapons/WeaponFactory.cpp.s
+
 server/src/world/instructions/InstructionFactory.o: server/src/world/instructions/InstructionFactory.cpp.o
 .PHONY : server/src/world/instructions/InstructionFactory.o
 
@@ -1412,9 +1436,6 @@ help:
 	@echo "... client/src/GameClient.o"
 	@echo "... client/src/GameClient.i"
 	@echo "... client/src/GameClient.s"
-	@echo "... client/src/PruebaClient.o"
-	@echo "... client/src/PruebaClient.i"
-	@echo "... client/src/PruebaClient.s"
 	@echo "... client/src/client_juego.o"
 	@echo "... client/src/client_juego.i"
 	@echo "... client/src/client_juego.s"
@@ -1436,9 +1457,6 @@ help:
 	@echo "... client/src/engine/graphics/Texture.o"
 	@echo "... client/src/engine/graphics/Texture.i"
 	@echo "... client/src/engine/graphics/Texture.s"
-	@echo "... client/src/engine/utils/WorldScale.o"
-	@echo "... client/src/engine/utils/WorldScale.i"
-	@echo "... client/src/engine/utils/WorldScale.s"
 	@echo "... client/src/joinGameWindow.o"
 	@echo "... client/src/joinGameWindow.i"
 	@echo "... client/src/joinGameWindow.s"
@@ -1475,6 +1493,9 @@ help:
 	@echo "... common_libs/src/socket.o"
 	@echo "... common_libs/src/socket.i"
 	@echo "... common_libs/src/socket.s"
+	@echo "... common_libs/src/utils/WorldScale.o"
+	@echo "... common_libs/src/utils/WorldScale.i"
+	@echo "... common_libs/src/utils/WorldScale.s"
 	@echo "... editor/src/FactoryTexture.o"
 	@echo "... editor/src/FactoryTexture.i"
 	@echo "... editor/src/FactoryTexture.s"
@@ -1517,6 +1538,12 @@ help:
 	@echo "... server/src/world/entities/WWorm.o"
 	@echo "... server/src/world/entities/WWorm.i"
 	@echo "... server/src/world/entities/WWorm.s"
+	@echo "... server/src/world/entities/weapons/Axe.o"
+	@echo "... server/src/world/entities/weapons/Axe.i"
+	@echo "... server/src/world/entities/weapons/Axe.s"
+	@echo "... server/src/world/entities/weapons/WeaponFactory.o"
+	@echo "... server/src/world/entities/weapons/WeaponFactory.i"
+	@echo "... server/src/world/entities/weapons/WeaponFactory.s"
 	@echo "... server/src/world/instructions/InstructionFactory.o"
 	@echo "... server/src/world/instructions/InstructionFactory.i"
 	@echo "... server/src/world/instructions/InstructionFactory.s"
