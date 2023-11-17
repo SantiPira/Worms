@@ -16,8 +16,6 @@ void GameClient::Init(const std::vector<Grd>& vector, int idPlayer, std::vector<
         worm->init();
         m_Worms.insert(std::make_pair(gameUpdate.player_id, worm));
     }
-
-    _isRunning = true;
 }
 
 void GameClient::InitSDL() {
@@ -41,14 +39,10 @@ void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
     if (gameUpdate.m_Move == GameAction::INVALID_ACTION) {
         return;
     }
-
     m_Worms.at(gameUpdate.player_id)->update(elapsedSeconds, gameUpdate);
-    /*if gameUpdate.Action == DIE {
-     *  remove worm from m_Worms and renders a tombstone
-     * }*/
 }
 
-void GameClient::Render() {
+void GameClient::Render(const WormDie& wormDie) {
     SDL_RenderClear(_renderer);
 
     for (auto& grdL : m_GrdLarge) {
@@ -57,6 +51,13 @@ void GameClient::Render() {
 
     for (auto& worm : m_Worms) {
         worm.second->render();
+    }
+
+    if (wormDie.isDie) {
+        m_Worms.at(wormDie.idPlayer)->renderDie();
+        //remove from worms
+        delete m_Worms.at(wormDie.idPlayer);
+        m_Worms.erase(wormDie.idPlayer);
     }
     SDL_RenderPresent(_renderer);
 }
@@ -67,7 +68,4 @@ void GameClient::Release() {
     SDL_Quit();
 }
 
-bool GameClient::IsRunning() {
-    return _isRunning;
-}
 
