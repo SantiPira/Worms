@@ -4,6 +4,7 @@
 void GameClient::Init(const std::vector<Grd>& vector, int idPlayer, std::vector<GameUpdate>& initInfo) {
     InitSDL();
     CreateWindowAndRender();
+    InitMixerAndChunk();
     SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
     m_IdPlayer = idPlayer;
     for (auto& grd : vector) {
@@ -22,14 +23,14 @@ void GameClient::Init(const std::vector<Grd>& vector, int idPlayer, std::vector<
     const SDL_Rect m_SourceRect = {0, 0, 4096, 2034};
     sky = new Texture(std::filesystem::current_path().concat(Cloud_Sky.c_str()).c_str(), _renderer, {false, 128, 128, 192});
     sky->init();
-    sky->setSourceRect(&m_SourceRect);    
+    sky->setSourceRect(&m_SourceRect);      
 
-
-
+    //Corro el audio con el chunk
+    mixer->PlayChannel(-1, *chunk, -1);
 }
 
 void GameClient::InitSDL() {
-    auto isInitialized = SDL_Init(SDL_INIT_VIDEO) >= 0;
+    auto isInitialized = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) >= 0;
 
     if (!isInitialized) {
         std::cout << "Exception" << std::endl;
@@ -43,6 +44,12 @@ void GameClient::CreateWindowAndRender() {
         //throw SDL_Exception(SDL_GetError());
         std::cout << "Exception" << std::endl;
     }
+}
+
+void GameClient::InitMixerAndChunk() {
+    mixer = new SDL2pp::Mixer(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096);
+    
+    chunk = new SDL2pp::Chunk(std::filesystem::current_path().concat(Game_Music.c_str()).c_str());
 }
 
 void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {

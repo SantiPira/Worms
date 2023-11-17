@@ -2,6 +2,7 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL2pp/SDL2pp.hh>
 #include <iostream>
 #include <filesystem>
 #include "engine/entities/worms/Worm.h"
@@ -30,10 +31,15 @@ class GameClient {
     std::vector<GrdLarge*> m_GrdLarge;
     Texture* sky;
 
+    SDL2pp::Mixer *mixer;
+    SDL2pp::Chunk *chunk;
+
  private:
     void InitSDL();
 
     void CreateWindowAndRender();
+
+    void InitMixerAndChunk();
 
  public:
     void Init(const std::vector<Grd>& vector, int idPlayer, std::vector<GameUpdate>& initInfo);

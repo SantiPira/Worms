@@ -22,8 +22,6 @@ class Juego{
 
     explicit Juego(const std::string& ip, const std::string& puerto);
 
-    void iniciar_juego();
-
     void joinGame(int idGame, int cantPlayers);
 
     GameInfo getGamesInfo();
