@@ -27,7 +27,7 @@ private:
     bool m_IsJumping;
     bool m_IsFalling;
     bool m_IsShooting;
-    bool m_IsGettingDamage;
+    GameAction m_SelfCondtion;
     WeaponID m_Weapon;
     Direction m_Dir;
     bool m_IsAttacking;
@@ -53,7 +53,7 @@ public:
     [[nodiscard]] WeaponID getWeapon() const;
     [[nodiscard]] Direction getDirection() const;
     [[nodiscard]] bool getIsAttacking() const;
-    [[nodiscard]] bool getIsGettingDamage() const;
+    [[nodiscard]] GameAction getSelfCondition() const;
 
     void setPosition(b2Vec2 position);
     void setVelocity(b2Vec2 velocity);
@@ -71,7 +71,7 @@ public:
     void setWeapon(WeaponID weapon);
     void setDirection(Direction dir);
     void setIsAttacking(bool isAttacking);
-    void setIsGettingDamage(bool isGettingDamage);
+    void setSelfCondition(GameAction selfCondition);
 
     [[nodiscard]] GameUpdate getUpdate() const;
 

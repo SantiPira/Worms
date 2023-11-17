@@ -19,7 +19,6 @@ WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRi
     fd.density = 20.0f;
     m_Body->CreateFixture(&fd);
 
-
     this->m_Id = id;
     this->m_Position = b2Vec2(0, 0);
     this->m_Velocity = b2Vec2(0, 0);
@@ -174,11 +173,6 @@ GameUpdate WWorm::getUpdate() const {
     posX = getPosition().x;
     posY = getPosition().y;
 
-//    if (m_Weapon != Weapon::NO_WEAPON) {
-//        actionWeapon = m_IsAttacking ? GameAction::HAS_WEAPON_AND_ATTACK : GameAction::HAS_WEAPON_AND_NO_ATTACK;
-//    } else {
-//        actionWeapon = GameAction::NO_HAS_WEAPON;
-//    }
     gameUpdate.player_id = m_Id;
     gameUpdate.m_Move = move;
     gameUpdate.x_pos = posX;
@@ -189,6 +183,7 @@ GameUpdate WWorm::getUpdate() const {
     gameUpdate.height = m_Height * 2;
     gameUpdate.m_Health = m_Health;
     gameUpdate.m_Dir = m_Dir;
+    gameUpdate.m_SelfCondition = m_SelfCondtion;
     return gameUpdate;
 }
 
@@ -215,7 +210,6 @@ void WWorm::attack() {
         if (w != nullptr && w->getId() != m_Id) {
             b2Vec2 position = w->getBody()->GetPosition();
             std::unique_ptr<Weapon> weaponPtr(weaponFactory.createWeapon(m_Weapon, attackerPosition, position));
-            std::cout << "Worm " << this->m_Id << " is attacking worm " << w->getId() << std::endl;
             weaponPtr->attack(w);
         }
     }
@@ -246,18 +240,18 @@ void WWorm::setIsAttacking(bool isAttacking) {
 }
 
 void WWorm::receiveDamage(int damage) {
-    this->m_IsGettingDamage = true;
+    this->m_SelfCondtion = GameAction::WORM_ATTACKED;
     this->m_Health -= damage;
     if (this->m_Health <= 0) {
         this->m_IsDead = true;
+        this->m_SelfCondtion = GameAction::WORM_DIE;
     }
-    std::cout << "Worm " << this->m_Id << " received " << damage << " damage. Health: " << this->m_Health << std::endl;
 }
 
-bool WWorm::getIsGettingDamage() const {
-    return this->m_IsGettingDamage;
+GameAction WWorm::getSelfCondition() const {
+    return this->m_SelfCondtion;
 }
 
-void WWorm::setIsGettingDamage(bool isGettingDamage) {
-    this->m_IsGettingDamage = isGettingDamage;
+void WWorm::setSelfCondition(GameAction selfCondition) {
+    this->m_SelfCondtion = selfCondition;
 }

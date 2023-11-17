@@ -109,6 +109,7 @@ void Protocol::sendGameUpdate(GameUpdate &update) {
     sendByte(update.m_ActionWeapon);
     sendByte(update.m_Health);
     sendByte(update.m_Dir);
+    sendByte(update.m_SelfCondition);
 }
 
 GameInfo Protocol::recvGameInfo() {
@@ -155,6 +156,7 @@ GameUpdate Protocol::recvGameUpdate() {
     update.m_ActionWeapon = GameAction(recvByte());
     update.m_Health = recvByte();
     update.m_Dir = Direction(recvByte());
+    update.m_SelfCondition = GameAction(recvByte());
     return update;
 }
 

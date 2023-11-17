@@ -2,11 +2,11 @@
 
 Animation::Animation(std::string path, SDL_Renderer *renderer, BlendMode blendMode, int frames,
                      int distanceBetweenFrames, int frameWidth, int frameHeight, float duration, SDL_Rect srcRect,
-                     int initYSprite, SDL_Rect destRect) :
+                     int initYSprite, SDL_Rect destRect, float deltaPosX, float deltaPosY) :
                      m_Texture(new Texture(std::move(path), renderer, blendMode)),
                      m_Frames(frames), m_DistanceBetweenFrames(distanceBetweenFrames), m_FrameWidth(frameWidth),
                      m_FrameHeight(frameHeight), m_Duration(duration), m_CurrentTime(0.0f), m_SourceRect(srcRect),
-                     m_InitYSprite(initYSprite), m_DestRect(destRect) {}
+                     m_InitYSprite(initYSprite), m_DestRect(destRect), m_DeltaPosX(deltaPosX), m_DeltaPosY(deltaPosY) {}
 
 void Animation::init() {
     m_Texture->init();
@@ -54,5 +54,21 @@ SDL_Rect &Animation::getDestRect() {
 
 Animation::~Animation() {
     delete m_Texture;
+}
+
+float Animation::getDeltaPosX() const {
+    return m_DeltaPosX;
+}
+
+float Animation::getDeltaPosY() const {
+    return m_DeltaPosY;
+}
+
+int Animation::getFrameWidth() const {
+    return m_FrameWidth;
+}
+
+int Animation::getFrameHeight() const {
+    return m_FrameHeight;
 }
 

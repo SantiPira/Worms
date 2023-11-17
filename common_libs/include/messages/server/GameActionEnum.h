@@ -12,5 +12,8 @@ enum GameAction : uint8_t {
     HAS_WEAPON_AND_ATTACK = 0X07,
     HAS_WEAPON_AND_NO_ATTACK = 0X08,
     NO_HAS_WEAPON = 0X09,
+    WORM_ATTACKED = 0x0A,
+    WORM_DIE = 0x0B,
+    WORM_GRAVE = 0x0C,
     INVALID_ACTION = 0xFF
 };

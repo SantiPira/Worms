@@ -78,3 +78,9 @@ GameUpdate GameWorld::execute(IWormInstruction *instruction, int playerId) {
 void GameWorld::step() {
     m_world.Step(timeStep,velocityIterations,positionIterations);
 }
+
+void GameWorld::removeWorm(int idPlayer) {
+    m_world.DestroyBody(worms.at(idPlayer)->getBody());
+    worms.erase(idPlayer);
+    wormsPositions.erase(idPlayer);
+}

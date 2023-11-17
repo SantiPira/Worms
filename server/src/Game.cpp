@@ -37,21 +37,24 @@ void Game::run() {
                     auto wormPositions = world.getWormsPosition();
                     pushUpdatesToClients(std::ref(wormPositions));
                 } else {
-                    updates.insert(world.execute(instruction, userAction.getIdPlayer()));
+                    auto gameUpdate = world.execute(instruction, userAction.getIdPlayer());
+                    updates.insert(gameUpdate);
+                    if (gameUpdate.m_SelfCondition == GameAction::WORM_DIE) {
+                        auto grave = gameUpdate;
+                        grave.m_SelfCondition = GameAction::WORM_GRAVE;
+                        updates.insert(grave);
+                        world.removeWorm(gameUpdate.player_id);
+                    }
                 }
-                delete instruction; //TODO: unique_pointer
+                delete instruction;
             }
             pushSetToClients(std::ref(updates));
-            //auto updates = world.UpdateWorld(std::ref(userActions));
 
-
-            //pushUpdatesToClients();
             //TODO: Revisar esto, pero creo que deberia estar bien, el loop del turnHandler no esta mal, ya que administra de quien es el turno.
             std::chrono::steady_clock::time_point start_time = std::chrono::steady_clock::now();
-            // Espero hasta que pase 1/60 segundos
             std::chrono::steady_clock::time_point end_time = start_time;
             std::chrono::duration<double> elapsed_seconds = end_time - start_time;
-            double target_frame_time = 1.0 / 60.0;  // 1/60 segundos
+            double target_frame_time = 1.0 / 60.0;
             while (elapsed_seconds.count() < target_frame_time) {
                 end_time = std::chrono::steady_clock::now();
                 elapsed_seconds = end_time - start_time;

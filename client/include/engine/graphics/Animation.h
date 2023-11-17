@@ -17,11 +17,13 @@ class Animation {
     SDL_Rect m_SourceRect;
     int m_InitYSprite;
     SDL_Rect m_DestRect;
+    float m_DeltaPosX;
+    float m_DeltaPosY;
 
 public:
     Animation(std::string path, SDL_Renderer *renderer, BlendMode blendMode,
               int frames, int distanceBetweenFrames, int frameWidth, int frameHeight, float duration,
-              SDL_Rect srcRect, int initYSprite, SDL_Rect destRect);
+              SDL_Rect srcRect, int initYSprite, SDL_Rect destRect, float deltaPosX, float deltaPosY);
 
     void init();
     void update(double elapsedSeconds);
@@ -32,6 +34,10 @@ public:
     void setDestDimensions(int width, int height);
     void setDestRect(SDL_Rect destRect);
     SDL_Rect& getDestRect();
+    float getDeltaPosX() const;
+    float getDeltaPosY() const;
+    int getFrameWidth() const;
+    int getFrameHeight() const;
 
     //destructor
     ~Animation();

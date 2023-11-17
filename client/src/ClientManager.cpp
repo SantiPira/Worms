@@ -4,7 +4,7 @@
 #include "GameClient.h"
 
 ClientManager::ClientManager(Protocol *protocol, int idPlayer, int cantPlayers) : m_Protocol(protocol),
-    m_IdPlayer(idPlayer), m_CantPlayers(cantPlayers), settingsQueue(100), gameUpdates(100) {}
+    m_IdPlayer(idPlayer), m_CantPlayers(cantPlayers), settingsQueue(100), gameUpdates(100), m_KeepRunning(true) {}
 
 void ClientManager::init() {
     try {
@@ -36,7 +36,7 @@ void ClientManager::init() {
 
 void ClientManager::gameLoop() {
     auto lastTime = std::chrono::system_clock::now();
-    while (m_Game.IsRunning()) {
+    while (m_KeepRunning) {
         GameUpdate svUpdate{};
 
         auto current = std::chrono::system_clock::now();
@@ -44,8 +44,17 @@ void ClientManager::gameLoop() {
 
         gameUpdates.try_pop(svUpdate);
 
-        m_Game.Update(elapsedSeconds.count(), svUpdate);
-        m_Game.Render();
+        m_Game.Update(elapsedSeconds.count(), svUpdate); // me setea en memoria el sprite que voy a renderizar
+        WormDie wormDie{};
+        /*if (svUpdate.m_SelfCondition == GameAction::WORM_DIE) {
+            wormDie.idPlayer = svUpdate.player_id;
+            wormDie.isDie = true;
+            if (svUpdate.player_id == m_IdPlayer) {
+                m_KeepRunning = false;
+            }
+        }*/
+        m_Game.Render(wormDie);
+
 
         lastTime = current;
     }
