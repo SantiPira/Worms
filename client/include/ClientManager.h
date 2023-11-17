@@ -12,6 +12,7 @@ class ClientManager {
     GameClient m_Game{};
     ProtectedQueue<std::string> settingsQueue;
     ProtectedQueue<GameUpdate> gameUpdates;
+    bool m_KeepRunning;
 
  public:
     ClientManager(Protocol* protocol, int idPlayer, int cantPlayers);

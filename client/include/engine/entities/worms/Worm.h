@@ -1,38 +1,46 @@
 #pragma once
 
 #include <SDL_render.h>
+#include <iostream>
 #include "SpritesEnum.h"
+#include "utils/WorldScale.h"
 #include "engine/graphics/Animation.h"
 #include "engine/entities/TexturePaths.h"
-#include "engine/utils/WorldScale.h"
+#include "Skins.h"
+#include "engine/entities/effects/EffectSkins.h"
 #include "messages/server/GameUpdate.h"
-#include "messages/user_actions/Weapon.h"
+#include "messages/user_actions/ActionType.h"
+#include "messages/user_actions/WeaponID.h"
 #include <filesystem>
 #include <unordered_map>
+#include <vector>
 
 class Worm {
-private:
+ private:
     SDL_Renderer* m_Renderer;
-    Animation* m_WormAnimation{};
-    std::unordered_map<SpritesEnum, Animation*> m_SpritesMap;
-    SDL_Rect m_DestWormRect{};
-    int m_WormWidth{};
-    int m_WormHeight{};
+    std::unordered_map<SpritesEnum, std::unique_ptr<Animation>> m_SpritesMap;
     float m_WormXPosition;
     float m_WormYPosition;
-    BlendMode m_BlendMode{};
     SpritesEnum m_CurrentSprite;
+    float m_Widht;
+    float m_Height;
+    Direction m_Dir;
+    std::vector<SDL_Rect > m_DieRects;
 
-public:
-    Worm(SDL_Renderer* renderer, float posX, float posY);
+private:
+    std::unique_ptr<Animation> getWaccuseAnimation(const std::string& spritePath, BlendMode blendMode, int frames,
+                                                   int distanceBetweenFrames,
+                                                   int frameWidth, int frameHeight, float duration, SDL_Rect srcRect,
+                                                   int initYSprite, SDL_Rect destRect, float deltaPosX, float deltaPosY);
+
+ public:
+    Worm(SDL_Renderer *renderer, float posX, float posY, float d, float d1);
 
     void init();
-    void release();
     void update(double elapsedSeconds, const GameUpdate& gameUpdate);
     void render();
 
-    GameAction m_Dir;
-    Animation* m_CurrentAnimation{};
+    ~Worm() = default;
 
-    void moveNormalWorm(const GameUpdate& gameUpdate);
+    void renderDie();
 };

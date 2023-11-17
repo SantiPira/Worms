@@ -7,10 +7,13 @@
 #include "resources/GrdEnum.h"
 
 struct Grd {
-    Grd(int grdType, int posX, int posY);
+    Grd(int grdType, float posX, float posY);
+    Grd(int grdType, float posX, float posY, float w, float h);
     GrdEnum grdType;
-    int x;
-    int y;
+    float x;
+    float y;
+    float width;
+    float height;
 };
 
 class ParseMapFromFile {

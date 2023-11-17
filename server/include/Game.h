@@ -40,6 +40,8 @@ public:
     std::unordered_map<int, ProtectedQueue<GameUpdate>*>* getClientUpdates();
     void setupWorld();
     void updateWorld();
+    bool isStillPlayable();
+    void kill();
 
 private:
     void pushSetToClients(std::reference_wrapper<std::unordered_set<GameUpdate, GameUpdateHash>> updates);

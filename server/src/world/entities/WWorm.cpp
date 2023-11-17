@@ -1,14 +1,15 @@
 #include "world/entities/WWorm.h"
 
-WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY) {
+WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRight) {
     m_World = world;
     m_Width = 0.50f; //Valores cargados por config?
-    m_Height = 1.0f; //Valores cargados por config?
+    m_Height = 0.80f; //Valores cargados por config?
     b2BodyDef bd;
     bd.position.Set(posX, posY + m_Width);
     bd.type = b2_dynamicBody;
     bd.fixedRotation = true;
     bd.allowSleep = false;
+    bd.userData.pointer = reinterpret_cast<uintptr_t>(this);
     m_Body = m_World->CreateBody(&bd);
     b2PolygonShape shape;
     shape.SetAsBox(m_Width, m_Height);
@@ -27,12 +28,13 @@ WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY) {
     this->m_Ammo = 50;     //Valores cargados por config?
     this->m_Score = 0;
     this->m_IsDead = false;
-    this->m_IsFacingRight = true;
     this->m_IsMoving = false;
     this->m_IsJumping = false;
     this->m_IsFalling = false;
     this->m_IsShooting = false;
-    this->m_Weapon = Weapon::NO_WEAPON;
+    this->m_Weapon = WeaponID::NO_WEAPON;
+    this->m_IsFacingRight = isFacingRight;
+    this->m_Dir = isFacingRight ? Direction::RIGHT : Direction::LEFT;
 }
 
 [[maybe_unused]] uint8_t WWorm::getId() const {
@@ -102,6 +104,7 @@ void WWorm::setPosition(b2Vec2 position) {
 void WWorm::setVelocity(b2Vec2 velocity) {
     this->m_Velocity = velocity;
     this->m_Body->SetLinearVelocity(m_Velocity);
+    this->m_IsMoving = true;
 }
 
 void WWorm::setAngle(float angle) {
@@ -150,43 +153,43 @@ void WWorm::setIsShooting(bool isShooting) {
 
 GameUpdate WWorm::getUpdate() const {
     GameUpdate gameUpdate;
-    GameAction move;
-    GameAction actionWeapon;
+    GameAction move = WORM_MOVE_RIGHT;
+    //GameAction actionWeapon;
     float posX, posY;
     b2Vec2 velocity = m_Body->GetLinearVelocity();
     if (velocity.x > 0) {
         move = WORM_MOVE_RIGHT;
-    } else if (velocity.x < 0) {
-        move = WORM_MOVE_LEFT;
-    } else if (velocity.y > 0) {
-        move = WORM_JUMP;
-    } else if (velocity.y < 0) {
-        move = WORM_FALL;
-    } else {
-        move = WORM_MOVE_RIGHT;
     }
-//    gameUpdate.player_id = m_Id;
+    if (velocity.x < 0) {
+        move = WORM_MOVE_LEFT;
+    }
+    if (velocity.y > 0 || (velocity.y > 0 && m_IsMoving)) {
+        move = WORM_JUMP;
+    }
+    if (velocity.y < 0) {
+        move = WORM_JUMP;
+    }
+
     posX = getPosition().x;
     posY = getPosition().y;
 
-    if (m_Weapon != Weapon::NO_WEAPON) {
-        actionWeapon = m_IsAttacking ? GameAction::HAS_WEAPON_AND_ATTACK : GameAction::HAS_WEAPON_AND_NO_ATTACK;
-    } else {
-        actionWeapon = GameAction::NO_HAS_WEAPON;
-    }
     gameUpdate.player_id = m_Id;
     gameUpdate.m_Move = move;
     gameUpdate.x_pos = posX;
     gameUpdate.y_pos = posY;
     gameUpdate.m_Weapon = m_Weapon;
-    gameUpdate.m_ActionWeapon = actionWeapon;
+    gameUpdate.m_ActionWeapon = m_IsAttacking ? GameAction::HAS_WEAPON_AND_ATTACK : GameAction::HAS_WEAPON_AND_NO_ATTACK;
+    gameUpdate.width = m_Width * 2;
+    gameUpdate.height = m_Height * 2;
+    gameUpdate.m_Health = m_Health;
+    gameUpdate.m_Dir = m_Dir;
+    gameUpdate.m_SelfCondition = m_SelfCondtion;
     return gameUpdate;
 }
 
 void WWorm::jump(b2Vec2 vel) {
     m_Body->ApplyLinearImpulse(vel, m_Body->GetWorldCenter(), true);
     this->m_IsJumping = true;
-    this->m_IsMoving = false;
 }
 
 void WWorm::stopMove() {
@@ -199,15 +202,24 @@ void WWorm::stopMove() {
 }
 
 void WWorm::attack() {
-    std::cout << "Esta atacando en Direction: " << static_cast<int>(m_Dir) << std::endl;
+    WeaponFactory weaponFactory;
     m_IsAttacking = true;
+    b2Vec2 attackerPosition = m_Body->GetPosition();
+    for (b2Body* worm = m_World->GetBodyList(); worm; worm = worm->GetNext()) {
+        auto* w = reinterpret_cast<WWorm*>(worm->GetUserData().pointer);
+        if (w != nullptr && w->getId() != m_Id) {
+            b2Vec2 position = w->getBody()->GetPosition();
+            std::unique_ptr<Weapon> weaponPtr(weaponFactory.createWeapon(m_Weapon, attackerPosition, position));
+            weaponPtr->attack(w);
+        }
+    }
 }
 
-Weapon WWorm::getWeapon() const {
+WeaponID WWorm::getWeapon() const {
     return this->m_Weapon;
 }
 
-void WWorm::setWeapon(Weapon weapon) {
+void WWorm::setWeapon(WeaponID weapon) {
     this->m_Weapon = weapon;
 }
 
@@ -225,4 +237,21 @@ bool WWorm::getIsAttacking() const {
 
 void WWorm::setIsAttacking(bool isAttacking) {
     this->m_IsAttacking = isAttacking;
+}
+
+void WWorm::receiveDamage(int damage) {
+    this->m_SelfCondtion = GameAction::WORM_ATTACKED;
+    this->m_Health -= damage;
+    if (this->m_Health <= 0) {
+        this->m_IsDead = true;
+        this->m_SelfCondtion = GameAction::WORM_DIE;
+    }
+}
+
+GameAction WWorm::getSelfCondition() const {
+    return this->m_SelfCondtion;
+}
+
+void WWorm::setSelfCondition(GameAction selfCondition) {
+    this->m_SelfCondtion = selfCondition;
 }

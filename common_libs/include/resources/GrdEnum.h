@@ -14,3 +14,13 @@ enum GrdEnum : uint8_t {
     GRD_SMALL_DIAGONAL_1 = 0x08,
     GRD_SMALL_DIAGONAL_2 = 0x09
 };
+
+namespace GrdWidthEnum {
+    const float GRD_WIDTH_LARGE = 10;
+    const float GRD_WIDTH_SMALL = 5;
+};
+
+namespace GrdHeightEnum {
+    const float GRD_HEIGHT_LARGE = 1.0f;
+    const float GRD_HEIGHT_SMALL = 0.2f;
+}

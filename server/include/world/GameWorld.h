@@ -36,4 +36,6 @@ public:
     std::vector<GameUpdate> getWormsPosition() const;
 
     void step();
+
+    void removeWorm(int idPlayer);
 };

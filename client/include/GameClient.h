@@ -11,27 +11,14 @@
 #include <unordered_map>
 #include <vector>
 
+struct WormDie {
+    int idPlayer;
+    bool isDie;
+    WormDie() : idPlayer(0), isDie(false) {}
+};
+
 class GameClient {
-public:
-    void Init(const std::vector<Grd>& vector, int idPlayer, std::vector<GameUpdate>& initInfo);
-
-    void HandleEvents();
-
-    void Update(double elapsedSeconds, const GameUpdate& gameUpdate);
-
-    void Render();
-
-    void Release();
-
-    bool IsRunning();
-
-private:
-    void InitSDL();
-
-    void CreateWindowAndRender();
-
-private:
-    bool _isRunning;
+ private:
     int m_IdPlayer;
 
     SDL_Window *_window;
@@ -40,4 +27,22 @@ private:
     std::unordered_map<int, Worm*> m_Worms;
     std::vector<Grd> m_Grd;
     std::vector<GrdLarge*> m_GrdLarge;
+
+ private:
+    void InitSDL();
+
+    void CreateWindowAndRender();
+
+ public:
+    void Init(const std::vector<Grd>& vector, int idPlayer, std::vector<GameUpdate>& initInfo);
+
+    void Update(double elapsedSeconds, const GameUpdate& gameUpdate);
+
+    void Render(const WormDie& wormDie);
+
+    void Release();
+
+
+
+
 };

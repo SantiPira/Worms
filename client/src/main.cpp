@@ -15,6 +15,8 @@ int main(int argc, char *argv[]) {
         try {
             ClientManager clientManager(window_connect.getProtocol(), window_connect.getIdPlayer(), window_connect.getCantPlayers());
             clientManager.init();
+            //TODO: tener una ventana de QT con fin de juego
+
             //TODO: Ver tema exceptions y manejo del main / ClientManager
         } catch (std::exception &exception) {
             fprintf(stderr, "%s", exception.what());

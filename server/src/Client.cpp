@@ -16,11 +16,10 @@ void Client::run() {
 
     } catch (const LibError& e) {
         std::cerr << "LibError exception e.what(): " << e.what() << std::endl;
-        destroyClient();
     } catch (const std::exception &e1) {
         std::cerr << "Unexpected error e.what(): " << e1.what() << std::endl;
-        destroyClient();
     }
+    destroyClient();
 }
 
 void Client::initGame() {
@@ -29,7 +28,7 @@ void Client::initGame() {
     m_Sender.start();
     //Receiver state
     while (isRunning()) {
-        m_InputActions->push(m_Protocol.recvUserAction());
+        m_InputActions->try_push(m_Protocol.recvUserAction());
     }
     m_Sender.stop();
     m_Sender.join();
@@ -86,15 +85,22 @@ void Client::kill() {
 
 void Client::sendMap() {
     std::vector<Grd> map = ParseMapFromFile::parse(m_Matches->getMapName(m_IdGame));
+    for (auto& grd : map) {
+        GrdEnum grdEnum = grd.grdType;
+        if (grdEnum == GRD_LARGE_HORIZONTAL) {
+            grd.width = GrdWidthEnum::GRD_WIDTH_LARGE;
+            grd.height = GrdHeightEnum::GRD_HEIGHT_LARGE;
+        }
+    }
     m_Protocol.sendMap(std::ref(map));
 }
 
 void Client::destroyClient() {
-    if (m_KeepRunning.load()) {
-        kill();
-    }
     if (hasGame) {
         m_Matches->removePlayer(m_IdGame, m_IdPlayer);
+    }
+    if (m_KeepRunning.load()) {
+        kill();
     }
 }
 

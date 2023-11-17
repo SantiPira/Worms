@@ -6,18 +6,16 @@ void GameClient::Init(const std::vector<Grd>& vector, int idPlayer, std::vector<
     SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
     m_IdPlayer = idPlayer;
     for (auto& grd : vector) {
-        auto* grdL = new GrdLarge(_renderer, grd.x, grd.y);
+        auto* grdL = new GrdLarge(_renderer, grd.x, grd.y, grd.width, grd.height);
         grdL->init();
         m_GrdLarge.push_back(grdL);
     }
 
     for (auto& gameUpdate : initInfo) {
-        auto* worm = new Worm(_renderer, gameUpdate.x_pos, gameUpdate.y_pos);
+        auto* worm = new Worm(_renderer, gameUpdate.x_pos, gameUpdate.y_pos, gameUpdate.width, gameUpdate.height);
         worm->init();
         m_Worms.insert(std::make_pair(gameUpdate.player_id, worm));
     }
-
-    _isRunning = true;
 }
 
 void GameClient::InitSDL() {
@@ -37,17 +35,6 @@ void GameClient::CreateWindowAndRender() {
     }
 }
 
-
-void GameClient::HandleEvents() {
-    SDL_Event event;
-
-    if (SDL_PollEvent(&event)) {
-        if (event.type == SDL_QUIT) {
-            _isRunning = false;
-        }
-    }
-}
-
 void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
     if (gameUpdate.m_Move == GameAction::INVALID_ACTION) {
         return;
@@ -55,7 +42,7 @@ void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
     m_Worms.at(gameUpdate.player_id)->update(elapsedSeconds, gameUpdate);
 }
 
-void GameClient::Render() {
+void GameClient::Render(const WormDie& wormDie) {
     SDL_RenderClear(_renderer);
 
     for (auto& grdL : m_GrdLarge) {
@@ -64,6 +51,13 @@ void GameClient::Render() {
 
     for (auto& worm : m_Worms) {
         worm.second->render();
+    }
+
+    if (wormDie.isDie) {
+        m_Worms.at(wormDie.idPlayer)->renderDie();
+        //remove from worms
+        delete m_Worms.at(wormDie.idPlayer);
+        m_Worms.erase(wormDie.idPlayer);
     }
     SDL_RenderPresent(_renderer);
 }
@@ -74,7 +68,4 @@ void GameClient::Release() {
     SDL_Quit();
 }
 
-bool GameClient::IsRunning() {
-    return _isRunning;
-}
 

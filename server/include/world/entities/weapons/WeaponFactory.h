@@ -1,0 +1,19 @@
+#pragma once
+
+#include "Weapon.h"
+#include "messages/user_actions/WeaponID.h"
+#include "world/entities/weapons/impl/Axe.h"
+
+class Weapon;
+class WeaponFactory {
+public:
+    WeaponFactory() = default;
+    Weapon* createWeapon(WeaponID weaponId, b2Vec2& attackerPosition, b2Vec2& attackedPosition);
+
+    ~WeaponFactory() = default;
+
+    WeaponFactory(const WeaponFactory&) = default;
+    WeaponFactory& operator=(const WeaponFactory&) = default;
+    WeaponFactory(WeaponFactory&&) noexcept = default;
+    WeaponFactory& operator=(WeaponFactory&&) noexcept = default;
+};

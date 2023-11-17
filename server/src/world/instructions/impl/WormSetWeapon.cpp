@@ -1,6 +1,6 @@
 #include "world/instructions/impl/WormSetWeapon.h"
 
-WormSetWeapon::WormSetWeapon(int idPlayer, Weapon weapon) {
+WormSetWeapon::WormSetWeapon(int idPlayer, WeaponID weapon) {
     this->setIdPlayer(idPlayer);
     m_Weapon = weapon;
 }

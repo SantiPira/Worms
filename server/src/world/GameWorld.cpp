@@ -2,7 +2,7 @@
 
 GameWorld::GameWorld(const std::string &file_map_path) : players(1), width(20.0f), height(20.0f),
  timeStep(1.0f/60.0f), velocityIterations(8), positionIterations(3), gravity(0.0f,-10.0f),
- m_world(gravity), map_path(file_map_path) {}
+ m_world(gravity), map_path(file_map_path) {}   /*TODO ESTO IRIA POR CONFIG YML*/
 
 void GameWorld::Setup() {
     StartWorld();
@@ -16,7 +16,7 @@ void GameWorld::Setup() {
 void GameWorld::SetGirder(const Grd& girder) {
     if(girder.grdType == GRD_LARGE_HORIZONTAL) {
         b2BodyDef bd;
-        bd.position.Set(float(girder.x + (5.0f)),float(girder.y));
+        bd.position.Set(girder.x, girder.y);
         bd.type = b2_staticBody;
         b2Body * body = m_world.CreateBody(&bd); 
         b2PolygonShape shape;
@@ -54,7 +54,7 @@ void GameWorld::StartWorld() {
 }
 
 void GameWorld::SetWorm(const int& player_number, const float & x_pos, const float& y_pos) {
-    auto* wormEntity = new WWorm(&m_world, player_number, x_pos, y_pos);
+    auto* wormEntity = new WWorm(&m_world, player_number, x_pos, y_pos, x_pos <= width/2);
     worms.insert(std::make_pair(player_number, wormEntity));
     wormsPositions.insert(std::make_pair(player_number, b2Vec2(x_pos, y_pos)));
     std::cout << "ID [" << player_number << "] - POS (" << x_pos << ", " << y_pos << ")" << std::endl;
@@ -77,4 +77,10 @@ GameUpdate GameWorld::execute(IWormInstruction *instruction, int playerId) {
 
 void GameWorld::step() {
     m_world.Step(timeStep,velocityIterations,positionIterations);
+}
+
+void GameWorld::removeWorm(int idPlayer) {
+    m_world.DestroyBody(worms.at(idPlayer)->getBody());
+    worms.erase(idPlayer);
+    wormsPositions.erase(idPlayer);
 }

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ActionType.h"
-#include "Weapon.h"
+#include "WeaponID.h"
 
 class UserAction {
 private:
