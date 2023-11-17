@@ -98,14 +98,14 @@ std::string Game::getMapName() const {
 
 void Game::pushUpdateToClients(GameUpdate &update) {
     for (auto& clientUpdate : m_QClientUpdates) {
-        clientUpdate.second->push(std::ref(update));
+        clientUpdate.second->try_push(std::ref(update));
     }
 }
 
 void Game::pushSetToClients(std::reference_wrapper<std::unordered_set<GameUpdate, GameUpdateHash>> updates) {
     for (auto& clientQueue : m_QClientUpdates) {
         for (auto& update : updates.get()) {
-            clientQueue.second->push(std::ref(update));
+            clientQueue.second->try_push(std::ref(update));
         }
     }
 }
@@ -113,7 +113,7 @@ void Game::pushSetToClients(std::reference_wrapper<std::unordered_set<GameUpdate
 void Game::pushUpdatesToClients(std::reference_wrapper<std::vector<GameUpdate>> updates) {
     for (auto& clientQueue : m_QClientUpdates) {
         for (auto& update : updates.get()) {
-            clientQueue.second->push(std::ref(update));
+            clientQueue.second->try_push(std::ref(update));
         }
     }
 }
@@ -130,3 +130,14 @@ void Game::setupWorld() {
     }
 }
 
+void Game::kill() {
+    m_KeepRunning = false;
+    for (auto& clientUpdate : m_QClientUpdates) {
+        clientUpdate.second->close();
+    }
+    m_QClientUpdates.clear();
+}
+
+bool Game::isStillPlayable() {
+    return m_QClientUpdates.size() >= 2;
+}

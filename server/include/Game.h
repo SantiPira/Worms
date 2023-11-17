@@ -36,10 +36,12 @@ public:
     Game(Game&& other) = delete;
 
     bool isReadyToStart();
+    bool isStillPlayable();
 
     std::unordered_map<int, ProtectedQueue<GameUpdate>*>* getClientUpdates();
     void setupWorld();
     void updateWorld();
+    void kill();
 
 private:
     void pushSetToClients(std::reference_wrapper<std::unordered_set<GameUpdate, GameUpdateHash>> updates);
