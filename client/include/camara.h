@@ -12,6 +12,7 @@
 #include "messages/server/GameUpdate.h"
 #include <unordered_map>
 #include <vector>
+#include "../../common_libs/include/utils/WorldScale.h"
 
 typedef struct {
     float x, y;
@@ -20,14 +21,17 @@ typedef struct {
 
 class Camara {
  
- SDL_Renderer *_renderer;
- Worm *worm;
- Camera_info camera_info;
+    SDL_Renderer *_renderer;
+    Worm *worm;
+    Camera_info camera_info;
+    WorldScale escalador;
+
 
  public:
     Camara(SDL_Renderer *renderer);
 
     void setWorm(Worm *worm);
+
 
     void updateCamera();
 
