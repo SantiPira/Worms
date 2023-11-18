@@ -45,16 +45,6 @@ void Juego::joinGame(int idGame, int players) {
     std::cout<<"El id del juego es: "<<idGame<<std::endl;
 }
 
-void Juego::iniciar_juego() {
-
-    //ventana de juego
-    //std::cout<<"El ip es: "<<ip<<std::endl;
-    //std::cout<<"El puerto es: "<<puerto<<std::endl;
-    menu_window();
-
-    //this->emisor_de_mensajes->join();
-}
-
 Protocol *Juego::getProtocol() {
     return &m_Protocol;
 }

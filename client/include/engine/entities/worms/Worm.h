@@ -19,11 +19,17 @@ class Worm {
  private:
     SDL_Renderer* m_Renderer;
     std::unordered_map<SpritesEnum, std::unique_ptr<Animation>> m_SpritesMap;
+
+ public:
     float m_WormXPosition;
     float m_WormYPosition;
+ private:
     SpritesEnum m_CurrentSprite;
+ public:
     float m_Widht;
     float m_Height;
+    
+ private:
     Direction m_Dir;
     std::vector<SDL_Rect > m_DieRects;
 

@@ -1,8 +1,10 @@
 #include "../include/GameClient.h"
+#include "engine/entities/worms/Skins.h"
 
 void GameClient::Init(const std::vector<Grd>& vector, int idPlayer, std::vector<GameUpdate>& initInfo) {
     InitSDL();
     CreateWindowAndRender();
+    InitMixerAndChunk();
     SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
     m_IdPlayer = idPlayer;
     for (auto& grd : vector) {
@@ -16,10 +18,27 @@ void GameClient::Init(const std::vector<Grd>& vector, int idPlayer, std::vector<
         worm->init();
         m_Worms.insert(std::make_pair(gameUpdate.player_id, worm));
     }
+
+    //Inicializo el cielo
+    const SDL_Rect m_SourceRect = {0, 0, 4096, 2034};
+    sky = new Texture(std::filesystem::current_path().concat(Cloud_Sky.c_str()).c_str(), _renderer, {false, 128, 128, 192});
+    sky->init();
+    sky->setSourceRect(&m_SourceRect);      
+
+    InitCamera();
+
+    //Corro el audio con el chunk
+    //mixer->PlayChannel(-1, *chunk, -1);
+
+}
+
+void GameClient::InitCamera() {
+    camara = new Camara(_renderer);
+    camara->setWorm(m_Worms.at(m_IdPlayer));
 }
 
 void GameClient::InitSDL() {
-    auto isInitialized = SDL_Init(SDL_INIT_VIDEO) >= 0;
+    auto isInitialized = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) >= 0;
 
     if (!isInitialized) {
         std::cout << "Exception" << std::endl;
@@ -33,6 +52,12 @@ void GameClient::CreateWindowAndRender() {
         //throw SDL_Exception(SDL_GetError());
         std::cout << "Exception" << std::endl;
     }
+}
+
+void GameClient::InitMixerAndChunk() {
+    mixer = new SDL2pp::Mixer(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096);
+    
+    chunk = new SDL2pp::Chunk(std::filesystem::current_path().concat(Game_Music.c_str()).c_str());
 }
 
 void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
@@ -49,18 +74,29 @@ void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
 void GameClient::Render() {
     SDL_RenderClear(_renderer);
 
+    //camara->updateCamera();
+
+    //renderizar fondo.
+    const SDL_Rect m_DestRect = {0, 0, 512, 512};
+    sky->render(&m_DestRect, false);
+
+
     for (auto& grdL : m_GrdLarge) {
         grdL->render();
     }
 
+    
     for (auto& worm : m_Worms) {
         worm.second->render();
     }
+    camara->updateCamera();
 
     for (auto& worm : m_WormsDie) {
         worm->render();
     }
+
     SDL_RenderPresent(_renderer);
+
 }
 
 void GameClient::Release() {

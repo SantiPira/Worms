@@ -11,6 +11,7 @@ void ClientManager::init() {
         const std::vector<Grd> &map = m_Protocol->recvMap();
 
         std::vector<GameUpdate> initInfo;
+        
         for (int i = 0; i < m_CantPlayers; i++) {
             initInfo.push_back(m_Protocol->recvGameUpdate());
         }
