@@ -6,7 +6,6 @@
 
 
 class Animation {
- private:
     Texture *m_Texture;
     int m_Frames;
     int m_DistanceBetweenFrames;

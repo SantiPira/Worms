@@ -1,5 +1,12 @@
 #include "engine/entities/worms/Worm.h"
 
+
+
+SDL_Rect& Worm::getWormRect(){
+    return (m_SpritesMap.at(this->m_CurrentSprite))->getDestRect();
+}
+
+
 Worm::Worm(SDL_Renderer *renderer, float posX, float posY, float width, float height)
         : m_Renderer(renderer), m_WormXPosition(posX),
           m_WormYPosition(posY), m_Widht(WorldScale::toPixel(width)), m_Height(WorldScale::toPixel(height)) {}
@@ -136,6 +143,8 @@ void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
             m_WormXPosition = tempX;
             m_WormYPosition = tempY;
         }
+
+        
     }
 }
 
@@ -176,5 +185,3 @@ void Worm::renderDie() {
     explotion.*/
 
 }
-
-

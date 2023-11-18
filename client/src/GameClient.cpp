@@ -67,25 +67,26 @@ void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
     m_Worms.at(gameUpdate.player_id)->update(elapsedSeconds, gameUpdate);
 }
 
+
 void GameClient::Render(const WormDie& wormDie) {
     SDL_RenderClear(_renderer);
 
     //camara->updateCamera();
 
     //renderizar fondo.
-    const SDL_Rect m_DestRect = {0, 0, 512, 512};
+    SDL_Rect m_DestRect = {0, 0, 512, 512};
     sky->render(&m_DestRect, false);
-
 
     for (auto& grdL : m_GrdLarge) {
         grdL->render();
     }
-
     
     for (auto& worm : m_Worms) {
         worm.second->render();
     }
+
     camara->updateCamera();
+    
 
     if (wormDie.isDie) {
         m_Worms.at(wormDie.idPlayer)->renderDie();

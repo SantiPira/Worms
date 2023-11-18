@@ -25,6 +25,9 @@ class Camara {
     Worm *worm;
     Camera_info camera_info;
     WorldScale escalador;
+    SDL_Rect camara_rect;
+
+    //SDL_Rect& worm_rect;
 
 
  public:
