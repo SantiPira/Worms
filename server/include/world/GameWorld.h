@@ -2,6 +2,7 @@
 #include "ProtectedQueue.h"
 #include "ParseMapFromFile.h"
 #include "messages/server/GameUpdate.h"
+#include "listeners/contact/WormsContact.h"
 #include "TurnHandler.h"
 #include "messages/user_actions/UserAction.h"
 #include "world/entities/WWorm.h"
@@ -25,6 +26,7 @@ private:
     std::unordered_map<int, WWorm*> worms; // Deberia ser un int, Worm donde Worm tenga dentro un b2Body
     int i = 0;
     std::unordered_map<int, b2Vec2> wormsPositions;
+    WormsContact wormsContact;
 public:
 
     explicit GameWorld(const std::string &map_path);
@@ -37,5 +39,8 @@ public:
 
     void step();
 
-    void removeWorm(int idPlayer);
+    void removeDeadWorms(std::reference_wrapper<std::vector<GameUpdate>> updates);
+
+    void setStaticBody(std::pair<const int, WWorm *> &worm);
+
 };

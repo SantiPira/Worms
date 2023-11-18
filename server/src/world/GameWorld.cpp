@@ -25,6 +25,10 @@ void GameWorld::SetGirder(const Grd& girder) {
         myFixtureDef.shape = &shape;
         myFixtureDef.density = 1;
         body->CreateFixture(&myFixtureDef);
+        b2Filter filter;
+        filter.categoryBits = 0x0002;
+        filter.maskBits = 0x0001 | 0x0003;
+        body->GetFixtureList()->SetFilterData(filter);
     }
 }
 
@@ -51,6 +55,12 @@ void GameWorld::StartWorld() {
     staticBody->CreateFixture(&myFixtureDef);
     polygonShape.SetAsBox( 1, 10, b2Vec2(21, 10), 0);//right wall
     staticBody->CreateFixture(&myFixtureDef);
+    b2Filter filter;
+    filter.categoryBits = 0x0001;
+    filter.maskBits = 0x0002 | 0x0003;
+    staticBody->GetFixtureList()->SetFilterData(filter);
+
+    m_world.SetContactListener(&wormsContact);
 }
 
 void GameWorld::SetWorm(const int& player_number, const float & x_pos, const float& y_pos) {
@@ -79,8 +89,35 @@ void GameWorld::step() {
     m_world.Step(timeStep,velocityIterations,positionIterations);
 }
 
-void GameWorld::removeWorm(int idPlayer) {
-    m_world.DestroyBody(worms.at(idPlayer)->getBody());
-    worms.erase(idPlayer);
-    wormsPositions.erase(idPlayer);
+void GameWorld::removeDeadWorms(std::reference_wrapper<std::vector<GameUpdate>> updates) {
+    std::vector<int> wormsToRemove;
+    for (auto& worm : worms) {
+        if (worm.second->getSelfCondition() == WORM_DIE) {
+            auto up = worm.second->getUpdate();
+            up.m_SelfCondition = WORM_GRAVE;
+            updates.get().push_back(up);
+            wormsToRemove.push_back(worm.first);
+            setStaticBody(worm);
+        }
+    }
+
+    for (auto& id : wormsToRemove) {
+        m_world.DestroyBody(worms.at(id)->getBody());
+        worms.erase(id);
+        wormsPositions.erase(id);
+    }
 }
+
+void GameWorld::setStaticBody(std::pair<const int, WWorm *> &worm) {
+    b2BodyDef bd;
+    bd.position.Set(worm.second->getPosition().x, worm.second->getPosition().y);
+    bd.type = b2_staticBody;
+    b2Body * body = m_world.CreateBody(&bd);
+    b2PolygonShape shape;
+    b2FixtureDef myFixtureDef;
+    shape.SetAsBox(0.8f,0.5f);
+    myFixtureDef.shape = &shape;
+    myFixtureDef.density = 1;
+    body->CreateFixture(&myFixtureDef);
+}
+

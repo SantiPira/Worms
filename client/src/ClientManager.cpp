@@ -44,17 +44,9 @@ void ClientManager::gameLoop() {
 
         gameUpdates.try_pop(svUpdate);
 
-        m_Game.Update(elapsedSeconds.count(), svUpdate); // me setea en memoria el sprite que voy a renderizar
-        WormDie wormDie{};
-        /*if (svUpdate.m_SelfCondition == GameAction::WORM_DIE) {
-            wormDie.idPlayer = svUpdate.player_id;
-            wormDie.isDie = true;
-            if (svUpdate.player_id == m_IdPlayer) {
-                m_KeepRunning = false;
-            }
-        }*/
-        m_Game.Render(wormDie);
+        m_Game.Update(elapsedSeconds.count(), svUpdate);
 
+        m_Game.Render();
 
         lastTime = current;
     }

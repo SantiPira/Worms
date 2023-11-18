@@ -5,14 +5,13 @@
 #include "messages/user_actions/ActionType.h"
 #include <unordered_set>
 
-
 struct GameUpdate {
     uint8_t player_id;
     GameAction m_Move;
     float x_pos;
     float y_pos;
-    float width; // 1m
-    float height; //1.6m 1920x1080
+    float width;
+    float height;
     WeaponID m_Weapon;
     GameAction m_ActionWeapon;
     uint8_t m_Health;

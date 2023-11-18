@@ -40,9 +40,13 @@ void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
         return;
     }
     m_Worms.at(gameUpdate.player_id)->update(elapsedSeconds, gameUpdate);
+    if (gameUpdate.m_SelfCondition == GameAction::WORM_GRAVE) {
+        m_WormsDie.push_back(m_Worms.at(gameUpdate.player_id));
+        m_Worms.erase(gameUpdate.player_id);
+    }
 }
 
-void GameClient::Render(const WormDie& wormDie) {
+void GameClient::Render() {
     SDL_RenderClear(_renderer);
 
     for (auto& grdL : m_GrdLarge) {
@@ -53,11 +57,8 @@ void GameClient::Render(const WormDie& wormDie) {
         worm.second->render();
     }
 
-    if (wormDie.isDie) {
-        m_Worms.at(wormDie.idPlayer)->renderDie();
-        //remove from worms
-        delete m_Worms.at(wormDie.idPlayer);
-        m_Worms.erase(wormDie.idPlayer);
+    for (auto& worm : m_WormsDie) {
+        worm->render();
     }
     SDL_RenderPresent(_renderer);
 }

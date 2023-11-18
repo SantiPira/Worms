@@ -5,7 +5,7 @@ WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRi
     m_Width = 0.50f; //Valores cargados por config?
     m_Height = 0.80f; //Valores cargados por config?
     b2BodyDef bd;
-    bd.position.Set(posX, posY + m_Width);
+    bd.position.Set(posX, posY);
     bd.type = b2_dynamicBody;
     bd.fixedRotation = true;
     bd.allowSleep = false;
@@ -18,10 +18,14 @@ WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRi
     fd.shape = &shape;
     fd.density = 20.0f;
     m_Body->CreateFixture(&fd);
+    b2Filter filter;
+    filter.categoryBits = 0x0003;
+    filter.maskBits = 0x0001 | 0x0002;
+    m_Body->GetFixtureList()->SetFilterData(filter);
 
     this->m_Id = id;
-    this->m_Position = b2Vec2(0, 0);
-    this->m_Velocity = b2Vec2(0, 0);
+    this->m_Position = b2Vec2_zero;
+    this->m_Velocity = b2Vec2_zero;
     this->m_Angle = 0;
     this->m_AngularVelocity = 0;
     this->m_Health = 100; //Valores cargados por config?
@@ -193,7 +197,7 @@ void WWorm::jump(b2Vec2 vel) {
 }
 
 void WWorm::stopMove() {
-    b2Vec2 vel = b2Vec2(0, 0);
+    b2Vec2 vel = b2Vec2_zero;
     this->m_Body->SetLinearVelocity(vel);
     this->m_Velocity = vel;
     this->m_IsMoving = false;

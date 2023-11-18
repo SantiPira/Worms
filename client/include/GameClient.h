@@ -11,12 +11,6 @@
 #include <unordered_map>
 #include <vector>
 
-struct WormDie {
-    int idPlayer;
-    bool isDie;
-    WormDie() : idPlayer(0), isDie(false) {}
-};
-
 class GameClient {
  private:
     int m_IdPlayer;
@@ -27,6 +21,7 @@ class GameClient {
     std::unordered_map<int, Worm*> m_Worms;
     std::vector<Grd> m_Grd;
     std::vector<GrdLarge*> m_GrdLarge;
+    std::vector<Worm*> m_WormsDie;
 
  private:
     void InitSDL();
@@ -38,7 +33,7 @@ class GameClient {
 
     void Update(double elapsedSeconds, const GameUpdate& gameUpdate);
 
-    void Render(const WormDie& wormDie);
+    void Render();
 
     void Release();
 

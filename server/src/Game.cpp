@@ -19,7 +19,15 @@ void Game::run() {
     }
     InstructionFactory instructionFactory;
     while (m_KeepRunning) {
-
+            /*auto grave = gameUpdate;
+                        grave.m_SelfCondition = GameAction::WORM_GRAVE;
+                        updates.insert(grave);
+                        world.removeWorm(gameUpdate.player_id);*/
+            {
+                std::vector<GameUpdate> deadWorms;
+                world.removeDeadWorms(std::ref(deadWorms));
+                pushUpdatesToClients(std::ref(deadWorms));
+            }
         //while (turnHandler.isValidTurn()) {
             //Ver como se estan almacenando los mensajes en el vector, si hay repetidos etc... y como llega al pushUpdateToClients..
             //m_InputActions.try_pop(std::ref(updates), m_PopMessageQuantity);
@@ -37,14 +45,7 @@ void Game::run() {
                     auto wormPositions = world.getWormsPosition();
                     pushUpdatesToClients(std::ref(wormPositions));
                 } else {
-                    auto gameUpdate = world.execute(instruction, userAction.getIdPlayer());
-                    updates.insert(gameUpdate);
-                    if (gameUpdate.m_SelfCondition == GameAction::WORM_DIE) {
-                        auto grave = gameUpdate;
-                        grave.m_SelfCondition = GameAction::WORM_GRAVE;
-                        updates.insert(grave);
-                        world.removeWorm(gameUpdate.player_id);
-                    }
+                    updates.insert(world.execute(instruction, userAction.getIdPlayer()));
                 }
                 delete instruction;
             }
@@ -142,5 +143,5 @@ void Game::kill() {
 }
 
 bool Game::isStillPlayable() {
-    return m_QClientUpdates.size()-1 >= 2;
+    return m_QClientUpdates.size() >= 1;
 }
