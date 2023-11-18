@@ -28,7 +28,11 @@ void Client::initGame() {
     m_Sender.start();
     //Receiver state
     while (isRunning()) {
-        m_InputActions->try_push(m_Protocol.recvUserAction());
+        try{
+            m_InputActions->push(m_Protocol.recvUserAction());
+        } catch (...) {
+            return;
+        }
     }
     m_Sender.stop();
     m_Sender.join();

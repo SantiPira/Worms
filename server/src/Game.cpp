@@ -136,6 +136,7 @@ void Game::setupWorld() {
 
 void Game::kill() {
     m_KeepRunning = false;
+    m_InputActions.close();
     for (auto& clientUpdate : m_QClientUpdates) {
         clientUpdate.second->close();
     }
@@ -143,5 +144,11 @@ void Game::kill() {
 }
 
 bool Game::isStillPlayable() {
-    return m_QClientUpdates.size() >= 1;
+    unsigned long int compare;
+    if( m_Players == 1) {
+        compare = 1;
+    } else {
+        compare = 2;
+    }
+    return m_QClientUpdates.size()-1 >= compare;
 }

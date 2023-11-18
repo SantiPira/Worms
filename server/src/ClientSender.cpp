@@ -12,8 +12,14 @@ void ClientSender::run() {
         }
     } catch (const LibError& e) {
         m_KeepRunning.store(false);
+        if(! m_Protocol.isClosed() ) {
+        m_Protocol.shutdown(SHUT_RDWR);
+        }
     } catch (const ClosedQueue& cqe) {
         m_KeepRunning.store(false);
+        if(! m_Protocol.isClosed() ) {
+            m_Protocol.shutdown(SHUT_RDWR);
+        }
     } catch (...) {
         std::cout << "Error en ClientSender" << std::endl;
     }
