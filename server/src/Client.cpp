@@ -31,7 +31,7 @@ void Client::initGame() {
         try{
             m_InputActions->push(m_Protocol.recvUserAction());
         } catch (...) {
-            return;
+            //should do nothing, either protocol has closed or queue is closed 
         }
     }
     m_Sender.stop();
