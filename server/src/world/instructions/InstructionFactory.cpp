@@ -16,6 +16,8 @@ IWormInstruction* InstructionFactory::createInstruction(UserAction userAction) {
             return new WormSetWeapon(userAction.getIdPlayer(), WeaponID(userAction.getParam1()));
         case UNSET_WEAPON:
             return new WormUnSetWeapon(userAction.getIdPlayer());
+        case NONE:
+            return new WormNone(userAction.getIdPlayer());
         default:
             new WormNone(userAction.getIdPlayer());
     }

@@ -44,10 +44,21 @@ void ClientManager::gameLoop() {
         std::chrono::duration<double> elapsedSeconds = current - lastTime;
 
         gameUpdates.try_pop(svUpdate);
-
-        m_Game.Update(elapsedSeconds.count(), svUpdate);
-
-        m_Game.Render();
+        while (!m_Game.getCurrentAnimation().isFinished()) {
+            m_Game.Update(elapsedSeconds.count(), svUpdate);
+            m_Game.Render();
+            lastTime = current;
+            current = std::chrono::system_clock::now();
+            elapsedSeconds = current - lastTime;
+            gameUpdates.try_pop(svUpdate);
+        }
+//        if (svUpdate.m_TimeDuration > 0.0f) {
+//            std::this_thread::sleep_for(std::chrono::milliseconds(int(svUpdate.m_TimeDuration * 1000)));
+//        }
+//
+//        m_Game.Update(elapsedSeconds.count(), svUpdate);
+//
+//        m_Game.Render();
 
         lastTime = current;
     }

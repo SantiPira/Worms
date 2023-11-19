@@ -25,7 +25,7 @@ void GameClient::Init(const std::vector<Grd>& vector, int idPlayer, std::vector<
     sky->init();
     sky->setSourceRect(&m_SourceRect);      
 
-    InitCamera();
+    //InitCamera();
 
     //Corro el audio con el chunk
     //mixer->PlayChannel(-1, *chunk, -1);
@@ -89,7 +89,7 @@ void GameClient::Render() {
     for (auto& worm : m_Worms) {
         worm.second->render();
     }
-    camara->updateCamera();
+    //camara->updateCamera();
 
     for (auto& worm : m_WormsDie) {
         worm->render();

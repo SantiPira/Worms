@@ -1,6 +1,7 @@
 #include "world/entities/WWorm.h"
 
-WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRight) {
+WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRight, uint16_t wormCategory,
+             const std::vector<uint16_t>& categories) {
     m_World = world;
     m_Width = 0.50f; //Valores cargados por config?
     m_Height = 0.80f; //Valores cargados por config?
@@ -10,6 +11,7 @@ WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRi
     bd.fixedRotation = true;
     bd.allowSleep = false;
     bd.userData.pointer = reinterpret_cast<uintptr_t>(this);
+    //store "Worm Entity" in body's user data
     m_Body = m_World->CreateBody(&bd);
     b2PolygonShape shape;
     shape.SetAsBox(m_Width, m_Height);
@@ -19,9 +21,14 @@ WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRi
     fd.density = 20.0f;
     m_Body->CreateFixture(&fd);
     b2Filter filter;
-    filter.categoryBits = 0x0003;
-    filter.maskBits = 0x0001 | 0x0002;
+    m_WormCategory = wormCategory;
+    filter.categoryBits = m_WormCategory;
+    for (unsigned short category : categories) {
+        filter.maskBits |= category;
+    }
     m_Body->GetFixtureList()->SetFilterData(filter);
+    m_EntityType = EntitiesType::ENTITY_WORM;
+    //world->SetContactListener(&m_WormsContact);
 
     this->m_Id = id;
     this->m_Position = b2Vec2_zero;
@@ -39,6 +46,7 @@ WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRi
     this->m_Weapon = WeaponID::NO_WEAPON;
     this->m_IsFacingRight = isFacingRight;
     this->m_Dir = isFacingRight ? Direction::RIGHT : Direction::LEFT;
+    this->m_SelfCondtion = GameAction::WORM_NONE;
 }
 
 [[maybe_unused]] uint8_t WWorm::getId() const {
@@ -132,7 +140,9 @@ void WWorm::setScore(int32 score) {
 }
 
 void WWorm::setIsDead(bool isDead) {
+    this->m_Health = 0;
     this->m_IsDead = isDead;
+    this->m_SelfCondtion = GameAction::WORM_DIE;
 }
 
 void WWorm::setIsFacingRight(bool isFacingRight) {
@@ -188,6 +198,7 @@ GameUpdate WWorm::getUpdate() const {
     gameUpdate.m_Health = m_Health;
     gameUpdate.m_Dir = m_Dir;
     gameUpdate.m_SelfCondition = m_SelfCondtion;
+    gameUpdate.m_TimeDuration = m_SelfCondtion == GameAction::WORM_DIE ? 3.0 : 0.0;
     return gameUpdate;
 }
 
@@ -259,3 +270,11 @@ GameAction WWorm::getSelfCondition() const {
 void WWorm::setSelfCondition(GameAction selfCondition) {
     this->m_SelfCondtion = selfCondition;
 }
+
+WWorm::WWorm() : m_Id(0xFF){
+}
+
+EntitiesType WWorm::getEntityType() {
+    return m_EntityType;
+}
+

@@ -40,13 +40,19 @@ void Game::run() {
             }
             for (auto& userAction : userActions) {
                 auto* instruction = instructionFactory.createInstruction(userAction);
-                if (userAction.getAction() == NONE) {
-                    world.step();
-                    auto wormPositions = world.getWormsPosition();
-                    pushUpdatesToClients(std::ref(wormPositions));
-                } else {
-                    updates.insert(world.execute(instruction, userAction.getIdPlayer()));
+//                if (userAction.getAction() == NONE) {
+//                    world.step();
+//                    auto wormPositions = world.getWormsPosition();
+//                    pushUpdatesToClients(std::ref(wormPositions));
+                //} else {
+                world.execute(instruction, userAction.getIdPlayer());
+                world.step();
+                auto wormPositions = world.getWormsPosition();
+                for (auto& wormPosition : wormPositions) {
+                    updates.insert(wormPosition);
                 }
+                //updates.insert();
+                //}
                 delete instruction;
             }
             pushSetToClients(std::ref(updates));
