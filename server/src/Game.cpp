@@ -8,7 +8,7 @@ Game::Game(int id, std::string gameName, std::string mapName, int players) : m_I
 
 void Game::run() {
     setupWorld();
-    sendInfoTurns(0);
+    sendInfoTurns(0, GameAction::START_TURN);
 
     std::vector<int> idPlayers;
     for (int i = 0; i < m_Players; i++) {
@@ -23,7 +23,6 @@ void Game::run() {
     InstructionFactory instructionFactory;
     std::cout << "Turn idPlayer: " << turnHandler.getCurrentPlayer() << std::endl;
     while (m_KeepRunning) {
-        std::cout << "while(keepRunning) debe cambiar turno.. idPlayer: " << turnHandler.getCurrentPlayer() << std::endl;
         /*auto grave = gameUpdate;
                     grave.m_SelfCondition = GameAction::WORM_GRAVE;
                     updates.insert(grave);
@@ -34,7 +33,6 @@ void Game::run() {
                 pushUpdatesToClients(std::ref(deadWorms));
             }
         while (turnHandler.isValidTurn()) {
-            std::cout << "Keep turn(while) idPlayer: " << turnHandler.getCurrentPlayer() << std::endl;
 //            Ver como se estan almacenando los mensajes en el vector, si hay repetidos etc... y como llega al pushUpdateToClients..
             std::vector<UserAction> userActions;
             //std::vector<GameUpdate> updates;
@@ -72,8 +70,10 @@ void Game::run() {
                 elapsed_seconds = end_time - start_time;
             }
         }
+        sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::END_TURN);
         turnHandler.nextTurn();
-        sendInfoTurns(turnHandler.getCurrentPlayer());
+        std::cout << "Turn idPlayer: " << turnHandler.getCurrentPlayer() << std::endl;
+        sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::START_TURN);
     }
 }
 
@@ -162,9 +162,9 @@ bool Game::isStillPlayable() {
     return m_QClientUpdates.size()-1 >= compare;
 }
 
-void Game::sendInfoTurns(int playerId) {
+void Game::sendInfoTurns(int playerId, GameAction infoTurn) {
     GameUpdate update{};
-    update.m_SelfCondition = START_TURN;
+    update.m_SelfCondition = infoTurn;
     update.player_id = playerId;
     pushUpdateToClients(std::ref(update));
 }

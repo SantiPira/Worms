@@ -8,16 +8,16 @@ ClientManager::ClientManager(Protocol *protocol, int idPlayer, int cantPlayers) 
 
 void ClientManager::init() {
     try {
+        std::cout << "Client ID: " << m_IdPlayer << std::endl;
         const std::vector<Grd> &map = m_Protocol->recvMap();
         GameUpdate turnInfo = m_Protocol->recvGameUpdate();
-        std::cout << "Turno del idPlayer: " << static_cast<int>(turnInfo.player_id) << std::endl;
         std::vector<GameUpdate> initInfo;
         
         for (int i = 0; i < m_CantPlayers; i++) {
             initInfo.push_back(m_Protocol->recvGameUpdate());
         }
 
-        EventSender eventSender(*m_Protocol, m_IdPlayer, std::ref(settingsQueue));
+        EventSender eventSender(*m_Protocol, m_IdPlayer, std::ref(settingsQueue), turnInfo.player_id == m_IdPlayer);
         ClientReceiver receiver(*m_Protocol, std::ref(gameUpdates), std::ref(eventSender), m_IdPlayer);
 
         m_Game = GameClient();

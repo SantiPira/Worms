@@ -20,7 +20,7 @@ class EventSender : public Thread {
     ProtectedQueue<std::string>& m_SettingsQueue;
     
  public:
-    EventSender(Protocol& protocol, int idPlayer, ProtectedQueue<std::string>& settingsQueue);
+    EventSender(Protocol& protocol, int idPlayer, ProtectedQueue<std::string>& settingsQueue, bool isMyTurn);
     void run() override;
     bool isRunning();
     void stop();

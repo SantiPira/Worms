@@ -1,7 +1,7 @@
 #include "EventSender.h"
 
-EventSender::EventSender(Protocol& protocol, int idPlayer, ProtectedQueue<std::string>& settingsQueue)
-    : m_Protocol(protocol), m_IsMyTurn(false), m_KeepRunning(true), m_IdPlayer(idPlayer),
+EventSender::EventSender(Protocol& protocol, int idPlayer, ProtectedQueue<std::string>& settingsQueue, bool isMyTurn)
+    : m_Protocol(protocol), m_IsMyTurn(isMyTurn), m_KeepRunning(true), m_IdPlayer(idPlayer),
     m_SettingsQueue(settingsQueue) {}
 
 void EventSender::run() {
@@ -20,6 +20,7 @@ void EventSender::run() {
             } else if (key == SDLK_a) {
                 userAction = {ActionType::MOVE, m_IdPlayer, Direction::LEFT};
             } else if (key == SDLK_SPACE) {
+                std::cout << "ID: " << m_IdPlayer << " JUMP" << std::endl;
                 userAction = {ActionType::JUMP, m_IdPlayer};
             } else if (key == SDLK_c) {
                 userAction = {ActionType::ATTACK, m_IdPlayer};
@@ -38,8 +39,12 @@ void EventSender::run() {
             }
         }
 
-        if (userAction.getAction() != ActionType::NONE && m_IsMyTurn.load()) {
-            m_Protocol.sendUserAction(userAction);
+        if (userAction.getAction() != ActionType::NONE) {
+            bool isMyTurn = m_IsMyTurn.load();
+            if (isMyTurn) {
+                std::cout << "ID: " << m_IdPlayer << " Enviando accion: " << userAction.getAction() << std::endl;
+                m_Protocol.sendUserAction(userAction);
+            }
         }
     }
 }
@@ -55,5 +60,6 @@ void EventSender::stop() {
 }
 
 void EventSender::setItsMyTurn(bool isMyTurn) {
+    std::cout << "ID: " << m_IdPlayer << " Cambio de turno: " << isMyTurn << std::endl;
     this->m_IsMyTurn.store(isMyTurn);
 }
