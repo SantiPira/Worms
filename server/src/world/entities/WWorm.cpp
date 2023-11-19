@@ -220,9 +220,13 @@ void WWorm::attack() {
     WeaponFactory weaponFactory;
     m_IsAttacking = true;
     b2Vec2 attackerPosition = m_Body->GetPosition();
-    for (b2Body* worm = m_World->GetBodyList(); worm; worm = worm->GetNext()) {
-        auto* w = reinterpret_cast<WWorm*>(worm->GetUserData().pointer);
-        if (w != nullptr && w->getId() != m_Id) {
+    for (b2Body* entity = m_World->GetBodyList(); entity; entity = entity->GetNext()) {
+        auto* wentity = reinterpret_cast<WEntity*>(entity->GetUserData().pointer);
+        if (wentity != nullptr && wentity->getEntityType() == EntitiesType::ENTITY_WORM) {
+            auto* w = reinterpret_cast<WWorm*>(entity->GetUserData().pointer);
+            if (w->getId() == this->m_Id) {
+                continue;
+            }
             b2Vec2 position = w->getBody()->GetPosition();
             std::unique_ptr<Weapon> weaponPtr(weaponFactory.createWeapon(m_Weapon, attackerPosition, position));
             weaponPtr->attack(w);

@@ -21,21 +21,14 @@ void Game::run() {
         pushUpdatesToClients(std::ref(update));
     }
     InstructionFactory instructionFactory;
-    std::cout << "Turn idPlayer: " << turnHandler.getCurrentPlayer() << std::endl;
     while (m_KeepRunning) {
-        /*auto grave = gameUpdate;
-                    grave.m_SelfCondition = GameAction::WORM_GRAVE;
-                    updates.insert(grave);
-                    world.removeWorm(gameUpdate.player_id);*/
+        while (turnHandler.isValidTurn()) {
             {
                 std::vector<GameUpdate> deadWorms;
                 world.removeDeadWorms(std::ref(deadWorms));
                 pushUpdatesToClients(std::ref(deadWorms));
             }
-        while (turnHandler.isValidTurn()) {
-//            Ver como se estan almacenando los mensajes en el vector, si hay repetidos etc... y como llega al pushUpdateToClients..
             std::vector<UserAction> userActions;
-            //std::vector<GameUpdate> updates;
             std::unordered_set<GameUpdate, GameUpdateHash> updates;
             m_InputActions.try_pop(std::ref(userActions), m_PopMessageQuantity);
             if (userActions.empty()) {
@@ -43,24 +36,16 @@ void Game::run() {
             }
             for (auto& userAction : userActions) {
                 auto* instruction = instructionFactory.createInstruction(userAction);
-//                if (userAction.getAction() == NONE) {
-//                    world.step();
-//                    auto wormPositions = world.getWormsPosition();
-//                    pushUpdatesToClients(std::ref(wormPositions));
-                //} else {
                 world.execute(instruction, userAction.getIdPlayer());
                 world.step();
                 auto wormPositions = world.getWormsPosition();
                 for (auto& wormPosition : wormPositions) {
                     updates.insert(wormPosition);
                 }
-                //updates.insert();
-                //}
                 delete instruction;
             }
             pushSetToClients(std::ref(updates));
 
-            //TODO: Revisar esto, pero creo que deberia estar bien, el loop del turnHandler no esta mal, ya que administra de quien es el turno.
             std::chrono::steady_clock::time_point start_time = std::chrono::steady_clock::now();
             std::chrono::steady_clock::time_point end_time = start_time;
             std::chrono::duration<double> elapsed_seconds = end_time - start_time;
@@ -72,7 +57,6 @@ void Game::run() {
         }
         sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::END_TURN);
         turnHandler.nextTurn();
-        std::cout << "Turn idPlayer: " << turnHandler.getCurrentPlayer() << std::endl;
         sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::START_TURN);
     }
 }
