@@ -8,29 +8,34 @@ Game::Game(int id, std::string gameName, std::string mapName, int players) : m_I
 
 void Game::run() {
     setupWorld();
-//    GameUpdate update{};
-//    update.action = TURN_INFO;
-//    update.player_id = 0;
-//    pushUpdateToClients(std::ref(update));
-//    TurnHandler turnHandler(0, m_Players);
+    sendInfoTurns(0);
+
+    std::vector<int> idPlayers;
+    for (int i = 0; i < m_Players; i++) {
+        idPlayers.push_back(i);
+    }
+
+    TurnHandler turnHandler(0, idPlayers);
     {
         auto update = world.getWormsPosition();
         pushUpdatesToClients(std::ref(update));
     }
     InstructionFactory instructionFactory;
+    std::cout << "Turn idPlayer: " << turnHandler.getCurrentPlayer() << std::endl;
     while (m_KeepRunning) {
-            /*auto grave = gameUpdate;
-                        grave.m_SelfCondition = GameAction::WORM_GRAVE;
-                        updates.insert(grave);
-                        world.removeWorm(gameUpdate.player_id);*/
+        std::cout << "while(keepRunning) debe cambiar turno.. idPlayer: " << turnHandler.getCurrentPlayer() << std::endl;
+        /*auto grave = gameUpdate;
+                    grave.m_SelfCondition = GameAction::WORM_GRAVE;
+                    updates.insert(grave);
+                    world.removeWorm(gameUpdate.player_id);*/
             {
                 std::vector<GameUpdate> deadWorms;
                 world.removeDeadWorms(std::ref(deadWorms));
                 pushUpdatesToClients(std::ref(deadWorms));
             }
-        //while (turnHandler.isValidTurn()) {
-            //Ver como se estan almacenando los mensajes en el vector, si hay repetidos etc... y como llega al pushUpdateToClients..
-            //m_InputActions.try_pop(std::ref(updates), m_PopMessageQuantity);
+        while (turnHandler.isValidTurn()) {
+            std::cout << "Keep turn(while) idPlayer: " << turnHandler.getCurrentPlayer() << std::endl;
+//            Ver como se estan almacenando los mensajes en el vector, si hay repetidos etc... y como llega al pushUpdateToClients..
             std::vector<UserAction> userActions;
             //std::vector<GameUpdate> updates;
             std::unordered_set<GameUpdate, GameUpdateHash> updates;
@@ -66,11 +71,9 @@ void Game::run() {
                 end_time = std::chrono::steady_clock::now();
                 elapsed_seconds = end_time - start_time;
             }
-        //}
-//        turnHandler.nextTurn();
-//        update.action = TURN_INFO;
-//        update.player_id = turnHandler.getCurrentPlayer();
-//        pushUpdateToClients(std::ref(update));
+        }
+        turnHandler.nextTurn();
+        sendInfoTurns(turnHandler.getCurrentPlayer());
     }
 }
 
@@ -157,4 +160,11 @@ bool Game::isStillPlayable() {
         compare = 2;
     }
     return m_QClientUpdates.size()-1 >= compare;
+}
+
+void Game::sendInfoTurns(int playerId) {
+    GameUpdate update{};
+    update.m_SelfCondition = START_TURN;
+    update.player_id = playerId;
+    pushUpdateToClients(std::ref(update));
 }

@@ -1,7 +1,7 @@
 #include "EventSender.h"
 
 EventSender::EventSender(Protocol& protocol, int idPlayer, ProtectedQueue<std::string>& settingsQueue)
-    : m_Protocol(protocol), itsMyTurn(false), m_KeepRunning(true), m_IdPlayer(idPlayer),
+    : m_Protocol(protocol), m_IsMyTurn(false), m_KeepRunning(true), m_IdPlayer(idPlayer),
     m_SettingsQueue(settingsQueue) {}
 
 void EventSender::run() {
@@ -13,42 +13,33 @@ void EventSender::run() {
             break;
         }
         SDL_Keycode key = event.key.keysym.sym;
+        UserAction userAction;
         if (event.type == SDL_KEYDOWN && event.key.repeat == 0) {
             if (key == SDLK_d) {
-                std::cout << "enviando accion de moverse a la derecha" << std::endl;
-                UserAction userAction(ActionType::MOVE, m_IdPlayer, Direction::RIGHT);
-                m_Protocol.sendUserAction(userAction);
+                userAction = {ActionType::MOVE, m_IdPlayer, Direction::RIGHT};
             } else if (key == SDLK_a) {
-                std::cout << "enviando accion de moverse a la izquierda" << std::endl;
-                UserAction userAction(ActionType::MOVE, m_IdPlayer, Direction::LEFT);
-                m_Protocol.sendUserAction(userAction);
+                userAction = {ActionType::MOVE, m_IdPlayer, Direction::LEFT};
             } else if (key == SDLK_SPACE) {
-                std::cout << "enviando accion de saltar" << std::endl;
-                UserAction userAction(ActionType::JUMP, m_IdPlayer);
-                m_Protocol.sendUserAction(userAction);
+                userAction = {ActionType::JUMP, m_IdPlayer};
             } else if (key == SDLK_c) {
-                std::cout << "enviando accion de atacar" << std::endl;
-                UserAction userAction(ActionType::ATTACK, m_IdPlayer);
-                m_Protocol.sendUserAction(userAction);
+                userAction = {ActionType::ATTACK, m_IdPlayer};
             } else if (key == SDLK_h) {
-                std::cout << "Sacando Hacha" << std::endl;
-                UserAction userAction(ActionType::SET_WEAPON, m_IdPlayer, WeaponID::AXE); // TIPO DE ARMA
-                m_Protocol.sendUserAction(userAction);
+                userAction = {ActionType::SET_WEAPON, m_IdPlayer, WeaponID::AXE};
             } else if (key == SDLK_j) {
-                std::cout << "Guardando Hacha" << std::endl;
-                UserAction userAction(ActionType::UNSET_WEAPON, m_IdPlayer); // TIPO DE ARMA
-                m_Protocol.sendUserAction(userAction);
+                userAction = {ActionType::UNSET_WEAPON, m_IdPlayer};
             } else {
                 std::cout << "key no mapeada: " << key << std::endl;
             }
         } else if (event.type == SDL_KEYUP && event.key.repeat == 0) {
             if (key == SDLK_d || key == SDLK_a) {
-                std::cout << "enviando accion de dejar de moverse" << std::endl;
-                UserAction userAction(ActionType::STOP_MOVE, m_IdPlayer);
-                m_Protocol.sendUserAction(userAction);
+                userAction = {ActionType::STOP_MOVE, m_IdPlayer};
             } else {
                 std::cout << "key no mapeada: " << key << std::endl;
             }
+        }
+
+        if (userAction.getAction() != ActionType::NONE && m_IsMyTurn.load()) {
+            m_Protocol.sendUserAction(userAction);
         }
     }
 }
@@ -61,4 +52,8 @@ void EventSender::stop() {
     m_KeepRunning.store(false);
     m_Protocol.shutdown(SHUT_RDWR);
     m_Protocol.close();
+}
+
+void EventSender::setItsMyTurn(bool isMyTurn) {
+    this->m_IsMyTurn.store(isMyTurn);
 }

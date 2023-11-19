@@ -14,7 +14,7 @@
 class EventSender : public Thread {
  private:
     Protocol& m_Protocol;
-    std::atomic<bool> itsMyTurn;
+    std::atomic<bool> m_IsMyTurn;
     std::atomic<bool> m_KeepRunning;
     int m_IdPlayer;
     ProtectedQueue<std::string>& m_SettingsQueue;
@@ -24,6 +24,8 @@ class EventSender : public Thread {
     void run() override;
     bool isRunning();
     void stop();
+
+    void setItsMyTurn(bool isMyTurn);
 };
 
 #endif
