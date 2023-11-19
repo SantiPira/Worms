@@ -2,12 +2,9 @@
 
 
 TurnHandler::TurnHandler(int idPlayer, std::vector<int> idPlayers) : idCurrentPlayer(idPlayer),
-    m_IdPlayers(std::move(idPlayers)), m_StartTime(std::chrono::system_clock::now()), m_MaxTurnSeconds(30) {}
+    m_IdPlayers(std::move(idPlayers)), m_StartTime(std::chrono::system_clock::now()), m_MaxTurnSeconds(10) {}
 
 bool TurnHandler::isValidTurn() {
-//    double difftime1 = difftime(std::chrono::system_clock::now().time_since_epoch().count(),
-//                                m_StartTime.time_since_epoch().count());
-//    return difftime1 < m_MaxTurnSeconds;
     std::chrono::duration<double> elapsedSeconds = std::chrono::system_clock::now() - m_StartTime;
     return elapsedSeconds.count() < m_MaxTurnSeconds;
 }

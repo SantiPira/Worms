@@ -9,10 +9,9 @@ void GameWorld::Setup() {
     StartWorld();
     ParseMapFromFile parser;
     std::vector<Grd> girders = parser.parse(map_path);
-//    for (auto& girder : girders) {
-//        SetGirder(girder);
-//    }
-    SetGirder(girders[0]);
+    for (auto& girder : girders) {
+        SetGirder(girder);
+    }
     m_WWater = std::make_unique<WWater>(&m_world, categories);
     m_world.SetContactListener(&contactListener);
 }
@@ -20,7 +19,7 @@ void GameWorld::Setup() {
 void GameWorld::SetGirder(const Grd& girder) {
     if(girder.grdType == GRD_LARGE_HORIZONTAL) {
         b2BodyDef bd;
-        bd.position.Set(5.0f, 9.5f);
+        bd.position.Set(girder.x, girder.y);
         bd.type = b2_staticBody;
         b2Body * body = m_world.CreateBody(&bd);
         b2PolygonShape shape;
