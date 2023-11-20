@@ -19,6 +19,7 @@ struct GameUpdate {
     GameAction m_SelfCondition;
     double m_TimeDuration;
 
+
     GameUpdate() : player_id(0), m_Move(INVALID_ACTION), x_pos(0), y_pos(0), width(0.0f), height(0.0f),
         m_Weapon(NO_WEAPON), m_ActionWeapon(NO_HAS_WEAPON), m_Health(0), m_Dir(Direction::RIGHT),
         m_SelfCondition(GameAction::WORM_NONE), m_TimeDuration(0.0f) {}

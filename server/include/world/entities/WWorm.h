@@ -36,6 +36,7 @@ private:
     bool m_IsAttacking{};
     uint16_t m_WormCategory{};
     EntitiesType m_EntityType;
+    float m_WeaponAngle{};
 
 public:
     WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRight, uint16_t wormCategory,
@@ -61,7 +62,7 @@ public:
     [[nodiscard]] Direction getDirection() const;
     [[nodiscard]] bool getIsAttacking() const;
     [[nodiscard]] GameAction getSelfCondition() const;
-
+    [[nodiscard]] float getWeaponAngle() const;
     EntitiesType getEntityType() override;
 
     void setPosition(b2Vec2 position);
@@ -81,6 +82,7 @@ public:
     void setDirection(Direction dir);
     void setIsAttacking(bool isAttacking);
     void setSelfCondition(GameAction selfCondition);
+    void setWeaponAngle(float angle);
 
     [[nodiscard]] GameUpdate getUpdate() const;
 
@@ -88,9 +90,11 @@ public:
 
     void stopMove();
 
-    void attack();
+    void attack(int param1);
 
     void receiveDamage(int damage);
 
     ~WWorm() override = default;
+
+    void increaseWeaponAngle();
 };

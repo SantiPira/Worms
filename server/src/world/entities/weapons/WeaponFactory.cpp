@@ -4,6 +4,8 @@ Weapon *WeaponFactory::createWeapon(WeaponID weaponId, b2Vec2& attackerPosition,
     switch (weaponId) {
         case WeaponID::AXE:
             return new Axe(attackerPosition, attackedPosition);
+        case WeaponID::BATE:
+            return new Bate(attackerPosition, attackedPosition);
         default:
             return new Axe(attackerPosition, attackedPosition);
     }

@@ -18,13 +18,18 @@ class EventSender : public Thread {
     std::atomic<bool> m_KeepRunning;
     int m_IdPlayer;
     ProtectedQueue<std::string>& m_SettingsQueue;
-    
- public:
+
+    WeaponID m_WeaponId;
+    std::chrono::time_point<std::chrono::system_clock> m_StartAttackTime;
+
+private:
+    UserAction attack();
+
+public:
     EventSender(Protocol& protocol, int idPlayer, ProtectedQueue<std::string>& settingsQueue, bool isMyTurn);
     void run() override;
     bool isRunning();
     void stop();
-
     void setItsMyTurn(bool isMyTurn);
 };
 

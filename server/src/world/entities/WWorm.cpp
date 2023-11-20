@@ -216,7 +216,7 @@ void WWorm::stopMove() {
     this->m_IsFalling = false;
 }
 
-void WWorm::attack() {
+void WWorm::attack(int param1) {
     WeaponFactory weaponFactory;
     m_IsAttacking = true;
     b2Vec2 attackerPosition = m_Body->GetPosition();
@@ -280,5 +280,13 @@ WWorm::WWorm() : m_Id(0xFF){
 
 EntitiesType WWorm::getEntityType() {
     return m_EntityType;
+}
+
+void WWorm::setWeaponAngle(float angle) {
+    this->m_WeaponAngle = angle;
+}
+
+float WWorm::getWeaponAngle() const {
+    return this->m_WeaponAngle;
 }
 

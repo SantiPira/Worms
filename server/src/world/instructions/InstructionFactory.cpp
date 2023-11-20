@@ -1,6 +1,5 @@
 #include "world/instructions/InstructionFactory.h"
 
-
 IWormInstruction* InstructionFactory::createInstruction(UserAction userAction) {
     switch (userAction.getAction()) {
         case MOVE:
@@ -11,11 +10,13 @@ IWormInstruction* InstructionFactory::createInstruction(UserAction userAction) {
         case JUMP:
             return new WormJump(userAction.getIdPlayer());
         case ATTACK:
-            return new WormAttack(userAction.getIdPlayer());
+            return new WormAttack(userAction.getIdPlayer(), userAction.getParam1());
         case SET_WEAPON:
             return new WormSetWeapon(userAction.getIdPlayer(), WeaponID(userAction.getParam1()));
         case UNSET_WEAPON:
             return new WormUnSetWeapon(userAction.getIdPlayer());
+        case INCREASE_ANGLE:
+            return new WormIncreaseAngle(userAction.getIdPlayer());
         case NONE:
             return new WormNone(userAction.getIdPlayer());
         default:
