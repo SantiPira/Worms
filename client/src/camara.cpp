@@ -2,34 +2,34 @@
 
 
 Camara::Camara(SDL_Renderer *renderer) : _renderer(renderer) {
-    camera_info.zoom = 1.4f;
+    float zoom = 1.5f;
     camara_rect = {0,0, 512, 512};
+    SDL_RenderSetScale(_renderer, zoom, 1);
 }
 
 
 void Camara::updateCamera(){
-
-    SDL_RenderSetScale(_renderer, camera_info.zoom, camera_info.zoom);
     
-    int player_x =  escalador.worldToPixelX(worm->m_WormXPosition, worm->m_Widht);
-    int player_y = escalador.pixelToWorldY(worm->m_WormYPosition, worm->m_Height );
+    camara_rect.w = WorldScale::toPixel(worm->m_Widht);
+    camara_rect.h = WorldScale::toPixel(worm->m_Height);
+    camara_rect.x = WorldScale::worldToPixelX(worm->m_WormXPosition, worm->m_Widht) - (camara_rect.w/2); 
+    camara_rect.y = WorldScale::worldToPixelY(worm->m_WormYPosition, worm->m_Height) - (camara_rect.h/2);
+
+    //int pos_x = WorldScale::worldToPixelX(worm->m_WormXPosition, worm->m_Widht);
+    //int pos_y =  WorldScale::worldToPixelY(worm->m_WormYPosition, worm->m_Height);
 
 
-    camara_rect.x = player_x - (camara_rect.w/2);
-    camara_rect.y = player_y - (camara_rect.h/2);
-    
-    
     if (camara_rect.x < 0) {camara_rect.x = 0;}
     if (camara_rect.y < 0) {camara_rect.y = 0;}
     if (camara_rect.x > camara_rect.w) {camara_rect.x = camara_rect.w;}
     if (camara_rect.y > camara_rect.h) {camara_rect.y = camara_rect.h;}
 
-    SDL_Rect& worm_rect = worm->getWormRect();
+    //SDL_Rect& worm_rect = worm->getWormRect();
 
-    worm_rect.x = player_x - camara_rect.x;
-    worm_rect.y = player_y - camara_rect.y;
+    //worm_rect.x = pos_x - camara_rect.x;
+    //worm_rect.y = pos_y - camara_rect.y;
 
-    SDL_RenderFillRect(_renderer, &camara_rect);
+    //SDL_RenderFillRect(_renderer, &camara_rect);
     
     
 }

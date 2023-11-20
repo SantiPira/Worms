@@ -71,10 +71,11 @@ void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
 void GameClient::Render(const WormDie& wormDie) {
     SDL_RenderClear(_renderer);
 
-    //camara->updateCamera();
+    camara->updateCamera();
 
     //renderizar fondo.
-    SDL_Rect m_DestRect = {0, 0, 512, 512};
+    SDL_Rect m_DestRect = {0 - camara->camara_rect.x/4, 0 - camara->camara_rect.y/4, 512, 512};
+    //SDL_Rect m_DestRect = {-15, -1, 512, 512};
     sky->render(&m_DestRect, false);
 
     for (auto& grdL : m_GrdLarge) {
@@ -85,7 +86,7 @@ void GameClient::Render(const WormDie& wormDie) {
         worm.second->render();
     }
 
-    camara->updateCamera();
+    //camara->updateCamera();
     
 
     if (wormDie.isDie) {
