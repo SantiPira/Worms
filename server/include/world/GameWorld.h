@@ -52,7 +52,7 @@ public:
 
     void step();
 
-    void removeDeadWorms(std::reference_wrapper<std::vector<GameUpdate>> updates);
+    void removeDeadWorms(std::vector<int> &wormsRemoved);
 
     void setStaticBody(std::pair<const int, WWorm *> &worm);
 

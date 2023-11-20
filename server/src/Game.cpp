@@ -24,11 +24,7 @@ void Game::run() {
     while (m_KeepRunning) {
         while (turnHandler.isValidTurn()) {
             std::chrono::steady_clock::time_point start_time = std::chrono::steady_clock::now();
-            {
-                std::vector<GameUpdate> deadWorms;
-                world.removeDeadWorms(std::ref(deadWorms));
-                pushUpdatesToClients(std::ref(deadWorms));
-            }
+
             std::vector<UserAction> userActions;
             std::unordered_set<GameUpdate, GameUpdateHash> updates;
             m_InputActions.try_pop(std::ref(userActions), m_PopMessageQuantity);
@@ -55,9 +51,13 @@ void Game::run() {
                 elapsed_seconds = end_time - start_time;
             }
         }
+
         sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::END_TURN);
         world.resetWormStatus(turnHandler.getCurrentPlayer());
-        turnHandler.nextTurn();
+        std::vector<int> wormsRemovedIds;
+        std::vector<GameUpdate> deadWorms;
+        world.removeDeadWorms(std::ref(wormsRemovedIds));
+        turnHandler.nextTurn(std::ref(wormsRemovedIds));
         sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::START_TURN);
     }
 }

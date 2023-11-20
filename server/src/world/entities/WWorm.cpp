@@ -176,7 +176,12 @@ GameUpdate WWorm::getUpdate() {
     gameUpdate.m_IsAttacking = m_IsAttacking;
     std::chrono::duration<double> elapsed_seconds = std::chrono::system_clock::now() - m_TimeState;
     if (elapsed_seconds.count() > 2.0) {
-        m_SelfCondition = GameAction::WORM_IDLE;
+        if (m_SelfCondition == GameAction::WORM_DIE) {
+            m_SelfCondition = GameAction::WORM_GRAVE;
+            m_TimeState = std::chrono::system_clock::now();
+        } else {
+            m_SelfCondition = GameAction::WORM_IDLE;
+        }
     }
     gameUpdate.m_SelfCondition = m_SelfCondition;
     gameUpdate.m_Movement = getMovement();

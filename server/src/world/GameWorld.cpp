@@ -79,27 +79,21 @@ void GameWorld::execute(IWormInstruction *instruction, int playerId) {
     }
     WWorm* worm = worms.at(playerId);
     instruction->execute(worm);
-//    step();
-//    return worm->getUpdate();
 }
 
 void GameWorld::step() {
     m_world.Step(timeStep,velocityIterations,positionIterations);
 }
 
-void GameWorld::removeDeadWorms(std::reference_wrapper<std::vector<GameUpdate>> updates) {
-    std::vector<int> wormsToRemove;
+void GameWorld::removeDeadWorms(std::vector<int> &wormsRemoved) {
     for (auto& worm : worms) {
-        if (worm.second->getSelfCondition() == WORM_DIE) {
-            auto up = worm.second->getUpdate();
-            up.m_SelfCondition = WORM_GRAVE;
-            updates.get().push_back(up);
-            wormsToRemove.push_back(worm.first);
+        if (worm.second->getSelfCondition() == WORM_GRAVE) {
+            wormsRemoved.push_back(worm.first);
             setStaticBody(worm);
         }
     }
 
-    for (auto& id : wormsToRemove) {
+    for (auto& id : wormsRemoved) {
         m_world.DestroyBody(worms.at(id)->getBody());
         worms.erase(id);
         wormsPositions.erase(id);
