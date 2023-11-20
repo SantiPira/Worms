@@ -2,7 +2,7 @@
 
 
 TurnHandler::TurnHandler(int idPlayer, std::vector<int> idPlayers) : idCurrentPlayer(idPlayer),
-    m_IdPlayers(std::move(idPlayers)), m_StartTime(std::chrono::system_clock::now()), m_MaxTurnSeconds(10) {}
+    m_IdPlayers(std::move(idPlayers)), m_StartTime(std::chrono::system_clock::now()), m_MaxTurnSeconds(20) {}
 
 bool TurnHandler::isValidTurn() {
     std::chrono::duration<double> elapsedSeconds = std::chrono::system_clock::now() - m_StartTime;
