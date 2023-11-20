@@ -23,6 +23,24 @@ Grd::Grd(int grdType, float posX, float posY) {
     this->grdType = static_cast<GrdEnum>(grdType);
     this->x = posX;
     this->y = posY;
+    switch (grdType) {
+        case GRD_SMALL_HORIZONTAL:
+            this->width = 2.0f;
+            this->height = 0.5f;
+            break;
+        case GRD_LARGE_HORIZONTAL:
+            this->width = GrdWidthEnum::GRD_HORIZONTAL_WIDTH_LARGE;
+            this->height = GrdHeightEnum::GRD_HORIZONTAL_HEIGHT_LARGE;
+            break;
+        case GRD_LARGE_VERTICAL:
+            this->width = 1.0f;
+            this->height = 10.0f;
+            break;
+        default:
+            this->width = 10.0f;
+            this->height = 1.0f;
+            break;
+    }
 }
 
 Grd::Grd(int grdType, float posX, float posY, float w, float h) {

@@ -15,6 +15,6 @@ private:
 public:
     WWater(b2World* world, const std::vector<uint16_t>& categories);
     EntitiesType getEntityType() override;
-    //destructor
+
     ~WWater() override = default;
 };

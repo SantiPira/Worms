@@ -8,6 +8,7 @@
 #include "messages/user_actions/UserAction.h"
 #include "world/entities/WWorm.h"
 #include "world/entities/WWater.h"
+#include "world/entities/WBeam.h"
 #include "world/instructions/IWormInstruction.h"
 #include "world/listeners/ContactListener.h"
 #include <fstream>
@@ -17,7 +18,6 @@
 
 class GameWorld {
 private:
-    int beams;
     int players;
     const float width;
     const float height;
@@ -31,6 +31,7 @@ private:
     int i = 0;
     std::unordered_map<int, b2Vec2> wormsPositions;
     std::unique_ptr<WWater> m_WWater;
+    std::vector<std::unique_ptr<WBeam>> m_Beams;
 
     uint16_t m_GroundCategory = 0x0001;
     uint16_t m_BeamCategory = 0x0002;

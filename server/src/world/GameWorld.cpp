@@ -10,7 +10,8 @@ void GameWorld::Setup() {
     ParseMapFromFile parser;
     std::vector<Grd> girders = parser.parse(map_path);
     for (auto& girder : girders) {
-        SetGirder(girder);
+        std::unique_ptr<WBeam> beam = std::make_unique<WBeam>(&m_world, girder);
+        m_Beams.push_back(std::move(beam));
     }
     m_WWater = std::make_unique<WWater>(&m_world, categories);
     m_world.SetContactListener(&contactListener);
