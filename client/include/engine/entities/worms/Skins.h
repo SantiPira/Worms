@@ -31,7 +31,7 @@ struct WaccuseWalk {
     int distanceBetweenFrames = 60;
     int frameWidth = 30;
     int frameHeight = 44;
-    float duration = 0.3f;
+    float duration = 1.0f;
     SDL_Rect srcRect = {11, 14, 28, 29};
     int initYSprite = 14;
     float deltaPosX = 25.6f;

@@ -87,6 +87,7 @@ public:
     void setIsAttacking(bool isAttacking);
     void setSelfCondition(GameAction selfCondition);
     void setWeaponAngle(float angle);
+    void resetWormStatus();
 
     GameUpdate getUpdate();
 

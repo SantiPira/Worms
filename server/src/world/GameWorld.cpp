@@ -1,7 +1,7 @@
 #include "world/GameWorld.h"
 
 GameWorld::GameWorld(const std::string &file_map_path) : players(1), width(20.0f), height(20.0f),
- timeStep(1.0f/60.0f), velocityIterations(8), positionIterations(3), gravity(0.0f,-10.0f),
+ timeStep(1.0f/60.0f), velocityIterations(6), positionIterations(2), gravity(0.0f,-10.0f),
  m_world(gravity), map_path(file_map_path) {}   /*TODO ESTO IRIA POR CONFIG YML*/
 
 void GameWorld::Setup() {
@@ -124,5 +124,10 @@ GameWorld::~GameWorld() {
         m_world.DestroyBody(worm.second->getBody());
         delete worm.second; //TODO: Revisar esto
     }
+}
+
+void GameWorld::resetWormStatus(int idPlayer) {
+    worms.at(idPlayer)->resetWormStatus();
+    m_world.Step(0,0,0);
 }
 

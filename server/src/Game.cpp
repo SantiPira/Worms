@@ -23,6 +23,7 @@ void Game::run() {
     InstructionFactory instructionFactory;
     while (m_KeepRunning) {
         while (turnHandler.isValidTurn()) {
+            std::chrono::steady_clock::time_point start_time = std::chrono::steady_clock::now();
             {
                 std::vector<GameUpdate> deadWorms;
                 world.removeDeadWorms(std::ref(deadWorms));
@@ -46,7 +47,6 @@ void Game::run() {
             }
             pushSetToClients(std::ref(updates));
 
-            std::chrono::steady_clock::time_point start_time = std::chrono::steady_clock::now();
             std::chrono::steady_clock::time_point end_time = start_time;
             std::chrono::duration<double> elapsed_seconds = end_time - start_time;
             double target_frame_time = 1.0 / 60.0;
@@ -56,6 +56,7 @@ void Game::run() {
             }
         }
         sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::END_TURN);
+        world.resetWormStatus(turnHandler.getCurrentPlayer());
         turnHandler.nextTurn();
         sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::START_TURN);
     }

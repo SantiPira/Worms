@@ -17,11 +17,16 @@ void WormsContact::BeginContact(b2Body* bodyA, b2Body* bodyB) {
     if (wormA != nullptr && wormB != nullptr
             && wormA->getEntityType() == EntitiesType::ENTITY_WORM
             && wormB->getEntityType() == EntitiesType::ENTITY_WORM) {
+        WWorm* producerContact;
         std::cout << "[COLISION] [WORM-A - ID: [" << static_cast<int>(wormA->getId()) << "]" << std::endl;
-        wormA->setVelocity(b2Vec2_zero);
-        wormA->getBody()->GetFixtureList()->SetFriction(400.0f);
-        wormB->setVelocity(b2Vec2_zero);
-        wormB->getBody()->GetFixtureList()->SetFriction(400.0f);
+        if (wormA->getVelocity() != b2Vec2_zero) {
+            producerContact = wormA;
+        } else {
+            producerContact = wormB;
+        }
+        producerContact->setVelocity(b2Vec2_zero);
+//        wormA->getBody()->GetFixtureList()->SetFriction(400.0f);
+//        wormB->getBody()->GetFixtureList()->SetFriction(400.0f);
 
         std::cout << "[COLISION] [WORM-B - ID: [" << static_cast<int>(wormB->getId()) << "]" << std::endl;
     }
@@ -44,12 +49,6 @@ void WormsContact::EndContact(b2Body* bodyA, b2Body* bodyB) {
     }
 
     if (wormA != nullptr && wormB != nullptr) {
-        std::cout << "[COLISION] [WORM-A - ID: [" << static_cast<int>(wormA->getId()) << "]" << std::endl;
-        wormA->setVelocity(b2Vec2_zero);
-        wormA->getBody()->GetFixtureList()->SetFriction(0.0f);
-        wormB->setVelocity(b2Vec2_zero);
-        wormB->getBody()->GetFixtureList()->SetFriction(0.0f);
-
-        std::cout << "[COLISION] [WORM-B - ID: [" << static_cast<int>(wormB->getId()) << "]" << std::endl;
+        std::cout << "[END WORM COLLIDE]" << std::endl;
     }
 }

@@ -44,7 +44,7 @@ WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRi
     this->m_Weapon = WeaponID::NO_WEAPON;
     this->m_IsFacingRight = isFacingRight;
     this->m_Dir = isFacingRight ? Direction::RIGHT : Direction::LEFT;
-    this->m_SelfCondition = GameAction::WORM_NONE;
+    this->m_SelfCondition = GameAction::WORM_IDLE;
 }
 
 [[maybe_unused]] uint8_t WWorm::getId() const {
@@ -176,7 +176,7 @@ GameUpdate WWorm::getUpdate() {
     gameUpdate.m_IsAttacking = m_IsAttacking;
     std::chrono::duration<double> elapsed_seconds = std::chrono::system_clock::now() - m_TimeState;
     if (elapsed_seconds.count() > 2.0) {
-        m_SelfCondition = GameAction::WORM_NONE;
+        m_SelfCondition = GameAction::WORM_IDLE;
     }
     gameUpdate.m_SelfCondition = m_SelfCondition;
     gameUpdate.m_Movement = getMovement();
@@ -270,7 +270,7 @@ float WWorm::getWeaponAngle() const {
 
 void WWorm::move(Direction direction) {
     float velocity;
-    direction == Direction::LEFT ? velocity = -5 : velocity = 5;
+    direction == Direction::LEFT ? velocity = -0.5 : velocity = 0.5;
     this->m_Dir = direction;
     b2Vec2 vel = b2Vec2(velocity, 0);
     if (m_Weapon != WeaponID::NO_WEAPON) {
@@ -281,7 +281,7 @@ void WWorm::move(Direction direction) {
 }
 
 GameAction WWorm::getMovement() {
-    GameAction move = WORM_NONE;
+    GameAction move = WORM_IDLE;
     b2Vec2 velocity = m_Body->GetLinearVelocity();
     if (velocity.x > 0) {
         move = WORM_MOVE_RIGHT;
@@ -296,5 +296,18 @@ GameAction WWorm::getMovement() {
         move = WORM_JUMP;
     }
     return move;
+}
+
+void WWorm::resetWormStatus() {
+    m_IsAttacking = false;
+    m_IsShooting = false;
+    m_IsJumping = false;
+    m_IsFalling = false;
+    m_IsMoving = false;
+    m_IsFacingRight = false;
+    m_Weapon = WeaponID::NO_WEAPON;
+    m_SelfCondition = GameAction::WORM_IDLE;
+    m_WeaponAngle = 0;
+    stopMove();
 }
 

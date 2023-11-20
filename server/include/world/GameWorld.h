@@ -58,4 +58,6 @@ public:
 
     //destructor
     ~GameWorld();
+
+    void resetWormStatus(int idPlayer);
 };
