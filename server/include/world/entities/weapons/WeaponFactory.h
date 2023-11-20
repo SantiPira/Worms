@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Weapon.h"
-#include "messages/user_actions/WeaponID.h"
 #include "world/entities/weapons/impl/Axe.h"
 #include "world/entities/weapons/impl/Bate.h"
 

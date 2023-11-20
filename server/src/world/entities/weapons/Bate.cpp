@@ -12,3 +12,11 @@ void Bate::attack(WWorm *worm) {
         worm->receiveDamage(damage);
     }
 }
+
+void Bate::setWeaponId(WeaponID weaponId) {
+    this->m_WeaponId = weaponId;
+}
+
+WeaponID Bate::getWeaponId() const {
+    return this->m_WeaponId;
+}

@@ -12,3 +12,11 @@ void Axe::attack(WWorm *wormAttacked) {
         wormAttacked->receiveDamage(damage);
     }
 }
+
+void Axe::setWeaponId(WeaponID weaponId) {
+    this->m_WeaponId = weaponId;
+}
+
+WeaponID Axe::getWeaponId() const {
+    return this->m_WeaponId;
+}

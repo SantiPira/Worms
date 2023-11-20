@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../../../Box2D/include/box2d/box2d.h"
 #include "ProtectedQueue.h"
 #include "ParseMapFromFile.h"

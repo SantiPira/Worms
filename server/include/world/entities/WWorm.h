@@ -3,6 +3,8 @@
 #include "../../../../Box2D/include/box2d/box2d.h"
 #include "messages/server/GameUpdate.h"
 #include "world/entities/weapons/WeaponFactory.h"
+#include "world/entities/weapons/impl/Axe.h"
+#include "world/entities/weapons/impl/Bate.h"
 #include "messages/user_actions/ActionType.h"
 #include "EntitiesType.h"
 #include "WEntity.h"

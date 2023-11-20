@@ -6,5 +6,5 @@ WormAttack::WormAttack(int idPlayer, uint8_t param1) {
 }
 
 void WormAttack::execute(WWorm *worm) {
-    worm->attack();
+    worm->attack(m_Param1);
 }

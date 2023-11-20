@@ -2,7 +2,6 @@
 
 #include "../../../../../Box2D/include/box2d/box2d.h"
 #include "messages/user_actions/WeaponID.h"
-#include "world/entities/WWorm.h"
 
 class WWorm;
 class Weapon {
@@ -12,14 +11,10 @@ protected:
     b2Vec2 m_AttackedPosition{};
 public:
     virtual void attack(WWorm* worm) = 0;
-    void setWeaponId(WeaponID weaponId) {
-        this->m_WeaponId = weaponId;
-    }
 
-    [[nodiscard]] WeaponID getWeaponId() const {
-        return m_WeaponId;
-    }
+    virtual void setWeaponId(WeaponID weaponId) = 0;
 
-    //destructor
+    virtual WeaponID getWeaponId() const = 0;
+
     virtual ~Weapon() = default;
 };
