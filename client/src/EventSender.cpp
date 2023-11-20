@@ -80,7 +80,7 @@ void EventSender::setItsMyTurn(bool isMyTurn) {
 }
 
 UserAction EventSender::attack() {
-    std::chrono::duration<double> elapsedSeconds;
+    std::chrono::duration<double> elapsedSeconds{};
     switch (m_WeaponId) {
         case WeaponID::BATE:
             elapsedSeconds = std::chrono::system_clock::now() - m_StartAttackTime;
@@ -98,6 +98,8 @@ UserAction EventSender::attack() {
         case WeaponID::AXE:
             return {ActionType::ATTACK, m_IdPlayer};
         case WeaponID::NO_WEAPON:
+            return {};
+        default:
             return {};
     }
 }

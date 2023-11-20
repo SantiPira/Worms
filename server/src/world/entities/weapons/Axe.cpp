@@ -1,15 +1,16 @@
 #include "world/entities/weapons/impl/Axe.h"
 
-Axe::Axe(b2Vec2& attackerPosition, b2Vec2& attackedPosition) : damage(50), distance(1.5f) {
+Axe::Axe() : damage(50), distance(1.5f) {
     this->m_WeaponId = WeaponID::AXE;
-    this->m_AttackerPosition = attackerPosition;
-    this->m_AttackedPosition = attackedPosition;
 }
 
-void Axe::attack(WWorm *wormAttacked) {
-    float distanceBetween = b2Distance(this->m_AttackerPosition, this->m_AttackedPosition);
+void Axe::attack(WWorm *attacker, WWorm *attacked) {
+    if (attacked->getId() == attacker->getId()) {
+        return;
+    }
+    float distanceBetween = b2Distance(attacker->getPosition(), attacked->getPosition());
     if (distanceBetween <= distance) {
-        wormAttacked->receiveDamage(damage);
+        attacked->receiveDamage(damage);
     }
 }
 

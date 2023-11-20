@@ -106,7 +106,7 @@ void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
     //TODO: Cuando setea un sprite en m_CurrentSprite ya no deberia setear ninguno mas (por esta accion en particular)
     m_Dir = gameUpdate.m_Dir;
     WeaponID weapon(gameUpdate.m_Weapon);
-    if (gameUpdate.m_Move == GameAction::WORM_NONE) {
+    if (gameUpdate.m_Movement == GameAction::WORM_NONE) {
         m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
     } else {
         //TODO: Aca habria que hacer un Factory de Sprites para no estar asignando a manopla cada Sprite por cada accion distinta
@@ -117,7 +117,7 @@ void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
         } else if (gameUpdate.m_SelfCondition == GameAction::WORM_GRAVE) {
             m_CurrentSprite = SpritesEnum::SPRITE_WACCUSE_GRAVE;
         } else if (weapon == WeaponID::NO_WEAPON) {
-            if (gameUpdate.m_Move == GameAction::WORM_JUMP) {
+            if (gameUpdate.m_Movement == GameAction::WORM_JUMP) {
                 m_CurrentSprite = SpritesEnum::SPRITE_JUMPING;
             } else {
                 m_CurrentSprite = SpritesEnum::SPRITE_WALK;
@@ -127,7 +127,7 @@ void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
         }
         m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
 
-        if (gameUpdate.m_Move != WORM_NONE) {
+        if (gameUpdate.m_Movement != WORM_NONE) {
             Animation* anim = m_SpritesMap.at(m_CurrentSprite).get();
             float tempX = WorldScale::worldToPixelX(gameUpdate.x_pos, anim->getDeltaPosX());
             float tempY = WorldScale::worldToPixelY(gameUpdate.y_pos, anim->getDeltaPosY());
@@ -136,6 +136,24 @@ void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
             m_WormXPosition = tempX;
             m_WormYPosition = tempY;
         }
+    }
+}
+
+SpritesEnum Worm::chooseSprite(const GameUpdate& gameUpdate) const {
+    if (gameUpdate.m_Movement == GameAction::WORM_NONE) {
+        return m_CurrentSprite;
+    } else if (gameUpdate.m_SelfCondition == GameAction::WORM_ATTACKED) {
+        return SpritesEnum::SPRITE_WACCUSE_GETTING_DAMAGE;
+    } else if (gameUpdate.m_SelfCondition == GameAction::WORM_DIE) {
+        return SpritesEnum::SPRITE_WACCUSE_DIE;
+    } else if (gameUpdate.m_SelfCondition == GameAction::WORM_GRAVE) {
+        return SpritesEnum::SPRITE_WACCUSE_GRAVE;
+    } else if (gameUpdate.m_Movement == GameAction::WORM_JUMP) {
+        return SpritesEnum::SPRITE_JUMPING;
+    } else if (gameUpdate.m_Weapon == WeaponID::AXE) {
+        return SpritesEnum::SPRITE_AXE_WALK;
+    } else {
+        return SpritesEnum::SPRITE_WALK;
     }
 }
 

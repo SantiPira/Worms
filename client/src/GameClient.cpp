@@ -61,7 +61,7 @@ void GameClient::InitMixerAndChunk() {
 }
 
 void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
-    if (gameUpdate.m_Move == GameAction::INVALID_ACTION) {
+    if (gameUpdate.m_Movement == GameAction::INVALID_ACTION) {
         return;
     }
     m_Worms.at(gameUpdate.player_id)->update(elapsedSeconds, gameUpdate);

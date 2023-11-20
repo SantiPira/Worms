@@ -19,7 +19,7 @@ void WaterContact::BeginContact(b2Body* bodyA, b2Body* bodyB) {
             worm = reinterpret_cast<WWorm*>(bodyB->GetUserData().pointer);
             water = reinterpret_cast<WWater*>(bodyA->GetUserData().pointer);
         }
-        worm->setIsDead(true);
+        worm->setIsDead();
         std::cout << water->getEntityType() << std::endl;
     }
 }

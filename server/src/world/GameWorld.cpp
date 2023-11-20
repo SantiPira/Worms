@@ -64,7 +64,7 @@ void GameWorld::SetWorm(const int& player_number, const float & x_pos, const flo
     std::cout << "ID [" << player_number << "] - POS (" << x_pos << ", " << y_pos << ")" << std::endl;
 }
 
-std::vector<GameUpdate> GameWorld::getWormsPosition() const {
+std::vector<GameUpdate> GameWorld::getWormsUpdates() const {
     std::vector<GameUpdate> gameUpdates;
     for (auto& worm : worms) {
         gameUpdates.push_back(worm.second->getUpdate());

@@ -10,8 +10,8 @@ private:
     int damage;
     float distance;
 public:
-    Bate(b2Vec2& attackerPosition, b2Vec2& attackedPosition);
-    void attack(WWorm* worm) override;
+    Bate();
+    void attack(WWorm* attacker, WWorm* attacked) override;
 
     void setWeaponId(WeaponID weaponId) override;
     WeaponID getWeaponId() const override;

@@ -49,4 +49,6 @@ private:
     ~Worm() = default;
 
     void renderDie();
+
+    SpritesEnum chooseSprite(const GameUpdate &gameUpdate) const;
 };

@@ -5,10 +5,7 @@ WormMove::WormMove(int idPlayer, Direction m_Dir) : m_Dir(m_Dir) {
 }
 
 void WormMove::execute(WWorm* worm) {
-    float velocity;
-    m_Dir == Direction::LEFT ? velocity = -5 : velocity = 5;
-    worm->setDirection(m_Dir);
-    worm->setVelocity(b2Vec2(velocity, 0));
+    worm->move(m_Dir);
 }
 
 

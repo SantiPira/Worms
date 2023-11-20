@@ -11,6 +11,7 @@
 #include <iostream>
 #include <memory>
 #include <vector>
+#include <chrono>
 
 class WWorm : public WEntity {
 private:
@@ -32,13 +33,14 @@ private:
     bool m_IsJumping{};
     bool m_IsFalling{};
     bool m_IsShooting{};
-    GameAction m_SelfCondtion;
+    GameAction m_SelfCondition;
     WeaponID m_Weapon;
     Direction m_Dir;
     bool m_IsAttacking{};
     uint16_t m_WormCategory{};
     EntitiesType m_EntityType;
     float m_WeaponAngle{};
+    std::chrono::time_point<std::chrono::system_clock> m_TimeState; //seconds
 
 public:
     WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRight, uint16_t wormCategory,
@@ -74,7 +76,7 @@ public:
     void setHealth(int32 health);
     void setAmmo(int32 ammo);
     void setScore(int32 score);
-    void setIsDead(bool isDead);
+    void setIsDead();
     void setIsFacingRight(bool isFacingRight);
     void setIsMoving(bool isMoving);
     void setIsJumping(bool isJumping);
@@ -86,9 +88,9 @@ public:
     void setSelfCondition(GameAction selfCondition);
     void setWeaponAngle(float angle);
 
-    [[nodiscard]] GameUpdate getUpdate() const;
+    GameUpdate getUpdate();
 
-    void jump(b2Vec2 vel);
+    void jump();
 
     void stopMove();
 
@@ -99,4 +101,8 @@ public:
     ~WWorm() override = default;
 
     void increaseWeaponAngle();
+
+    void move(Direction direction);
+
+    GameAction getMovement();
 };
