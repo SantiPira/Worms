@@ -26,6 +26,7 @@ class GameClient {
     std::vector<GrdLarge*> m_GrdLarge;
     std::vector<Worm*> m_WormsDie;
     Texture* sky;
+    Texture* water;
 
     SDL2pp::Mixer *mixer;
     SDL2pp::Chunk *chunk;

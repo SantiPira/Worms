@@ -17,21 +17,6 @@ void GameWorld::Setup() {
     m_world.SetContactListener(&contactListener);
 }
 
-void GameWorld::SetGirder(const Grd& girder) {
-    if(girder.grdType == GRD_LARGE_HORIZONTAL) {
-        b2BodyDef bd;
-        bd.position.Set(girder.x, girder.y);
-        bd.type = b2_staticBody;
-        b2Body * body = m_world.CreateBody(&bd);
-        b2PolygonShape shape;
-        b2FixtureDef myFixtureDef;
-        shape.SetAsBox(5.0f,0.50f);
-        myFixtureDef.shape = &shape;
-        myFixtureDef.density = 1;
-        body->CreateFixture(&myFixtureDef);
-    }
-}
-
 void GameWorld::StartWorld() {
     b2BodyDef myBodyDef;
     b2PolygonShape polygonShape;

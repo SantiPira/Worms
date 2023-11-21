@@ -19,5 +19,6 @@ inline extern const std::string Worm_Sprite_Axe_Walk = "/resources/Worms/waxebk2
 inline extern const std::string Worm_Sprite_Axe_Attack = "/resources/Worms/waxeswn.png";
 
 inline extern const std::string Cloud_Sky = "/resources/Fondos/cielo.png";
+inline extern const std::string Water = "/resources/Fondos/water.png";
 
 inline extern const std::string Game_Music = "/resources/Music/game_music.ogg";

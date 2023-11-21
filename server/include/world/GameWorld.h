@@ -44,7 +44,6 @@ public:
 
     explicit GameWorld(const std::string &map_path);
     void Setup();
-    void SetGirder(const Grd& girder);
     void StartWorld();
     void SetWorm(const int& player_number, const float & x_pos, const float& y_pos);
     void execute(IWormInstruction* instruction, int playerId);

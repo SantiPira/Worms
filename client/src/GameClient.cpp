@@ -23,7 +23,11 @@ void GameClient::Init(const std::vector<Grd>& vector, int idPlayer, std::vector<
     const SDL_Rect m_SourceRect = {0, 0, 4096, 2034};
     sky = new Texture(std::filesystem::current_path().concat(Cloud_Sky.c_str()).c_str(), _renderer, {false, 128, 128, 192});
     sky->init();
-    sky->setSourceRect(&m_SourceRect);      
+    sky->setSourceRect(&m_SourceRect);
+    water = new Texture(std::filesystem::current_path().concat(Water.c_str()).c_str(), _renderer, {false, 128, 128, 192});
+    water->init();
+    const SDL_Rect srcWaterRect = {0, 385, 1024, 46};
+    water->setSourceRect(&srcWaterRect);
 
     //InitCamera();
 
@@ -79,7 +83,8 @@ void GameClient::Render() {
     //renderizar fondo.
     const SDL_Rect m_DestRect = {0, 0, 512, 512};
     sky->render(&m_DestRect, false);
-
+    const SDL_Rect m_DestRect2 = {0, 461, 1024, 51};
+    water->render(&m_DestRect2, false);
 
     for (auto& grdL : m_GrdLarge) {
         grdL->render();
