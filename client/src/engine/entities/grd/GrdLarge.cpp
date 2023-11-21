@@ -24,3 +24,6 @@ void GrdLarge::release() {
     delete m_GrdLTexture;
 }
 
+SDL_Rect& GrdLarge::getGrdlRect() {
+    return this->m_DestGrdLRect;
+}

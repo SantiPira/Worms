@@ -1,6 +1,9 @@
 #include "../include/GameClient.h"
 #include "engine/entities/worms/Skins.h"
 
+#include <iostream>
+#include <thread>
+
 void GameClient::Init(const std::vector<Grd>& vector, int idPlayer, std::vector<GameUpdate>& initInfo) {
     InitSDL();
     CreateWindowAndRender();
@@ -71,7 +74,7 @@ void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
 void GameClient::Render(const WormDie& wormDie) {
     SDL_RenderClear(_renderer);
 
-    camara->updateCamera();
+    //camara->updateCamera();
 
     //renderizar fondo.
     SDL_Rect m_DestRect = {0 - camara->camara_rect.x/4, 0 - camara->camara_rect.y/4, 512, 512};
@@ -79,6 +82,24 @@ void GameClient::Render(const WormDie& wormDie) {
     sky->render(&m_DestRect, false);
 
     for (auto& grdL : m_GrdLarge) {
+
+        //std::cout << "Buenas\n";
+
+        SDL_Rect& grdlRect = grdL->getGrdlRect();
+        SDL_Rect aux = grdlRect;
+
+        aux.x -= grdlRect.x;
+        aux.y -= grdlRect.y;
+
+        grdlRect.x = aux.x;
+        grdlRect.y = aux.y;
+
+        
+        //std::cout << grdlRect.x << std::endl;
+        //std::cout << grdlRect.y << std::endl;
+
+        std::this_thread::sleep_for(std::chrono::seconds(5));
+
         grdL->render();
     }
     
@@ -86,7 +107,7 @@ void GameClient::Render(const WormDie& wormDie) {
         worm.second->render();
     }
 
-    //camara->updateCamera();
+    camara->updateCamera();
     
 
     if (wormDie.isDie) {
