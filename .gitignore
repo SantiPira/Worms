@@ -36,3 +36,6 @@
 
 # building
 /build
+
+cmake-build-debug/
+build/
