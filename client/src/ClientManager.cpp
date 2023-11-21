@@ -3,8 +3,9 @@
 #include "client_receiver.h"
 #include "GameClient.h"
 
-ClientManager::ClientManager(Protocol *protocol, int idPlayer, int cantPlayers) : m_Protocol(protocol),
-    m_IdPlayer(idPlayer), m_CantPlayers(cantPlayers), settingsQueue(100), gameUpdates(100), m_KeepRunning(true) {}
+ClientManager::ClientManager(Protocol *protocol, int idPlayer, int cantPlayers, WaitingWindow* waitingWindow) : m_Protocol(protocol),
+    m_IdPlayer(idPlayer), m_CantPlayers(cantPlayers), settingsQueue(100), gameUpdates(100), m_KeepRunning(true),
+    m_WaitingWindow(waitingWindow) {}
 
 void ClientManager::init() {
     try {
@@ -16,6 +17,9 @@ void ClientManager::init() {
         for (int i = 0; i < m_CantPlayers; i++) {
             initInfo.push_back(m_Protocol->recvGameUpdate());
         }
+
+        //Aca deberia cerrarse la ventana de espera pero eso no pasa.
+        //m_WaitingWindow->close();
 
         EventSender eventSender(*m_Protocol, m_IdPlayer, std::ref(settingsQueue), turnInfo.player_id == m_IdPlayer);
         ClientReceiver receiver(*m_Protocol, std::ref(gameUpdates), std::ref(eventSender), m_IdPlayer);

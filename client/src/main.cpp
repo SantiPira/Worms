@@ -5,15 +5,17 @@
 #include "GameClient.h"
 #include "ClientManager.h"
 #include "messages/server/GameUpdate.h"
+#include "waitingWindow.h"
 
 int main(int argc, char *argv[]) {
     try{
         QApplication app(argc, argv);
-        MainWindow window_connect;
+        WaitingWindow* waitingWindow = new WaitingWindow();
+        MainWindow window_connect(nullptr, waitingWindow);
         window_connect.show();
         app.exec();
         try {
-            ClientManager clientManager(window_connect.getProtocol(), window_connect.getIdPlayer(), window_connect.getCantPlayers());
+            ClientManager clientManager(window_connect.getProtocol(), window_connect.getIdPlayer(), window_connect.getCantPlayers(), waitingWindow);
             clientManager.init();
             //TODO: tener una ventana de QT con fin de juego
 

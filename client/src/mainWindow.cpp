@@ -1,6 +1,7 @@
 #include "mainWindow.h"
 
-MainWindow::MainWindow(QWidget *parent) : QWidget(parent), m_Lobby(true), buttonConnect("Conectar") {
+MainWindow::MainWindow(QWidget *parent, WaitingWindow *waitingWindow) : QWidget(parent), m_Lobby(true), buttonConnect("Conectar"),
+m_WaitingWindow(waitingWindow) {
     QVBoxLayout* connectLayout = new QVBoxLayout();
     QVBoxLayout* inputLayout = new QVBoxLayout();
 
@@ -34,8 +35,8 @@ void MainWindow::switchToGame() {
     QString server = this->inputServer.text();
 
     this->close();
-    this->juego = new Juego(server.toStdString(), port.toStdString());
-    //juego->iniciar_juego();
+    this->juego = new Juego(server.toStdString(), port.toStdString(), this->m_WaitingWindow);
+ 
     juego->menu_window();
 }
 
