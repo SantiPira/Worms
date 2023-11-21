@@ -16,6 +16,9 @@ void WormsContact::BeginContact(b2Body* bodyA, b2Body* bodyB) {
     }
     if (wormA != nullptr && wormB != nullptr) {
         std::cout << "[BEGIN WORM COLLIDE]" << std::endl;
+        if (wormA->getIsAttacking() || wormB->getIsAttacking()) {
+            return;
+        }
         wormA->getBody()->SetAwake(false);
         wormB->getBody()->SetAwake(false);
     }
@@ -38,6 +41,9 @@ void WormsContact::EndContact(b2Body* bodyA, b2Body* bodyB) {
     }
 
     if (wormA != nullptr && wormB != nullptr) {
+        if (wormA->getIsAttacking() || wormB->getIsAttacking()) {
+            return;
+        }
         wormA->getBody()->SetAwake(true);
         wormB->getBody()->SetAwake(true);
     }

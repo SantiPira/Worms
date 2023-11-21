@@ -11,7 +11,7 @@ private:
     float distance;
 public:
     Bate();
-    void attack(WWorm* attacker, WWorm* attacked) override;
+    void attack(WWorm* attacker, WWorm* attacked, uint8_t force) override;
 
     void setWeaponId(WeaponID weaponId) override;
     WeaponID getWeaponId() const override;

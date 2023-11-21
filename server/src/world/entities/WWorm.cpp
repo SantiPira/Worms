@@ -207,7 +207,7 @@ void WWorm::stopMove() {
     this->m_Velocity = vel;
 }
 
-void WWorm::attack(int param1) {
+void WWorm::attack(uint8_t force) {
     if (m_Weapon != WeaponID::NO_WEAPON) {
         WeaponFactory weaponFactory;
         for (b2Body* entity = m_World->GetBodyList(); entity; entity = entity->GetNext()) {
@@ -215,7 +215,7 @@ void WWorm::attack(int param1) {
             if (wentity != nullptr && wentity->getEntityType() == EntitiesType::ENTITY_WORM) {
                 auto* w = reinterpret_cast<WWorm*>(entity->GetUserData().pointer);
                 std::unique_ptr<Weapon> weaponPtr(weaponFactory.createWeapon(m_Weapon));
-                weaponPtr->attack(this, w);
+                weaponPtr->attack(this, w, force);
             }
         }
     }

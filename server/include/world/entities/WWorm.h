@@ -95,7 +95,7 @@ public:
 
     void stopMove();
 
-    void attack(int param1);
+    void attack(uint8_t force);
 
     void receiveDamage(int damage);
 

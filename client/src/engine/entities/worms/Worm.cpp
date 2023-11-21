@@ -13,6 +13,7 @@ void Worm::init() {
         WaccuseDie waccuseDie;
         WaccuseGettingDamage waccuseGettingDamage;
         GraveSkin waccuseGrave;
+        WaccuseSetBate waccuseSetBate;
         SDL_Rect destRect = {
                 static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
                 static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)),
@@ -112,6 +113,20 @@ void Worm::init() {
             waccuseGrave.deltaPosX,
             waccuseGrave.deltaPosY));
 
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_WACCUSE_SET_BATE, getWaccuseAnimation(
+            waccuseSetBate.spritePath,
+            waccuseSetBate.blendMode,
+            waccuseSetBate.frames,
+            waccuseSetBate.distanceBetweenFrames,
+            waccuseSetBate.frameWidth,
+            waccuseSetBate.frameHeight,
+            waccuseSetBate.duration,
+            waccuseSetBate.srcRect,
+            waccuseSetBate.initYSprite,
+            destRect,
+            waccuseSetBate.deltaPosX,
+            waccuseSetBate.deltaPosY));
+
     for (auto& sprite : m_SpritesMap) {
         sprite.second->init();
     }
@@ -147,6 +162,8 @@ SpritesEnum Worm::chooseSprite(const GameUpdate& gameUpdate) const {
         return SpritesEnum::SPRITE_JUMPING;
     } else if (gameUpdate.m_Weapon == WeaponID::AXE) {
         return SpritesEnum::SPRITE_AXE_WALK;
+    } else if (gameUpdate.m_Weapon == WeaponID::BATE) {
+        return SpritesEnum::SPRITE_WACCUSE_SET_BATE;
     } else if (gameUpdate.m_Movement == GameAction::WORM_MOVE_RIGHT ||
                gameUpdate.m_Movement == GameAction::WORM_MOVE_LEFT) {
         return SpritesEnum::SPRITE_WALK;

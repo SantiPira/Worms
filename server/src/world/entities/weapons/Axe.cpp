@@ -4,7 +4,7 @@ Axe::Axe() : damage(50), distance(1.5f) {
     this->m_WeaponId = WeaponID::AXE;
 }
 
-void Axe::attack(WWorm *attacker, WWorm *attacked) {
+void Axe::attack(WWorm *attacker, WWorm *attacked, uint8_t force) {
     if (attacked->getId() == attacker->getId()) {
         return;
     }

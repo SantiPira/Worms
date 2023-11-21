@@ -95,6 +95,20 @@ struct WaccuseGettingDamage {
     float deltaPosY = 40.96f;
 };
 
+struct WaccuseSetBate {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wbsblnk.png");
+    BlendMode blendMode = {true, 192, 192, 128};
+    int frames = 10;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 60;
+    int frameHeight = 40;
+    float duration = 0.5f;
+    SDL_Rect srcRect = {13, 13, 47, 30};
+    int initYSprite = 13;
+    float deltaPosX = 80.0f;
+    float deltaPosY = 35.0f;
+};
+
 /*
 struct SkySking {
     const std::string spritePath = "../../resources/Fondos/cielo.png"

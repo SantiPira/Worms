@@ -87,11 +87,14 @@ UserAction EventSender::attack() {
             uint8_t force;
             if (elapsedSeconds.count() >= BatePotency::LOW_POTENCY
                 && elapsedSeconds.count() < BatePotency::MEDIUM_POTENCY) {
+                std::cout << "LOW" << std::endl;
                 force = BateForce::LOW;
             } else if (elapsedSeconds.count() > BatePotency::MEDIUM_POTENCY
                 && elapsedSeconds.count() < BatePotency::HIGH_POTENCY) {
+                std::cout << "MEDIUM" << std::endl;
                 force = BateForce::MEDIUM;
             } else {
+                std::cout << "HIGH" << std::endl;
                 force = BateForce::HIGH;
             }
             return {ActionType::ATTACK, m_IdPlayer, force};
