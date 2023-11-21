@@ -20,11 +20,16 @@ typedef struct {
 } Camera_info;
 
 class Camara {
- 
+ public:
     SDL_Renderer *_renderer;
     Worm *worm;
-    Camera_info camera_info;
-    WorldScale escalador;
+    int pos_x;
+    int pos_y;
+    //Camera_info camera_info;
+    //WorldScale escalador;
+    SDL_Rect camara_rect;
+
+    //SDL_Rect& worm_rect;
 
 
  public:

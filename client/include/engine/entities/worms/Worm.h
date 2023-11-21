@@ -16,7 +16,7 @@
 #include <vector>
 
 class Worm {
- private:
+ public:
     SDL_Renderer* m_Renderer;
     std::unordered_map<SpritesEnum, std::unique_ptr<Animation>> m_SpritesMap;
 
@@ -45,6 +45,8 @@ private:
     void init();
     void update(double elapsedSeconds, const GameUpdate& gameUpdate);
     void render();
+   
+    SDL_Rect& getWormRect();
 
     ~Worm() = default;
 

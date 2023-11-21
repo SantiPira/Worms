@@ -28,7 +28,7 @@ void GameClient::Init(const std::vector<Grd>& beams, int idPlayer, std::vector<G
     const SDL_Rect srcWaterRect = {0, 385, 1024, 46};
     water->setSourceRect(&srcWaterRect);
 
-    //InitCamera();
+    InitCamera();
 
     //Corro el audio con el chunk
     //mixer->PlayChannel(-1, *chunk, -1);
@@ -74,13 +74,14 @@ void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
     }
 }
 
-void GameClient::Render() {
+void GameClient::Render(const WormDie& wormDie) {
     SDL_RenderClear(_renderer);
 
-    //camara->updateCamera();
+    camara->updateCamera();
 
     //renderizar fondo.
-    const SDL_Rect m_DestRect = {0, 0, 512, 512};
+    SDL_Rect m_DestRect = {0 - camara->camara_rect.x/4, 0 - camara->camara_rect.y/4, 512, 512};
+    //SDL_Rect m_DestRect = {-15, -1, 512, 512};
     sky->render(&m_DestRect, false);
     const SDL_Rect m_DestRect2 = {0, 461, 1024, 51};
     water->render(&m_DestRect2, false);
@@ -93,7 +94,7 @@ void GameClient::Render() {
     for (auto& worm : m_Worms) {
         worm.second->render();
     }
-    //camara->updateCamera();
+    camara->updateCamera();
 
     for (auto& worm : m_WormsDie) {
         worm->render();
