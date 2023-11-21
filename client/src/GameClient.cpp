@@ -74,7 +74,7 @@ void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
     }
 }
 
-void GameClient::Render(const WormDie& wormDie) {
+void GameClient::Render() {
     SDL_RenderClear(_renderer);
 
     camara->updateCamera();
