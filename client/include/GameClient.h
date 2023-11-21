@@ -7,12 +7,13 @@
 #include <filesystem>
 #include "engine/entities/worms/Worm.h"
 #include "ParseMapFromFile.h"
-#include "engine/entities/grd/GrdLarge.h"
+#include "engine/entities/beams/Beam.h"
 #include "engine/graphics/Texture.h"
 #include "messages/server/GameUpdate.h"
 #include <unordered_map>
 #include <vector>
 #include "../include/camara.h"
+#include "engine/entities/worms/Skins.h"
 
 class GameClient {
  private:
@@ -23,7 +24,7 @@ class GameClient {
 
     std::unordered_map<int, Worm*> m_Worms;
     std::vector<Grd> m_Grd;
-    std::vector<GrdLarge*> m_GrdLarge;
+    std::vector<Beam*> m_Beams;
     std::vector<Worm*> m_WormsDie;
     Texture* sky;
     Texture* water;
@@ -43,7 +44,7 @@ class GameClient {
     void InitCamera();
 
  public:
-    void Init(const std::vector<Grd>& vector, int idPlayer, std::vector<GameUpdate>& initInfo);
+    void Init(const std::vector<Grd>& beams, int idPlayer, std::vector<GameUpdate>& initInfo);
 
     void Update(double elapsedSeconds, const GameUpdate& gameUpdate);
 

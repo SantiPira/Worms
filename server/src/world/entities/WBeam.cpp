@@ -2,10 +2,11 @@
 
 WBeam::WBeam(b2World* world, const Grd& beam) {
     this->type = EntitiesType::ENTITY_BEAM;
+    this->m_GrdType = beam.grdType;
     b2BodyDef beamBodyDef;
     beamBodyDef.type = b2_staticBody;
     beamBodyDef.position.Set(beam.x, beam.y);
-    beamBodyDef.angle = 0;
+//    beamBodyDef.angle = 0;
     beamBodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
 
     m_BeamBody = world->CreateBody(&beamBodyDef);

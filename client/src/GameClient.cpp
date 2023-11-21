@@ -1,16 +1,15 @@
 #include "../include/GameClient.h"
-#include "engine/entities/worms/Skins.h"
 
-void GameClient::Init(const std::vector<Grd>& vector, int idPlayer, std::vector<GameUpdate>& initInfo) {
+void GameClient::Init(const std::vector<Grd>& beams, int idPlayer, std::vector<GameUpdate>& initInfo) {
     InitSDL();
     CreateWindowAndRender();
     InitMixerAndChunk();
     SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
     m_IdPlayer = idPlayer;
-    for (auto& grd : vector) {
-        auto* grdL = new GrdLarge(_renderer, grd.x, grd.y, grd.width, grd.height);
-        grdL->init();
-        m_GrdLarge.push_back(grdL);
+    for (auto& beamMap : beams) {
+        auto* beam = new Beam(_renderer, beamMap);
+        beam->init();
+        m_Beams.push_back(beam);
     }
 
     for (auto& gameUpdate : initInfo) {
@@ -86,8 +85,8 @@ void GameClient::Render() {
     const SDL_Rect m_DestRect2 = {0, 461, 1024, 51};
     water->render(&m_DestRect2, false);
 
-    for (auto& grdL : m_GrdLarge) {
-        grdL->render();
+    for (auto& beam : m_Beams) {
+        beam->render();
     }
 
     

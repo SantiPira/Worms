@@ -25,16 +25,16 @@ Grd::Grd(int grdType, float posX, float posY) {
     this->y = posY;
     switch (grdType) {
         case GRD_SMALL_HORIZONTAL:
-            this->width = 2.0f;
-            this->height = 0.5f;
+            this->width = GrdWidthEnum::GRD_WIDTH_SMALL;
+            this->height = GrdHeightEnum::GRD_HEIGHT_SMALL;
             break;
         case GRD_LARGE_HORIZONTAL:
             this->width = GrdWidthEnum::GRD_HORIZONTAL_WIDTH_LARGE;
             this->height = GrdHeightEnum::GRD_HORIZONTAL_HEIGHT_LARGE;
             break;
         case GRD_LARGE_VERTICAL:
-            this->width = 1.0f;
-            this->height = 10.0f;
+            this->width = GrdWidthEnum::GRD_VERTICAL_WIDTH_LARGE;
+            this->height = GrdHeightEnum::GRD_VERTICAL_HEIGHT_LARGE;
             break;
         default:
             this->width = 10.0f;

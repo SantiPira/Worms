@@ -18,9 +18,11 @@ enum GrdEnum : uint8_t {
 namespace GrdWidthEnum {
     const float GRD_HORIZONTAL_WIDTH_LARGE = 10;
     const float GRD_WIDTH_SMALL = 5;
+    const float GRD_VERTICAL_WIDTH_LARGE = 1;
 };
 
 namespace GrdHeightEnum {
     const float GRD_HORIZONTAL_HEIGHT_LARGE = 1.0f;
-    const float GRD_HEIGHT_SMALL = 0.2f;
+    const float GRD_HEIGHT_SMALL = 1.0f;
+    const float GRD_VERTICAL_HEIGHT_LARGE = 10.0f;
 }

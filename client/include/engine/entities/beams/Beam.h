@@ -4,19 +4,20 @@
 #include "utils/WorldScale.h"
 #include "engine/graphics/Texture.h"
 #include "engine/entities/TexturePaths.h"
-#include "resources/GrdEnum.h"
 #include <filesystem>
+#include "ParseMapFromFile.h"
 
-class GrdLarge {
+class Beam {
  private:
     SDL_Renderer* m_Renderer;
-    Texture* m_GrdLTexture{};
-    SDL_Rect m_DestGrdLRect{};
-    float m_GrdLWidth{};
-    float m_GrdLHeight{};
+    Texture* m_BeamTexture{};
+    SDL_Rect m_DestBeamRect{};
+    float m_BeamWidth{};
+    float m_BeamHeight{};
+    GrdEnum m_BeamType;
 
  public:
-    GrdLarge(SDL_Renderer* renderer, float posX, float posY, float w, float h);
+    Beam(SDL_Renderer* renderer, const Grd& grd);
 
     void init();
     void release();

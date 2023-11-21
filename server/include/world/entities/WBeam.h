@@ -10,6 +10,7 @@ class WBeam : public WEntity {
  private:
     uint16_t m_BeamCategory = 0x0002;
     b2Body* m_BeamBody{};
+    GrdEnum m_GrdType;
  public:
     WBeam(b2World* world, const Grd& beam);
 
