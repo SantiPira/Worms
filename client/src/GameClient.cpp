@@ -32,10 +32,11 @@ void GameClient::Init(const std::vector<Grd>& beams, int idPlayer, std::vector<G
     const SDL_Rect srcWaterRect = {0, 385, 1024, 46};
     water->setSourceRect(&srcWaterRect);
 
-    InitCamera();
+    //La camara funciona con bugs.
+    //InitCamera();
 
-    //Corro el audio con el chunk
-    //mixer->PlayChannel(-1, *chunk, -1);
+    //Corro el audio con el chunk.
+    mixer->PlayChannel(-1, *chunk, -1);
 
 }
 
@@ -81,19 +82,22 @@ void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
 void GameClient::Render() {
     SDL_RenderClear(_renderer);
 
-    camara->updateCamera();
+    //camara->updateCamera();
 
     //SDL_Rect& wormRect;
 
     //renderizar fondo.
-    SDL_Rect m_DestRect = {0 - camara->camara_rect.x/4, 0 - camara->camara_rect.y/4, 512, 512};
+    SDL_Rect m_DestRect = {0 /*- camara->camara_rect.x/4*/, 0 /*- camara->camara_rect.y/4*/, 512, 512};
     sky->render(&m_DestRect, false);
+
     const SDL_Rect m_DestRect2 = {0, 461, 1024, 51};
     water->render(&m_DestRect2, false);
 
     for (auto& beam : m_Beams) {
-        //Por un aparente problema con Box2D al desplazar la camara las vigas se mantiene estaticas.
 
+        //Las vigas se desplzan muy rapido respecto a la velocidad del gusano.
+        
+        /*
         SDL_Rect& beamRect = beam->getBeamRect();
         SDL_Rect beamRectCopy = {0,0,0,0};
         beamRectCopy.x = beamRect.x;
@@ -101,12 +105,14 @@ void GameClient::Render() {
         
         beamRect.x -= camara->camara_rect.x/4;
         beamRect.y -= camara->camara_rect.y/4;
+        */
 
         beam->render();
 
+        /*
         beamRect.x = beamRectCopy.x;
         beamRect.y = beamRectCopy.y;
-
+        */
 
 
     }
