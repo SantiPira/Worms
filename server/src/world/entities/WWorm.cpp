@@ -18,6 +18,7 @@ WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRi
     fd.friction = 0.0f;
     fd.shape = &shape;
     fd.density = 20.0f;
+    fd.restitution = 0.0f;
     m_Body->CreateFixture(&fd);
     b2Filter filter;
     m_WormCategory = wormCategory;
@@ -175,6 +176,7 @@ GameUpdate WWorm::getUpdate() {
     gameUpdate.m_Weapon = m_Weapon;
     gameUpdate.m_IsAttacking = m_IsAttacking;
     std::chrono::duration<double> elapsed_seconds = std::chrono::system_clock::now() - m_TimeState;
+    //TODO: Refactor de esta parte, llevar a un metodo que maneje mejor el tiempo para cada animacion especifica.
     if (elapsed_seconds.count() > 2.0) {
         if (m_SelfCondition == GameAction::WORM_DIE) {
             m_SelfCondition = GameAction::WORM_GRAVE;
@@ -206,13 +208,15 @@ void WWorm::stopMove() {
 }
 
 void WWorm::attack(int param1) {
-    WeaponFactory weaponFactory;
-    for (b2Body* entity = m_World->GetBodyList(); entity; entity = entity->GetNext()) {
-        auto* wentity = reinterpret_cast<WEntity*>(entity->GetUserData().pointer);
-        if (wentity != nullptr && wentity->getEntityType() == EntitiesType::ENTITY_WORM) {
-            auto* w = reinterpret_cast<WWorm*>(entity->GetUserData().pointer);
-            std::unique_ptr<Weapon> weaponPtr(weaponFactory.createWeapon(m_Weapon));
-            weaponPtr->attack(this, w);
+    if (m_Weapon != WeaponID::NO_WEAPON) {
+        WeaponFactory weaponFactory;
+        for (b2Body* entity = m_World->GetBodyList(); entity; entity = entity->GetNext()) {
+            auto* wentity = reinterpret_cast<WEntity*>(entity->GetUserData().pointer);
+            if (wentity != nullptr && wentity->getEntityType() == EntitiesType::ENTITY_WORM) {
+                auto* w = reinterpret_cast<WWorm*>(entity->GetUserData().pointer);
+                std::unique_ptr<Weapon> weaponPtr(weaponFactory.createWeapon(m_Weapon));
+                weaponPtr->attack(this, w);
+            }
         }
     }
 }

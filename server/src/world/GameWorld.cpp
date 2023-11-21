@@ -78,6 +78,9 @@ void GameWorld::execute(IWormInstruction *instruction, int playerId) {
         return;
     }
     WWorm* worm = worms.at(playerId);
+    if (worm->getBody()->GetType() == b2_staticBody) {
+        return;
+    }
     instruction->execute(worm);
 }
 
