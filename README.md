@@ -58,13 +58,13 @@ Una vez establecida la conexión,  se muestra una ventana que permite decidir si
 #### Gameplay
 
 Para mover al gusano se utilizan las teclas:
-A : Mueve a izquierda
-D: Mueve a Derecha
-Barra espaciadora: Salta
-H: Saca el Hacha y equipa el Hacha
-J: Guarda el arma
-B: Saca y equipa el Bate
-C: Ataca
+- A : Mueve a izquierda
+- D: Mueve a Derecha
+- Barra espaciadora: Salta
+- H: Saca el Hacha y equipa el Hacha
+- J: Guarda el arma
+- B: Saca y equipa el Bate
+- C: Ataca
 
 El Worm por defecto tiene 100 de HP y el golpe del Hacha quita 50 de HP.
 Para el uso del Bate se empezo a implementar el aumento del angulo de golpe, con las flechas UP y DOWN se incrementa y decrementa el angulo. Esto no esta del todo hecho.
