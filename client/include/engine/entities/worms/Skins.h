@@ -10,7 +10,7 @@
  * existen sprites distintos, y habria que modificar el cuerpo del World para poder mandar desde el servidor el width y height
  * Y asi modelar usando WorldScale::toPixel(w o h) y renderizar el gusano segun las dimensaiones que esta tomando en el World
  * En este proyecto, a priori se utiliza un Worm dinamico pero que no cambia sus dimensiones a lo largo del juego*/
-struct WaccuseWalk {
+struct WaccuseIdle {
     const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/waccuse.png");
     BlendMode blendMode = {true, 128, 128, 192};
     int frames = 36;
@@ -20,6 +20,20 @@ struct WaccuseWalk {
     float duration = 2.0f;
     SDL_Rect srcRect = {20, 17, 22, 26};
     int initYSprite = 17;
+    float deltaPosX = 25.6f;
+    float deltaPosY = 40.96f;
+};
+
+struct WaccuseWalk {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wwalk.png");
+    BlendMode blendMode = {true, 128, 128, 192};
+    int frames = 15;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 30;
+    int frameHeight = 44;
+    float duration = 0.7f;
+    SDL_Rect srcRect = {11, 14, 28, 29};
+    int initYSprite = 14;
     float deltaPosX = 25.6f;
     float deltaPosY = 40.96f;
 };
@@ -79,6 +93,20 @@ struct WaccuseGettingDamage {
     int initYSprite = 17;
     float deltaPosX = 25.6f;
     float deltaPosY = 40.96f;
+};
+
+struct WaccuseSetBate {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wbsblnk.png");
+    BlendMode blendMode = {true, 192, 192, 128};
+    int frames = 10;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 60;
+    int frameHeight = 40;
+    float duration = 0.5f;
+    SDL_Rect srcRect = {13, 13, 47, 30};
+    int initYSprite = 13;
+    float deltaPosX = 80.0f;
+    float deltaPosY = 35.0f;
 };
 
 /*

@@ -6,5 +6,4 @@ WormNone::WormNone(int idPlayer) {
 
 void WormNone::execute(WWorm *worm) {
     // Do nothing
-    std::cout << "WormNone::execute" << std::endl;
 }

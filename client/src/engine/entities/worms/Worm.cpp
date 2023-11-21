@@ -5,18 +5,34 @@ Worm::Worm(SDL_Renderer *renderer, float posX, float posY, float width, float he
           m_WormYPosition(posY), m_Widht(WorldScale::toPixel(width)), m_Height(WorldScale::toPixel(height)) {}
 
 void Worm::init() {
-        m_CurrentSprite = SpritesEnum::SPRITE_WALK;
+        m_CurrentSprite = SpritesEnum::SPRITE_WACCUSE_IDLE;
+        WaccuseIdle waccuseIdle;
         WaccuseWalk waccuseWalk;
         WaccuseAxe waccuseAxe;
         WaccuseJumping waccuseJumping;
         WaccuseDie waccuseDie;
         WaccuseGettingDamage waccuseGettingDamage;
         GraveSkin waccuseGrave;
+        WaccuseSetBate waccuseSetBate;
         SDL_Rect destRect = {
                 static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
                 static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)),
                 static_cast<int>(m_Widht), static_cast<int>(m_Height)
         };
+
+        m_SpritesMap.emplace(SpritesEnum::SPRITE_WACCUSE_IDLE, getWaccuseAnimation(
+                waccuseIdle.spritePath,
+                waccuseIdle.blendMode,
+                waccuseIdle.frames,
+                waccuseIdle.distanceBetweenFrames,
+                waccuseIdle.frameWidth,
+                waccuseIdle.frameHeight,
+                waccuseIdle.duration,
+                waccuseIdle.srcRect,
+                waccuseIdle.initYSprite,
+                destRect,
+                waccuseIdle.deltaPosX,
+                waccuseIdle.deltaPosY));
         m_SpritesMap.emplace(SpritesEnum::SPRITE_WALK, getWaccuseAnimation(
                 waccuseWalk.spritePath,
                 waccuseWalk.blendMode,
@@ -97,45 +113,62 @@ void Worm::init() {
             waccuseGrave.deltaPosX,
             waccuseGrave.deltaPosY));
 
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_WACCUSE_SET_BATE, getWaccuseAnimation(
+            waccuseSetBate.spritePath,
+            waccuseSetBate.blendMode,
+            waccuseSetBate.frames,
+            waccuseSetBate.distanceBetweenFrames,
+            waccuseSetBate.frameWidth,
+            waccuseSetBate.frameHeight,
+            waccuseSetBate.duration,
+            waccuseSetBate.srcRect,
+            waccuseSetBate.initYSprite,
+            destRect,
+            waccuseSetBate.deltaPosX,
+            waccuseSetBate.deltaPosY));
+
     for (auto& sprite : m_SpritesMap) {
         sprite.second->init();
     }
 }
 
 void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
-    //TODO: Cuando setea un sprite en m_CurrentSprite ya no deberia setear ninguno mas (por esta accion en particular)
     m_Dir = gameUpdate.m_Dir;
-    WeaponID weapon(gameUpdate.m_Weapon);
-    if (gameUpdate.m_Move == GameAction::WORM_NONE) {
-        m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
-    } else {
-        //TODO: Aca habria que hacer un Factory de Sprites para no estar asignando a manopla cada Sprite por cada accion distinta
-        if (gameUpdate.m_SelfCondition == GameAction::WORM_ATTACKED) {
-            m_CurrentSprite = SpritesEnum::SPRITE_WACCUSE_GETTING_DAMAGE;
-        } else if (gameUpdate.m_SelfCondition == GameAction::WORM_DIE) {
-            m_CurrentSprite = SpritesEnum::SPRITE_WACCUSE_DIE;
-        } else if (gameUpdate.m_SelfCondition == GameAction::WORM_GRAVE) {
-            m_CurrentSprite = SpritesEnum::SPRITE_WACCUSE_GRAVE;
-        } else if (weapon == WeaponID::NO_WEAPON) {
-            if (gameUpdate.m_Move == GameAction::WORM_JUMP) {
-                m_CurrentSprite = SpritesEnum::SPRITE_JUMPING;
-            } else {
-                m_CurrentSprite = SpritesEnum::SPRITE_WALK;
-            }
-        } else if (weapon == WeaponID::AXE) {
-            m_CurrentSprite = SpritesEnum::SPRITE_AXE_WALK;
-        }
-        m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
+    m_CurrentSprite = chooseSprite(gameUpdate);
 
-        if (gameUpdate.m_Move != WORM_NONE) {
-            Animation* anim = m_SpritesMap.at(m_CurrentSprite).get();
-            float tempX = WorldScale::worldToPixelX(gameUpdate.x_pos, anim->getDeltaPosX());
-            float tempY = WorldScale::worldToPixelY(gameUpdate.y_pos, anim->getDeltaPosY());
-            anim->setDestRect({static_cast<int>(tempX), static_cast<int>(tempY), anim->getFrameWidth(),
-                               anim->getFrameHeight()});
-            m_WormXPosition = tempX;
-            m_WormYPosition = tempY;
-        }
+    m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
+
+    if (gameUpdate.m_Movement != INVALID_ACTION) {
+        Animation* anim = m_SpritesMap.at(m_CurrentSprite).get();
+        float tempX = WorldScale::worldToPixelX(gameUpdate.x_pos, anim->getDeltaPosX());
+        float tempY = WorldScale::worldToPixelY(gameUpdate.y_pos, anim->getDeltaPosY());
+        anim->setDestRect({static_cast<int>(tempX), static_cast<int>(tempY), anim->getFrameWidth(),
+                           anim->getFrameHeight()});
+        m_WormXPosition = tempX;
+        m_WormYPosition = tempY;
+    }
+}
+
+SpritesEnum Worm::chooseSprite(const GameUpdate& gameUpdate) const {
+    if (gameUpdate.m_Movement == GameAction::INVALID_ACTION) {
+        return m_CurrentSprite;
+    } else if (gameUpdate.m_SelfCondition == GameAction::WORM_ATTACKED) {
+        return SpritesEnum::SPRITE_WACCUSE_GETTING_DAMAGE;
+    } else if (gameUpdate.m_SelfCondition == GameAction::WORM_DIE) {
+        return SpritesEnum::SPRITE_WACCUSE_DIE;
+    } else if (gameUpdate.m_SelfCondition == GameAction::WORM_GRAVE) {
+        return SpritesEnum::SPRITE_WACCUSE_GRAVE;
+    } else if (gameUpdate.m_Movement == GameAction::WORM_JUMP) {
+        return SpritesEnum::SPRITE_JUMPING;
+    } else if (gameUpdate.m_Weapon == WeaponID::AXE) {
+        return SpritesEnum::SPRITE_AXE_WALK;
+    } else if (gameUpdate.m_Weapon == WeaponID::BATE) {
+        return SpritesEnum::SPRITE_WACCUSE_SET_BATE;
+    } else if (gameUpdate.m_Movement == GameAction::WORM_MOVE_RIGHT ||
+               gameUpdate.m_Movement == GameAction::WORM_MOVE_LEFT) {
+        return SpritesEnum::SPRITE_WALK;
+    } else {
+        return SpritesEnum::SPRITE_WACCUSE_IDLE;
     }
 }
 

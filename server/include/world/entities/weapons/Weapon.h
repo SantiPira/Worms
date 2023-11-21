@@ -7,10 +7,8 @@ class WWorm;
 class Weapon {
 protected:
     WeaponID m_WeaponId = WeaponID::NO_WEAPON;
-    b2Vec2 m_AttackerPosition{};
-    b2Vec2 m_AttackedPosition{};
 public:
-    virtual void attack(WWorm* worm) = 0;
+    virtual void attack(WWorm* attacker, WWorm* attacked, uint8_t force) = 0;
 
     virtual void setWeaponId(WeaponID weaponId) = 0;
 

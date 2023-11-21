@@ -1,7 +1,7 @@
 #include "world/GameWorld.h"
 
 GameWorld::GameWorld(const std::string &file_map_path) : players(1), width(20.0f), height(20.0f),
- timeStep(1.0f/60.0f), velocityIterations(8), positionIterations(3), gravity(0.0f,-10.0f),
+ timeStep(1.0f/60.0f), velocityIterations(6), positionIterations(2), gravity(0.0f,-10.0f),
  m_world(gravity), map_path(file_map_path) {}   /*TODO ESTO IRIA POR CONFIG YML*/
 
 void GameWorld::Setup() {
@@ -10,25 +10,11 @@ void GameWorld::Setup() {
     ParseMapFromFile parser;
     std::vector<Grd> girders = parser.parse(map_path);
     for (auto& girder : girders) {
-        SetGirder(girder);
+        std::unique_ptr<WBeam> beam = std::make_unique<WBeam>(&m_world, girder);
+        m_Beams.push_back(std::move(beam));
     }
     m_WWater = std::make_unique<WWater>(&m_world, categories);
     m_world.SetContactListener(&contactListener);
-}
-
-void GameWorld::SetGirder(const Grd& girder) {
-    if(girder.grdType == GRD_LARGE_HORIZONTAL) {
-        b2BodyDef bd;
-        bd.position.Set(girder.x, girder.y);
-        bd.type = b2_staticBody;
-        b2Body * body = m_world.CreateBody(&bd);
-        b2PolygonShape shape;
-        b2FixtureDef myFixtureDef;
-        shape.SetAsBox(5.0f,0.50f);
-        myFixtureDef.shape = &shape;
-        myFixtureDef.density = 1;
-        body->CreateFixture(&myFixtureDef);
-    }
 }
 
 void GameWorld::StartWorld() {
@@ -64,7 +50,7 @@ void GameWorld::SetWorm(const int& player_number, const float & x_pos, const flo
     std::cout << "ID [" << player_number << "] - POS (" << x_pos << ", " << y_pos << ")" << std::endl;
 }
 
-std::vector<GameUpdate> GameWorld::getWormsPosition() const {
+std::vector<GameUpdate> GameWorld::getWormsUpdates() const {
     std::vector<GameUpdate> gameUpdates;
     for (auto& worm : worms) {
         gameUpdates.push_back(worm.second->getUpdate());
@@ -77,28 +63,25 @@ void GameWorld::execute(IWormInstruction *instruction, int playerId) {
         return;
     }
     WWorm* worm = worms.at(playerId);
+    if (worm->getBody()->GetType() == b2_staticBody) {
+        return;
+    }
     instruction->execute(worm);
-//    step();
-//    return worm->getUpdate();
 }
 
 void GameWorld::step() {
     m_world.Step(timeStep,velocityIterations,positionIterations);
 }
 
-void GameWorld::removeDeadWorms(std::reference_wrapper<std::vector<GameUpdate>> updates) {
-    std::vector<int> wormsToRemove;
+void GameWorld::removeDeadWorms(std::vector<int> &wormsRemoved) {
     for (auto& worm : worms) {
-        if (worm.second->getSelfCondition() == WORM_DIE) {
-            auto up = worm.second->getUpdate();
-            up.m_SelfCondition = WORM_GRAVE;
-            updates.get().push_back(up);
-            wormsToRemove.push_back(worm.first);
+        if (worm.second->getSelfCondition() == WORM_GRAVE) {
+            wormsRemoved.push_back(worm.first);
             setStaticBody(worm);
         }
     }
 
-    for (auto& id : wormsToRemove) {
+    for (auto& id : wormsRemoved) {
         m_world.DestroyBody(worms.at(id)->getBody());
         worms.erase(id);
         wormsPositions.erase(id);
@@ -123,5 +106,10 @@ GameWorld::~GameWorld() {
         m_world.DestroyBody(worm.second->getBody());
         delete worm.second; //TODO: Revisar esto
     }
+}
+
+void GameWorld::resetWormStatus(int idPlayer) {
+    worms.at(idPlayer)->resetWormStatus();
+    m_world.Step(0,0,0);
 }
 

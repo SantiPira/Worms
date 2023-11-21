@@ -8,8 +8,8 @@ private:
     int damage;
     float distance;
 public:
-    Axe(b2Vec2& attackerPosition, b2Vec2& attackedPosition);
-    void attack(WWorm* worm) override;
+    Axe();
+    void attack(WWorm* attacker, WWorm* attacked, uint8_t force) override;
 
     void setWeaponId(WeaponID weaponId) override;
     WeaponID getWeaponId() const override;

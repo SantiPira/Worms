@@ -8,6 +8,7 @@
 #include "messages/user_actions/UserAction.h"
 #include "world/entities/WWorm.h"
 #include "world/entities/WWater.h"
+#include "world/entities/WBeam.h"
 #include "world/instructions/IWormInstruction.h"
 #include "world/listeners/ContactListener.h"
 #include <fstream>
@@ -17,7 +18,6 @@
 
 class GameWorld {
 private:
-    int beams;
     int players;
     const float width;
     const float height;
@@ -31,6 +31,7 @@ private:
     int i = 0;
     std::unordered_map<int, b2Vec2> wormsPositions;
     std::unique_ptr<WWater> m_WWater;
+    std::vector<std::unique_ptr<WBeam>> m_Beams;
 
     uint16_t m_GroundCategory = 0x0001;
     uint16_t m_BeamCategory = 0x0002;
@@ -43,18 +44,19 @@ public:
 
     explicit GameWorld(const std::string &map_path);
     void Setup();
-    void SetGirder(const Grd& girder);
     void StartWorld();
     void SetWorm(const int& player_number, const float & x_pos, const float& y_pos);
     void execute(IWormInstruction* instruction, int playerId);
-    std::vector<GameUpdate> getWormsPosition() const;
+    std::vector<GameUpdate> getWormsUpdates() const;
 
     void step();
 
-    void removeDeadWorms(std::reference_wrapper<std::vector<GameUpdate>> updates);
+    void removeDeadWorms(std::vector<int> &wormsRemoved);
 
     void setStaticBody(std::pair<const int, WWorm *> &worm);
 
     //destructor
     ~GameWorld();
+
+    void resetWormStatus(int idPlayer);
 };

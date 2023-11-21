@@ -1,16 +1,39 @@
 #include "world/entities/weapons/impl/Bate.h"
 
-Bate::Bate(b2Vec2 &attackerPosition, b2Vec2 &attackedPosition) {
+Bate::Bate() {
     this->m_WeaponId = WeaponID::BATE;
-    this->m_AttackerPosition = attackerPosition;
-    this->m_AttackedPosition = attackedPosition;
+    this->distance = 1.0f;
 }
 
-void Bate::attack(WWorm *worm) {
-    float distanceBetween = b2Distance(this->m_AttackerPosition, this->m_AttackedPosition);
-    if (distanceBetween <= distance) {
-        worm->receiveDamage(damage);
+void Bate::attack(WWorm *attacker, WWorm* attacked, uint8_t force) {
+    float mForce;
+    switch (force) {
+        case LOW:
+            mForce = 100;
+            break;
+        case MEDIUM:
+            mForce = 200;
+            break;
+        case HIGH:
+            mForce = 300;
+            break;
+        default:
+            mForce = 100;
+            break;
     }
+    std::cout << "Bate attack. FORCE : [" << mForce << "]." << std::endl;
+    float distanceBetween = b2Distance(attacker->getPosition(), attacked->getPosition());
+    if (distanceBetween > distance) {
+        return;
+    }
+
+    float angle = attacker->getWeaponAngle();
+    float xForce = cos(angle);
+    float yForce = sin(angle);
+    attacker->getDirection() == Direction::LEFT ? xForce *= -1 : xForce *= 1;
+    b2Vec2 forceVector = mForce * b2Vec2(xForce * 15, yForce);
+    std::cout << "Force vector: " << forceVector.x << " " << forceVector.y << std::endl;
+    attacked->getBody()->ApplyForceToCenter(forceVector, true);
 }
 
 void Bate::setWeaponId(WeaponID weaponId) {

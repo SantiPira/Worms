@@ -89,13 +89,6 @@ void Client::kill() {
 
 void Client::sendMap() {
     std::vector<Grd> map = ParseMapFromFile::parse(m_Matches->getMapName(m_IdGame));
-    for (auto& grd : map) {
-        GrdEnum grdEnum = grd.grdType;
-        if (grdEnum == GRD_LARGE_HORIZONTAL) {
-            grd.width = GrdWidthEnum::GRD_WIDTH_LARGE;
-            grd.height = GrdHeightEnum::GRD_HEIGHT_LARGE;
-        }
-    }
     m_Protocol.sendMap(std::ref(map));
 }
 

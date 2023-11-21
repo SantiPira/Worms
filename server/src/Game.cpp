@@ -17,18 +17,15 @@ void Game::run() {
 
     TurnHandler turnHandler(0, idPlayers);
     {
-        auto update = world.getWormsPosition();
+        auto update = world.getWormsUpdates();
         pushUpdatesToClients(std::ref(update));
     }
     InstructionFactory instructionFactory;
     while (m_KeepRunning) {
         try {
             while (turnHandler.isValidTurn()) {
-                {
-                    std::vector<GameUpdate> deadWorms;
-                    world.removeDeadWorms(std::ref(deadWorms));
-                    pushUpdatesToClients(std::ref(deadWorms));
-                }
+                std::chrono::steady_clock::time_point start_time = std::chrono::steady_clock::now();
+
                 std::vector<UserAction> userActions;
                 std::unordered_set<GameUpdate, GameUpdateHash> updates;
                 m_InputActions.try_pop(std::ref(userActions), m_PopMessageQuantity);
@@ -39,7 +36,7 @@ void Game::run() {
                     auto* instruction = instructionFactory.createInstruction(userAction);
                     world.execute(instruction, userAction.getIdPlayer());
                     world.step();
-                    auto wormPositions = world.getWormsPosition();
+                    auto wormPositions = world.getWormsUpdates();
                     for (auto& wormPosition : wormPositions) {
                         updates.insert(wormPosition);
                     }
@@ -47,7 +44,6 @@ void Game::run() {
                 }
                 pushSetToClients(std::ref(updates));
 
-                std::chrono::steady_clock::time_point start_time = std::chrono::steady_clock::now();
                 std::chrono::steady_clock::time_point end_time = start_time;
                 std::chrono::duration<double> elapsed_seconds = end_time - start_time;
                 double target_frame_time = 1.0 / 60.0;
@@ -57,7 +53,11 @@ void Game::run() {
                 }
             }
             sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::END_TURN);
-            turnHandler.nextTurn();
+            world.resetWormStatus(turnHandler.getCurrentPlayer());
+            std::vector<int> wormsRemovedIds;
+            std::vector<GameUpdate> deadWorms;
+            world.removeDeadWorms(std::ref(wormsRemovedIds));
+            turnHandler.nextTurn(std::ref(wormsRemovedIds));
             sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::START_TURN);
         }  catch (const ClosedQueue& cqe) {
             //should do nothing, if queue has been closed this is the last iteration

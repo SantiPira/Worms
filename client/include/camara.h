@@ -7,7 +7,7 @@
 #include <filesystem>
 #include "engine/entities/worms/Worm.h"
 #include "ParseMapFromFile.h"
-#include "engine/entities/grd/GrdLarge.h"
+#include "engine/entities/beams/Beam.h"
 #include "engine/graphics/Texture.h"
 #include "messages/server/GameUpdate.h"
 #include <unordered_map>
