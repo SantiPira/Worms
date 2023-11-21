@@ -94,7 +94,7 @@ void GameClient::Render() {
     for (auto& worm : m_Worms) {
         worm.second->render();
     }
-    camara->updateCamera();
+    //camara->updateCamera();
 
     for (auto& worm : m_WormsDie) {
         worm->render();
