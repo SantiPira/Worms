@@ -187,6 +187,8 @@ GameUpdate WWorm::getUpdate() {
     }
     gameUpdate.m_SelfCondition = m_SelfCondition;
     gameUpdate.m_Movement = getMovement();
+    gameUpdate.m_VelocityX = getVelocity().x;
+    gameUpdate.m_VelocityY = getVelocity().y;
     return gameUpdate;
 }
 
