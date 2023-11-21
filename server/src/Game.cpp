@@ -22,42 +22,48 @@ void Game::run() {
     }
     InstructionFactory instructionFactory;
     while (m_KeepRunning) {
-        while (turnHandler.isValidTurn()) {
-            {
-                std::vector<GameUpdate> deadWorms;
-                world.removeDeadWorms(std::ref(deadWorms));
-                pushUpdatesToClients(std::ref(deadWorms));
-            }
-            std::vector<UserAction> userActions;
-            std::unordered_set<GameUpdate, GameUpdateHash> updates;
-            m_InputActions.try_pop(std::ref(userActions), m_PopMessageQuantity);
-            if (userActions.empty()) {
-                userActions.emplace_back();
-            }
-            for (auto& userAction : userActions) {
-                auto* instruction = instructionFactory.createInstruction(userAction);
-                world.execute(instruction, userAction.getIdPlayer());
-                world.step();
-                auto wormPositions = world.getWormsPosition();
-                for (auto& wormPosition : wormPositions) {
-                    updates.insert(wormPosition);
+        try {
+            while (turnHandler.isValidTurn()) {
+                {
+                    std::vector<GameUpdate> deadWorms;
+                    world.removeDeadWorms(std::ref(deadWorms));
+                    pushUpdatesToClients(std::ref(deadWorms));
                 }
-                delete instruction;
-            }
-            pushSetToClients(std::ref(updates));
+                std::vector<UserAction> userActions;
+                std::unordered_set<GameUpdate, GameUpdateHash> updates;
+                m_InputActions.try_pop(std::ref(userActions), m_PopMessageQuantity);
+                if (userActions.empty()) {
+                    userActions.emplace_back();
+                }
+                for (auto& userAction : userActions) {
+                    auto* instruction = instructionFactory.createInstruction(userAction);
+                    world.execute(instruction, userAction.getIdPlayer());
+                    world.step();
+                    auto wormPositions = world.getWormsPosition();
+                    for (auto& wormPosition : wormPositions) {
+                        updates.insert(wormPosition);
+                    }
+                    delete instruction;
+                }
+                pushSetToClients(std::ref(updates));
 
-            std::chrono::steady_clock::time_point start_time = std::chrono::steady_clock::now();
-            std::chrono::steady_clock::time_point end_time = start_time;
-            std::chrono::duration<double> elapsed_seconds = end_time - start_time;
-            double target_frame_time = 1.0 / 60.0;
-            while (elapsed_seconds.count() < target_frame_time) {
-                end_time = std::chrono::steady_clock::now();
-                elapsed_seconds = end_time - start_time;
+                std::chrono::steady_clock::time_point start_time = std::chrono::steady_clock::now();
+                std::chrono::steady_clock::time_point end_time = start_time;
+                std::chrono::duration<double> elapsed_seconds = end_time - start_time;
+                double target_frame_time = 1.0 / 60.0;
+                while (elapsed_seconds.count() < target_frame_time) {
+                    end_time = std::chrono::steady_clock::now();
+                    elapsed_seconds = end_time - start_time;
+                }
             }
+            sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::END_TURN);
+            turnHandler.nextTurn();
+            sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::START_TURN);
+        }  catch (const ClosedQueue& cqe) {
+            //should do nothing, if queue has been closed this is the last iteration
+        } catch (...) {
+            std::cout << "Error in Game: " << this->m_IdGame << std::endl;
         }
-        sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::END_TURN);
-        turnHandler.nextTurn();
-        sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::START_TURN);
     }
 }
 

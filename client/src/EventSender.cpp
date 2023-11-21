@@ -99,5 +99,7 @@ UserAction EventSender::attack() {
             return {ActionType::ATTACK, m_IdPlayer};
         case WeaponID::NO_WEAPON:
             return {};
+        default:
+            return {};
     }
 }
