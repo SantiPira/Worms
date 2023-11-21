@@ -94,10 +94,21 @@ void GameClient::Render() {
     for (auto& beam : m_Beams) {
         //Por un aparente problema con Box2D al desplazar la camara las vigas se mantiene estaticas.
 
-        //SDL_Rect& beamRect = beam->getBeamRect();
-        //beamRect.x -= camara->camara_rect.x;
-        //beamRect.y -= camara->camara_rect.y;
+        SDL_Rect& beamRect = beam->getBeamRect();
+        SDL_Rect beamRectCopy = {0,0,0,0};
+        beamRectCopy.x = beamRect.x;
+        beamRectCopy.y = beamRect.y;
+        
+        beamRect.x -= camara->camara_rect.x/4;
+        beamRect.y -= camara->camara_rect.y/4;
+
         beam->render();
+
+        beamRect.x = beamRectCopy.x;
+        beamRect.y = beamRectCopy.y;
+
+
+
     }
 
 
@@ -111,11 +122,12 @@ void GameClient::Render() {
     //Para ver esto: Apretar "A" hasta que aparezaca el gusano.
     //Luego mantener pulsado "D".
 
-    //Worm* player_worm = this->m_Worms.at(this->m_IdPlayer);
-    //SDL_Rect& worm_rect = player_worm->getWormRect();
-    //worm_rect.x -= camara->camara_rect.x/4;
-    //worm_rect.y -= camara->camara_rect.y/4;
-
+    /* 
+    Worm* player_worm = this->m_Worms.at(this->m_IdPlayer);
+    SDL_Rect& worm_rect = player_worm->getWormRect();
+    worm_rect.x -= camara->camara_rect.x/4;
+    worm_rect.y -= camara->camara_rect.y/4;
+    */
 
     //camara->updateCamera();
 
