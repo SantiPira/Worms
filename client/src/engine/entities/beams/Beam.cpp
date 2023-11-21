@@ -46,3 +46,7 @@ void Beam::release() {
     delete m_BeamTexture;
 }
 
+SDL_Rect& Beam::getBeamRect(){
+    return m_DestBeamRect;
+}
+

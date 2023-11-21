@@ -1,5 +1,9 @@
 #include "../include/GameClient.h"
 
+#include <thread>
+#include <iostream>
+
+
 void GameClient::Init(const std::vector<Grd>& beams, int idPlayer, std::vector<GameUpdate>& initInfo) {
     InitSDL();
     CreateWindowAndRender();
@@ -79,21 +83,40 @@ void GameClient::Render() {
 
     camara->updateCamera();
 
+    //SDL_Rect& wormRect;
+
     //renderizar fondo.
     SDL_Rect m_DestRect = {0 - camara->camara_rect.x/4, 0 - camara->camara_rect.y/4, 512, 512};
-    //SDL_Rect m_DestRect = {-15, -1, 512, 512};
     sky->render(&m_DestRect, false);
     const SDL_Rect m_DestRect2 = {0, 461, 1024, 51};
     water->render(&m_DestRect2, false);
 
     for (auto& beam : m_Beams) {
+        //Por un aparente problema con Box2D al desplazar la camara las vigas se mantiene estaticas.
+
+        //SDL_Rect& beamRect = beam->getBeamRect();
+        //beamRect.x -= camara->camara_rect.x;
+        //beamRect.y -= camara->camara_rect.y;
         beam->render();
     }
 
-    
+
     for (auto& worm : m_Worms) {
         worm.second->render();
     }
+
+    //El gusano se pinta en en una parte del mapa, pero cuando este comienza a desplazarse hacia la derecha
+    //comienza a desaperecer y aparecer de forma intermitente.
+    
+    //Para ver esto: Apretar "A" hasta que aparezaca el gusano.
+    //Luego mantener pulsado "D".
+
+    //Worm* player_worm = this->m_Worms.at(this->m_IdPlayer);
+    //SDL_Rect& worm_rect = player_worm->getWormRect();
+    //worm_rect.x -= camara->camara_rect.x/4;
+    //worm_rect.y -= camara->camara_rect.y/4;
+
+
     //camara->updateCamera();
 
     for (auto& worm : m_WormsDie) {

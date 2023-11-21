@@ -22,4 +22,5 @@ class Beam {
     void init();
     void release();
     void render();
+    SDL_Rect& getBeamRect();
 };
