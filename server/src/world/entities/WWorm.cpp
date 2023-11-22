@@ -28,6 +28,7 @@ WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRi
     }
     m_Body->GetFixtureList()->SetFilterData(filter);
     m_EntityType = EntitiesType::ENTITY_WORM;
+    m_WasChanged = true;
 
     this->m_Id = id;
     this->m_Position = b2Vec2_zero;
@@ -164,31 +165,34 @@ void WWorm::setIsShooting(bool isShooting) {
     this->m_IsShooting = isShooting;
 }
 
-GameUpdate WWorm::getUpdate() {
+GameUpdate WWorm::getUpdate(bool wormChanged) {
     GameUpdate gameUpdate;
-    gameUpdate.player_id = m_Id;
-    gameUpdate.x_pos = getPosition().x;
-    gameUpdate.y_pos = getPosition().y;
-    gameUpdate.width = m_Width * 2;
-    gameUpdate.height = m_Height * 2;
-    gameUpdate.m_Health = m_Health;
-    gameUpdate.m_Dir = m_Dir;
-    gameUpdate.m_Weapon = m_Weapon;
-    gameUpdate.m_IsAttacking = m_IsAttacking;
-    std::chrono::duration<double> elapsed_seconds = std::chrono::system_clock::now() - m_TimeState;
-    //TODO: Refactor de esta parte, llevar a un metodo que maneje mejor el tiempo para cada animacion especifica.
-    if (elapsed_seconds.count() > 2.0) {
-        if (m_SelfCondition == GameAction::WORM_DIE) {
-            m_SelfCondition = GameAction::WORM_GRAVE;
-            m_TimeState = std::chrono::system_clock::now();
-        } else {
-            m_SelfCondition = GameAction::WORM_IDLE;
+    if(wormChanged) {
+        gameUpdate.player_id = m_Id;
+        gameUpdate.x_pos = getPosition().x;
+        gameUpdate.y_pos = getPosition().y;
+        gameUpdate.width = m_Width * 2;
+        gameUpdate.height = m_Height * 2;
+        gameUpdate.m_Health = m_Health;
+        gameUpdate.m_Dir = m_Dir;
+        gameUpdate.m_Weapon = m_Weapon;
+        gameUpdate.m_IsAttacking = m_IsAttacking;
+        std::chrono::duration<double> elapsed_seconds = std::chrono::system_clock::now() - m_TimeState;
+        //TODO: Refactor de esta parte, llevar a un metodo que maneje mejor el tiempo para cada animacion especifica.
+        if (elapsed_seconds.count() > 2.0) {
+            if (m_SelfCondition == GameAction::WORM_DIE) {
+                m_SelfCondition = GameAction::WORM_GRAVE;
+                m_TimeState = std::chrono::system_clock::now();
+            } else {
+                m_SelfCondition = GameAction::WORM_IDLE;
+            }
         }
+        gameUpdate.m_SelfCondition = m_SelfCondition;
+        gameUpdate.m_Movement = getMovement();
+        gameUpdate.m_VelocityX = getVelocity().x;
+        gameUpdate.m_VelocityY = getVelocity().y;
     }
-    gameUpdate.m_SelfCondition = m_SelfCondition;
-    gameUpdate.m_Movement = getMovement();
-    gameUpdate.m_VelocityX = getVelocity().x;
-    gameUpdate.m_VelocityY = getVelocity().y;
+    m_WasChanged = false;
     return gameUpdate;
 }
 
@@ -254,6 +258,7 @@ void WWorm::receiveDamage(int damage) {
     if (this->m_Health <= 0) {
         setIsDead();
     }
+    m_WasChanged = true;
 }
 
 GameAction WWorm::getSelfCondition() const {
@@ -320,5 +325,13 @@ void WWorm::resetWormStatus() {
     m_SelfCondition = GameAction::WORM_IDLE;
     m_WeaponAngle = 0;
     stopMove();
+}
+
+void WWorm::setWasChanged(bool wasChanged) {
+    m_WasChanged = wasChanged;
+}
+
+bool WWorm::getWasChanged() const {
+    return m_WasChanged;
 }
 

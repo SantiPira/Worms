@@ -41,6 +41,7 @@ private:
     EntitiesType m_EntityType;
     float m_WeaponAngle{};
     std::chrono::time_point<std::chrono::system_clock> m_TimeState; //seconds
+    bool m_WasChanged;
 
 public:
     WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRight, uint16_t wormCategory,
@@ -88,8 +89,9 @@ public:
     void setSelfCondition(GameAction selfCondition);
     void setWeaponAngle(float angle);
     void resetWormStatus();
+    void setWasChanged(bool wasChanged);
 
-    GameUpdate getUpdate();
+    GameUpdate getUpdate(bool wormChanged);
 
     void jump();
 
@@ -106,4 +108,6 @@ public:
     void move(Direction direction);
 
     GameAction getMovement();
+
+    bool getWasChanged() const;
 };

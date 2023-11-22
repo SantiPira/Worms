@@ -17,7 +17,7 @@ void Game::run() {
 
     TurnHandler turnHandler(0, idPlayers);
     {
-        auto update = world.getWormsUpdates();
+        auto update = world.getWormsUpdates(true);
         pushUpdatesToClients(std::ref(update));
     }
     InstructionFactory instructionFactory;
@@ -43,7 +43,7 @@ void Game::run() {
                     world.execute(instruction, userAction.getIdPlayer());
                     world.step();
 
-                    auto wormPositions = world.getWormsUpdates();
+                    auto wormPositions = world.getWormsUpdates(false);
                     for (auto& wormPosition : wormPositions) {
                         updates.insert(wormPosition);
                     }
