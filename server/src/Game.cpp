@@ -22,6 +22,7 @@ void Game::run() {
     }
     InstructionFactory instructionFactory;
     while (m_KeepRunning) {
+        bool shouldChangeTurn = false;
         try {
             while (turnHandler.isValidTurn()) {
                 std::chrono::steady_clock::time_point start_time = std::chrono::steady_clock::now();
@@ -33,14 +34,26 @@ void Game::run() {
                     userActions.emplace_back();
                 }
                 for (auto& userAction : userActions) {
+                    if (userAction.getAction() == ActionType::ATTACK) {
+                        pushUpdateToClients(buildTransitionUpdate());
+                        shouldChangeTurn = true;
+                        break;
+                    }
                     auto* instruction = instructionFactory.createInstruction(userAction);
                     world.execute(instruction, userAction.getIdPlayer());
                     world.step();
+
                     auto wormPositions = world.getWormsUpdates();
                     for (auto& wormPosition : wormPositions) {
                         updates.insert(wormPosition);
                     }
                     delete instruction;
+                }
+                if (shouldChangeTurn) {
+                    auto* instruction = instructionFactory.createInstruction(userActions.at(0));
+                    world.execute(instruction, userActions.at(0).getIdPlayer());
+                    world.step();
+                    break;
                 }
                 pushSetToClients(std::ref(updates));
 
@@ -157,4 +170,10 @@ void Game::sendInfoTurns(int playerId, GameAction infoTurn) {
     update.m_SelfCondition = infoTurn;
     update.player_id = playerId;
     pushUpdateToClients(std::ref(update));
+}
+
+GameUpdate &Game::buildTransitionUpdate() {
+    GameUpdate update{};
+    update.m_SelfCondition = GameAction::TURN_TRANSITION;
+    return std::ref(update);
 }

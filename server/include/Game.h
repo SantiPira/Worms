@@ -48,4 +48,6 @@ private:
     void pushUpdatesToClients(std::reference_wrapper<std::vector<GameUpdate>> updates);
     void pushUpdateToClients(GameUpdate& update);
     void sendInfoTurns(int playerId, GameAction infoTurn);
+
+    GameUpdate &buildTransitionUpdate();
 };

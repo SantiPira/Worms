@@ -281,7 +281,7 @@ float WWorm::getWeaponAngle() const {
 
 void WWorm::move(Direction direction) {
     float velocity;
-    direction == Direction::LEFT ? velocity = -0.5 : velocity = 0.5;
+    direction == Direction::LEFT ? velocity = -1.0 : velocity = 1.0;
     this->m_Dir = direction;
     b2Vec2 vel = b2Vec2(velocity, 0);
     if (m_Weapon != WeaponID::NO_WEAPON) {
