@@ -2,9 +2,10 @@
 
 #define POP_MESSAGE_QUANTITY 1
 
-Game::Game(int id, std::string gameName, std::string mapName, int players) : m_IdGame(id), m_GameName(std::move(gameName)),
-    m_MapName(std::move(mapName)), m_Players(players), m_InputActions(100), m_KeepRunning(true),
-    m_PopMessageQuantity(POP_MESSAGE_QUANTITY), world(m_MapName) {}
+Game::Game(int id, std::string gameName, std::string mapName, int players) : m_IdGame(id),
+    m_GameName(std::move(gameName)), m_MapName(std::move(mapName)), m_Players(players), m_InputActions(100),
+    m_KeepRunning(true), m_PopMessageQuantity(POP_MESSAGE_QUANTITY), world(m_MapName),
+    m_GameState(GameState::PLAYING) {}
 
 void Game::run() {
     setupWorld();
@@ -16,68 +17,102 @@ void Game::run() {
     }
 
     TurnHandler turnHandler(0, idPlayers);
-    {
-        auto update = world.getWormsUpdates(true);
-        pushUpdatesToClients(std::ref(update));
-    }
     InstructionFactory instructionFactory;
+    {
+        auto updates = world.getWormsUpdates(true);
+        pushUpdatesToClients(std::ref(updates));
+    }
     while (m_KeepRunning) {
-        bool shouldChangeTurn = false;
-        try {
-            while (turnHandler.isValidTurn()) {
-                std::chrono::steady_clock::time_point start_time = std::chrono::steady_clock::now();
+        processTurns(turnHandler, instructionFactory);
+        m_GameState = GameState::PLAYING;
+    }
+}
 
+void Game::processTurns(TurnHandler& turnHandler, InstructionFactory& instructionFactory) {
+    try {
+        while (turnHandler.isValidTurn() || m_GameState == GameState::TURN_TRANSITION) {
+            if (m_GameState == GameState::PLAYING) {
                 std::vector<UserAction> userActions;
-                std::unordered_set<GameUpdate, GameUpdateHash> updates;
+                std::vector<GameUpdate> updates;
                 m_InputActions.try_pop(std::ref(userActions), m_PopMessageQuantity);
                 if (userActions.empty()) {
                     userActions.emplace_back();
                 }
-                for (auto& userAction : userActions) {
-                    if (userAction.getAction() == ActionType::ATTACK) {
-                        pushUpdateToClients(buildTransitionUpdate());
-                        shouldChangeTurn = true;
-                        break;
-                    }
-                    auto* instruction = instructionFactory.createInstruction(userAction);
-                    world.execute(instruction, userAction.getIdPlayer());
-                    world.step();
-
-                    auto wormPositions = world.getWormsUpdates(false);
-                    for (auto& wormPosition : wormPositions) {
-                        updates.insert(wormPosition);
-                    }
-                    delete instruction;
-                }
-                if (shouldChangeTurn) {
-                    auto* instruction = instructionFactory.createInstruction(userActions.at(0));
-                    world.execute(instruction, userActions.at(0).getIdPlayer());
-                    world.step();
+                size_t idxInstruction = 0;
+                if (processUserActions(userActions, updates, instructionFactory, idxInstruction)) {
+                    m_GameState = GameState::TURN_TRANSITION;
+                    processTransitionAction(userActions, instructionFactory, idxInstruction);
                     break;
                 }
                 pushSetToClients(std::ref(updates));
-
-                std::chrono::steady_clock::time_point end_time = start_time;
-                std::chrono::duration<double> elapsed_seconds = end_time - start_time;
-                double target_frame_time = 1.0 / 60.0;
-                while (elapsed_seconds.count() < target_frame_time) {
-                    end_time = std::chrono::steady_clock::now();
-                    elapsed_seconds = end_time - start_time;
-                }
+            } else if (m_GameState == GameState::TURN_TRANSITION) {
+                // Aquí solo procesas las actualizaciones de daño a los Worms
+                auto updates = world.getDamageUpdates();
+                pushUpdatesToClients(std::ref(updates));
             }
-            sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::END_TURN);
-            world.resetWormStatus(turnHandler.getCurrentPlayer());
-            std::vector<int> wormsRemovedIds;
-            std::vector<GameUpdate> deadWorms;
-            world.removeDeadWorms(std::ref(wormsRemovedIds));
-            turnHandler.nextTurn(std::ref(wormsRemovedIds));
-            sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::START_TURN);
-        }  catch (const ClosedQueue& cqe) {
-            //should do nothing, if queue has been closed this is the last iteration
-        } catch (...) {
-            std::cout << "Error in Game: " << this->m_IdGame << std::endl;
+            waitFrameTime();
         }
+        endTurn(turnHandler);
+    }  catch (const ClosedQueue& cqe) {
+        //should do nothing, if queue has been closed this is the last iteration
+    } catch (...) {
+        std::cout << "Error in Game: " << this->m_IdGame << std::endl;
     }
+}
+
+bool Game::processUserActions(std::vector<UserAction>& userActions,
+                              std::vector<GameUpdate>& updates,
+                              InstructionFactory& instructionFactory, size_t& idxInstruction) {
+    bool shouldChangeTurn = false;
+    for (size_t i = 0; i < userActions.size(); i++) {
+        if (userActions.at(i).getAction() == ActionType::ATTACK) {
+            pushUpdateToClients(buildTransitionUpdate());
+            shouldChangeTurn = true;
+            idxInstruction = i;
+            break;
+        }
+        auto* instruction = instructionFactory.createInstruction(userActions.at(i));
+        world.execute(instruction, userActions.at(i).getIdPlayer());
+        world.step();
+
+        auto wormPositions = world.getWormsUpdates(false);
+        for (auto& wormPosition : wormPositions) {
+            updates.push_back(wormPosition);
+        }
+        delete instruction;
+    }
+    return shouldChangeTurn;
+}
+
+void Game::processTransitionAction(std::vector<UserAction> &userActions, InstructionFactory &instructionFactory,
+                                   size_t &idxInstruction) {
+    auto* instruction = instructionFactory.createInstruction(userActions.at(idxInstruction));
+    world.execute(instruction, userActions.at(idxInstruction).getIdPlayer());
+    world.step();
+    auto updates = world.getWormsUpdates(false);
+    pushUpdatesToClients(std::ref(updates));
+    delete instruction;
+}
+
+void Game::waitFrameTime() {
+    std::chrono::steady_clock::time_point start_time = std::chrono::steady_clock::now();
+    std::chrono::steady_clock::time_point end_time = start_time;
+    std::chrono::duration<double> elapsed_seconds = end_time - start_time;
+    double target_frame_time = 1.0 / 60.0;
+    while (elapsed_seconds.count() < target_frame_time) {
+        end_time = std::chrono::steady_clock::now();
+        elapsed_seconds = end_time - start_time;
+    }
+}
+
+void Game::endTurn(TurnHandler& turnHandler) {
+    sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::END_TURN);
+    world.resetWormStatus(turnHandler.getCurrentPlayer());
+    std::vector<int> wormsRemovedIds;
+    std::vector<GameUpdate> deadWorms;
+    world.removeDeadWorms(std::ref(wormsRemovedIds));
+    turnHandler.nextTurn(std::ref(wormsRemovedIds));
+    sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::START_TURN);
 }
 
 int Game::getPlayers() const {
@@ -118,7 +153,7 @@ void Game::pushUpdateToClients(GameUpdate &update) {
     }
 }
 
-void Game::pushSetToClients(std::reference_wrapper<std::unordered_set<GameUpdate, GameUpdateHash>> updates) {
+void Game::pushSetToClients(std::reference_wrapper<std::vector<GameUpdate>> updates) {
     for (auto& clientQueue : m_QClientUpdates) {
         for (auto& update : updates.get()) {
             clientQueue.second->try_push(std::ref(update));
@@ -177,3 +212,5 @@ GameUpdate &Game::buildTransitionUpdate() {
     update.m_SelfCondition = GameAction::TURN_TRANSITION;
     return std::ref(update);
 }
+
+

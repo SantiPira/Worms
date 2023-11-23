@@ -42,6 +42,7 @@ private:
     float m_WeaponAngle{};
     std::chrono::time_point<std::chrono::system_clock> m_TimeState; //seconds
     bool m_WasChanged;
+    GameUpdate m_PreviousState;
 
 public:
     WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRight, uint16_t wormCategory,

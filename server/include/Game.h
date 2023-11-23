@@ -7,7 +7,11 @@
 #include "messages/user_actions/UserAction.h"
 #include "world/instructions/InstructionFactory.h"
 
-#define MAX_TURN_SECONDS 120
+enum class GameState {
+    PLAYING,
+    TURN_TRANSITION,
+    GRACE_PERIOD
+};
 
 class Game : public Thread {
  private:
@@ -20,6 +24,7 @@ class Game : public Thread {
     std::atomic<bool> m_KeepRunning;
     int m_PopMessageQuantity;
     GameWorld world;
+    GameState m_GameState;
 
 public:
     Game(int id, std::string gameName, std::string mapName, int players);
@@ -44,10 +49,20 @@ public:
     void kill();
 
 private:
-    void pushSetToClients(std::reference_wrapper<std::unordered_set<GameUpdate, GameUpdateHash>> updates);
+    void pushSetToClients(std::reference_wrapper<std::vector<GameUpdate>> updates);
     void pushUpdatesToClients(std::reference_wrapper<std::vector<GameUpdate>> updates);
     void pushUpdateToClients(GameUpdate& update);
     void sendInfoTurns(int playerId, GameAction infoTurn);
+
+    void processTurns(TurnHandler& turnHandler, InstructionFactory& instructionFactory);
+    bool processUserActions(std::vector<UserAction>& userActions,
+                            std::vector<GameUpdate>& updates,
+                            InstructionFactory& instructionFactory, size_t& idxInstruction);
+
+    void processTransitionAction(std::vector<UserAction> &userActions, InstructionFactory &instructionFactory,
+                                 size_t &idxInstruction);
+    void waitFrameTime();
+    void endTurn(TurnHandler& turnHandler);
 
     GameUpdate &buildTransitionUpdate();
 };

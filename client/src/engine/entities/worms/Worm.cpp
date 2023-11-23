@@ -140,12 +140,12 @@ void Worm::init() {
 }
 
 void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
-    m_Dir = gameUpdate.m_Dir;
     m_CurrentSprite = chooseSprite(gameUpdate);
 
     m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
 
     if (gameUpdate.m_Movement != INVALID_ACTION) {
+        m_Dir = gameUpdate.m_Dir;
         Animation* anim = m_SpritesMap.at(m_CurrentSprite).get();
         float tempX = WorldScale::worldToPixelX(gameUpdate.x_pos, anim->getDeltaPosX());
         float tempY = WorldScale::worldToPixelY(gameUpdate.y_pos, anim->getDeltaPosY());

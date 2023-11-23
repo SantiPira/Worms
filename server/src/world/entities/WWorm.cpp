@@ -1,5 +1,7 @@
 #include "world/entities/WWorm.h"
 
+WWorm::WWorm() : m_Id(0xFF) {}
+
 WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRight, uint16_t wormCategory,
              const std::vector<uint16_t>& categories) {
     m_World = world;
@@ -166,34 +168,32 @@ void WWorm::setIsShooting(bool isShooting) {
 }
 
 GameUpdate WWorm::getUpdate(bool wormChanged) {
-    GameUpdate gameUpdate;
-    if(wormChanged) {
-        gameUpdate.player_id = m_Id;
-        gameUpdate.x_pos = getPosition().x;
-        gameUpdate.y_pos = getPosition().y;
-        gameUpdate.width = m_Width * 2;
-        gameUpdate.height = m_Height * 2;
-        gameUpdate.m_Health = m_Health;
-        gameUpdate.m_Dir = m_Dir;
-        gameUpdate.m_Weapon = m_Weapon;
-        gameUpdate.m_IsAttacking = m_IsAttacking;
-        std::chrono::duration<double> elapsed_seconds = std::chrono::system_clock::now() - m_TimeState;
-        //TODO: Refactor de esta parte, llevar a un metodo que maneje mejor el tiempo para cada animacion especifica.
-        if (elapsed_seconds.count() > 2.0) {
-            if (m_SelfCondition == GameAction::WORM_DIE) {
-                m_SelfCondition = GameAction::WORM_GRAVE;
-                m_TimeState = std::chrono::system_clock::now();
-            } else {
-                m_SelfCondition = GameAction::WORM_IDLE;
-            }
-        }
-        gameUpdate.m_SelfCondition = m_SelfCondition;
-        gameUpdate.m_Movement = getMovement();
-        gameUpdate.m_VelocityX = getVelocity().x;
-        gameUpdate.m_VelocityY = getVelocity().y;
+    GameUpdate currentState;
+    currentState.player_id = m_Id;
+    currentState.x_pos = getPosition().x;
+    currentState.y_pos = getPosition().y;
+    currentState.width = m_Width * 2;
+    currentState.height = m_Height * 2;
+    currentState.m_Health = m_Health;
+    currentState.m_Dir = m_Dir;
+    currentState.m_Weapon = m_Weapon;
+    currentState.m_IsAttacking = m_IsAttacking;
+    currentState.m_SelfCondition = m_SelfCondition;
+    currentState.m_Movement = getMovement();
+    currentState.m_VelocityX = getVelocity().x;
+    currentState.m_VelocityY = getVelocity().y;
+
+    if (currentState != m_PreviousState) {
+        wormChanged = true;
+        m_PreviousState = currentState;
     }
-    m_WasChanged = false;
-    return gameUpdate;
+
+    if(wormChanged) {
+        m_WasChanged = false;
+        return currentState;
+    }
+
+    return {};
 }
 
 void WWorm::jump() {
@@ -258,7 +258,6 @@ void WWorm::receiveDamage(int damage) {
     if (this->m_Health <= 0) {
         setIsDead();
     }
-    m_WasChanged = true;
 }
 
 GameAction WWorm::getSelfCondition() const {
@@ -267,9 +266,6 @@ GameAction WWorm::getSelfCondition() const {
 
 void WWorm::setSelfCondition(GameAction selfCondition) {
     this->m_SelfCondition = selfCondition;
-}
-
-WWorm::WWorm() : m_Id(0xFF){
 }
 
 EntitiesType WWorm::getEntityType() {

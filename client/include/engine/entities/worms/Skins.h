@@ -27,7 +27,7 @@ struct WaccuseIdle {
 struct WaccuseWalk {
     const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wwalk.png");
     BlendMode blendMode = {true, 128, 128, 192};
-    int frames = 15;
+    int frames = 9;
     int distanceBetweenFrames = 60;
     int frameWidth = 30;
     int frameHeight = 44;
