@@ -76,20 +76,15 @@ void Game::endTurn(TurnHandler& turnHandler) {
         waitFrameTime();
     }
     playingStatus = false;
-    auto updates = world.getWormsUpdates(true, playingStatus);
-    pushUpdatesToClients(std::ref(updates));
     std::vector<int> deadWorms;
     world.getDeadWormsIds(std::ref(deadWorms));
     if (!deadWorms.empty()) {
         while (world.wormsAlive(std::ref(deadWorms))) {
-            updates.clear();
             world.step();
-            updates = world.getWormsUpdates(false, playingStatus);
+            auto updates = world.getWormsUpdates(false, playingStatus);
             pushUpdatesToClients(std::ref(updates));
             waitFrameTime();
         }
-        updates = world.getWormsUpdates(false, playingStatus);
-        pushUpdatesToClients(std::ref(updates));
     }
     turnHandler.nextTurn(std::ref(deadWorms));
     world.removeDeadWorms(std::ref(deadWorms));

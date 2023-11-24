@@ -343,7 +343,7 @@ void WWorm::resetWormStatus() {
         m_IsMoving = false;
         m_IsFacingRight = false;
         m_Weapon = WeaponID::NO_WEAPON;
-        m_SelfCondition = GameAction::WORM_IDLE;
+        m_SelfCondition = m_SelfCondition == WORM_DIE ? WORM_DIE : WORM_IDLE;
         m_WeaponAngle = 0;
          stopMove();
     }
@@ -360,6 +360,8 @@ bool WWorm::getWasChanged() const {
 GameUpdate WWorm::getUpdateEndTurn(bool wormChanged) {
     GameUpdate currentState;
     currentState.player_id = m_Id;
+    currentState.x_pos = getPosition().x;
+    currentState.y_pos = getPosition().y;
     currentState.width = m_Width * 2;
     currentState.height = m_Height * 2;
     currentState.m_Health = m_Health;
@@ -383,9 +385,11 @@ GameUpdate WWorm::getUpdateEndTurn(bool wormChanged) {
         auto now = std::chrono::system_clock::now();
         auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - m_TimeState);
         if (elapsed.count() > 1000) {
-            currentState.m_SelfCondition = WORM_GRAVE;
+            m_SelfCondition = WORM_GRAVE;
+            currentState.m_SelfCondition = m_SelfCondition;
             m_TimeState = std::chrono::system_clock::now();
         }
+        m_PreviousState = currentState;
         return currentState;
     }
 
@@ -393,9 +397,11 @@ GameUpdate WWorm::getUpdateEndTurn(bool wormChanged) {
         auto now = std::chrono::system_clock::now();
         auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - m_TimeState);
         if (elapsed.count() > 1000) {
-            currentState.m_SelfCondition = WORM_IDLE;
+            m_SelfCondition = WORM_IDLE;
+            currentState.m_SelfCondition = m_SelfCondition;
             m_TimeState = std::chrono::system_clock::now();
         }
+        m_PreviousState = currentState;
         return currentState;
     }
 
