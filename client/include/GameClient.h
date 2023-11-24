@@ -10,10 +10,12 @@
 #include "engine/entities/beams/Beam.h"
 #include "engine/graphics/Texture.h"
 #include "messages/server/GameUpdate.h"
+#include "ProtectedQueue.h"
 #include <unordered_map>
 #include <vector>
 #include "../include/camara.h"
 #include "engine/entities/worms/Skins.h"
+#include "ProtectedQueue.h"
 
 class GameClient {
  private:
@@ -28,11 +30,14 @@ class GameClient {
     std::vector<Worm*> m_WormsDie;
     Texture* sky;
     Texture* water;
+    Texture* weapons_list;
 
     SDL2pp::Mixer *mixer;
     SDL2pp::Chunk *chunk;
     Camara* camara;
 
+public:
+    bool se_hizo_tab{false};//Acciones que no requieren del server.
 
  private:
     void InitSDL();

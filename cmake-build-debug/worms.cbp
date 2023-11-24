@@ -1,0 +1,1452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="worms"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\Box2D\;CMake Files\Box2D\src\;CMake Files\SDL2pp\;CMake Files\SDL2pp\cmake\;CMake Files\SDL2pp\SDL2pp\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\;CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\;CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SDL2\;CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5\;CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Widgets\;CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\;CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Core\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="libcommon">
+				<Option output="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/liblibcommon.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_WIDGETS_LIB"/>
+					<Add option="-DQT_GUI_LIB"/>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/editor/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/common_libs/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/local/include/SDL2"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtWidgets"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtGui"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 libcommon"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="libcommon/fast">
+				<Option output="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/liblibcommon.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_WIDGETS_LIB"/>
+					<Add option="-DQT_GUI_LIB"/>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/editor/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/common_libs/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/local/include/SDL2"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtWidgets"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtGui"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 libcommon/fast"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="libserver">
+				<Option output="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/liblibserver.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_WIDGETS_LIB"/>
+					<Add option="-DQT_GUI_LIB"/>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/editor/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/common_libs/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/local/include/SDL2"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtWidgets"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtGui"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 libserver"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="libserver/fast">
+				<Option output="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/liblibserver.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_WIDGETS_LIB"/>
+					<Add option="-DQT_GUI_LIB"/>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/editor/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/common_libs/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/local/include/SDL2"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtWidgets"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtGui"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 libserver/fast"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="libeditor">
+				<Option output="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/liblibeditor.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_WIDGETS_LIB"/>
+					<Add option="-DQT_GUI_LIB"/>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/editor/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/common_libs/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/local/include/SDL2"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtWidgets"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtGui"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 libeditor"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="libeditor/fast">
+				<Option output="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/liblibeditor.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_WIDGETS_LIB"/>
+					<Add option="-DQT_GUI_LIB"/>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/editor/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/common_libs/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/local/include/SDL2"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtWidgets"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtGui"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 libeditor/fast"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="libclient">
+				<Option output="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/liblibclient.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_WIDGETS_LIB"/>
+					<Add option="-DQT_GUI_LIB"/>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/editor/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/common_libs/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/local/include/SDL2"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtWidgets"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtGui"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 libclient"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="libclient/fast">
+				<Option output="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/liblibclient.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_WIDGETS_LIB"/>
+					<Add option="-DQT_GUI_LIB"/>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/editor/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/common_libs/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/local/include/SDL2"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtWidgets"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtGui"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 libclient/fast"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="worms-client">
+				<Option output="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/worms-client" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_WIDGETS_LIB"/>
+					<Add option="-DQT_GUI_LIB"/>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/editor/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/common_libs/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/local/include/SDL2"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtWidgets"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtGui"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 worms-client"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="worms-client/fast">
+				<Option output="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/worms-client" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_WIDGETS_LIB"/>
+					<Add option="-DQT_GUI_LIB"/>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/editor/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/common_libs/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/local/include/SDL2"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtWidgets"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtGui"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 worms-client/fast"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="worms-server">
+				<Option output="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/worms-server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_WIDGETS_LIB"/>
+					<Add option="-DQT_GUI_LIB"/>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/editor/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/common_libs/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/local/include/SDL2"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtWidgets"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtGui"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 worms-server"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="worms-server/fast">
+				<Option output="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/worms-server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_WIDGETS_LIB"/>
+					<Add option="-DQT_GUI_LIB"/>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/editor/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/common_libs/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/local/include/SDL2"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtWidgets"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtGui"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 worms-server/fast"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="worms-editor">
+				<Option output="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/worms-editor" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_WIDGETS_LIB"/>
+					<Add option="-DQT_GUI_LIB"/>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/editor/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/common_libs/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/local/include/SDL2"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtWidgets"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtGui"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 worms-editor"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="worms-editor/fast">
+				<Option output="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/worms-editor" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_WIDGETS_LIB"/>
+					<Add option="-DQT_GUI_LIB"/>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/editor/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/common_libs/include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/local/include/SDL2"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtWidgets"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtGui"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 worms-editor/fast"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="SDL2pp">
+				<Option output="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp/libSDL2pp.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/local/include/SDL2"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp/Makefile&quot;  VERBOSE=1 SDL2pp"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="SDL2pp/fast">
+				<Option output="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp/libSDL2pp.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/local/include/SDL2"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp/Makefile&quot;  VERBOSE=1 SDL2pp/fast"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/SDL2pp/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="box2d">
+				<Option output="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Box2D/bin/libbox2d.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Box2D/src"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/../include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Box2D/src/Makefile&quot;  VERBOSE=1 box2d"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Box2D/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Box2D/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Box2D/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="box2d/fast">
+				<Option output="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Box2D/bin/libbox2d.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Box2D/src"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/../include"/>
+					<Add directory="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Box2D/src/Makefile&quot;  VERBOSE=1 box2d/fast"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Box2D/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Box2D/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/cmake-build-debug/Box2D/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_api.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_block_allocator.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_body.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_broad_phase.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_chain_shape.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_circle_shape.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_collision.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_common.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_contact.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_contact_manager.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_distance.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_distance_joint.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_draw.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_dynamic_tree.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_edge_shape.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_fixture.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_friction_joint.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_gear_joint.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_growable_stack.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_joint.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_math.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_motor_joint.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_mouse_joint.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_polygon_shape.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_prismatic_joint.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_pulley_joint.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_revolute_joint.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_rope.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_settings.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_shape.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_stack_allocator.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_time_of_impact.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_time_step.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_timer.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_types.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_weld_joint.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_wheel_joint.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_world.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/b2_world_callbacks.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/include/box2d/box2d.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/collision/b2_broad_phase.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/collision/b2_chain_shape.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/collision/b2_circle_shape.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/collision/b2_collide_circle.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/collision/b2_collide_edge.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/collision/b2_collide_polygon.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/collision/b2_collision.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/collision/b2_distance.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/collision/b2_dynamic_tree.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/collision/b2_edge_shape.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/collision/b2_polygon_shape.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/collision/b2_time_of_impact.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/common/b2_block_allocator.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/common/b2_draw.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/common/b2_math.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/common/b2_settings.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/common/b2_stack_allocator.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/common/b2_timer.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_body.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_chain_circle_contact.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_chain_circle_contact.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_chain_polygon_contact.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_chain_polygon_contact.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_circle_contact.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_circle_contact.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_contact.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_contact_manager.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_contact_solver.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_contact_solver.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_distance_joint.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_edge_circle_contact.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_edge_circle_contact.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_edge_polygon_contact.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_edge_polygon_contact.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_fixture.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_friction_joint.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_gear_joint.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_island.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_island.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_joint.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_motor_joint.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_mouse_joint.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_polygon_circle_contact.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_polygon_circle_contact.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_polygon_contact.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_polygon_contact.h">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_prismatic_joint.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_pulley_joint.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_revolute_joint.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_weld_joint.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_wheel_joint.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_world.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/dynamics/b2_world_callbacks.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/rope/b2_rope.cpp">
+			<Option target="box2d"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/AudioDevice.cc">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/AudioDevice.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/AudioLock.cc">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/AudioSpec.cc">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/AudioSpec.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Chunk.cc">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Chunk.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Color.cc">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Color.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/ContainerRWops.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Exception.cc">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Exception.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Font.cc">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Font.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Mixer.cc">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Mixer.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Music.cc">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Music.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Optional.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Point.cc">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Point.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/RWops.cc">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/RWops.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Rect.cc">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Rect.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Renderer.cc">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Renderer.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/SDL.cc">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/SDL.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/SDL2pp.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/SDLImage.cc">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/SDLImage.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/SDLMixer.cc">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/SDLMixer.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/SDLTTF.cc">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/SDLTTF.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/StreamRWops.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Surface.cc">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Surface.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/SurfaceLock.cc">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Texture.cc">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Texture.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/TextureLock.cc">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Wav.cc">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Wav.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Window.cc">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Window.hh">
+			<Option target="SDL2pp"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/src/ClientManager.cpp">
+			<Option target="libclient"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/src/EventSender.cpp">
+			<Option target="libclient"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/src/GameClient.cpp">
+			<Option target="libclient"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/src/camara.cpp">
+			<Option target="libclient"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/src/client_juego.cpp">
+			<Option target="libclient"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/src/client_receiver.cpp">
+			<Option target="libclient"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/src/createGameWindow.cpp">
+			<Option target="libclient"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/src/engine/entities/beams/Beam.cpp">
+			<Option target="libclient"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/src/engine/entities/worms/Worm.cpp">
+			<Option target="libclient"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/src/engine/graphics/Animation.cpp">
+			<Option target="libclient"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/src/engine/graphics/Texture.cpp">
+			<Option target="libclient"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/src/joinGameWindow.cpp">
+			<Option target="libclient"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/src/main.cpp">
+			<Option target="worms-client"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/src/mainWindow.cpp">
+			<Option target="libclient"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/src/menuWindow.cpp">
+			<Option target="libclient"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/client/src/waitingWindow.cpp">
+			<Option target="libclient"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/common_libs/src/ParseMapFromFile.cpp">
+			<Option target="libcommon"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/common_libs/src/Protocol.cpp">
+			<Option target="libcommon"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/common_libs/src/liberror.cpp">
+			<Option target="libcommon"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/common_libs/src/messages/server/GameInfo.cpp">
+			<Option target="libcommon"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/common_libs/src/messages/user_actions/UserAction.cpp">
+			<Option target="libcommon"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/common_libs/src/resolver.cpp">
+			<Option target="libcommon"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/common_libs/src/resolvererror.cpp">
+			<Option target="libcommon"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/common_libs/src/socket.cpp">
+			<Option target="libcommon"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/common_libs/src/utils/WorldScale.cpp">
+			<Option target="libcommon"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/editor/src/backgroundItem.cpp">
+			<Option target="libeditor"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/editor/src/dragAndDrop.cpp">
+			<Option target="libeditor"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/editor/src/main.cpp">
+			<Option target="worms-editor"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/editor/src/mapEditor.cpp">
+			<Option target="libeditor"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/Client.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/ClientSender.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/Game.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/MatchesMonitor.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/Server.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/TurnHandler.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/main.cpp">
+			<Option target="worms-server"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/GameWorld.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/entities/WBeam.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/entities/WWater.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/entities/WWorm.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/entities/weapons/Axe.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/entities/weapons/Bate.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/entities/weapons/WeaponFactory.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/instructions/InstructionFactory.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/instructions/impl/WormAttack.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/instructions/impl/WormDecreaseAngle.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/instructions/impl/WormIncreaseAngle.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/instructions/impl/WormJump.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/instructions/impl/WormMove.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/instructions/impl/WormNone.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/instructions/impl/WormSetWeapon.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/instructions/impl/WormStopMove.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/instructions/impl/WormUnSetWeapon.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/listeners/ContactListener.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/listeners/contact/WaterContact.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/server/src/world/listeners/contact/WormsContact.cpp">
+			<Option target="libserver"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\Box2D\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/Box2D/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\Box2D\src\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\SDL2pp\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/cmake/FindSDL2_image.cmake">
+			<Option virtualFolder="CMake Files\SDL2pp\cmake\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/cmake/FindSDL2_mixer.cmake">
+			<Option virtualFolder="CMake Files\SDL2pp\cmake\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/cmake/FindSDL2_ttf.cmake">
+			<Option virtualFolder="CMake Files\SDL2pp\cmake\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/SDL2pp/SDL2pp/Config.hh.in">
+			<Option virtualFolder="CMake Files\SDL2pp\SDL2pp\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/SDL2/sdl2-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SDL2\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/SDL2/sdl2-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SDL2\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5/Qt5Config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5/Qt5ConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5/Qt5ModuleLocation.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Widgets/Qt5WidgetsConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Widgets/Qt5WidgetsConfigExtras.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Widgets/Qt5WidgetsConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Widgets/Qt5WidgetsMacros.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5GuiConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5GuiConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QComposePlatformInputContextPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEglFSEmulatorIntegrationPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEglFSIntegrationPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEglFSKmsEglDeviceIntegrationPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEglFSKmsGbmIntegrationPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEglFSX11IntegrationPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEvdevKeyboardPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEvdevMousePlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEvdevTabletPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QEvdevTouchScreenPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QGifPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QICOPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QIbusPlatformInputContextPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QJpegPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QLibInputPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QLinuxFbIntegrationPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QMinimalEglIntegrationPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QMinimalIntegrationPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QOffscreenIntegrationPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QTuioTouchPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QVncIntegrationPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QXcbEglIntegrationPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QXcbGlxIntegrationPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5Gui_QXcbIntegrationPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigExtras.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/home/vic/Escritorio/universidad/materias/taller_i/tps/worms/../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreMacros.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Core\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

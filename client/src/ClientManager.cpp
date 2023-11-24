@@ -48,10 +48,24 @@ void ClientManager::gameLoop() {
         auto current = std::chrono::system_clock::now();
         std::chrono::duration<double> elapsedSeconds = current - lastTime;
 
+        std::string user_action = "a";
+        settingsQueue.try_pop(user_action);
+
+        //std::cout << user_action;
+
+        if (user_action == "MUESTRO LISTA") {
+            std::cout << "ACABO DE HACER MOSTRAR LA LISTA\n";
+            m_Game.se_hizo_tab = true;
+        } else if (user_action == "GUARDO LISTA") {
+            std::cout << "VOY A GUARDAR LA LISTA WIUIU\n";
+            m_Game.se_hizo_tab = false;
+        }
+
+
+    
         gameUpdates.try_pop(svUpdate);
         m_Game.Update(elapsedSeconds.count(), svUpdate);
         m_Game.Render();
-
         lastTime = current;
     }
 

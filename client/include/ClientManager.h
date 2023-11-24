@@ -5,6 +5,8 @@
 #include "GameClient.h"
 #include "waitingWindow.h"
 
+#include <string>
+
 class ClientManager {
  private:
     Protocol* m_Protocol;

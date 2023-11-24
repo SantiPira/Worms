@@ -1,0 +1,2 @@
+/usr/bin/ar qc liblibeditor.a CMakeFiles/libeditor.dir/editor/src/backgroundItem.cpp.o CMakeFiles/libeditor.dir/editor/src/dragAndDrop.cpp.o CMakeFiles/libeditor.dir/editor/src/mapEditor.cpp.o
+/usr/bin/ranlib liblibeditor.a
