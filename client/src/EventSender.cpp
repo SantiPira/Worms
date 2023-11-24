@@ -10,7 +10,7 @@ void EventSender::run() {
         SDL_WaitEvent(&event);
         if (event.type == SDL_QUIT) {
             stop();
-            break;
+            return;
         }
         SDL_Keycode key = event.key.keysym.sym;
         UserAction userAction;

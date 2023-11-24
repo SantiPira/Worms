@@ -4,6 +4,7 @@
 #include "ProtectedQueue.h"
 #include "GameClient.h"
 #include "waitingWindow.h"
+#include "EventSender.h"
 
 #include <string>
 
@@ -21,7 +22,7 @@ class ClientManager {
  public:
     ClientManager(Protocol* protocol, int idPlayer, int cantPlayers, WaitingWindow* waitingWindow);
     void init();
-    void gameLoop();
+    void gameLoop(EventSender& eventSender);
     ~ClientManager() = default;
     ClientManager(const ClientManager&) = delete;
     ClientManager(ClientManager&&) = delete;

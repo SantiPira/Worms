@@ -1,5 +1,4 @@
 #include "ClientManager.h"
-#include "EventSender.h"
 #include "client_receiver.h"
 #include "GameClient.h"
 
@@ -28,7 +27,7 @@ void ClientManager::init() {
         m_Game.Init(map, m_IdPlayer, std::ref(initInfo));
         eventSender.start();
         receiver.start();
-        gameLoop();
+        gameLoop(eventSender);
         receiver.join();
         eventSender.join();
 
@@ -40,9 +39,9 @@ void ClientManager::init() {
     }
 }
 
-void ClientManager::gameLoop() {
+void ClientManager::gameLoop(EventSender& eventSender) {
     auto lastTime = std::chrono::system_clock::now();
-    while (m_KeepRunning) {
+    while (eventSender.isRunning()) {
         GameUpdate svUpdate{};
 
         auto current = std::chrono::system_clock::now();
@@ -61,13 +60,15 @@ void ClientManager::gameLoop() {
             m_Game.se_hizo_tab = false;
         }
 
-
+        std::cout<<"keeprunning: "<<m_KeepRunning<<"\n";
     
         gameUpdates.try_pop(svUpdate);
         m_Game.Update(elapsedSeconds.count(), svUpdate);
         m_Game.Render();
         lastTime = current;
     }
+
+    std::cout<<"Cerrando juego\n";
 
     m_Game.Release();
 }
