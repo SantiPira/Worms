@@ -109,6 +109,37 @@ struct WaccuseSetBate {
     float deltaPosY = 35.0f;
 };
 
+//ver
+struct WaccuseSetBazooka {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wbazbak.png");
+    BlendMode blendMode = {true, 128, 128, 192};
+    int frames = 3;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 42;
+    int frameHeight = 41;
+    float duration = 0.3f;
+    SDL_Rect srcRect = {12, 11, 42, 41};
+    int initYSprite = 11;
+    float deltaPosX = 80.0f;
+    float deltaPosY = 50.0f;
+};
+
+struct WaccuseSetGreenBomb {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wgrnbak.png");
+    BlendMode blendMode = {true, 128, 128, 192};
+    int frames = 3;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 42;
+    int frameHeight = 41;
+    float duration = 0.3f;
+    SDL_Rect srcRect = {12, 11, 42, 41};
+    int initYSprite = 11;
+    float deltaPosX = 80.0f;
+    float deltaPosY = 50.0f;
+};
+
+
+
 /*
 struct SkySking {
     const std::string spritePath = "../../resources/Fondos/cielo.png"
