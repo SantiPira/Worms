@@ -27,10 +27,17 @@ void GameClient::Init(const std::vector<Grd>& beams, int idPlayer, std::vector<G
     sky = new Texture(std::filesystem::current_path().concat(Cloud_Sky.c_str()).c_str(), _renderer, {false, 128, 128, 192});
     sky->init();
     sky->setSourceRect(&m_SourceRect);
+
+    const SDL_Rect srcWaterRect = {0, 385, 1024, 46};
     water = new Texture(std::filesystem::current_path().concat(Water.c_str()).c_str(), _renderer, {false, 128, 128, 192});
     water->init();
-    const SDL_Rect srcWaterRect = {0, 385, 1024, 46};
     water->setSourceRect(&srcWaterRect);
+    
+    const SDL_Rect weapons_list_rect = {0,0, 160, 64};
+    weapons_list = new Texture(std::filesystem::current_path().concat(WeaponsList.c_str()).c_str(), _renderer, {false, 128, 128, 192}); 
+    weapons_list->init();
+    weapons_list->setSourceRect(&weapons_list_rect);
+
 
     //La camara funciona con bugs.
     //InitCamera();
@@ -122,26 +129,22 @@ void GameClient::Render() {
         worm.second->render();
     }
 
-    //El gusano se pinta en en una parte del mapa, pero cuando este comienza a desplazarse hacia la derecha
-    //comienza a desaperecer y aparecer de forma intermitente.
+
+    //std::string user_action;
+    //UserActions.try_pop(user_action);
+
+    if(se_hizo_tab) {
+        SDL_Rect weapons_list_dst_rect = {0, 0, 160, 64};
+        weapons_list->render(&weapons_list_dst_rect, false);
+    }
     
-    //Para ver esto: Apretar "A" hasta que aparezaca el gusano.
-    //Luego mantener pulsado "D".
-
-    /* 
-    Worm* player_worm = this->m_Worms.at(this->m_IdPlayer);
-    SDL_Rect& worm_rect = player_worm->getWormRect();
-    worm_rect.x -= camara->camara_rect.x/4;
-    worm_rect.y -= camara->camara_rect.y/4;
-    */
-
-    //camara->updateCamera();
-
+        
     for (auto& worm : m_WormsDie) {
         worm->render();
     }
 
     SDL_RenderPresent(_renderer);
+    //se_hizo_tab = false;
 
 }
 

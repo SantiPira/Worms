@@ -41,6 +41,12 @@ void EventSender::run() {
                 if (m_WeaponId == WeaponID::BATE) {
                     userAction = {ActionType::INCREASE_ANGLE, m_IdPlayer};
                 }
+            } else if (key == SDLK_1) { 
+                std::cout << "toque algooooo\n";
+                m_SettingsQueue.push("MUESTRO LISTA");
+            } else if (key == SDLK_2) { 
+                std::cout << "toque algooooo\n";
+                m_SettingsQueue.push("GUARDO LISTA");  
             } else {
                 std::cout << "key no mapeada: " << key << std::endl;
             }
