@@ -10,7 +10,22 @@
  * existen sprites distintos, y habria que modificar el cuerpo del World para poder mandar desde el servidor el width y height
  * Y asi modelar usando WorldScale::toPixel(w o h) y renderizar el gusano segun las dimensaiones que esta tomando en el World
  * En este proyecto, a priori se utiliza un Worm dinamico pero que no cambia sus dimensiones a lo largo del juego*/
-struct WaccuseIdle {
+
+struct WaccuseConfigBase {
+    const std::string spritePath;
+    BlendMode blendMode;
+    int frames;
+    int distanceBetweenFrames;
+    int frameWidth;
+    int frameHeight;
+    float duration;
+    SDL_Rect srcRect;
+    int initYSprite;
+    float deltaPosX;
+    float deltaPosY;
+};
+
+struct WaccuseIdle : public WaccuseConfigBase {
     const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/waccuse.png");
     BlendMode blendMode = {true, 128, 128, 192};
     int frames = 36;
@@ -24,7 +39,7 @@ struct WaccuseIdle {
     float deltaPosY = 40.96f;
 };
 
-struct WaccuseWalk {
+struct WaccuseWalk : public WaccuseConfigBase {
     const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wwalk.png");
     BlendMode blendMode = {true, 128, 128, 192};
     int frames = 15;
@@ -39,7 +54,7 @@ struct WaccuseWalk {
 };
 
 
-struct WaccuseAxe {
+struct WaccuseAxe : public WaccuseConfigBase {
     const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/waxebk2.png");
     BlendMode blendMode = {true, 192, 192, 128};
     int frames = 7;
@@ -53,7 +68,7 @@ struct WaccuseAxe {
     float deltaPosY = 51.0f;
 };
 
-struct WaccuseJumping {
+struct WaccuseJumping : public WaccuseConfigBase {
     const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/waccuseu.png");
     BlendMode blendMode = {true, 128, 128, 192};
     int frames = 36;
@@ -67,7 +82,7 @@ struct WaccuseJumping {
     float deltaPosY = 40.96f; // HEIGHT WORLD WORM * 2 * 25.6
 };
 
-struct WaccuseDie {
+struct WaccuseDie : public WaccuseConfigBase {
     const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wdie.png");
     BlendMode blendMode = {true, 128, 128, 192};
     int frames = 60;
@@ -81,7 +96,7 @@ struct WaccuseDie {
     float deltaPosY = 52.0f;
 };
 
-struct WaccuseGettingDamage {
+struct WaccuseGettingDamage : public WaccuseConfigBase {
     const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wpbrtlk.png");
     BlendMode blendMode = {true, 128, 128, 192};
     int frames = 15;
@@ -95,7 +110,7 @@ struct WaccuseGettingDamage {
     float deltaPosY = 40.96f;
 };
 
-struct WaccuseSetBate {
+struct WaccuseSetBate : public WaccuseConfigBase {
     const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wbsblnk.png");
     BlendMode blendMode = {true, 192, 192, 128};
     int frames = 10;
@@ -110,7 +125,7 @@ struct WaccuseSetBate {
 };
 
 //ver
-struct WaccuseSetBazooka {
+struct WaccuseSetBazooka : public WaccuseConfigBase {
     const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wbazbak.png");
     BlendMode blendMode = {true, 128, 128, 192};
     int frames = 3;
@@ -124,7 +139,7 @@ struct WaccuseSetBazooka {
     float deltaPosY = 50.0f;
 };
 
-struct WaccuseSetGreenBomb {
+struct WaccuseSetGreenBomb : public WaccuseConfigBase {
     const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wgrnbak.png");
     BlendMode blendMode = {true, 128, 128, 192};
     int frames = 3;

@@ -4,8 +4,9 @@
 #include <SDL_rect.h>
 #include "engine/graphics/Texture.h"
 #include <filesystem>
+#include "engine/entities/worms/Skins.h"
 
-struct GraveSkin {
+struct GraveSkin : public WaccuseConfigBase{
     const std::string spritePath = std::filesystem::current_path().concat("/resources/Misc/grave1.png");
     BlendMode blendMode = {true, 192, 192, 128};
     int frames = 20;
@@ -19,7 +20,7 @@ struct GraveSkin {
     float deltaPosY = 34.0f;
 };
 
-struct BlobSkin {
+struct BlobSkin : public WaccuseConfigBase{
     const std::string spritePath = std::filesystem::current_path().concat("/resources/Effects/blob.png");
     BlendMode blendMode = {true, 128, 128, 192};
     int frames = 16;

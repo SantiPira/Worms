@@ -13,6 +13,7 @@ Worm::Worm(SDL_Renderer *renderer, float posX, float posY, float width, float he
 
 void Worm::init() {
         m_CurrentSprite = SpritesEnum::SPRITE_WACCUSE_IDLE;
+        
         WaccuseIdle waccuseIdle;
         WaccuseWalk waccuseWalk;
         WaccuseAxe waccuseAxe;
@@ -21,7 +22,6 @@ void Worm::init() {
         WaccuseGettingDamage waccuseGettingDamage;
         GraveSkin waccuseGrave;
         WaccuseSetBate waccuseSetBate;
-        //bazooka
         WaccuseSetBazooka waccuseSetBazooka;
         WaccuseSetGreenBomb waccuseSetGreenBomb;
         
@@ -31,6 +31,43 @@ void Worm::init() {
                 static_cast<int>(m_Widht), static_cast<int>(m_Height)
         };
 
+        std::vector<WaccuseConfigBase*> waccuseConfigBaseVector;
+
+        waccuseConfigBaseVector.push_back(&waccuseWalk);
+        waccuseConfigBaseVector.push_back(&waccuseAxe);
+        waccuseConfigBaseVector.push_back(&waccuseJumping);
+        waccuseConfigBaseVector.push_back(&waccuseGettingDamage);
+        waccuseConfigBaseVector.push_back(&waccuseDie);
+        waccuseConfigBaseVector.push_back(&waccuseGrave);
+        waccuseConfigBaseVector.push_back(&waccuseIdle);
+        waccuseConfigBaseVector.push_back(&waccuseSetBate);
+        waccuseConfigBaseVector.push_back(&waccuseSetBazooka);
+        waccuseConfigBaseVector.push_back(&waccuseSetGreenBomb);
+
+        std::cout<<"waccuseConfigBaseVector.size() "<<waccuseConfigBaseVector.size()<<std::endl;
+
+        for (size_t i = 0; i < waccuseConfigBaseVector.size(); i++) {
+            WaccuseConfigBase* waccuse = waccuseConfigBaseVector[i];
+            m_SpritesMap.emplace(static_cast<SpritesEnum>(i), getWaccuseAnimation(
+                waccuse->spritePath,
+                waccuse->blendMode,
+                waccuse->frames,
+                waccuse->distanceBetweenFrames,
+                waccuse->frameWidth,
+                waccuse->frameHeight,
+                waccuse->duration,
+                waccuse->srcRect,
+                waccuse->initYSprite,
+                destRect,
+                waccuse->deltaPosX,
+                waccuse->deltaPosY
+            ));
+
+        }
+
+        std::cout<<"salio del for"<<std::endl;
+        /*
+        
         m_SpritesMap.emplace(SpritesEnum::SPRITE_WACCUSE_IDLE, getWaccuseAnimation(
                 waccuseIdle.spritePath,
                 waccuseIdle.blendMode,
@@ -61,7 +98,7 @@ void Worm::init() {
                 waccuseAxe.spritePath,
                 waccuseAxe.blendMode,
                 waccuseAxe.frames,
-                waccuseAxe.distanceBetweenFrames,
+                waccuseAxe.distanceBetweenFrames,S
                 waccuseAxe.frameWidth,
                 waccuseAxe.frameHeight,
                 waccuseAxe.duration,
@@ -167,11 +204,16 @@ void Worm::init() {
             waccuseSetGreenBomb.deltaPosX,
             waccuseSetGreenBomb.deltaPosY));
     
+        */
+
     
 
     for (auto& sprite : m_SpritesMap) {
+        std::cout<<"cantidad de sprites "<<m_SpritesMap.size()<<std::endl;
         sprite.second->init();
     }
+
+    std::cout<<"salio del init"<<std::endl;
 }
 
 void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
