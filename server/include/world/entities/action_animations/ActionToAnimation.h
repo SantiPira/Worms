@@ -1,0 +1,21 @@
+#pragma once
+
+#include <chrono>
+#include "messages/user_actions/ActionType.h"
+#include "messages/sprites/SpritesEnum.h"
+#include "world/entities/action_animations/SpriteAnimations.h"
+#include "world/entities/action_animations/AnimationFactory.h"
+
+class ActionToAnimation {
+private:
+    ActionType m_Action;
+    std::chrono::time_point<std::chrono::system_clock> m_StartTime;
+public:
+    ActionToAnimation();
+
+    void resetAnimation();
+
+    [[nodiscard]] SpritesEnum getCurrentSprite() const;
+
+    void setAction(ActionType action);
+};

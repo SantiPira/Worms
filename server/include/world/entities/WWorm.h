@@ -6,6 +6,7 @@
 #include "world/entities/weapons/impl/Axe.h"
 #include "world/entities/weapons/impl/Bate.h"
 #include "messages/user_actions/ActionType.h"
+#include "world/entities/action_animations/ActionToAnimation.h"
 #include "EntitiesType.h"
 #include "WEntity.h"
 #include <iostream>
@@ -45,7 +46,7 @@ private:
     GameUpdate m_PreviousState;
     ActionType m_CurrentActionType = ActionType::NONE;
     bool m_IsInContactWithWWorm = false;
-
+    ActionToAnimation m_ActionToAnimation;
 
 public:
     WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRight, uint16_t wormCategory,

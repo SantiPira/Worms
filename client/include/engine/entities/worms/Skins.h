@@ -53,6 +53,48 @@ struct WaccuseAxe {
     float deltaPosY = 51.0f;
 };
 
+struct SettingAxe {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/waxelnk.png");
+    BlendMode blendMode = {true, 192, 192, 128};
+    int frames = 15;
+    int distanceBetweenFrames = 104;
+    int frameWidth = 47;
+    int frameHeight = 47;
+    float duration = 2.0f;
+    SDL_Rect srcRect = {39, 26, 41, 39};
+    int initYSprite = 26;
+    float deltaPosX = 47.0f;
+    float deltaPosY = 51.0f;
+};
+
+struct HasAxe {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/waxelk2.png");
+    BlendMode blendMode = {true, 192, 192, 128};
+    int frames = 23;
+    int distanceBetweenFrames = 104;
+    int frameWidth = 47;
+    int frameHeight = 47;
+    float duration = 2.0f;
+    SDL_Rect srcRect = {39, 26, 41, 39};
+    int initYSprite = 26;
+    float deltaPosX = 47.0f;
+    float deltaPosY = 51.0f;
+};
+
+struct SaveingAxe {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/waxebk2.png");
+    BlendMode blendMode = {true, 192, 192, 128};
+    int frames = 15;
+    int distanceBetweenFrames = 104;
+    int frameWidth = 47;
+    int frameHeight = 47;
+    float duration = 2.0f;
+    SDL_Rect srcRect = {39, 26, 41, 39};
+    int initYSprite = 26;
+    float deltaPosX = 47.0f;
+    float deltaPosY = 51.0f;
+};
+
 struct WaccuseJumping {
     const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/waccuseu.png");
     BlendMode blendMode = {true, 128, 128, 192};

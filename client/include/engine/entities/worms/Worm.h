@@ -2,7 +2,7 @@
 
 #include <SDL_render.h>
 #include <iostream>
-#include "SpritesEnum.h"
+#include "messages/sprites/SpritesEnum.h"
 #include "utils/WorldScale.h"
 #include "engine/graphics/Animation.h"
 #include "engine/entities/TexturePaths.h"

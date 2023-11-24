@@ -49,6 +49,7 @@ WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRi
     this->m_IsFacingRight = isFacingRight;
     this->m_Dir = isFacingRight ? Direction::RIGHT : Direction::LEFT;
     this->m_SelfCondition = GameAction::WORM_IDLE;
+    m_ActionToAnimation = ActionToAnimation();
 }
 
 [[maybe_unused]] uint8_t WWorm::getId() const {
@@ -195,9 +196,20 @@ GameUpdate WWorm::getUpdatePlaying(bool wormChanged) {
     if (m_IsAttacking) {
         auto now = std::chrono::system_clock::now();
         auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - m_TimeState);
+        currentState.m_CurrentSprite = SPRITE_WACCUSE_ATTACK;
         if (elapsed.count() > 1000) {
             m_IsAttacking = false;
             currentState.m_IsAttacking = m_IsAttacking;
+            currentState.m_CurrentSprite = SPRITE_WACCUSE_IDLE;
+            m_TimeState = std::chrono::system_clock::now();
+        }
+        return currentState;
+    }
+    if (m_Weapon) {
+        auto now = std::chrono::system_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - m_TimeState);
+        if (elapsed.count() > 1000) {
+            currentState.m_Weapon = m_Weapon;
             m_TimeState = std::chrono::system_clock::now();
         }
         return currentState;
@@ -211,6 +223,8 @@ void WWorm::jump() {
     b2Vec2 vel = this->getVelocity();
     float epsilon = 0.1f;
     if (std::abs(vel.y) < epsilon) {
+        m_ActionToAnimation.resetAnimation();
+        m_ActionToAnimation.setAction(ActionType::JUMP);
         float impulse = this->getBody()->GetMass() * 5;
         vel.y = impulse;
         m_Body->ApplyLinearImpulse(vel, m_Body->GetWorldCenter(), true);
@@ -220,6 +234,8 @@ void WWorm::jump() {
 
 void WWorm::stopMove() {
     m_CurrentActionType = ActionType::STOP_MOVE;
+    m_ActionToAnimation.resetAnimation();
+    m_ActionToAnimation.setAction(ActionType::STOP_MOVE);
     b2Vec2 vel = b2Vec2_zero;
     this->m_Body->SetLinearVelocity(vel);
     this->m_Velocity = vel;
@@ -248,6 +264,7 @@ WeaponID WWorm::getWeapon() const {
 }
 
 void WWorm::setWeapon(WeaponID weapon, ActionType actionType) {
+    m_TimeState = std::chrono::system_clock::now();
     this->m_Weapon = weapon;
     m_CurrentActionType = actionType;
 }
@@ -302,6 +319,8 @@ float WWorm::getWeaponAngle() const {
 
 void WWorm::move(Direction direction) {
     if (!m_IsInContactWithWWorm || (m_IsInContactWithWWorm && direction != m_Dir)) {
+        m_ActionToAnimation.resetAnimation();
+        m_ActionToAnimation.setAction(ActionType::MOVE);
         m_CurrentActionType = ActionType::MOVE;
         m_IsMoving = true;
         float velocity;

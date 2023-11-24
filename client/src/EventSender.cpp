@@ -20,7 +20,6 @@ void EventSender::run() {
             } else if (key == SDLK_a) {
                 userAction = {ActionType::MOVE, m_IdPlayer, Direction::LEFT};
             } else if (key == SDLK_SPACE) {
-                std::cout << "ID: " << m_IdPlayer << " JUMP" << std::endl;
                 userAction = {ActionType::JUMP, m_IdPlayer};
             } else if (key == SDLK_c) {
                 m_StartAttackTime = std::chrono::system_clock::now();
