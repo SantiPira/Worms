@@ -21,6 +21,10 @@ void Worm::init() {
         WaccuseGettingDamage waccuseGettingDamage;
         GraveSkin waccuseGrave;
         WaccuseSetBate waccuseSetBate;
+        //bazooka
+        WaccuseSetBazooka waccuseSetBazooka;
+        WaccuseSetGreenBomb waccuseSetGreenBomb;
+        
         SDL_Rect destRect = {
                 static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
                 static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)),
@@ -134,6 +138,37 @@ void Worm::init() {
             waccuseSetBate.deltaPosX,
             waccuseSetBate.deltaPosY));
 
+    //bazooka
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_WACCUSE_SET_BAZOOKA, getWaccuseAnimation(
+            waccuseSetBazooka.spritePath,
+            waccuseSetBazooka.blendMode,
+            waccuseSetBazooka.frames,
+            waccuseSetBazooka.distanceBetweenFrames,
+            waccuseSetBazooka.frameWidth,
+            waccuseSetBazooka.frameHeight,
+            waccuseSetBazooka.duration,
+            waccuseSetBazooka.srcRect,
+            waccuseSetBazooka.initYSprite,
+            destRect,
+            waccuseSetBazooka.deltaPosX,
+            waccuseSetBazooka.deltaPosY));
+    
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_WACCUSE_SET_GREENBOMB, getWaccuseAnimation(
+            waccuseSetGreenBomb.spritePath,
+            waccuseSetGreenBomb.blendMode,
+            waccuseSetGreenBomb.frames,
+            waccuseSetGreenBomb.distanceBetweenFrames,
+            waccuseSetGreenBomb.frameWidth,
+            waccuseSetGreenBomb.frameHeight,
+            waccuseSetGreenBomb.duration,
+            waccuseSetGreenBomb.srcRect,
+            waccuseSetGreenBomb.initYSprite,
+            destRect,
+            waccuseSetGreenBomb.deltaPosX,
+            waccuseSetGreenBomb.deltaPosY));
+    
+    
+
     for (auto& sprite : m_SpritesMap) {
         sprite.second->init();
     }
@@ -174,7 +209,11 @@ SpritesEnum Worm::chooseSprite(const GameUpdate& gameUpdate) const {
     } else if (gameUpdate.m_Movement == GameAction::WORM_MOVE_RIGHT ||
                gameUpdate.m_Movement == GameAction::WORM_MOVE_LEFT) {
         return SpritesEnum::SPRITE_WALK;
-    } else {
+    }else if (gameUpdate.m_Weapon == WeaponID::BAZOOKA) {
+        return SpritesEnum::SPRITE_WACCUSE_SET_BAZOOKA;
+    }else if (gameUpdate.m_Weapon == WeaponID::GREENBOMB) {
+        return SpritesEnum::SPRITE_WACCUSE_SET_GREENBOMB;
+    }else {
         return SpritesEnum::SPRITE_WACCUSE_IDLE;
     }
 }

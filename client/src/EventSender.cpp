@@ -33,7 +33,13 @@ void EventSender::run() {
             } else if (key == SDLK_b) {
                 m_WeaponId = WeaponID::BATE;
                 userAction = {ActionType::SET_WEAPON, m_IdPlayer, m_WeaponId};
-            } else if (key == SDLK_DOWN) {
+            } else if (key == SDLK_k){ //bazooka
+                m_WeaponId = WeaponID::BAZOOKA;
+                userAction = {ActionType::SET_WEAPON, m_IdPlayer, m_WeaponId};
+            }else if(key == SDLK_g){ //greenbomb
+                m_WeaponId = WeaponID::GREENBOMB;
+                userAction = {ActionType::SET_WEAPON, m_IdPlayer, m_WeaponId};
+            }else if (key == SDLK_DOWN) {
                 if (m_WeaponId == WeaponID::BATE) {
                     userAction = {ActionType::DECREASE_ANGLE, m_IdPlayer};
                 }
