@@ -96,8 +96,9 @@ bool WWorm::getIsFacingRight() const {
 }
 
 bool WWorm::getIsMoving() const {
-    return this->m_Body->GetLinearVelocity().x != 0;
+    return this->m_Body->GetLinearVelocity().x != 0 || this->m_Body->GetLinearVelocity().y != 0;
 }
+
 
 bool WWorm::getIsJumping() const {
     return this->m_Body->GetLinearVelocity().y > 0;
@@ -167,18 +168,16 @@ void WWorm::setIsShooting(bool isShooting) {
     this->m_IsShooting = isShooting;
 }
 
-GameUpdate WWorm::getUpdate(bool wormChanged) {
+GameUpdate WWorm::getUpdatePlaying(bool wormChanged) {
     GameUpdate currentState;
     currentState.player_id = m_Id;
     currentState.x_pos = getPosition().x;
     currentState.y_pos = getPosition().y;
     currentState.width = m_Width * 2;
     currentState.height = m_Height * 2;
-    currentState.m_Health = m_Health;
     currentState.m_Dir = m_Dir;
     currentState.m_Weapon = m_Weapon;
     currentState.m_IsAttacking = m_IsAttacking;
-    currentState.m_SelfCondition = m_SelfCondition;
     currentState.m_Movement = getMovement();
     currentState.m_VelocityX = getVelocity().x;
     currentState.m_VelocityY = getVelocity().y;
@@ -193,10 +192,22 @@ GameUpdate WWorm::getUpdate(bool wormChanged) {
         return currentState;
     }
 
+    if (m_IsAttacking) {
+        auto now = std::chrono::system_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - m_TimeState);
+        if (elapsed.count() > 1000) {
+            m_IsAttacking = false;
+            currentState.m_IsAttacking = m_IsAttacking;
+            m_TimeState = std::chrono::system_clock::now();
+        }
+        return currentState;
+    }
+
     return {};
 }
 
 void WWorm::jump() {
+    m_CurrentActionType = ActionType::JUMP;
     b2Vec2 vel = this->getVelocity();
     float epsilon = 0.1f;
     if (std::abs(vel.y) < epsilon) {
@@ -208,19 +219,24 @@ void WWorm::jump() {
 }
 
 void WWorm::stopMove() {
+    m_CurrentActionType = ActionType::STOP_MOVE;
     b2Vec2 vel = b2Vec2_zero;
     this->m_Body->SetLinearVelocity(vel);
     this->m_Velocity = vel;
+    m_IsMoving = false;
 }
 
 void WWorm::attack(uint8_t force) {
+    m_CurrentActionType = ActionType::ATTACK;
     if (m_Weapon != WeaponID::NO_WEAPON) {
+        m_TimeState = std::chrono::system_clock::now();
         WeaponFactory weaponFactory;
         for (b2Body* entity = m_World->GetBodyList(); entity; entity = entity->GetNext()) {
             auto* wentity = reinterpret_cast<WEntity*>(entity->GetUserData().pointer);
             if (wentity != nullptr && wentity->getEntityType() == EntitiesType::ENTITY_WORM) {
                 auto* w = reinterpret_cast<WWorm*>(entity->GetUserData().pointer);
                 std::unique_ptr<Weapon> weaponPtr(weaponFactory.createWeapon(m_Weapon));
+                this->m_IsAttacking = true;
                 weaponPtr->attack(this, w, force);
             }
         }
@@ -231,8 +247,9 @@ WeaponID WWorm::getWeapon() const {
     return this->m_Weapon;
 }
 
-void WWorm::setWeapon(WeaponID weapon) {
+void WWorm::setWeapon(WeaponID weapon, ActionType actionType) {
     this->m_Weapon = weapon;
+    m_CurrentActionType = actionType;
 }
 
 Direction WWorm::getDirection() const {
@@ -254,9 +271,11 @@ void WWorm::setIsAttacking(bool isAttacking) {
 void WWorm::receiveDamage(int damage) {
     m_TimeState = std::chrono::system_clock::now();
     this->m_SelfCondition = GameAction::WORM_ATTACKED;
-    this->m_Health -= damage;
-    if (this->m_Health <= 0) {
-        setIsDead();
+    if (damage >= m_Health) {
+        m_Health = 0;
+        m_SelfCondition = GameAction::WORM_DIE;
+    } else {
+        m_Health -= damage;
     }
 }
 
@@ -272,7 +291,8 @@ EntitiesType WWorm::getEntityType() {
     return m_EntityType;
 }
 
-void WWorm::setWeaponAngle(float angle) {
+void WWorm::setWeaponAngle(float angle, ActionType actionType) {
+    m_CurrentActionType = actionType;
     this->m_WeaponAngle = angle;
 }
 
@@ -281,15 +301,19 @@ float WWorm::getWeaponAngle() const {
 }
 
 void WWorm::move(Direction direction) {
-    float velocity;
-    direction == Direction::LEFT ? velocity = -1.0 : velocity = 1.0;
-    this->m_Dir = direction;
-    b2Vec2 vel = b2Vec2(velocity, 0);
-    if (m_Weapon != WeaponID::NO_WEAPON) {
-        m_Weapon = WeaponID::NO_WEAPON;
+    if (!m_IsInContactWithWWorm || (m_IsInContactWithWWorm && direction != m_Dir)) {
+        m_CurrentActionType = ActionType::MOVE;
+        m_IsMoving = true;
+        float velocity;
+        direction == Direction::LEFT ? velocity = -1.0 : velocity = 1.0;
+        this->m_Dir = direction;
+        b2Vec2 vel = b2Vec2(velocity, 0);
+        if (m_Weapon != WeaponID::NO_WEAPON) {
+            m_Weapon = WeaponID::NO_WEAPON;
+        }
+        this->m_Velocity = vel;
+        this->m_Body->SetLinearVelocity(vel);
     }
-    this->m_Velocity = vel;
-    this->m_Body->SetLinearVelocity(vel);
 }
 
 GameAction WWorm::getMovement() {
@@ -311,16 +335,18 @@ GameAction WWorm::getMovement() {
 }
 
 void WWorm::resetWormStatus() {
-    m_IsAttacking = false;
-    m_IsShooting = false;
-    m_IsJumping = false;
-    m_IsFalling = false;
-    m_IsMoving = false;
-    m_IsFacingRight = false;
-    m_Weapon = WeaponID::NO_WEAPON;
-    m_SelfCondition = GameAction::WORM_IDLE;
-    m_WeaponAngle = 0;
-    stopMove();
+    if (m_CurrentActionType == ActionType::MOVE || m_CurrentActionType == ActionType::JUMP) {
+        m_IsAttacking = false;
+        m_IsShooting = false;
+        m_IsJumping = false;
+        m_IsFalling = false;
+        m_IsMoving = false;
+        m_IsFacingRight = false;
+        m_Weapon = WeaponID::NO_WEAPON;
+        m_SelfCondition = GameAction::WORM_IDLE;
+        m_WeaponAngle = 0;
+         stopMove();
+    }
 }
 
 void WWorm::setWasChanged(bool wasChanged) {
@@ -329,5 +355,70 @@ void WWorm::setWasChanged(bool wasChanged) {
 
 bool WWorm::getWasChanged() const {
     return m_WasChanged;
+}
+
+GameUpdate WWorm::getUpdateEndTurn(bool wormChanged) {
+    GameUpdate currentState;
+    currentState.player_id = m_Id;
+    currentState.width = m_Width * 2;
+    currentState.height = m_Height * 2;
+    currentState.m_Health = m_Health;
+    currentState.m_IsAttacking = m_IsAttacking;
+    currentState.m_Movement = getMovement();
+    currentState.m_VelocityX = getVelocity().x;
+    currentState.m_VelocityY = getVelocity().y;
+    currentState.m_SelfCondition = m_SelfCondition;
+
+    if (currentState != m_PreviousState) {
+        wormChanged = true;
+        m_PreviousState = currentState;
+    }
+
+    if(wormChanged) {
+        m_WasChanged = false;
+        return currentState;
+    }
+
+    if (m_SelfCondition == WORM_DIE) {
+        auto now = std::chrono::system_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - m_TimeState);
+        if (elapsed.count() > 1000) {
+            currentState.m_SelfCondition = WORM_GRAVE;
+            m_TimeState = std::chrono::system_clock::now();
+        }
+        return currentState;
+    }
+
+    if (m_SelfCondition == WORM_ATTACKED) {
+        auto now = std::chrono::system_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - m_TimeState);
+        if (elapsed.count() > 1000) {
+            currentState.m_SelfCondition = WORM_IDLE;
+            m_TimeState = std::chrono::system_clock::now();
+        }
+        return currentState;
+    }
+
+    return {};
+}
+
+GameUpdate WWorm::getPreviousState() const {
+    return m_PreviousState;
+}
+
+float WWorm::getWidth() const {
+    return m_Width;
+}
+
+float WWorm::getHeight() const {
+    return m_Height;
+}
+
+bool WWorm::getIsInContactWithAnotherWorm() const {
+    return m_IsInContactWithWWorm;
+}
+
+void WWorm::setIsInContactWithAnotherWorm(bool isInContactWithAnotherWorm) {
+    m_IsInContactWithWWorm = isInContactWithAnotherWorm;
 }
 

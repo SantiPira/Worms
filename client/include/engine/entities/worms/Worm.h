@@ -44,6 +44,7 @@ private:
 
     void init();
     void update(double elapsedSeconds, const GameUpdate& gameUpdate);
+    void update(double elapsedSeconds);
     void render();
    
     SDL_Rect& getWormRect();

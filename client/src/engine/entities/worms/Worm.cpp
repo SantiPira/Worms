@@ -144,15 +144,15 @@ void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
 
     m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
 
-    if (gameUpdate.m_Movement != INVALID_ACTION) {
+    if (gameUpdate.m_Movement != GameAction::INVALID_ACTION) {
         m_Dir = gameUpdate.m_Dir;
         Animation* anim = m_SpritesMap.at(m_CurrentSprite).get();
         float tempX = WorldScale::worldToPixelX(gameUpdate.x_pos, anim->getDeltaPosX());
         float tempY = WorldScale::worldToPixelY(gameUpdate.y_pos, anim->getDeltaPosY());
         anim->setDestRect({static_cast<int>(tempX), static_cast<int>(tempY), anim->getFrameWidth(),
                            anim->getFrameHeight()});
-        m_WormXPosition = tempX;
-        m_WormYPosition = tempY;
+        m_WormXPosition = gameUpdate.x_pos;
+        m_WormYPosition = gameUpdate.y_pos;
     }
 }
 
@@ -215,6 +215,15 @@ void Worm::renderDie() {
     explotion->init();
     explotion.*/
 
+}
+
+void Worm::update(double elapsedSeconds) {
+    Animation* anim = m_SpritesMap.at(m_CurrentSprite).get();
+    float tempX = WorldScale::worldToPixelX(m_WormXPosition, anim->getDeltaPosX());
+    float tempY = WorldScale::worldToPixelY(m_WormYPosition, anim->getDeltaPosY());
+    anim->setDestRect({static_cast<int>(tempX), static_cast<int>(tempY), anim->getFrameWidth(),
+                       anim->getFrameHeight()});
+    m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
 }
 
 

@@ -2,6 +2,7 @@
 
 WormIncreaseAngle::WormIncreaseAngle(int idPlayer) {
     this->setIdPlayer(idPlayer);
+    this->m_ActionType = ActionType::INCREASE_ANGLE;
 }
 
 void WormIncreaseAngle::execute(WWorm *worm) {
@@ -12,5 +13,5 @@ void WormIncreaseAngle::execute(WWorm *worm) {
         gradAngle = 90.0f;
     }
     float angle = gradAngle * b2_pi / 180.0f;
-    worm->setWeaponAngle(angle);
+    worm->setWeaponAngle(angle, m_ActionType);
 }

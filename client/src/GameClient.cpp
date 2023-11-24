@@ -69,11 +69,18 @@ void GameClient::InitMixerAndChunk() {
 }
 
 void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
-//    if (gameUpdate.m_Movement == GameAction::INVALID_ACTION) {
-//        return;
-//    }
-    for (auto& worm : m_Worms) {
-        worm.second->update(elapsedSeconds, gameUpdate);
+    if (gameUpdate.m_Movement == GameAction::INVALID_ACTION) {
+        for (auto& worm : m_Worms) {
+            worm.second->update(elapsedSeconds);
+        }
+    } else {
+        for (auto& worm : m_Worms) {
+            if (worm.first == gameUpdate.player_id) {
+                worm.second->update(elapsedSeconds, gameUpdate);
+            } else {
+                worm.second->update(elapsedSeconds);
+            }
+        }
     }
     if (gameUpdate.m_SelfCondition == GameAction::WORM_GRAVE) {
         m_WormsDie.push_back(m_Worms.at(gameUpdate.player_id));

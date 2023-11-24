@@ -19,7 +19,7 @@ class Game : public Thread {
     std::string m_GameName;
     std::string m_MapName;
     int m_Players;
-    std::unordered_map<int, ProtectedQueue<GameUpdate>*> m_QClientUpdates; //TODO: Change string to GameUpdate later
+    std::unordered_map<int, ProtectedQueue<GameUpdate>*> m_QClientUpdates;
     ProtectedQueue<UserAction> m_InputActions;
     std::atomic<bool> m_KeepRunning;
     int m_PopMessageQuantity;
@@ -44,25 +44,15 @@ public:
 
     std::unordered_map<int, ProtectedQueue<GameUpdate>*>* getClientUpdates();
     void setupWorld();
-    void updateWorld();
     bool isStillPlayable();
     void kill();
 
 private:
-    void pushSetToClients(std::reference_wrapper<std::vector<GameUpdate>> updates);
     void pushUpdatesToClients(std::reference_wrapper<std::vector<GameUpdate>> updates);
     void pushUpdateToClients(GameUpdate& update);
+
     void sendInfoTurns(int playerId, GameAction infoTurn);
-
     void processTurns(TurnHandler& turnHandler, InstructionFactory& instructionFactory);
-    bool processUserActions(std::vector<UserAction>& userActions,
-                            std::vector<GameUpdate>& updates,
-                            InstructionFactory& instructionFactory, size_t& idxInstruction);
-
-    void processTransitionAction(std::vector<UserAction> &userActions, InstructionFactory &instructionFactory,
-                                 size_t &idxInstruction);
     void waitFrameTime();
     void endTurn(TurnHandler& turnHandler);
-
-    GameUpdate &buildTransitionUpdate();
 };
