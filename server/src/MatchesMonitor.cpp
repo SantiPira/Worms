@@ -9,6 +9,7 @@ void MatchesMonitor::removeGame(int id) {
     //std::lock_guard<std::mutex> lock(m_Mutex);
     m_Games.at(id)->kill();
     m_Games.at(id)->join();
+    m_Games.erase(id);
 }
 
 int MatchesMonitor::createGame(std::string gameName, std::string mapName, int players) {
@@ -48,10 +49,12 @@ std::string MatchesMonitor::getMapName(int idGame) {
 
 void MatchesMonitor::removePlayer(int idGame, int idPlayer) {
     std::lock_guard<std::mutex> lock(m_Mutex);
-    if(! m_Games.at(idGame)->isStillPlayable()) {
-        removeGame(idGame);
-    } else {
-        m_Games.at(idGame)->getClientUpdates()->erase(idPlayer);
+    if(m_Games.count(idGame) > 0) {
+        if(! m_Games.at(idGame)->isStillPlayable()) {
+            removeGame(idGame);
+        } else {
+            m_Games.at(idGame)->getClientUpdates()->erase(idPlayer);
+        }
     }
     //TODO: Preguntar si no hay race condition aca.
 }

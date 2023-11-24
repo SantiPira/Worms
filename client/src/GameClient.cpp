@@ -1,19 +1,19 @@
 #include "../include/GameClient.h"
-#include "engine/entities/worms/Skins.h"
 
-#include <iostream>
 #include <thread>
+#include <iostream>
 
-void GameClient::Init(const std::vector<Grd>& vector, int idPlayer, std::vector<GameUpdate>& initInfo) {
+
+void GameClient::Init(const std::vector<Grd>& beams, int idPlayer, std::vector<GameUpdate>& initInfo) {
     InitSDL();
     CreateWindowAndRender();
     InitMixerAndChunk();
     SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
     m_IdPlayer = idPlayer;
-    for (auto& grd : vector) {
-        auto* grdL = new GrdLarge(_renderer, grd.x, grd.y, grd.width, grd.height);
-        grdL->init();
-        m_GrdLarge.push_back(grdL);
+    for (auto& beamMap : beams) {
+        auto* beam = new Beam(_renderer, beamMap);
+        beam->init();
+        m_Beams.push_back(beam);
     }
 
     for (auto& gameUpdate : initInfo) {
@@ -26,12 +26,17 @@ void GameClient::Init(const std::vector<Grd>& vector, int idPlayer, std::vector<
     const SDL_Rect m_SourceRect = {0, 0, 4096, 2034};
     sky = new Texture(std::filesystem::current_path().concat(Cloud_Sky.c_str()).c_str(), _renderer, {false, 128, 128, 192});
     sky->init();
-    sky->setSourceRect(&m_SourceRect);      
+    sky->setSourceRect(&m_SourceRect);
+    water = new Texture(std::filesystem::current_path().concat(Water.c_str()).c_str(), _renderer, {false, 128, 128, 192});
+    water->init();
+    const SDL_Rect srcWaterRect = {0, 385, 1024, 46};
+    water->setSourceRect(&srcWaterRect);
 
-    InitCamera();
+    //La camara funciona con bugs.
+    //InitCamera();
 
-    //Corro el audio con el chunk
-    //mixer->PlayChannel(-1, *chunk, -1);
+    //Corro el audio con el chunk.
+    mixer->PlayChannel(-1, *chunk, -1);
 
 }
 
@@ -64,57 +69,76 @@ void GameClient::InitMixerAndChunk() {
 }
 
 void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
-    if (gameUpdate.m_Move == GameAction::INVALID_ACTION) {
+    if (gameUpdate.m_Movement == GameAction::INVALID_ACTION) {
         return;
     }
     m_Worms.at(gameUpdate.player_id)->update(elapsedSeconds, gameUpdate);
+    if (gameUpdate.m_SelfCondition == GameAction::WORM_GRAVE) {
+        m_WormsDie.push_back(m_Worms.at(gameUpdate.player_id));
+        m_Worms.erase(gameUpdate.player_id);
+    }
 }
 
-
-void GameClient::Render(const WormDie& wormDie) {
+void GameClient::Render() {
     SDL_RenderClear(_renderer);
 
     //camara->updateCamera();
 
+    //SDL_Rect& wormRect;
+
     //renderizar fondo.
-    SDL_Rect m_DestRect = {0 - camara->camara_rect.x/4, 0 - camara->camara_rect.y/4, 512, 512};
-    //SDL_Rect m_DestRect = {-15, -1, 512, 512};
+    SDL_Rect m_DestRect = {0 /*- camara->camara_rect.x/4*/, 0 /*- camara->camara_rect.y/4*/, 512, 512};
     sky->render(&m_DestRect, false);
 
-    for (auto& grdL : m_GrdLarge) {
+    const SDL_Rect m_DestRect2 = {0, 461, 1024, 51};
+    water->render(&m_DestRect2, false);
 
-        //std::cout << "Buenas\n";
+    for (auto& beam : m_Beams) {
 
-        SDL_Rect& grdlRect = grdL->getGrdlRect();
-        SDL_Rect aux = grdlRect;
-
-        aux.x -= grdlRect.x;
-        aux.y -= grdlRect.y;
-
-        grdlRect.x = aux.x;
-        grdlRect.y = aux.y;
-
+        //Las vigas se desplzan muy rapido respecto a la velocidad del gusano.
         
-        //std::cout << grdlRect.x << std::endl;
-        //std::cout << grdlRect.y << std::endl;
+        /*
+        SDL_Rect& beamRect = beam->getBeamRect();
+        SDL_Rect beamRectCopy = {0,0,0,0};
+        beamRectCopy.x = beamRect.x;
+        beamRectCopy.y = beamRect.y;
+        
+        beamRect.x -= camara->camara_rect.x/4;
+        beamRect.y -= camara->camara_rect.y/4;
+        */
 
-        std::this_thread::sleep_for(std::chrono::seconds(5));
+        beam->render();
 
-        grdL->render();
+        /*
+        beamRect.x = beamRectCopy.x;
+        beamRect.y = beamRectCopy.y;
+        */
+
+
     }
-    
+
+
     for (auto& worm : m_Worms) {
         worm.second->render();
     }
 
-    camara->updateCamera();
+    //El gusano se pinta en en una parte del mapa, pero cuando este comienza a desplazarse hacia la derecha
+    //comienza a desaperecer y aparecer de forma intermitente.
     
+    //Para ver esto: Apretar "A" hasta que aparezaca el gusano.
+    //Luego mantener pulsado "D".
 
-    if (wormDie.isDie) {
-        m_Worms.at(wormDie.idPlayer)->renderDie();
-        //remove from worms
-        delete m_Worms.at(wormDie.idPlayer);
-        m_Worms.erase(wormDie.idPlayer);
+    /* 
+    Worm* player_worm = this->m_Worms.at(this->m_IdPlayer);
+    SDL_Rect& worm_rect = player_worm->getWormRect();
+    worm_rect.x -= camara->camara_rect.x/4;
+    worm_rect.y -= camara->camara_rect.y/4;
+    */
+
+    //camara->updateCamera();
+
+    for (auto& worm : m_WormsDie) {
+        worm->render();
     }
 
     SDL_RenderPresent(_renderer);

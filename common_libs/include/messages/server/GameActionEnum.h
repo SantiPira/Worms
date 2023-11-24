@@ -2,7 +2,7 @@
 #include <stdint.h>
 
 enum GameAction : uint8_t {
-    TURN_INFO = 0x00,
+    START_TURN = 0x00,
     WORM_MOVE_RIGHT = 0x01,
     WORM_MOVE_LEFT = 0x02,
     WORM_IDLE = 0x03,
@@ -15,5 +15,6 @@ enum GameAction : uint8_t {
     WORM_ATTACKED = 0x0A,
     WORM_DIE = 0x0B,
     WORM_GRAVE = 0x0C,
+    END_TURN = 0x0D,
     INVALID_ACTION = 0xFF
 };

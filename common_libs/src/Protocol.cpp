@@ -100,16 +100,19 @@ void Protocol::sendMap(std::reference_wrapper<std::vector<Grd>> map) {
 
 void Protocol::sendGameUpdate(GameUpdate &update) {
     sendByte(update.player_id);
-    sendByte(update.m_Move);
     sendFloat(update.x_pos);
     sendFloat(update.y_pos);
     sendFloat(update.width);
     sendFloat(update.height);
+
+    sendByte(update.m_Movement);
     sendByte(update.m_Weapon);
-    sendByte(update.m_ActionWeapon);
+    sendByte(update.m_IsAttacking ? 0x01 : 0x00);
     sendByte(update.m_Health);
     sendByte(update.m_Dir);
     sendByte(update.m_SelfCondition);
+    sendFloat(update.m_VelocityX);
+    sendFloat(update.m_VelocityY);
 }
 
 GameInfo Protocol::recvGameInfo() {
@@ -147,16 +150,19 @@ std::vector<Grd> Protocol::recvMap() {
 GameUpdate Protocol::recvGameUpdate() {
     GameUpdate update{};
     update.player_id = recvByte();
-    update.m_Move = GameAction(recvByte());
     update.x_pos = recvFloat();
     update.y_pos = recvFloat();
     update.width = recvFloat();
     update.height = recvFloat();
+
+    update.m_Movement = GameAction(recvByte());
     update.m_Weapon = WeaponID(recvByte());
-    update.m_ActionWeapon = GameAction(recvByte());
+    update.m_IsAttacking = recvByte() == 0x01;
     update.m_Health = recvByte();
     update.m_Dir = Direction(recvByte());
     update.m_SelfCondition = GameAction(recvByte());
+    update.m_VelocityX = recvFloat();
+    update.m_VelocityY = recvFloat();
     return update;
 }
 

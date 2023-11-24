@@ -7,13 +7,14 @@
 #include <QVBoxLayout>
 #include <QLineEdit>
 #include "client_juego.h"
+#include "waitingWindow.h"
 
 class MainWindow : public QWidget {
 private:
     Juego* juego;
     std::atomic<bool> m_Lobby;
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(QWidget *parent = 0, WaitingWindow* waitingWindow = 0);
     Protocol* getProtocol();
     bool isLobby();
     ~MainWindow() override;
@@ -30,6 +31,8 @@ private:
     QPushButton buttonConnect;
     QLineEdit inputPort;
     QLineEdit inputServer;
+
+    WaitingWindow* m_WaitingWindow;
 
 };
 

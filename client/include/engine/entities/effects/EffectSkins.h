@@ -12,11 +12,11 @@ struct GraveSkin {
     int distanceBetweenFrames = 60;
     int frameWidth = 26;
     int frameHeight = 41;
-    float duration = 2.0f;
+    float duration = 0.2f;
     SDL_Rect srcRect = {19, 4, 22, 32};
     int initYSprite = 4;
-    float deltaPosX = 25.6f; // 1m = 25.6px
-    float deltaPosY = 40.96f; // 1.6 m = 40.96px
+    float deltaPosX = 25.6f;
+    float deltaPosY = 34.0f;
 };
 
 struct BlobSkin {
@@ -32,4 +32,3 @@ struct BlobSkin {
     float deltaPosX = 25.6f;
     float deltaPosY = 40.96f;
 };
-

@@ -1,8 +1,8 @@
 #include "EventSender.h"
 
-EventSender::EventSender(Protocol& protocol, int idPlayer, ProtectedQueue<std::string>& settingsQueue)
-    : m_Protocol(protocol), itsMyTurn(false), m_KeepRunning(true), m_IdPlayer(idPlayer),
-    m_SettingsQueue(settingsQueue) {}
+EventSender::EventSender(Protocol& protocol, int idPlayer, ProtectedQueue<std::string>& settingsQueue, bool isMyTurn)
+    : m_Protocol(protocol), m_IsMyTurn(isMyTurn), m_KeepRunning(true), m_IdPlayer(idPlayer),
+    m_SettingsQueue(settingsQueue), m_WeaponId(WeaponID::NO_WEAPON) {}
 
 void EventSender::run() {
     while (isRunning()) {
@@ -13,41 +13,52 @@ void EventSender::run() {
             break;
         }
         SDL_Keycode key = event.key.keysym.sym;
+        UserAction userAction;
         if (event.type == SDL_KEYDOWN && event.key.repeat == 0) {
             if (key == SDLK_d) {
-                std::cout << "enviando accion de moverse a la derecha" << std::endl;
-                UserAction userAction(ActionType::MOVE, m_IdPlayer, Direction::RIGHT);
-                m_Protocol.sendUserAction(userAction);
+                userAction = {ActionType::MOVE, m_IdPlayer, Direction::RIGHT};
             } else if (key == SDLK_a) {
-                std::cout << "enviando accion de moverse a la izquierda" << std::endl;
-                UserAction userAction(ActionType::MOVE, m_IdPlayer, Direction::LEFT);
-                m_Protocol.sendUserAction(userAction);
+                userAction = {ActionType::MOVE, m_IdPlayer, Direction::LEFT};
             } else if (key == SDLK_SPACE) {
-                std::cout << "enviando accion de saltar" << std::endl;
-                UserAction userAction(ActionType::JUMP, m_IdPlayer);
-                m_Protocol.sendUserAction(userAction);
+                std::cout << "ID: " << m_IdPlayer << " JUMP" << std::endl;
+                userAction = {ActionType::JUMP, m_IdPlayer};
             } else if (key == SDLK_c) {
-                std::cout << "enviando accion de atacar" << std::endl;
-                UserAction userAction(ActionType::ATTACK, m_IdPlayer);
-                m_Protocol.sendUserAction(userAction);
+                m_StartAttackTime = std::chrono::system_clock::now();
             } else if (key == SDLK_h) {
-                std::cout << "Sacando Hacha" << std::endl;
-                UserAction userAction(ActionType::SET_WEAPON, m_IdPlayer, WeaponID::AXE); // TIPO DE ARMA
-                m_Protocol.sendUserAction(userAction);
+                m_WeaponId = WeaponID::AXE;
+                userAction = {ActionType::SET_WEAPON, m_IdPlayer, m_WeaponId};
             } else if (key == SDLK_j) {
-                std::cout << "Guardando Hacha" << std::endl;
-                UserAction userAction(ActionType::UNSET_WEAPON, m_IdPlayer); // TIPO DE ARMA
-                m_Protocol.sendUserAction(userAction);
+                m_WeaponId = WeaponID::NO_WEAPON;
+                userAction = {ActionType::UNSET_WEAPON, m_IdPlayer};
+            } else if (key == SDLK_b) {
+                m_WeaponId = WeaponID::BATE;
+                userAction = {ActionType::SET_WEAPON, m_IdPlayer, m_WeaponId};
+            } else if (key == SDLK_DOWN) {
+                if (m_WeaponId == WeaponID::BATE) {
+                    userAction = {ActionType::DECREASE_ANGLE, m_IdPlayer};
+                }
+            } else if (key == SDLK_UP) {
+                if (m_WeaponId == WeaponID::BATE) {
+                    userAction = {ActionType::INCREASE_ANGLE, m_IdPlayer};
+                }
             } else {
                 std::cout << "key no mapeada: " << key << std::endl;
             }
         } else if (event.type == SDL_KEYUP && event.key.repeat == 0) {
             if (key == SDLK_d || key == SDLK_a) {
-                std::cout << "enviando accion de dejar de moverse" << std::endl;
-                UserAction userAction(ActionType::STOP_MOVE, m_IdPlayer);
-                m_Protocol.sendUserAction(userAction);
+                userAction = {ActionType::STOP_MOVE, m_IdPlayer};
+            } else if (key == SDLK_c) {
+                userAction = attack();
             } else {
                 std::cout << "key no mapeada: " << key << std::endl;
+            }
+        }
+
+        if (userAction.getAction() != ActionType::NONE) {
+            bool isMyTurn = m_IsMyTurn.load();
+            if (isMyTurn) {
+                std::cout << "ID: " << m_IdPlayer << " Enviando accion: " << userAction.getAction() << std::endl;
+                m_Protocol.sendUserAction(userAction);
             }
         }
     }
@@ -61,4 +72,37 @@ void EventSender::stop() {
     m_KeepRunning.store(false);
     m_Protocol.shutdown(SHUT_RDWR);
     m_Protocol.close();
+}
+
+void EventSender::setItsMyTurn(bool isMyTurn) {
+    std::cout << "ID: " << m_IdPlayer << " Cambio de turno: " << isMyTurn << std::endl;
+    this->m_IsMyTurn.store(isMyTurn);
+}
+
+UserAction EventSender::attack() {
+    std::chrono::duration<double> elapsedSeconds{};
+    switch (m_WeaponId) {
+        case WeaponID::BATE:
+            elapsedSeconds = std::chrono::system_clock::now() - m_StartAttackTime;
+            uint8_t force;
+            if (elapsedSeconds.count() >= BatePotency::LOW_POTENCY
+                && elapsedSeconds.count() < BatePotency::MEDIUM_POTENCY) {
+                std::cout << "LOW" << std::endl;
+                force = BateForce::LOW;
+            } else if (elapsedSeconds.count() > BatePotency::MEDIUM_POTENCY
+                && elapsedSeconds.count() < BatePotency::HIGH_POTENCY) {
+                std::cout << "MEDIUM" << std::endl;
+                force = BateForce::MEDIUM;
+            } else {
+                std::cout << "HIGH" << std::endl;
+                force = BateForce::HIGH;
+            }
+            return {ActionType::ATTACK, m_IdPlayer, force};
+        case WeaponID::AXE:
+            return {ActionType::ATTACK, m_IdPlayer};
+        case WeaponID::NO_WEAPON:
+            return {};
+        default:
+            return {};
+    }
 }

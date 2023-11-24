@@ -47,4 +47,5 @@ private:
     void pushSetToClients(std::reference_wrapper<std::unordered_set<GameUpdate, GameUpdateHash>> updates);
     void pushUpdatesToClients(std::reference_wrapper<std::vector<GameUpdate>> updates);
     void pushUpdateToClients(GameUpdate& update);
+    void sendInfoTurns(int playerId, GameAction infoTurn);
 };

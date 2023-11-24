@@ -3,6 +3,7 @@
 #include "Protocol.h"
 #include "ProtectedQueue.h"
 #include "GameClient.h"
+#include "waitingWindow.h"
 
 class ClientManager {
  private:
@@ -13,9 +14,10 @@ class ClientManager {
     ProtectedQueue<std::string> settingsQueue;
     ProtectedQueue<GameUpdate> gameUpdates;
     bool m_KeepRunning;
+    WaitingWindow* m_WaitingWindow;
 
  public:
-    ClientManager(Protocol* protocol, int idPlayer, int cantPlayers);
+    ClientManager(Protocol* protocol, int idPlayer, int cantPlayers, WaitingWindow* waitingWindow);
     void init();
     void gameLoop();
     ~ClientManager() = default;

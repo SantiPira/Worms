@@ -1,14 +1,14 @@
 #pragma once
 
 #include "Weapon.h"
-#include "messages/user_actions/WeaponID.h"
 #include "world/entities/weapons/impl/Axe.h"
+#include "world/entities/weapons/impl/Bate.h"
 
 class Weapon;
 class WeaponFactory {
 public:
     WeaponFactory() = default;
-    Weapon* createWeapon(WeaponID weaponId, b2Vec2& attackerPosition, b2Vec2& attackedPosition);
+    Weapon* createWeapon(WeaponID weaponId);
 
     ~WeaponFactory() = default;
 

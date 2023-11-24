@@ -3,38 +3,50 @@
 #include "../../../../Box2D/include/box2d/box2d.h"
 #include "messages/server/GameUpdate.h"
 #include "world/entities/weapons/WeaponFactory.h"
+#include "world/entities/weapons/impl/Axe.h"
+#include "world/entities/weapons/impl/Bate.h"
 #include "messages/user_actions/ActionType.h"
+#include "EntitiesType.h"
+#include "WEntity.h"
 #include <iostream>
 #include <memory>
+#include <vector>
+#include <chrono>
 
-class WWorm {
+class WWorm : public WEntity {
 private:
     uint8_t m_Id;
-    b2World* m_World;
-    b2Body* m_Body;
-    float m_Width;
-    float m_Height;
+    b2World* m_World{};
+    b2Body* m_Body{};
+    float m_Width{};
+    float m_Height{};
     b2Vec2 m_Position{};
     b2Vec2 m_Velocity{};
-    float m_Angle;
-    float m_AngularVelocity;
-    int32 m_Health;
-    int32 m_Ammo;
-    int32 m_Score;
-    bool m_IsDead;
-    bool m_IsFacingRight;
-    bool m_IsMoving;
-    bool m_IsJumping;
-    bool m_IsFalling;
-    bool m_IsShooting;
-    GameAction m_SelfCondtion;
+    float m_Angle{};
+    float m_AngularVelocity{};
+    int32 m_Health{};
+    int32 m_Ammo{};
+    int32 m_Score{};
+    bool m_IsDead{};
+    bool m_IsFacingRight{};
+    bool m_IsMoving{};
+    bool m_IsJumping{};
+    bool m_IsFalling{};
+    bool m_IsShooting{};
+    GameAction m_SelfCondition;
     WeaponID m_Weapon;
     Direction m_Dir;
-    bool m_IsAttacking;
+    bool m_IsAttacking{};
+    uint16_t m_WormCategory{};
+    EntitiesType m_EntityType;
+    float m_WeaponAngle{};
+    std::chrono::time_point<std::chrono::system_clock> m_TimeState; //seconds
 
 public:
-    WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRight);
+    WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRight, uint16_t wormCategory,
+          const std::vector<uint16_t>& categories);
 
+    WWorm();
     [[maybe_unused]] [[nodiscard]] uint8_t getId() const;
     [[nodiscard]] b2Body* getBody() const;
     [[nodiscard]] b2Vec2 getPosition() const;
@@ -54,6 +66,8 @@ public:
     [[nodiscard]] Direction getDirection() const;
     [[nodiscard]] bool getIsAttacking() const;
     [[nodiscard]] GameAction getSelfCondition() const;
+    [[nodiscard]] float getWeaponAngle() const;
+    EntitiesType getEntityType() override;
 
     void setPosition(b2Vec2 position);
     void setVelocity(b2Vec2 velocity);
@@ -62,7 +76,7 @@ public:
     void setHealth(int32 health);
     void setAmmo(int32 ammo);
     void setScore(int32 score);
-    void setIsDead(bool isDead);
+    void setIsDead();
     void setIsFacingRight(bool isFacingRight);
     void setIsMoving(bool isMoving);
     void setIsJumping(bool isJumping);
@@ -72,15 +86,24 @@ public:
     void setDirection(Direction dir);
     void setIsAttacking(bool isAttacking);
     void setSelfCondition(GameAction selfCondition);
+    void setWeaponAngle(float angle);
+    void resetWormStatus();
 
-    [[nodiscard]] GameUpdate getUpdate() const;
+    GameUpdate getUpdate();
 
-    void jump(b2Vec2 vel);
+    void jump();
 
     void stopMove();
 
-    void attack();
+    void attack(uint8_t force);
 
     void receiveDamage(int damage);
 
+    ~WWorm() override = default;
+
+    void increaseWeaponAngle();
+
+    void move(Direction direction);
+
+    GameAction getMovement();
 };

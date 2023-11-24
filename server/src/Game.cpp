@@ -8,62 +8,62 @@ Game::Game(int id, std::string gameName, std::string mapName, int players) : m_I
 
 void Game::run() {
     setupWorld();
-//    GameUpdate update{};
-//    update.action = TURN_INFO;
-//    update.player_id = 0;
-//    pushUpdateToClients(std::ref(update));
-//    TurnHandler turnHandler(0, m_Players);
+    sendInfoTurns(0, GameAction::START_TURN);
+
+    std::vector<int> idPlayers;
+    for (int i = 0; i < m_Players; i++) {
+        idPlayers.push_back(i);
+    }
+
+    TurnHandler turnHandler(0, idPlayers);
     {
-        auto update = world.getWormsPosition();
+        auto update = world.getWormsUpdates();
         pushUpdatesToClients(std::ref(update));
     }
     InstructionFactory instructionFactory;
     while (m_KeepRunning) {
+        try {
+            while (turnHandler.isValidTurn()) {
+                std::chrono::steady_clock::time_point start_time = std::chrono::steady_clock::now();
 
-        //while (turnHandler.isValidTurn()) {
-            //Ver como se estan almacenando los mensajes en el vector, si hay repetidos etc... y como llega al pushUpdateToClients..
-            //m_InputActions.try_pop(std::ref(updates), m_PopMessageQuantity);
-            std::vector<UserAction> userActions;
-            //std::vector<GameUpdate> updates;
-            std::unordered_set<GameUpdate, GameUpdateHash> updates;
-            m_InputActions.try_pop(std::ref(userActions), m_PopMessageQuantity);
-            if (userActions.empty()) {
-                userActions.emplace_back();
-            }
-            for (auto& userAction : userActions) {
-                auto* instruction = instructionFactory.createInstruction(userAction);
-                if (userAction.getAction() == NONE) {
-                    world.step();
-                    auto wormPositions = world.getWormsPosition();
-                    pushUpdatesToClients(std::ref(wormPositions));
-                } else {
-                    auto gameUpdate = world.execute(instruction, userAction.getIdPlayer());
-                    updates.insert(gameUpdate);
-                    if (gameUpdate.m_SelfCondition == GameAction::WORM_DIE) {
-                        auto grave = gameUpdate;
-                        grave.m_SelfCondition = GameAction::WORM_GRAVE;
-                        updates.insert(grave);
-                        world.removeWorm(gameUpdate.player_id);
-                    }
+                std::vector<UserAction> userActions;
+                std::unordered_set<GameUpdate, GameUpdateHash> updates;
+                m_InputActions.try_pop(std::ref(userActions), m_PopMessageQuantity);
+                if (userActions.empty()) {
+                    userActions.emplace_back();
                 }
-                delete instruction;
-            }
-            pushSetToClients(std::ref(updates));
+                for (auto& userAction : userActions) {
+                    auto* instruction = instructionFactory.createInstruction(userAction);
+                    world.execute(instruction, userAction.getIdPlayer());
+                    world.step();
+                    auto wormPositions = world.getWormsUpdates();
+                    for (auto& wormPosition : wormPositions) {
+                        updates.insert(wormPosition);
+                    }
+                    delete instruction;
+                }
+                pushSetToClients(std::ref(updates));
 
-            //TODO: Revisar esto, pero creo que deberia estar bien, el loop del turnHandler no esta mal, ya que administra de quien es el turno.
-            std::chrono::steady_clock::time_point start_time = std::chrono::steady_clock::now();
-            std::chrono::steady_clock::time_point end_time = start_time;
-            std::chrono::duration<double> elapsed_seconds = end_time - start_time;
-            double target_frame_time = 1.0 / 60.0;
-            while (elapsed_seconds.count() < target_frame_time) {
-                end_time = std::chrono::steady_clock::now();
-                elapsed_seconds = end_time - start_time;
+                std::chrono::steady_clock::time_point end_time = start_time;
+                std::chrono::duration<double> elapsed_seconds = end_time - start_time;
+                double target_frame_time = 1.0 / 60.0;
+                while (elapsed_seconds.count() < target_frame_time) {
+                    end_time = std::chrono::steady_clock::now();
+                    elapsed_seconds = end_time - start_time;
+                }
             }
-        //}
-//        turnHandler.nextTurn();
-//        update.action = TURN_INFO;
-//        update.player_id = turnHandler.getCurrentPlayer();
-//        pushUpdateToClients(std::ref(update));
+            sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::END_TURN);
+            world.resetWormStatus(turnHandler.getCurrentPlayer());
+            std::vector<int> wormsRemovedIds;
+            std::vector<GameUpdate> deadWorms;
+            world.removeDeadWorms(std::ref(wormsRemovedIds));
+            turnHandler.nextTurn(std::ref(wormsRemovedIds));
+            sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::START_TURN);
+        }  catch (const ClosedQueue& cqe) {
+            //should do nothing, if queue has been closed this is the last iteration
+        } catch (...) {
+            std::cout << "Error in Game: " << this->m_IdGame << std::endl;
+        }
     }
 }
 
@@ -135,6 +135,7 @@ void Game::setupWorld() {
 
 void Game::kill() {
     m_KeepRunning = false;
+    m_InputActions.close();
     for (auto& clientUpdate : m_QClientUpdates) {
         clientUpdate.second->close();
     }
@@ -142,5 +143,18 @@ void Game::kill() {
 }
 
 bool Game::isStillPlayable() {
-    return m_QClientUpdates.size()-1 >= 2;
+    unsigned long int compare;
+    if( m_Players == 1) {
+        compare = 1;
+    } else {
+        compare = 2;
+    }
+    return m_QClientUpdates.size()-1 >= compare;
+}
+
+void Game::sendInfoTurns(int playerId, GameAction infoTurn) {
+    GameUpdate update{};
+    update.m_SelfCondition = infoTurn;
+    update.player_id = playerId;
+    pushUpdateToClients(std::ref(update));
 }

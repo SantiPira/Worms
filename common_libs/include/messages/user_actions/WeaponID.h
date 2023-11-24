@@ -2,5 +2,18 @@
 
 enum WeaponID : uint8_t {
     AXE = 0X00,
-    NO_WEAPON = 0X01
+    NO_WEAPON = 0X01,
+    BATE = 0X02
+};
+
+enum BateForce : uint8_t {
+    LOW = 0X00,
+    MEDIUM = 0X01,
+    HIGH = 0X02
+};
+
+enum BatePotency {
+    LOW_POTENCY = 0,
+    MEDIUM_POTENCY = 10,
+    HIGH_POTENCY = 20
 };

@@ -6,7 +6,7 @@ UserAction::UserAction(ActionType action, int idPlayer, uint8_t param1, uint8_t 
 UserAction::UserAction(ActionType action, int idPlayer) : m_Action(action), m_IdPlayer(idPlayer), m_Param1(0),
     m_Param2(0) {}
 
-UserAction::UserAction() : m_Action(ActionType::NONE), m_IdPlayer(0), m_Param1(0), m_Param2(0) {}
+UserAction::UserAction() : m_Action(ActionType::NONE), m_IdPlayer(-1), m_Param1(0), m_Param2(0) {}
 
 UserAction::UserAction(ActionType action, int idPlayer, uint8_t param1) : m_Action(action), m_IdPlayer(idPlayer),
     m_Param1(param1), m_Param2(0) {}

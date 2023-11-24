@@ -10,7 +10,9 @@ enum ActionType : uint8_t {
     ATTACK = 0X04,
     STOP_ATTACK = 0X05,
     SET_WEAPON = 0X06,
-    UNSET_WEAPON = 0X07
+    UNSET_WEAPON = 0X07,
+    DECREASE_ANGLE = 0X08,
+    INCREASE_ANGLE = 0X09
 };
 
 

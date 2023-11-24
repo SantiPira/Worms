@@ -2,7 +2,7 @@
 
 
 Camara::Camara(SDL_Renderer *renderer) : _renderer(renderer) {
-    float zoom = 1.0f;
+    float zoom = 1.8f;
     camara_rect = {0,0, 512, 512};
     SDL_RenderSetScale(_renderer, zoom, 1);
 }

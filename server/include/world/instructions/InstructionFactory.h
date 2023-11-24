@@ -9,8 +9,9 @@
 #include "world/instructions/impl/WormAttack.h"
 #include "world/instructions/impl/WormSetWeapon.h"
 #include "world/instructions/impl/WormUnSetWeapon.h"
+#include "world/instructions/impl/WormIncreaseAngle.h"
+#include "world/instructions/impl/WormDecreaseAngle.h"
 #include <iostream>
-
 
 class InstructionFactory {
 public:
