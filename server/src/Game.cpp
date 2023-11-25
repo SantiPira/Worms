@@ -18,8 +18,8 @@ void Game::run() {
     TurnHandler turnHandler(0, idPlayers);
     InstructionFactory instructionFactory;
     {
-        bool playingStatus = true;
-        auto updates = world.getWormsUpdates(true, playingStatus);
+        bool getAll = true;
+        auto updates = world.getWormsUpdates(getAll);
         pushUpdatesToClients(std::ref(updates));
     }
 
@@ -42,8 +42,8 @@ void Game::processTurns(TurnHandler& turnHandler, InstructionFactory& instructio
             if (world.wormBrokeTurn(std::ref(userAction))) {
                 break;
             }
-            bool playingStatus = true;
-            auto updates = world.getWormsUpdates(false, playingStatus);
+            bool getAll = false;
+            auto updates = world.getWormsUpdates(getAll);
             pushUpdatesToClients(std::ref(updates));
             waitFrameTime();
         }
@@ -68,20 +68,20 @@ void Game::waitFrameTime() {
 void Game::endTurn(TurnHandler& turnHandler) {
     sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::END_TURN);
     world.resetWormStatus(turnHandler.getCurrentPlayer());
-    bool playingStatus = true;
     while (!world.isQuiet()) {
         world.step();
-        auto updates = world.getWormsUpdates(false, playingStatus);
+        bool getAll = false;
+        auto updates = world.getWormsUpdates(getAll);
         pushUpdatesToClients(std::ref(updates));
         waitFrameTime();
     }
-    playingStatus = false;
     std::vector<int> deadWorms;
     world.getDeadWormsIds(std::ref(deadWorms));
     if (!deadWorms.empty()) {
         while (world.wormsAlive(std::ref(deadWorms))) {
             world.step();
-            auto updates = world.getWormsUpdates(false, playingStatus);
+            bool getAll = false;
+            auto updates = world.getWormsUpdates(getAll);
             pushUpdatesToClients(std::ref(updates));
             waitFrameTime();
         }

@@ -16,22 +16,17 @@
 #include <vector>
 
 class Worm {
+ private:
+    SpritesEnum m_CurrentSprite;
+    Direction m_Dir;
+    std::vector<SDL_Rect > m_DieRects;
  public:
     SDL_Renderer* m_Renderer;
     std::unordered_map<SpritesEnum, std::unique_ptr<Animation>> m_SpritesMap;
-
- public:
     float m_WormXPosition;
     float m_WormYPosition;
- private:
-    SpritesEnum m_CurrentSprite;
- public:
     float m_Widht;
     float m_Height;
-    
- private:
-    Direction m_Dir;
-    std::vector<SDL_Rect > m_DieRects;
 
 private:
     std::unique_ptr<Animation> getWaccuseAnimation(const std::string& spritePath, BlendMode blendMode, int frames,
@@ -46,12 +41,7 @@ private:
     void update(double elapsedSeconds, const GameUpdate& gameUpdate);
     void update(double elapsedSeconds);
     void render();
-   
-    SDL_Rect& getWormRect();
-
-    ~Worm() = default;
-
     void renderDie();
 
-    SpritesEnum chooseSprite(const GameUpdate &gameUpdate) const;
+    ~Worm() = default;
 };

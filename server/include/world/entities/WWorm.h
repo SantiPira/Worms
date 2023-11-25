@@ -99,8 +99,7 @@ public:
     void setWasChanged(bool wasChanged);
     void setIsInContactWithAnotherWorm(bool isInContactWithAnotherWorm);
 
-    GameUpdate getUpdatePlaying(bool wormChanged);
-    GameUpdate getUpdateEndTurn(bool wormChanged);
+    GameUpdate getUpdate(bool wormChanged);
 
     void jump();
 

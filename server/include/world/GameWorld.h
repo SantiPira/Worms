@@ -49,7 +49,7 @@ public:
     void StartWorld();
     void SetWorm(const int& player_number, const float & x_pos, const float& y_pos);
     void execute(IWormInstruction* instruction, int playerId);
-    std::vector<GameUpdate> getWormsUpdates(bool getAll, bool playingStatus) const;
+    std::vector<GameUpdate> getWormsUpdates(bool getAll) const;
 
     void step();
 

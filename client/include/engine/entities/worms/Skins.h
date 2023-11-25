@@ -81,7 +81,7 @@ struct HasAxe {
     float deltaPosY = 51.0f;
 };
 
-struct SaveingAxe {
+struct SavingAxe {
     const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/waxebk2.png");
     BlendMode blendMode = {true, 192, 192, 128};
     int frames = 15;

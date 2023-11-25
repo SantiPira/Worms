@@ -1,11 +1,10 @@
 #pragma once
 
 #include "world/entities/action_animations/SpriteAnimations.h"
-#include <chrono>
 
-class SActionIdle : public SpriteAnimations {
+class SActionDeath : public SpriteAnimations {
  public:
-    SActionIdle();
+    SActionDeath();
     void update() override;
     void reset() override;
     bool hasFinished() override;

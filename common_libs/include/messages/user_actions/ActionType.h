@@ -12,7 +12,8 @@ enum ActionType : uint8_t {
     SET_WEAPON = 0X06,
     UNSET_WEAPON = 0X07,
     DECREASE_ANGLE = 0X08,
-    INCREASE_ANGLE = 0X09
+    INCREASE_ANGLE = 0X09,
+    DYING = 0X0A
 };
 
 

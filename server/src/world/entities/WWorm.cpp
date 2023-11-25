@@ -142,7 +142,8 @@ void WWorm::setScore(int32 score) {
 }
 
 void WWorm::setIsDead() {
-    m_TimeState = std::chrono::system_clock::now();
+    m_ActionToAnimation.resetAnimation();
+    m_ActionToAnimation.setAction(ActionType::DYING);
     this->setVelocity(b2Vec2_zero);
     this->m_Health = 0;
     this->m_IsDead = true;
@@ -169,19 +170,21 @@ void WWorm::setIsShooting(bool isShooting) {
     this->m_IsShooting = isShooting;
 }
 
-GameUpdate WWorm::getUpdatePlaying(bool wormChanged) {
+GameUpdate WWorm::getUpdate(bool wormChanged) {
     GameUpdate currentState;
     currentState.player_id = m_Id;
     currentState.x_pos = getPosition().x;
     currentState.y_pos = getPosition().y;
     currentState.width = m_Width * 2;
     currentState.height = m_Height * 2;
+    currentState.m_Health = m_Health;
     currentState.m_Dir = m_Dir;
     currentState.m_Weapon = m_Weapon;
     currentState.m_IsAttacking = m_IsAttacking;
     currentState.m_Movement = getMovement();
     currentState.m_VelocityX = getVelocity().x;
     currentState.m_VelocityY = getVelocity().y;
+    currentState.m_CurrentSprite = m_ActionToAnimation.getCurrentSprite(this);
 
     if (currentState != m_PreviousState) {
         wormChanged = true;
@@ -193,27 +196,27 @@ GameUpdate WWorm::getUpdatePlaying(bool wormChanged) {
         return currentState;
     }
 
-    if (m_IsAttacking) {
-        auto now = std::chrono::system_clock::now();
-        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - m_TimeState);
-        currentState.m_CurrentSprite = SPRITE_WACCUSE_ATTACK;
-        if (elapsed.count() > 1000) {
-            m_IsAttacking = false;
-            currentState.m_IsAttacking = m_IsAttacking;
-            currentState.m_CurrentSprite = SPRITE_WACCUSE_IDLE;
-            m_TimeState = std::chrono::system_clock::now();
-        }
-        return currentState;
-    }
-    if (m_Weapon) {
-        auto now = std::chrono::system_clock::now();
-        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - m_TimeState);
-        if (elapsed.count() > 1000) {
-            currentState.m_Weapon = m_Weapon;
-            m_TimeState = std::chrono::system_clock::now();
-        }
-        return currentState;
-    }
+//    if (m_IsAttacking) {
+//        auto now = std::chrono::system_clock::now();
+//        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - m_TimeState);
+//        currentState.m_CurrentSprite = SPRITE_WACCUSE_ATTACK;
+//        if (elapsed.count() > 1000) {
+//            m_IsAttacking = false;
+//            currentState.m_IsAttacking = m_IsAttacking;
+//            currentState.m_CurrentSprite = SPRITE_WACCUSE_IDLE;
+//            m_TimeState = std::chrono::system_clock::now();
+//        }
+//        return currentState;
+//    }
+//    if (m_Weapon) {
+//        auto now = std::chrono::system_clock::now();
+//        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - m_TimeState);
+//        if (elapsed.count() > 1000) {
+//            currentState.m_Weapon = m_Weapon;
+//            m_TimeState = std::chrono::system_clock::now();
+//        }
+//        return currentState;
+//    }
 
     return {};
 }
@@ -224,7 +227,7 @@ void WWorm::jump() {
     float epsilon = 0.1f;
     if (std::abs(vel.y) < epsilon) {
         m_ActionToAnimation.resetAnimation();
-        m_ActionToAnimation.setAction(ActionType::JUMP);
+        m_ActionToAnimation.setAction(m_CurrentActionType);
         float impulse = this->getBody()->GetMass() * 5;
         vel.y = impulse;
         m_Body->ApplyLinearImpulse(vel, m_Body->GetWorldCenter(), true);
@@ -264,7 +267,8 @@ WeaponID WWorm::getWeapon() const {
 }
 
 void WWorm::setWeapon(WeaponID weapon, ActionType actionType) {
-    m_TimeState = std::chrono::system_clock::now();
+    m_ActionToAnimation.resetAnimation();
+    m_ActionToAnimation.setAction(actionType, weapon);
     this->m_Weapon = weapon;
     m_CurrentActionType = actionType;
 }
@@ -324,7 +328,7 @@ void WWorm::move(Direction direction) {
         m_CurrentActionType = ActionType::MOVE;
         m_IsMoving = true;
         float velocity;
-        direction == Direction::LEFT ? velocity = -1.0 : velocity = 1.0;
+        direction == Direction::LEFT ? velocity = -5.0 : velocity = 5.0;
         this->m_Dir = direction;
         b2Vec2 vel = b2Vec2(velocity, 0);
         if (m_Weapon != WeaponID::NO_WEAPON) {
@@ -364,7 +368,9 @@ void WWorm::resetWormStatus() {
         m_Weapon = WeaponID::NO_WEAPON;
         m_SelfCondition = m_SelfCondition == WORM_DIE ? WORM_DIE : WORM_IDLE;
         m_WeaponAngle = 0;
-         stopMove();
+        stopMove();
+        m_ActionToAnimation.resetAnimation();
+        m_ActionToAnimation.setAction(getIsDead() ? ActionType::DYING : ActionType::NONE);
     }
 }
 
@@ -374,57 +380,6 @@ void WWorm::setWasChanged(bool wasChanged) {
 
 bool WWorm::getWasChanged() const {
     return m_WasChanged;
-}
-
-GameUpdate WWorm::getUpdateEndTurn(bool wormChanged) {
-    GameUpdate currentState;
-    currentState.player_id = m_Id;
-    currentState.x_pos = getPosition().x;
-    currentState.y_pos = getPosition().y;
-    currentState.width = m_Width * 2;
-    currentState.height = m_Height * 2;
-    currentState.m_Health = m_Health;
-    currentState.m_IsAttacking = m_IsAttacking;
-    currentState.m_Movement = getMovement();
-    currentState.m_VelocityX = getVelocity().x;
-    currentState.m_VelocityY = getVelocity().y;
-    currentState.m_SelfCondition = m_SelfCondition;
-
-    if (currentState != m_PreviousState) {
-        wormChanged = true;
-        m_PreviousState = currentState;
-    }
-
-    if(wormChanged) {
-        m_WasChanged = false;
-        return currentState;
-    }
-
-    if (m_SelfCondition == WORM_DIE) {
-        auto now = std::chrono::system_clock::now();
-        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - m_TimeState);
-        if (elapsed.count() > 1000) {
-            m_SelfCondition = WORM_GRAVE;
-            currentState.m_SelfCondition = m_SelfCondition;
-            m_TimeState = std::chrono::system_clock::now();
-        }
-        m_PreviousState = currentState;
-        return currentState;
-    }
-
-    if (m_SelfCondition == WORM_ATTACKED) {
-        auto now = std::chrono::system_clock::now();
-        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - m_TimeState);
-        if (elapsed.count() > 1000) {
-            m_SelfCondition = WORM_IDLE;
-            currentState.m_SelfCondition = m_SelfCondition;
-            m_TimeState = std::chrono::system_clock::now();
-        }
-        m_PreviousState = currentState;
-        return currentState;
-    }
-
-    return {};
 }
 
 GameUpdate WWorm::getPreviousState() const {

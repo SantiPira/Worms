@@ -1,12 +1,5 @@
 #include "engine/entities/worms/Worm.h"
 
-
-
-SDL_Rect& Worm::getWormRect(){
-    return (m_SpritesMap.at(this->m_CurrentSprite))->getDestRect();
-}
-
-
 Worm::Worm(SDL_Renderer *renderer, float posX, float posY, float width, float height)
         : m_Renderer(renderer), m_WormXPosition(posX),
           m_WormYPosition(posY), m_Widht(WorldScale::toPixel(width)), m_Height(WorldScale::toPixel(height)) {}
@@ -21,6 +14,9 @@ void Worm::init() {
         WaccuseGettingDamage waccuseGettingDamage;
         GraveSkin waccuseGrave;
         WaccuseSetBate waccuseSetBate;
+        SettingAxe waSettingAxe;
+        HasAxe waHasAxe;
+        SavingAxe waSavingAxe;
         SDL_Rect destRect = {
                 static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
                 static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)),
@@ -53,19 +49,45 @@ void Worm::init() {
                 destRect,
                 waccuseWalk.deltaPosX,
                 waccuseWalk.deltaPosY));
-        m_SpritesMap.emplace(SpritesEnum::SPRITE_AXE_WALK, getWaccuseAnimation(
-                waccuseAxe.spritePath,
-                waccuseAxe.blendMode,
-                waccuseAxe.frames,
-                waccuseAxe.distanceBetweenFrames,
-                waccuseAxe.frameWidth,
-                waccuseAxe.frameHeight,
-                waccuseAxe.duration,
-                waccuseAxe.srcRect,
-                waccuseAxe.initYSprite,
+        m_SpritesMap.emplace(SpritesEnum::SPRITE_SETTING_AXE, getWaccuseAnimation(
+                waSettingAxe.spritePath,
+                waSettingAxe.blendMode,
+                waSettingAxe.frames,
+                waSettingAxe.distanceBetweenFrames,
+                waSettingAxe.frameWidth,
+                waSettingAxe.frameHeight,
+                waSettingAxe.duration,
+                waSettingAxe.srcRect,
+                waSettingAxe.initYSprite,
                 destRect,
-                waccuseAxe.deltaPosX,
-                waccuseAxe.deltaPosY));
+                waSettingAxe.deltaPosX,
+                waSettingAxe.deltaPosY));
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_HAS_AXE, getWaccuseAnimation(
+            waHasAxe.spritePath,
+            waHasAxe.blendMode,
+            waHasAxe.frames,
+            waHasAxe.distanceBetweenFrames,
+            waHasAxe.frameWidth,
+            waHasAxe.frameHeight,
+            waHasAxe.duration,
+            waHasAxe.srcRect,
+            waHasAxe.initYSprite,
+            destRect,
+            waHasAxe.deltaPosX,
+            waHasAxe.deltaPosY));
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_SAVING_AXE, getWaccuseAnimation(
+            waSavingAxe.spritePath,
+            waSavingAxe.blendMode,
+            waSavingAxe.frames,
+            waSavingAxe.distanceBetweenFrames,
+            waSavingAxe.frameWidth,
+            waSavingAxe.frameHeight,
+            waSavingAxe.duration,
+            waSavingAxe.srcRect,
+            waSavingAxe.initYSprite,
+            destRect,
+            waSavingAxe.deltaPosX,
+            waSavingAxe.deltaPosY));
     m_SpritesMap.emplace(SpritesEnum::SPRITE_JUMPING, getWaccuseAnimation(
             waccuseJumping.spritePath,
             waccuseJumping.blendMode,
@@ -140,8 +162,7 @@ void Worm::init() {
 }
 
 void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
-    m_CurrentSprite = chooseSprite(gameUpdate);
-
+    m_CurrentSprite = gameUpdate.m_CurrentSprite;
     m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
 
     if (gameUpdate.m_Movement != GameAction::INVALID_ACTION) {
@@ -153,29 +174,6 @@ void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
                            anim->getFrameHeight()});
         m_WormXPosition = gameUpdate.x_pos;
         m_WormYPosition = gameUpdate.y_pos;
-    }
-}
-
-SpritesEnum Worm::chooseSprite(const GameUpdate& gameUpdate) const {
-    if (gameUpdate.m_Movement == GameAction::INVALID_ACTION) {
-        return m_CurrentSprite;
-    } else if (gameUpdate.m_SelfCondition == GameAction::WORM_ATTACKED) {
-        return SpritesEnum::SPRITE_WACCUSE_GETTING_DAMAGE;
-    } else if (gameUpdate.m_SelfCondition == GameAction::WORM_DIE) {
-        return SpritesEnum::SPRITE_WACCUSE_DIE;
-    } else if (gameUpdate.m_SelfCondition == GameAction::WORM_GRAVE) {
-        return SpritesEnum::SPRITE_WACCUSE_GRAVE;
-    } else if (gameUpdate.m_Movement == GameAction::WORM_JUMP) {
-        return SpritesEnum::SPRITE_JUMPING;
-    } else if (gameUpdate.m_Weapon == WeaponID::AXE) {
-        return SpritesEnum::SPRITE_AXE_WALK;
-    } else if (gameUpdate.m_Weapon == WeaponID::BATE) {
-        return SpritesEnum::SPRITE_WACCUSE_SET_BATE;
-    } else if (gameUpdate.m_Movement == GameAction::WORM_MOVE_RIGHT ||
-               gameUpdate.m_Movement == GameAction::WORM_MOVE_LEFT) {
-        return SpritesEnum::SPRITE_WALK;
-    } else {
-        return SpritesEnum::SPRITE_WACCUSE_IDLE;
     }
 }
 

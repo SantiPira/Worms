@@ -1,14 +1,15 @@
 #pragma once
 
 #include <cstdint>
+#include <chrono>
 #include "world/entities/action_animations/SpriteAnimations.h"
 
-enum WeaponType : uint8_t {
+enum class WeaponType : uint8_t {
     AXE = 0x00,
     BATE = 0x01
 };
 
-enum ActionWeaponType : uint8_t {
+enum class ActionWeaponType : uint8_t {
     SET_WEAPON = 0x00,
     HAS_WEAPON = 0x01,
     UNSET_WEAPON = 0x02
@@ -22,5 +23,5 @@ public:
     void update() override;
     void reset() override;
     bool hasFinished() override;
-    [[nodiscard]] SpritesEnum getCurrentSprite() const override;
+    [[nodiscard]] SpritesEnum getCurrentSprite(const std::chrono::time_point<std::chrono::system_clock>& startTime) const override;
 };

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "messages/sprites/SpritesEnum.h"
+#include <chrono>
 
 class SpriteAnimations {
 protected:
@@ -10,5 +11,6 @@ public:
     virtual void update() = 0;
     virtual void reset() = 0;
     virtual bool hasFinished() = 0;
-    virtual SpritesEnum getCurrentSprite() const = 0;
+    [[nodiscard]] virtual SpritesEnum
+    getCurrentSprite(const std::chrono::time_point<std::chrono::system_clock>& startTime) const = 0;
 };

@@ -81,11 +81,12 @@ void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
                 worm.second->update(elapsedSeconds);
             }
         }
+        if (gameUpdate.m_CurrentSprite == SPRITE_WACCUSE_GRAVE) {
+            m_WormsDie.push_back(m_Worms.at(gameUpdate.player_id));
+            m_Worms.erase(gameUpdate.player_id);
+        }
     }
-    if (gameUpdate.m_SelfCondition == GameAction::WORM_GRAVE) {
-        m_WormsDie.push_back(m_Worms.at(gameUpdate.player_id));
-        m_Worms.erase(gameUpdate.player_id);
-    }
+
 }
 
 void GameClient::Render() {

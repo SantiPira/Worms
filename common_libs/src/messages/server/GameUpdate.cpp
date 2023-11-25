@@ -13,5 +13,6 @@ bool GameUpdate::operator!=(const GameUpdate& other) const {
            m_SelfCondition != other.m_SelfCondition ||
            m_Movement != other.m_Movement ||
            m_VelocityX != other.m_VelocityX ||
-           m_VelocityY != other.m_VelocityY;
+           m_VelocityY != other.m_VelocityY ||
+           m_CurrentSprite != other.m_CurrentSprite;
 }

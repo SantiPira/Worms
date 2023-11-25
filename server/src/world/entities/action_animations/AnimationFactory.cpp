@@ -3,6 +3,7 @@
 #include "world/entities/action_animations/types/SActionIdle.h"
 #include "world/entities/action_animations/types/SActionJump.h"
 #include "world/entities/action_animations/types/SActionWeapon.h"
+#include "world/entities/action_animations/types/SActionDeath.h"
 
 SpriteAnimations *AnimationFactory::createAnimation(const ActionType& actionType, uint8_t param1, uint8_t param2) {
     switch (actionType) {
@@ -12,6 +13,8 @@ SpriteAnimations *AnimationFactory::createAnimation(const ActionType& actionType
             return new SActionJump();
         case ActionType::SET_WEAPON:
             return new SActionWeapon(param1, param2);
+        case ActionType::DYING:
+            return new SActionDeath();
         case ActionType::NONE:
             return new SActionIdle();
         case ActionType::STOP_MOVE:
@@ -19,4 +22,8 @@ SpriteAnimations *AnimationFactory::createAnimation(const ActionType& actionType
         default:
             return new SActionIdle();
     }
+}
+
+SpriteAnimations *AnimationFactory::createDeathAnimation() {
+    return new SActionDeath();
 }
