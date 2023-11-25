@@ -4,8 +4,7 @@
 
 Game::Game(int id, std::string gameName, std::string mapName, int players) : m_IdGame(id),
     m_GameName(std::move(gameName)), m_MapName(std::move(mapName)), m_Players(players), m_InputActions(100),
-    m_KeepRunning(true), m_PopMessageQuantity(POP_MESSAGE_QUANTITY), world(m_MapName),
-    m_GameState(GameState::PLAYING) {}
+    m_KeepRunning(true), m_PopMessageQuantity(POP_MESSAGE_QUANTITY), world(m_MapName) {}
 
 void Game::run() {
     setupWorld();
@@ -25,7 +24,6 @@ void Game::run() {
 
     while (m_KeepRunning) {
         processTurns(turnHandler, instructionFactory);
-        m_GameState = GameState::PLAYING;
     }
 }
 

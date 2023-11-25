@@ -2,7 +2,7 @@
 
 
 TurnHandler::TurnHandler(int idPlayer, std::vector<int> idPlayers) : idCurrentPlayer(idPlayer),
-    m_StartTime(std::chrono::system_clock::now()), m_MaxTurnSeconds(30) {
+    m_StartTime(std::chrono::system_clock::now()), m_MaxTurnSeconds(60) {
     m_IdPlayers = std::map<int, int>();
     for (int i = 0; i < static_cast<int>(idPlayers.size()); i++) {
         m_IdPlayers.insert(std::pair<int, int>(i, idPlayers.at(i)));

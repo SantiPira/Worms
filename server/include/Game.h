@@ -7,12 +7,6 @@
 #include "messages/user_actions/UserAction.h"
 #include "world/instructions/InstructionFactory.h"
 
-enum class GameState {
-    PLAYING,
-    TURN_TRANSITION,
-    GRACE_PERIOD
-};
-
 class Game : public Thread {
  private:
     int m_IdGame;
@@ -24,7 +18,6 @@ class Game : public Thread {
     std::atomic<bool> m_KeepRunning;
     int m_PopMessageQuantity;
     GameWorld world;
-    GameState m_GameState;
 
 public:
     Game(int id, std::string gameName, std::string mapName, int players);
