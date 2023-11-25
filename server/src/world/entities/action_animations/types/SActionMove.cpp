@@ -8,14 +8,3 @@ SpritesEnum SActionMove::getCurrentSprite(const std::chrono::time_point<std::chr
     return m_CurrentSprite;
 }
 
-bool SActionMove::hasFinished() {
-    return false;
-}
-
-void SActionMove::reset() {
-
-}
-
-void SActionMove::update() {
-
-}

@@ -4,18 +4,6 @@ SActionAttack::SActionAttack(uint8_t weaponId) {
     m_WeaponId = WeaponID(weaponId);
 }
 
-void SActionAttack::update() {
-
-}
-
-void SActionAttack::reset() {
-
-}
-
-bool SActionAttack::hasFinished() {
-    return false;
-}
-
 SpritesEnum SActionAttack::getCurrentSprite(const std::chrono::time_point<std::chrono::system_clock> &startTime) const {
     auto current = std::chrono::system_clock::now();
     std::chrono::duration<double> elapsedSeconds = current - startTime;

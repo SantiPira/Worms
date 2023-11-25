@@ -6,25 +6,9 @@ SActionWeapon::SActionWeapon(uint8_t weaponType, uint8_t actionWeaponType) {
     switch (m_WeaponType) {
         case WeaponID::AXE:
             m_Sequence = buildAxeSequence();
-//            if (m_ActionWeaponType == static_cast<uint8_t>(ActionWeaponType::SET_WEAPON)) {
-//                m_CurrentSprite = SpritesEnum::SPRITE_SETTING_AXE;
-//            }
-//            else if (m_ActionWeaponType == static_cast<uint8_t>(ActionWeaponType::HAS_WEAPON)) {
-//                m_CurrentSprite = SpritesEnum::SPRITE_HAS_AXE;
-//            } else if (m_ActionWeaponType == static_cast<uint8_t>(ActionWeaponType::UNSET_WEAPON)) {
-//                m_CurrentSprite = SpritesEnum::SPRITE_SAVING_AXE;
-//            }
             break;
         case WeaponID::BATE:
             m_Sequence = buildBateSequence();
-//            if (m_ActionWeaponType == static_cast<uint8_t>(ActionWeaponType::SET_WEAPON)) {
-//                m_CurrentSprite = SpritesEnum::SPRITE_SETTING_BATE;
-//            }
-//            else if (m_ActionWeaponType == static_cast<uint8_t>(ActionWeaponType::HAS_WEAPON)) {
-//                m_CurrentSprite = SpritesEnum::SPRITE_HAS_BATE;
-//            } else if (m_ActionWeaponType == static_cast<uint8_t>(ActionWeaponType::UNSET_WEAPON)) {
-//                m_CurrentSprite = SpritesEnum::SPRITE_SAVING_BATE;
-//            }
             break;
         default:
             m_Sequence = buildAxeSequence();
@@ -54,33 +38,7 @@ SpritesEnum SActionWeapon::getCurrentSprite(const std::chrono::time_point<std::c
         default:
             break;
     }
-//    switch (m_CurrentSprite) {
-//        case SpritesEnum::SPRITE_SETTING_AXE:
-//            if (elapsedSeconds.count() > 1.0) {
-//                return SpritesEnum::SPRITE_HAS_AXE;
-//            }
-//            break;
-//        case SpritesEnum::SPRITE_SAVING_AXE:
-//            if (elapsedSeconds.count() > 1.0) {
-//                return SpritesEnum::SPRITE_WACCUSE_IDLE;
-//            }
-//            break;
-//        default:
-//            break;
-//    }
     return m_CurrentSprite;
-}
-
-bool SActionWeapon::hasFinished() {
-    return false;
-}
-
-void SActionWeapon::reset() {
-
-}
-
-void SActionWeapon::update() {
-
 }
 
 Squence SActionWeapon::buildAxeSequence() {

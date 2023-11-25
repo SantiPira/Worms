@@ -4,18 +4,6 @@ SActionAttacked::SActionAttacked() {
     this->m_CurrentSprite = SpritesEnum::SPRITE_WACCUSE_GETTING_DAMAGE;
 }
 
-void SActionAttacked::update() {
-
-}
-
-void SActionAttacked::reset() {
-
-}
-
-bool SActionAttacked::hasFinished() {
-    return false;
-}
-
 SpritesEnum SActionAttacked::getCurrentSprite(
         const std::chrono::time_point<std::chrono::system_clock> &startTime) const {
     auto current = std::chrono::system_clock::now();

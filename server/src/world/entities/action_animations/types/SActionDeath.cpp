@@ -4,18 +4,6 @@ SActionDeath::SActionDeath() {
     this->m_CurrentSprite = SpritesEnum::SPRITE_WACCUSE_DIE;
 }
 
-void SActionDeath::update() {
-
-}
-
-void SActionDeath::reset() {
-
-}
-
-bool SActionDeath::hasFinished() {
-    return false;
-}
-
 SpritesEnum SActionDeath::getCurrentSprite(const std::chrono::time_point<std::chrono::system_clock> &startTime) const {
     auto current = std::chrono::system_clock::now();
     std::chrono::duration<double> elapsedSeconds = current - startTime;
