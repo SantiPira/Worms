@@ -115,7 +115,8 @@ void GameWorld::resetWormStatus(int idPlayer) {
 
 bool GameWorld::isQuiet() {
     for (auto& worm : worms) {
-        if (worm.second->getIsMoving()) {
+        SpritesEnum sprite = worm.second->getActionToAnimation()->getCurrentSprite();
+        if (sprite != SPRITE_WACCUSE_IDLE) {
             return false;
         }
     }

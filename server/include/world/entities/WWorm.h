@@ -76,6 +76,7 @@ public:
     EntitiesType getEntityType() override;
     [[nodiscard]] GameUpdate getPreviousState() const;
     [[nodiscard]] bool getIsInContactWithAnotherWorm() const;
+    ActionToAnimation* getActionToAnimation();
 
     void setPosition(b2Vec2 position);
     void setVelocity(b2Vec2 velocity);

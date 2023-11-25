@@ -14,12 +14,15 @@ private:
     std::chrono::time_point<std::chrono::system_clock> m_StartTime;
     uint8_t m_Param1 = 0;
     uint8_t m_Param2 = 0;
+    SpritesEnum m_CurrentSprite = SpritesEnum::SPRITE_WACCUSE_IDLE;
 public:
     ActionToAnimation();
 
     void resetAnimation();
 
-    [[nodiscard]] SpritesEnum getCurrentSprite(WWorm* worm) const;
+    [[nodiscard]] SpritesEnum getCurrentSprite(WWorm* worm);
 
     void setAction(ActionType action, uint8_t param1 = 0, uint8_t param2 = 0);
+
+    SpritesEnum getCurrentSprite() const;
 };

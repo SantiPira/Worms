@@ -3,21 +3,26 @@
 #include <cstdint>
 #include <chrono>
 #include "world/entities/action_animations/SpriteAnimations.h"
+#include "messages/user_actions/WeaponID.h"
 
-enum class WeaponType : uint8_t {
-    AXE = 0x00,
-    BATE = 0x01
+enum ActionWeaponType : uint8_t {
+    ACTION_WEAPON_TYPE_SET_WEAPON = 0x00,
+    ACTION_WEAPON_TYPE_HAS_WEAPON = 0x01,
+    ACTION_WEAPON_TYPE_UNSET_WEAPON = 0x02
 };
 
-enum class ActionWeaponType : uint8_t {
-    SET_WEAPON = 0x00,
-    HAS_WEAPON = 0x01,
-    UNSET_WEAPON = 0x02
+struct Squence {
+    SpritesEnum setWeapon;
+    SpritesEnum hasWeapon;
+    SpritesEnum saveWeapon;
 };
 class SActionWeapon : public SpriteAnimations {
 private:
-    uint8_t m_WeaponType;
+    WeaponID m_WeaponType;
     uint8_t  m_ActionWeaponType;
+    Squence m_Sequence{};
+    Squence buildAxeSequence();
+    Squence buildBateSequence();
 public:
     SActionWeapon(uint8_t weaponType, uint8_t actionType);
     void update() override;

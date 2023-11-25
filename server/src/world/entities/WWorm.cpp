@@ -248,7 +248,6 @@ void WWorm::stopMove() {
 void WWorm::attack(uint8_t force) {
     m_CurrentActionType = ActionType::ATTACK;
     if (m_Weapon != WeaponID::NO_WEAPON) {
-        m_TimeState = std::chrono::system_clock::now();
         WeaponFactory weaponFactory;
         for (b2Body* entity = m_World->GetBodyList(); entity; entity = entity->GetNext()) {
             auto* wentity = reinterpret_cast<WEntity*>(entity->GetUserData().pointer);
@@ -290,11 +289,12 @@ void WWorm::setIsAttacking(bool isAttacking) {
 }
 
 void WWorm::receiveDamage(int damage) {
-    m_TimeState = std::chrono::system_clock::now();
-    this->m_SelfCondition = GameAction::WORM_ATTACKED;
+    m_ActionToAnimation.resetAnimation();
+    m_ActionToAnimation.setAction(ActionType::ATTACKED);
     if (damage >= m_Health) {
         m_Health = 0;
-        m_SelfCondition = GameAction::WORM_DIE;
+        m_ActionToAnimation.resetAnimation();
+        m_ActionToAnimation.setAction(ActionType::DYING);
     } else {
         m_Health -= damage;
     }
@@ -328,7 +328,7 @@ void WWorm::move(Direction direction) {
         m_CurrentActionType = ActionType::MOVE;
         m_IsMoving = true;
         float velocity;
-        direction == Direction::LEFT ? velocity = -5.0 : velocity = 5.0;
+        direction == Direction::LEFT ? velocity = -1.0 : velocity = 1.0;
         this->m_Dir = direction;
         b2Vec2 vel = b2Vec2(velocity, 0);
         if (m_Weapon != WeaponID::NO_WEAPON) {
@@ -358,7 +358,7 @@ GameAction WWorm::getMovement() {
 }
 
 void WWorm::resetWormStatus() {
-    if (m_CurrentActionType == ActionType::MOVE || m_CurrentActionType == ActionType::JUMP) {
+    //if (m_CurrentActionType == ActionType::MOVE || m_CurrentActionType == ActionType::JUMP) {
         m_IsAttacking = false;
         m_IsShooting = false;
         m_IsJumping = false;
@@ -371,7 +371,7 @@ void WWorm::resetWormStatus() {
         stopMove();
         m_ActionToAnimation.resetAnimation();
         m_ActionToAnimation.setAction(getIsDead() ? ActionType::DYING : ActionType::NONE);
-    }
+   // }
 }
 
 void WWorm::setWasChanged(bool wasChanged) {
@@ -400,5 +400,9 @@ bool WWorm::getIsInContactWithAnotherWorm() const {
 
 void WWorm::setIsInContactWithAnotherWorm(bool isInContactWithAnotherWorm) {
     m_IsInContactWithWWorm = isInContactWithAnotherWorm;
+}
+
+ActionToAnimation *WWorm::getActionToAnimation() {
+    return &m_ActionToAnimation;
 }
 

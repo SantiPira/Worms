@@ -67,7 +67,6 @@ void Game::waitFrameTime() {
 
 void Game::endTurn(TurnHandler& turnHandler) {
     sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::END_TURN);
-    world.resetWormStatus(turnHandler.getCurrentPlayer());
     while (!world.isQuiet()) {
         world.step();
         bool getAll = false;
@@ -75,6 +74,7 @@ void Game::endTurn(TurnHandler& turnHandler) {
         pushUpdatesToClients(std::ref(updates));
         waitFrameTime();
     }
+    world.resetWormStatus(turnHandler.getCurrentPlayer());
     std::vector<int> deadWorms;
     world.getDeadWormsIds(std::ref(deadWorms));
     if (!deadWorms.empty()) {
