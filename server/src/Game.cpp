@@ -4,7 +4,7 @@
 
 Game::Game(int id, std::string gameName, std::string mapName, int players) : m_IdGame(id),
     m_GameName(std::move(gameName)), m_MapName(std::move(mapName)), m_Players(players), m_InputActions(100),
-    m_KeepRunning(true), m_PopMessageQuantity(POP_MESSAGE_QUANTITY), world(m_MapName) {}
+    m_KeepRunning(true), m_HasStarted(false), m_PopMessageQuantity(POP_MESSAGE_QUANTITY), world(m_MapName) {}
 
 void Game::run() {
     setupWorld();
@@ -96,6 +96,7 @@ int Game::getPlayers() const {
 int Game::addPlayer(ProtectedQueue<GameUpdate> *qClientUpdates) {
     m_QClientUpdates.insert(std::make_pair(m_QClientUpdates.size(), qClientUpdates));
     if (isReadyToStart()) {
+        m_HasStarted = true;
         start();
     }
     return m_QClientUpdates.size() - 1;
@@ -173,4 +174,6 @@ void Game::sendInfoTurns(int playerId, GameAction infoTurn) {
     pushUpdateToClients(std::ref(update));
 }
 
-
+bool Game::hasStarted() {
+    return m_HasStarted;
+}

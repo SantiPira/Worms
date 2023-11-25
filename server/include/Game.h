@@ -16,6 +16,7 @@ class Game : public Thread {
     std::unordered_map<int, ProtectedQueue<GameUpdate>*> m_QClientUpdates;
     ProtectedQueue<UserAction> m_InputActions;
     std::atomic<bool> m_KeepRunning;
+    std::atomic<bool> m_HasStarted;
     int m_PopMessageQuantity;
     GameWorld world;
 
@@ -39,6 +40,7 @@ public:
     void setupWorld();
     bool isStillPlayable();
     void kill();
+    bool hasStarted();
 
 private:
     void pushUpdatesToClients(std::reference_wrapper<std::vector<GameUpdate>> updates);
