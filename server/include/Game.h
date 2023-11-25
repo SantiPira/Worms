@@ -50,4 +50,6 @@ private:
     void processTurns(TurnHandler& turnHandler, InstructionFactory& instructionFactory);
     void waitFrameTime();
     void endTurn(TurnHandler& turnHandler);
+
+    void endCurrentPlayerTurn(TurnHandler &handler);
 };

@@ -65,6 +65,7 @@ void Game::waitFrameTime() {
 
 void Game::endTurn(TurnHandler& turnHandler) {
     sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::END_TURN);
+    endCurrentPlayerTurn(turnHandler);
     while (!world.isQuiet()) {
         world.step();
         bool getAll = false;
@@ -176,4 +177,13 @@ void Game::sendInfoTurns(int playerId, GameAction infoTurn) {
 
 bool Game::hasStarted() {
     return m_HasStarted;
+}
+
+void Game::endCurrentPlayerTurn(TurnHandler &handler) {
+    bool getAll = false;
+    while (!world.isWormIDLE(handler.getCurrentPlayer())) {
+        auto update = world.getWormUpdate(getAll, handler.getCurrentPlayer());
+        pushUpdateToClients(std::ref(update));
+    }
+
 }

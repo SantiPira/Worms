@@ -196,28 +196,6 @@ GameUpdate WWorm::getUpdate(bool wormChanged) {
         return currentState;
     }
 
-//    if (m_IsAttacking) {
-//        auto now = std::chrono::system_clock::now();
-//        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - m_TimeState);
-//        currentState.m_CurrentSprite = SPRITE_WACCUSE_ATTACK;
-//        if (elapsed.count() > 1000) {
-//            m_IsAttacking = false;
-//            currentState.m_IsAttacking = m_IsAttacking;
-//            currentState.m_CurrentSprite = SPRITE_WACCUSE_IDLE;
-//            m_TimeState = std::chrono::system_clock::now();
-//        }
-//        return currentState;
-//    }
-//    if (m_Weapon) {
-//        auto now = std::chrono::system_clock::now();
-//        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - m_TimeState);
-//        if (elapsed.count() > 1000) {
-//            currentState.m_Weapon = m_Weapon;
-//            m_TimeState = std::chrono::system_clock::now();
-//        }
-//        return currentState;
-//    }
-
     return {};
 }
 

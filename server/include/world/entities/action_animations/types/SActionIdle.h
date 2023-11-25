@@ -6,5 +6,5 @@
 class SActionIdle : public SpriteAnimations {
  public:
     SActionIdle();
-    [[nodiscard]] SpritesEnum getCurrentSprite(const std::chrono::time_point<std::chrono::system_clock>& startTime) const override;
+    [[nodiscard]] SpritesEnum getCurrentSprite(const std::chrono::time_point<std::chrono::system_clock>& startTime) override;
 };

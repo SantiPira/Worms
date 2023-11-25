@@ -8,7 +8,7 @@ SpritesEnum ActionToAnimation::getCurrentSprite(WWorm* worm) {
     SpritesEnum sprite = animation->getCurrentSprite(m_StartTime);
     delete animation;
     if (sprite == SPRITE_JUMPING && worm->getVelocity().y == 0) {
-        return SpritesEnum::SPRITE_WACCUSE_IDLE;
+        sprite = SPRITE_WACCUSE_IDLE;
     }
     m_CurrentSprite = sprite;
     return sprite;

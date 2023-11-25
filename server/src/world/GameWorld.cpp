@@ -167,5 +167,13 @@ bool GameWorld::wormsAlive(std::vector<int> &idsDeadWorms) {
     return false;
 }
 
+bool GameWorld::isWormIDLE(int idPlayer) {
+    return worms.at(idPlayer)->getActionToAnimation()->getCurrentSprite() == SPRITE_WACCUSE_IDLE;
+}
+
+GameUpdate GameWorld::getWormUpdate(bool wasChanged, int idPlayer) {
+    return worms.at(idPlayer)->getUpdate(wasChanged);
+}
+
 
 
