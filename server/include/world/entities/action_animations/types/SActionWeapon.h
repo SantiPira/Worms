@@ -23,6 +23,7 @@ private:
     Squence m_Sequence{};
     Squence buildAxeSequence();
     Squence buildBateSequence();
+    Squence buildBazookaSequence();
 public:
     SActionWeapon(uint8_t weaponType, uint8_t actionType);
     [[nodiscard]] SpritesEnum getCurrentSprite(const std::chrono::time_point<std::chrono::system_clock>& startTime) const override;

@@ -26,6 +26,9 @@ void EventSender::run() {
             } else if (key == SDLK_h) {
                 m_WeaponId = WeaponID::AXE;
                 userAction = {ActionType::SET_WEAPON, m_IdPlayer, m_WeaponId};
+            } else if (key == SDLK_k) {
+                m_WeaponId = WeaponID::BAZOOKA;
+                userAction = {ActionType::SET_WEAPON, m_IdPlayer, m_WeaponId};
             } else if (key == SDLK_j) {
                 m_WeaponId = WeaponID::NO_WEAPON;
                 userAction = {ActionType::UNSET_WEAPON, m_IdPlayer};
