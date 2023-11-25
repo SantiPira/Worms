@@ -9,6 +9,7 @@
 #include "world/entities/WWorm.h"
 #include "world/entities/WWater.h"
 #include "world/entities/WBeam.h"
+#include "world/entities/WDeadWorm.h"
 #include "world/instructions/IWormInstruction.h"
 #include "world/listeners/ContactListener.h"
 #include <fstream>
@@ -32,6 +33,7 @@ private:
     std::unordered_map<int, b2Vec2> wormsPositions;
     std::unique_ptr<WWater> m_WWater;
     std::vector<std::unique_ptr<WBeam>> m_Beams;
+    std::unordered_map<int, WDeadWorm*> deadWorms;
 
     uint16_t m_GroundCategory = 0x0001;
     uint16_t m_BeamCategory = 0x0002;
@@ -47,7 +49,7 @@ public:
     void StartWorld();
     void SetWorm(const int& player_number, const float & x_pos, const float& y_pos);
     void execute(IWormInstruction* instruction, int playerId);
-    std::vector<GameUpdate> getWormsUpdates() const;
+    std::vector<GameUpdate> getWormsUpdates(bool getAll) const;
 
     void step();
 
@@ -59,4 +61,16 @@ public:
     ~GameWorld();
 
     void resetWormStatus(int idPlayer);
+
+    bool isQuiet();
+
+    void getDeadWormsIds(std::vector<int>& deadWormsIds);
+
+    void passAway(int &id);
+
+    bool isAlive(int idPlayer);
+
+    bool wormBrokeTurn(const UserAction& userAction);
+
+    bool wormsAlive(std::vector<int>& idsDeadWorms);
 };

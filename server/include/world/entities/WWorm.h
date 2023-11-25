@@ -6,6 +6,7 @@
 #include "world/entities/weapons/impl/Axe.h"
 #include "world/entities/weapons/impl/Bate.h"
 #include "messages/user_actions/ActionType.h"
+#include "world/entities/action_animations/ActionToAnimation.h"
 #include "EntitiesType.h"
 #include "WEntity.h"
 #include <iostream>
@@ -41,6 +42,11 @@ private:
     EntitiesType m_EntityType;
     float m_WeaponAngle{};
     std::chrono::time_point<std::chrono::system_clock> m_TimeState; //seconds
+    bool m_WasChanged;
+    GameUpdate m_PreviousState;
+    ActionType m_CurrentActionType = ActionType::NONE;
+    bool m_IsInContactWithWWorm = false;
+    ActionToAnimation m_ActionToAnimation;
 
 public:
     WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRight, uint16_t wormCategory,
@@ -68,6 +74,9 @@ public:
     [[nodiscard]] GameAction getSelfCondition() const;
     [[nodiscard]] float getWeaponAngle() const;
     EntitiesType getEntityType() override;
+    [[nodiscard]] GameUpdate getPreviousState() const;
+    [[nodiscard]] bool getIsInContactWithAnotherWorm() const;
+    ActionToAnimation* getActionToAnimation();
 
     void setPosition(b2Vec2 position);
     void setVelocity(b2Vec2 velocity);
@@ -82,14 +91,16 @@ public:
     void setIsJumping(bool isJumping);
     void setIsFalling(bool isFalling);
     void setIsShooting(bool isShooting);
-    void setWeapon(WeaponID weapon);
+    void setWeapon(WeaponID weapon, ActionType actionType);
     void setDirection(Direction dir);
     void setIsAttacking(bool isAttacking);
     void setSelfCondition(GameAction selfCondition);
-    void setWeaponAngle(float angle);
+    void setWeaponAngle(float angle, ActionType actionType);
     void resetWormStatus();
+    void setWasChanged(bool wasChanged);
+    void setIsInContactWithAnotherWorm(bool isInContactWithAnotherWorm);
 
-    GameUpdate getUpdate();
+    GameUpdate getUpdate(bool wormChanged);
 
     void jump();
 
@@ -106,4 +117,10 @@ public:
     void move(Direction direction);
 
     GameAction getMovement();
+
+    bool getWasChanged() const;
+
+    float getWidth() const;
+
+    float getHeight() const;
 };

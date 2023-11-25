@@ -22,6 +22,9 @@ bool ClientReceiver::manageTurn(GameAction action, int id) {
             m_EventSender.setItsMyTurn(true);
             return true;
         }
+    } else if (action == GameAction::TURN_TRANSITION) {
+        m_EventSender.setItsMyTurn(false);
+        return true;
     }
     return false;
 }

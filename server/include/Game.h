@@ -7,7 +7,11 @@
 #include "messages/user_actions/UserAction.h"
 #include "world/instructions/InstructionFactory.h"
 
-#define MAX_TURN_SECONDS 120
+enum class GameState {
+    PLAYING,
+    TURN_TRANSITION,
+    GRACE_PERIOD
+};
 
 class Game : public Thread {
  private:
@@ -15,11 +19,12 @@ class Game : public Thread {
     std::string m_GameName;
     std::string m_MapName;
     int m_Players;
-    std::unordered_map<int, ProtectedQueue<GameUpdate>*> m_QClientUpdates; //TODO: Change string to GameUpdate later
+    std::unordered_map<int, ProtectedQueue<GameUpdate>*> m_QClientUpdates;
     ProtectedQueue<UserAction> m_InputActions;
     std::atomic<bool> m_KeepRunning;
     int m_PopMessageQuantity;
     GameWorld world;
+    GameState m_GameState;
 
 public:
     Game(int id, std::string gameName, std::string mapName, int players);
@@ -39,13 +44,15 @@ public:
 
     std::unordered_map<int, ProtectedQueue<GameUpdate>*>* getClientUpdates();
     void setupWorld();
-    void updateWorld();
     bool isStillPlayable();
     void kill();
 
 private:
-    void pushSetToClients(std::reference_wrapper<std::unordered_set<GameUpdate, GameUpdateHash>> updates);
     void pushUpdatesToClients(std::reference_wrapper<std::vector<GameUpdate>> updates);
     void pushUpdateToClients(GameUpdate& update);
+
     void sendInfoTurns(int playerId, GameAction infoTurn);
+    void processTurns(TurnHandler& turnHandler, InstructionFactory& instructionFactory);
+    void waitFrameTime();
+    void endTurn(TurnHandler& turnHandler);
 };

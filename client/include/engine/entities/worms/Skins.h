@@ -27,7 +27,7 @@ struct WaccuseIdle {
 struct WaccuseWalk {
     const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wwalk.png");
     BlendMode blendMode = {true, 128, 128, 192};
-    int frames = 15;
+    int frames = 9;
     int distanceBetweenFrames = 60;
     int frameWidth = 30;
     int frameHeight = 44;
@@ -43,6 +43,48 @@ struct WaccuseAxe {
     const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/waxebk2.png");
     BlendMode blendMode = {true, 192, 192, 128};
     int frames = 7;
+    int distanceBetweenFrames = 104;
+    int frameWidth = 47;
+    int frameHeight = 47;
+    float duration = 2.0f;
+    SDL_Rect srcRect = {39, 26, 41, 39};
+    int initYSprite = 26;
+    float deltaPosX = 47.0f;
+    float deltaPosY = 51.0f;
+};
+
+struct SettingAxe {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/waxelnk.png");
+    BlendMode blendMode = {true, 192, 192, 128};
+    int frames = 15;
+    int distanceBetweenFrames = 104;
+    int frameWidth = 47;
+    int frameHeight = 47;
+    float duration = 2.0f;
+    SDL_Rect srcRect = {39, 26, 41, 39};
+    int initYSprite = 26;
+    float deltaPosX = 47.0f;
+    float deltaPosY = 51.0f;
+};
+
+struct HasAxe {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/waxelk2.png");
+    BlendMode blendMode = {true, 192, 192, 128};
+    int frames = 23;
+    int distanceBetweenFrames = 104;
+    int frameWidth = 47;
+    int frameHeight = 47;
+    float duration = 2.0f;
+    SDL_Rect srcRect = {39, 26, 41, 39};
+    int initYSprite = 26;
+    float deltaPosX = 47.0f;
+    float deltaPosY = 51.0f;
+};
+
+struct SavingAxe {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/waxebk2.png");
+    BlendMode blendMode = {true, 192, 192, 128};
+    int frames = 15;
     int distanceBetweenFrames = 104;
     int frameWidth = 47;
     int frameHeight = 47;
@@ -95,7 +137,7 @@ struct WaccuseGettingDamage {
     float deltaPosY = 40.96f;
 };
 
-struct WaccuseSetBate {
+struct SettingBate {
     const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wbsblnk.png");
     BlendMode blendMode = {true, 192, 192, 128};
     int frames = 10;
@@ -109,6 +151,47 @@ struct WaccuseSetBate {
     float deltaPosY = 35.0f;
 };
 
+struct HasBate {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wbsbaim.png");
+    BlendMode blendMode = {true, 192, 192, 128};
+    int frames = 2;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 60;
+    int frameHeight = 40;
+    float duration = 0.5f;
+    SDL_Rect srcRect = {13, 915, 47, 29};
+    int initYSprite = 915;
+    float deltaPosX = 80.0f;
+    float deltaPosY = 35.0f;
+};
+
+struct SavingBate {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wbsbbak.png");
+    BlendMode blendMode = {true, 192, 192, 128};
+    int frames = 10;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 60;
+    int frameHeight = 40;
+    float duration = 0.5f;
+    SDL_Rect srcRect = {13, 13, 47, 30};
+    int initYSprite = 13;
+    float deltaPosX = 80.0f;
+    float deltaPosY = 35.0f;
+};
+
+struct AttackAxe {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/waxeswn.png");
+    BlendMode blendMode = {true, 192, 192, 128};
+    int frames = 4;
+    int distanceBetweenFrames = 107;
+    int frameWidth = 60;
+    int frameHeight = 40;
+    float duration = 1.0f;
+    SDL_Rect srcRect = {0, 1, 90, 65};
+    int initYSprite = 1;
+    float deltaPosX = 80.0f;
+    float deltaPosY = 35.0f;
+};
 /*
 struct SkySking {
     const std::string spritePath = "../../resources/Fondos/cielo.png"

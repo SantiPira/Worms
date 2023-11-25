@@ -1,12 +1,5 @@
 #include "engine/entities/worms/Worm.h"
 
-
-
-SDL_Rect& Worm::getWormRect(){
-    return (m_SpritesMap.at(this->m_CurrentSprite))->getDestRect();
-}
-
-
 Worm::Worm(SDL_Renderer *renderer, float posX, float posY, float width, float height)
         : m_Renderer(renderer), m_WormXPosition(posX),
           m_WormYPosition(posY), m_Widht(WorldScale::toPixel(width)), m_Height(WorldScale::toPixel(height)) {}
@@ -15,13 +8,18 @@ void Worm::init() {
         m_CurrentSprite = SpritesEnum::SPRITE_WACCUSE_IDLE;
         WaccuseIdle waccuseIdle;
         WaccuseWalk waccuseWalk;
-        WaccuseAxe waccuseAxe;
         WaccuseJumping waccuseJumping;
         WaccuseDie waccuseDie;
         WaccuseGettingDamage waccuseGettingDamage;
         GraveSkin waccuseGrave;
-        WaccuseSetBate waccuseSetBate;
-        SDL_Rect destRect = {
+        SettingAxe waSettingAxe;
+        HasAxe waHasAxe;
+        SavingAxe waSavingAxe;
+        SettingBate waSettingBate;
+        HasBate wHasBate;
+        SavingBate wSavingBate;
+        AttackAxe wAttackAxe;
+    SDL_Rect destRect = {
                 static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
                 static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)),
                 static_cast<int>(m_Widht), static_cast<int>(m_Height)
@@ -53,19 +51,45 @@ void Worm::init() {
                 destRect,
                 waccuseWalk.deltaPosX,
                 waccuseWalk.deltaPosY));
-        m_SpritesMap.emplace(SpritesEnum::SPRITE_AXE_WALK, getWaccuseAnimation(
-                waccuseAxe.spritePath,
-                waccuseAxe.blendMode,
-                waccuseAxe.frames,
-                waccuseAxe.distanceBetweenFrames,
-                waccuseAxe.frameWidth,
-                waccuseAxe.frameHeight,
-                waccuseAxe.duration,
-                waccuseAxe.srcRect,
-                waccuseAxe.initYSprite,
+        m_SpritesMap.emplace(SpritesEnum::SPRITE_SETTING_AXE, getWaccuseAnimation(
+                waSettingAxe.spritePath,
+                waSettingAxe.blendMode,
+                waSettingAxe.frames,
+                waSettingAxe.distanceBetweenFrames,
+                waSettingAxe.frameWidth,
+                waSettingAxe.frameHeight,
+                waSettingAxe.duration,
+                waSettingAxe.srcRect,
+                waSettingAxe.initYSprite,
                 destRect,
-                waccuseAxe.deltaPosX,
-                waccuseAxe.deltaPosY));
+                waSettingAxe.deltaPosX,
+                waSettingAxe.deltaPosY));
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_HAS_AXE, getWaccuseAnimation(
+            waHasAxe.spritePath,
+            waHasAxe.blendMode,
+            waHasAxe.frames,
+            waHasAxe.distanceBetweenFrames,
+            waHasAxe.frameWidth,
+            waHasAxe.frameHeight,
+            waHasAxe.duration,
+            waHasAxe.srcRect,
+            waHasAxe.initYSprite,
+            destRect,
+            waHasAxe.deltaPosX,
+            waHasAxe.deltaPosY));
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_SAVING_AXE, getWaccuseAnimation(
+            waSavingAxe.spritePath,
+            waSavingAxe.blendMode,
+            waSavingAxe.frames,
+            waSavingAxe.distanceBetweenFrames,
+            waSavingAxe.frameWidth,
+            waSavingAxe.frameHeight,
+            waSavingAxe.duration,
+            waSavingAxe.srcRect,
+            waSavingAxe.initYSprite,
+            destRect,
+            waSavingAxe.deltaPosX,
+            waSavingAxe.deltaPosY));
     m_SpritesMap.emplace(SpritesEnum::SPRITE_JUMPING, getWaccuseAnimation(
             waccuseJumping.spritePath,
             waccuseJumping.blendMode,
@@ -120,19 +144,61 @@ void Worm::init() {
             waccuseGrave.deltaPosX,
             waccuseGrave.deltaPosY));
 
-    m_SpritesMap.emplace(SpritesEnum::SPRITE_WACCUSE_SET_BATE, getWaccuseAnimation(
-            waccuseSetBate.spritePath,
-            waccuseSetBate.blendMode,
-            waccuseSetBate.frames,
-            waccuseSetBate.distanceBetweenFrames,
-            waccuseSetBate.frameWidth,
-            waccuseSetBate.frameHeight,
-            waccuseSetBate.duration,
-            waccuseSetBate.srcRect,
-            waccuseSetBate.initYSprite,
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_SETTING_BATE, getWaccuseAnimation(
+            waSettingBate.spritePath,
+            waSettingBate.blendMode,
+            waSettingBate.frames,
+            waSettingBate.distanceBetweenFrames,
+            waSettingBate.frameWidth,
+            waSettingBate.frameHeight,
+            waSettingBate.duration,
+            waSettingBate.srcRect,
+            waSettingBate.initYSprite,
             destRect,
-            waccuseSetBate.deltaPosX,
-            waccuseSetBate.deltaPosY));
+            waSettingBate.deltaPosX,
+            waSettingBate.deltaPosY));
+
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_HAS_BATE, getWaccuseAnimation(
+            wHasBate.spritePath,
+            wHasBate.blendMode,
+            wHasBate.frames,
+            wHasBate.distanceBetweenFrames,
+            wHasBate.frameWidth,
+            wHasBate.frameHeight,
+            wHasBate.duration,
+            wHasBate.srcRect,
+            wHasBate.initYSprite,
+            destRect,
+            wHasBate.deltaPosX,
+            wHasBate.deltaPosY));
+
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_SAVING_BATE, getWaccuseAnimation(
+            wSavingBate.spritePath,
+            wSavingBate.blendMode,
+            wSavingBate.frames,
+            wSavingBate.distanceBetweenFrames,
+            wSavingBate.frameWidth,
+            wSavingBate.frameHeight,
+            wSavingBate.duration,
+            wSavingBate.srcRect,
+            wSavingBate.initYSprite,
+            destRect,
+            wSavingBate.deltaPosX,
+            wSavingBate.deltaPosY));
+
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_ATTACK_AXE, getWaccuseAnimation(
+            wAttackAxe.spritePath,
+            wAttackAxe.blendMode,
+            wAttackAxe.frames,
+            wAttackAxe.distanceBetweenFrames,
+            wAttackAxe.frameWidth,
+            wAttackAxe.frameHeight,
+            wAttackAxe.duration,
+            wAttackAxe.srcRect,
+            wAttackAxe.initYSprite,
+            destRect,
+            wAttackAxe.deltaPosX,
+            wAttackAxe.deltaPosY));
 
     for (auto& sprite : m_SpritesMap) {
         sprite.second->init();
@@ -140,42 +206,18 @@ void Worm::init() {
 }
 
 void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
-    m_Dir = gameUpdate.m_Dir;
-    m_CurrentSprite = chooseSprite(gameUpdate);
-
+    m_CurrentSprite = gameUpdate.m_CurrentSprite;
     m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
 
-    if (gameUpdate.m_Movement != INVALID_ACTION) {
+    if (gameUpdate.m_Movement != GameAction::INVALID_ACTION) {
+        m_Dir = gameUpdate.m_Dir;
         Animation* anim = m_SpritesMap.at(m_CurrentSprite).get();
         float tempX = WorldScale::worldToPixelX(gameUpdate.x_pos, anim->getDeltaPosX());
         float tempY = WorldScale::worldToPixelY(gameUpdate.y_pos, anim->getDeltaPosY());
         anim->setDestRect({static_cast<int>(tempX), static_cast<int>(tempY), anim->getFrameWidth(),
                            anim->getFrameHeight()});
-        m_WormXPosition = tempX;
-        m_WormYPosition = tempY;
-    }
-}
-
-SpritesEnum Worm::chooseSprite(const GameUpdate& gameUpdate) const {
-    if (gameUpdate.m_Movement == GameAction::INVALID_ACTION) {
-        return m_CurrentSprite;
-    } else if (gameUpdate.m_SelfCondition == GameAction::WORM_ATTACKED) {
-        return SpritesEnum::SPRITE_WACCUSE_GETTING_DAMAGE;
-    } else if (gameUpdate.m_SelfCondition == GameAction::WORM_DIE) {
-        return SpritesEnum::SPRITE_WACCUSE_DIE;
-    } else if (gameUpdate.m_SelfCondition == GameAction::WORM_GRAVE) {
-        return SpritesEnum::SPRITE_WACCUSE_GRAVE;
-    } else if (gameUpdate.m_Movement == GameAction::WORM_JUMP) {
-        return SpritesEnum::SPRITE_JUMPING;
-    } else if (gameUpdate.m_Weapon == WeaponID::AXE) {
-        return SpritesEnum::SPRITE_AXE_WALK;
-    } else if (gameUpdate.m_Weapon == WeaponID::BATE) {
-        return SpritesEnum::SPRITE_WACCUSE_SET_BATE;
-    } else if (gameUpdate.m_Movement == GameAction::WORM_MOVE_RIGHT ||
-               gameUpdate.m_Movement == GameAction::WORM_MOVE_LEFT) {
-        return SpritesEnum::SPRITE_WALK;
-    } else {
-        return SpritesEnum::SPRITE_WACCUSE_IDLE;
+        m_WormXPosition = gameUpdate.x_pos;
+        m_WormYPosition = gameUpdate.y_pos;
     }
 }
 
@@ -215,6 +257,15 @@ void Worm::renderDie() {
     explotion->init();
     explotion.*/
 
+}
+
+void Worm::update(double elapsedSeconds) {
+    Animation* anim = m_SpritesMap.at(m_CurrentSprite).get();
+    float tempX = WorldScale::worldToPixelX(m_WormXPosition, anim->getDeltaPosX());
+    float tempY = WorldScale::worldToPixelY(m_WormYPosition, anim->getDeltaPosY());
+    anim->setDestRect({static_cast<int>(tempX), static_cast<int>(tempY), anim->getFrameWidth(),
+                       anim->getFrameHeight()});
+    m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
 }
 
 

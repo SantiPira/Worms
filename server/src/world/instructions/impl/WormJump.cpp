@@ -2,6 +2,7 @@
 
 WormJump::WormJump(int idPlayer) {
     this->setIdPlayer(idPlayer);
+    this->m_ActionType = ActionType::JUMP;
 }
 
 void WormJump::execute(WWorm *worm) {

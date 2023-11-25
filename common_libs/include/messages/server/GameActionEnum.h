@@ -16,5 +16,6 @@ enum GameAction : uint8_t {
     WORM_DIE = 0x0B,
     WORM_GRAVE = 0x0C,
     END_TURN = 0x0D,
+    TURN_TRANSITION = 0x0E,
     INVALID_ACTION = 0xFF
 };

@@ -1,7 +1,9 @@
 #include "world/listeners/contact/WormsContact.h"
 
 void WormsContact::BeginContact(b2Body* bodyA, b2Body* bodyB) {
-
+    if (bodyA->GetType() == b2_staticBody || bodyB->GetType() == b2_staticBody) {
+        return;
+    }
     WEntity* entityA = reinterpret_cast<WEntity*>(bodyA->GetUserData().pointer);
     WEntity* entityB = reinterpret_cast<WEntity*>(bodyB->GetUserData().pointer);
 
@@ -16,11 +18,13 @@ void WormsContact::BeginContact(b2Body* bodyA, b2Body* bodyB) {
     }
     if (wormA != nullptr && wormB != nullptr) {
         std::cout << "[BEGIN WORM COLLIDE]" << std::endl;
-        if (wormA->getIsAttacking() || wormB->getIsAttacking()) {
-            return;
-        }
-        wormA->getBody()->SetAwake(false);
-        wormB->getBody()->SetAwake(false);
+//        if (wormA->getIsAttacking() || wormB->getIsAttacking()) {
+//            return;
+//        }
+        wormA->setIsInContactWithAnotherWorm(true);
+        wormB->setIsInContactWithAnotherWorm(true);
+        bodyA->SetLinearVelocity(b2Vec2_zero); // Set x velocity to 0
+        bodyB->SetLinearVelocity(b2Vec2_zero); // Set x velocity to 0
     }
 }
 
@@ -41,10 +45,11 @@ void WormsContact::EndContact(b2Body* bodyA, b2Body* bodyB) {
     }
 
     if (wormA != nullptr && wormB != nullptr) {
-        if (wormA->getIsAttacking() || wormB->getIsAttacking()) {
-            return;
-        }
-        wormA->getBody()->SetAwake(true);
-        wormB->getBody()->SetAwake(true);
+        std::cout << "END WORM COLLIDE" << std::endl;
+//        if (wormA->getIsAttacking() || wormB->getIsAttacking()) {
+//            return;
+//        }
+        wormA->setIsInContactWithAnotherWorm(false);
+        wormB->setIsInContactWithAnotherWorm(false);
     }
 }

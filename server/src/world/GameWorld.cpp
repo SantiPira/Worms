@@ -44,16 +44,16 @@ void GameWorld::StartWorld() {
 
 void GameWorld::SetWorm(const int& player_number, const float & x_pos, const float& y_pos) {
     auto* wormEntity = new WWorm(&m_world, player_number, x_pos, y_pos, x_pos <= width/2, m_WormCategory,
-                                 {m_WormCategory, m_WaterCategory});
+                                 {m_WaterCategory});
     worms.insert(std::make_pair(player_number, wormEntity));
     wormsPositions.insert(std::make_pair(player_number, b2Vec2(x_pos, y_pos)));
     std::cout << "ID [" << player_number << "] - POS (" << x_pos << ", " << y_pos << ")" << std::endl;
 }
 
-std::vector<GameUpdate> GameWorld::getWormsUpdates() const {
+std::vector<GameUpdate> GameWorld::getWormsUpdates(bool getAll) const {
     std::vector<GameUpdate> gameUpdates;
     for (auto& worm : worms) {
-        gameUpdates.push_back(worm.second->getUpdate());
+        gameUpdates.push_back(worm.second->getUpdate(getAll));
     }
     return gameUpdates;
 }
@@ -74,17 +74,17 @@ void GameWorld::step() {
 }
 
 void GameWorld::removeDeadWorms(std::vector<int> &wormsRemoved) {
-    for (auto& worm : worms) {
-        if (worm.second->getSelfCondition() == WORM_GRAVE) {
-            wormsRemoved.push_back(worm.first);
-            setStaticBody(worm);
-        }
-    }
-
     for (auto& id : wormsRemoved) {
-        m_world.DestroyBody(worms.at(id)->getBody());
+        WWorm* worm = worms.at(id);
+        b2Vec2 pos = worm->getPosition();
+        float widthWorm = worm->getWidth();
+        float heightWorm = worm->getHeight();
+        deadWorms.insert(std::make_pair(id, new WDeadWorm(&m_world, id, pos, widthWorm, heightWorm)));
         worms.erase(id);
         wormsPositions.erase(id);
+        worm->getBody()->GetUserData().pointer = reinterpret_cast<uintptr_t>(nullptr);
+        m_world.DestroyBody(worm->getBody());
+        delete worm;
     }
 }
 
@@ -112,4 +112,60 @@ void GameWorld::resetWormStatus(int idPlayer) {
     worms.at(idPlayer)->resetWormStatus();
     m_world.Step(0,0,0);
 }
+
+bool GameWorld::isQuiet() {
+    for (auto& worm : worms) {
+        SpritesEnum sprite = worm.second->getActionToAnimation()->getCurrentSprite();
+        if (sprite != SPRITE_WACCUSE_IDLE) {
+            return false;
+        }
+    }
+    return true;
+}
+
+void GameWorld::getDeadWormsIds(std::vector<int> &deadWormsIds) {
+    for (auto& worm : worms) {
+        if (worm.second->getHealth() == 0) {
+            deadWormsIds.push_back(worm.first);
+        }
+    }
+}
+
+//void GameWorld::passAway(int &id) {
+//    WWorm* worm = worms.at(id);
+//    b2Vec2 pos = worm->getPosition();
+//    float widthWorm = worm->getWidth();
+//    float heightWorm = worm->getHeight();
+//    deadWorms.insert(std::make_pair(id, new WDeadWorm(&m_world, id, pos, widthWorm, heightWorm)));
+//    worms.erase(id);
+//    wormsPositions.erase(id);
+//    delete worm;
+//}
+
+bool GameWorld::isAlive(int idPlayer) {
+    return worms.at(idPlayer)->getHealth() > 0;
+}
+
+bool GameWorld::wormBrokeTurn(const UserAction &userAction) {
+    for (auto& worm : worms) {
+        if (worm.second->getHealth() == 0) {
+            return true;
+        }
+    }
+    if (userAction.getAction() == ATTACK) {
+        return true;
+    }
+    return false;
+}
+
+bool GameWorld::wormsAlive(std::vector<int> &idsDeadWorms) {
+    for (auto& idWorm : idsDeadWorms) {
+        if (worms.at(idWorm)->getSelfCondition() != WORM_GRAVE) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
 

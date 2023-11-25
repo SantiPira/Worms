@@ -2,7 +2,7 @@
 
 WormStopMove::WormStopMove(int idPlayer) {
     setIdPlayer(idPlayer);
-
+    m_ActionType = ActionType::STOP_MOVE;
 }
 
 void WormStopMove::execute(WWorm *worm) {

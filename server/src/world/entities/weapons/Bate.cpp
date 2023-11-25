@@ -34,6 +34,7 @@ void Bate::attack(WWorm *attacker, WWorm* attacked, uint8_t force) {
     b2Vec2 forceVector = mForce * b2Vec2(xForce * 15, yForce);
     std::cout << "Force vector: " << forceVector.x << " " << forceVector.y << std::endl;
     attacked->getBody()->ApplyForceToCenter(forceVector, true);
+    attacked->receiveDamage(50);
 }
 
 void Bate::setWeaponId(WeaponID weaponId) {
