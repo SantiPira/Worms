@@ -131,29 +131,19 @@ void GameWorld::getDeadWormsIds(std::vector<int> &deadWormsIds) {
     }
 }
 
-//void GameWorld::passAway(int &id) {
-//    WWorm* worm = worms.at(id);
-//    b2Vec2 pos = worm->getPosition();
-//    float widthWorm = worm->getWidth();
-//    float heightWorm = worm->getHeight();
-//    deadWorms.insert(std::make_pair(id, new WDeadWorm(&m_world, id, pos, widthWorm, heightWorm)));
-//    worms.erase(id);
-//    wormsPositions.erase(id);
-//    delete worm;
-//}
 
 bool GameWorld::isAlive(int idPlayer) {
     return worms.at(idPlayer)->getHealth() > 0;
 }
 
-bool GameWorld::wormBrokeTurn(const UserAction &userAction) {
+bool GameWorld::wormBrokeTurn(const UserAction &userAction, const int& idPlayer) {
     for (auto& worm : worms) {
         if (worm.second->getHealth() == 0) {
             return true;
         }
     }
-    if (userAction.getAction() == ATTACK) {
-        return true;
+    if (userAction.getAction() == ATTACK && userAction.getIdPlayer() == idPlayer) {
+        return worms.at(idPlayer)->getIsAttacking();
     }
     return false;
 }

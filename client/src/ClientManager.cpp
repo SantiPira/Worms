@@ -49,6 +49,7 @@ void ClientManager::gameLoop() {
         std::chrono::duration<double> elapsedSeconds = current - lastTime;
 
         gameUpdates.try_pop(svUpdate);
+
         m_Game.Update(elapsedSeconds.count(), svUpdate);
         m_Game.Render();
 

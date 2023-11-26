@@ -37,7 +37,7 @@ void Game::processTurns(TurnHandler& turnHandler, InstructionFactory& instructio
                 delete instruction;
             }
             world.step();
-            if (world.wormBrokeTurn(std::ref(userAction))) {
+            if (world.wormBrokeTurn(std::ref(userAction), turnHandler.getCurrentPlayer())) {
                 break;
             }
             bool getAll = false;
@@ -185,5 +185,4 @@ void Game::endCurrentPlayerTurn(TurnHandler &handler) {
         auto update = world.getWormUpdate(getAll, handler.getCurrentPlayer());
         pushUpdateToClients(std::ref(update));
     }
-
 }

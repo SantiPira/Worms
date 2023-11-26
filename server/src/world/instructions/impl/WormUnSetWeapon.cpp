@@ -6,5 +6,5 @@ WormUnSetWeapon::WormUnSetWeapon(int idPlayer) {
 }
 
 void WormUnSetWeapon::execute(WWorm *worm) {
-    worm->setWeapon(WeaponID::NO_WEAPON, m_ActionType);
+    worm->unSetWeapon();
 }

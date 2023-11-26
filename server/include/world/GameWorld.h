@@ -69,7 +69,7 @@ public:
 
     bool isAlive(int idPlayer);
 
-    bool wormBrokeTurn(const UserAction& userAction);
+    bool wormBrokeTurn(const UserAction& userAction, const int& idPlayer);
 
     bool wormsAlive(std::vector<int>& idsDeadWorms);
 

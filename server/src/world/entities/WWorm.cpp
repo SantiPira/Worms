@@ -232,7 +232,6 @@ void WWorm::attack(uint8_t force) {
             if (wentity != nullptr && wentity->getEntityType() == EntitiesType::ENTITY_WORM) {
                 auto* w = reinterpret_cast<WWorm*>(entity->GetUserData().pointer);
                 std::unique_ptr<Weapon> weaponPtr(weaponFactory.createWeapon(m_Weapon));
-                this->m_IsAttacking = true;
                 weaponPtr->attack(this, w, force);
             }
         }
@@ -382,5 +381,12 @@ void WWorm::setIsInContactWithAnotherWorm(bool isInContactWithAnotherWorm) {
 
 ActionToAnimation *WWorm::getActionToAnimation() {
     return &m_ActionToAnimation;
+}
+
+void WWorm::unSetWeapon() {
+    m_ActionToAnimation.resetAnimation();
+    m_ActionToAnimation.setAction(ActionType::UNSET_WEAPON, m_Weapon, ActionWeaponType::UNSET_WEAPON);
+    m_Weapon = WeaponID::NO_WEAPON;
+    m_CurrentActionType = ActionType::UNSET_WEAPON;
 }
 
