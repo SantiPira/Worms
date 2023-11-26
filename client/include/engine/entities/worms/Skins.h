@@ -249,8 +249,8 @@ struct SetGreenGranade {
     float duration = 2.0f;
     SDL_Rect srcRect = {0, 0, 60, 60};
     int initYSprite = 0;
-    float deltaPosX = 25.6f;
-    float deltaPosY = 40.96f;
+    float deltaPosX = 80.0f;
+    float deltaPosY = 35.0f;
 };
 
 struct HasGreenGranade {
@@ -263,8 +263,8 @@ struct HasGreenGranade {
     float duration = 2.0f;
     SDL_Rect srcRect = {0, 0, 60, 60};
     int initYSprite = 0;
-    float deltaPosX = 25.6f;
-    float deltaPosY = 40.96f;
+    float deltaPosX = 80.0f;
+    float deltaPosY = 35.0f;
 };
 
 struct SaveGreenGranade {
@@ -277,8 +277,9 @@ struct SaveGreenGranade {
     float duration = 2.0f;
     SDL_Rect srcRect = {0, 0, 60, 60};
     int initYSprite = 0;
-    float deltaPosX = 25.6f;
-    float deltaPosY = 40.96f;
+    float deltaPosX = 80.0f;
+    float deltaPosY = 35.0f;
+    
 };
 
 
