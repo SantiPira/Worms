@@ -28,10 +28,15 @@ class GameClient {
     std::vector<Worm*> m_WormsDie;
     Texture* sky;
     Texture* water;
+    Texture* weapons_list;
 
     SDL2pp::Mixer *mixer;
     SDL2pp::Chunk *chunk;
     Camara* camara;
+
+   public:
+   bool se_muestra_la_lista_de_armas{false};
+   
 
 
  private:

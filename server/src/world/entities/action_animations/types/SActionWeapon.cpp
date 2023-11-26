@@ -13,6 +13,9 @@ SActionWeapon::SActionWeapon(uint8_t weaponType, uint8_t actionWeaponType) {
         case WeaponID::BAZOOKA:
             m_Sequence = buildBazookaSequence();
             break;
+        case WeaponID::GREEN_GRANADE:
+            m_Sequence = buildGreenGranadeSequence();
+            break;
 
         default:
             m_Sequence = buildAxeSequence();
@@ -66,5 +69,13 @@ Squence SActionWeapon::buildBazookaSequence() {
     sequence.setWeapon = SpritesEnum::SPRITE_SETTING_BAZOOKA;
     sequence.hasWeapon = SpritesEnum::SPRITE_HAS_BAZOOKA;
     sequence.saveWeapon = SpritesEnum::SPRITE_SAVING_BAZOOKA;
+    return sequence;
+}
+
+Squence SActionWeapon::buildGreenGranadeSequence() {
+    Squence sequence{};
+    sequence.setWeapon = SpritesEnum::SPRITE_SETTING_GREEN_GRANADE;
+    sequence.hasWeapon = SpritesEnum::SPRITE_HAS_GREEN_GRANADE;
+    sequence.saveWeapon = SpritesEnum::SPRITE_SAVING_GREEN_GRANADE;
     return sequence;
 }

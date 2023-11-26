@@ -234,6 +234,55 @@ struct SavingBazooka {
     float deltaPosX = 25.6f;
     float deltaPosY = 40.96f;
 };
+
+//
+//
+//
+
+struct SetGreenGranade {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wgrnlnk.png");
+    BlendMode blendMode = {true, 128, 128, 192};
+    int frames = 10;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 60;
+    int frameHeight = 60;
+    float duration = 2.0f;
+    SDL_Rect srcRect = {0, 0, 60, 60};
+    int initYSprite = 0;
+    float deltaPosX = 25.6f;
+    float deltaPosY = 40.96f;
+};
+
+struct HasGreenGranade {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wgrnbak.png");
+    BlendMode blendMode = {true, 128, 128, 192};
+    int frames = 3;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 60;
+    int frameHeight = 60;
+    float duration = 2.0f;
+    SDL_Rect srcRect = {0, 0, 60, 60};
+    int initYSprite = 0;
+    float deltaPosX = 25.6f;
+    float deltaPosY = 40.96f;
+};
+
+struct SaveGreenGranade {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wgrnlnk.png");
+    BlendMode blendMode = {true, 128, 128, 192};
+    int frames = 10;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 60;
+    int frameHeight = 60;
+    float duration = 2.0f;
+    SDL_Rect srcRect = {0, 0, 60, 60};
+    int initYSprite = 0;
+    float deltaPosX = 25.6f;
+    float deltaPosY = 40.96f;
+};
+
+
+
 /*
 struct SkySking {
     const std::string spritePath = "../../resources/Fondos/cielo.png"

@@ -17,4 +17,6 @@ inline extern const std::string Map_Grds_Small_Diagonal_2 = "/resources/Weapons/
 inline extern const std::string Cloud_Sky = "/resources/Fondos/cielo.png";
 inline extern const std::string Water = "/resources/Fondos/water.png";
 
+inline extern const std::string WeaponsList = "/resources/Weapon Icons/weapons_list.png";
+
 inline extern const std::string Game_Music = "/resources/Music/game_music.ogg";
