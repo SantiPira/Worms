@@ -96,6 +96,7 @@ UserAction EventSender::attack() {
                 std::cout << "HIGH" << std::endl;
                 force = BateForce::HIGH;
             }
+            // no se si esta bueno ahcer el calculo del tiempo en el cliente, creo que deberia ser responsabilidad del servidor de medir esto. es un minor issue igual
             return {ActionType::ATTACK, m_IdPlayer, force};
         case WeaponID::AXE:
             return {ActionType::ATTACK, m_IdPlayer};

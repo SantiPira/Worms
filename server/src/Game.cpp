@@ -34,6 +34,7 @@ void Game::processTurns(TurnHandler& turnHandler, InstructionFactory& instructio
             if (m_InputActions.try_pop(userAction) && userAction.getIdPlayer() == turnHandler.getCurrentPlayer()) {
                 auto* instruction = instructionFactory.createInstruction(userAction);
                 world.execute(instruction, userAction.getIdPlayer());
+                // cuidado con los punteros raw
                 delete instruction;
             }
             world.step();

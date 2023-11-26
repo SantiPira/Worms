@@ -6,6 +6,7 @@ MatchesMonitor::MatchesMonitor() {}
 
 void MatchesMonitor::removeGame(int id) {
     // this lock is commented as this method is used as private
+    // haganlo privado entonces?
     //std::lock_guard<std::mutex> lock(m_Mutex);
     m_Games.at(id)->kill();
     m_Games.at(id)->join();

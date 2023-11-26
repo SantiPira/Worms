@@ -104,7 +104,8 @@ void Protocol::sendGameUpdate(GameUpdate &update) {
     sendFloat(update.y_pos);
     sendFloat(update.width);
     sendFloat(update.height);
-
+    // fijense que aca estan haciendo como 10 sends unitarios, porque no arman un array para mandar todo junto?
+    // lo mismo en los otros casos que pasa esto, y en los recv. pueden hacer 1 recv y despues parsear el mensaje in memory
     sendByte(update.m_Movement);
     sendByte(update.m_Weapon);
     sendByte(update.m_IsAttacking ? 0x01 : 0x00);
