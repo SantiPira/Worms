@@ -77,14 +77,18 @@ void GameClient::InitMixerAndChunk() {
 void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
     if (gameUpdate.m_Movement == GameAction::INVALID_ACTION) {
 
+        /*
         if (gameUpdate.m_Movement == GameAction::PROJECTILE) {
             //ACTUALIZO  EL RENDERER DE PROYECTILES.
         }
-
+        */
 
         for (auto& worm : m_Worms) {
             worm.second->update(elapsedSeconds);
         }
+
+    } else {
+
         for (auto& worm : m_Worms) {
             if (worm.first == gameUpdate.player_id) {
                 worm.second->update(elapsedSeconds, gameUpdate);
@@ -92,6 +96,7 @@ void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
                 worm.second->update(elapsedSeconds);
             }
         }
+
         if (gameUpdate.m_CurrentSprite == SPRITE_WACCUSE_GRAVE) {
             m_WormsDie.push_back(m_Worms.at(gameUpdate.player_id));
             m_Worms.erase(gameUpdate.player_id);
@@ -167,6 +172,7 @@ void GameClient::Render() {
         SDL_Rect weapons_list_dst_rect = {0, 0, 160, 64};
         weapons_list->render(&weapons_list_dst_rect, false);
     }
+    
 
     SDL_RenderPresent(_renderer);
 
