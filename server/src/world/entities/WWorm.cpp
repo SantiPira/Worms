@@ -385,7 +385,7 @@ ActionToAnimation *WWorm::getActionToAnimation() {
 
 void WWorm::unSetWeapon() {
     m_ActionToAnimation.resetAnimation();
-    m_ActionToAnimation.setAction(ActionType::UNSET_WEAPON, m_Weapon, ActionWeaponType::UNSET_WEAPON);
+    m_ActionToAnimation.setAction(ActionType::UNSET_WEAPON, m_Weapon, ActionWeaponType::ACTION_WEAPON_TYPE_UNSET_WEAPON);
     m_Weapon = WeaponID::NO_WEAPON;
     m_CurrentActionType = ActionType::UNSET_WEAPON;
 }

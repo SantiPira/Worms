@@ -65,6 +65,7 @@ void Game::waitFrameTime() {
 
 void Game::endTurn(TurnHandler& turnHandler) {
     sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::END_TURN);
+    world.resetWormStatus(turnHandler.getCurrentPlayer());
     endCurrentPlayerTurn(turnHandler);
     while (!world.isQuiet()) {
         world.step();
@@ -73,7 +74,6 @@ void Game::endTurn(TurnHandler& turnHandler) {
         pushUpdatesToClients(std::ref(updates));
         waitFrameTime();
     }
-    world.resetWormStatus(turnHandler.getCurrentPlayer());
     std::vector<int> deadWorms;
     world.getDeadWormsIds(std::ref(deadWorms));
     if (!deadWorms.empty()) {
@@ -88,6 +88,9 @@ void Game::endTurn(TurnHandler& turnHandler) {
     turnHandler.nextTurn(std::ref(deadWorms));
     world.removeDeadWorms(std::ref(deadWorms));
     sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::START_TURN);
+    std::cout << "Envio el siguiente turno" << std::endl;
+    auto finalUpdates = world.getWormsUpdates(true);
+    pushUpdatesToClients(std::ref(finalUpdates));
 }
 
 int Game::getPlayers() const {
@@ -125,14 +128,17 @@ std::string Game::getMapName() const {
 
 void Game::pushUpdateToClients(GameUpdate &update) {
     for (auto& clientUpdate : m_QClientUpdates) {
-        clientUpdate.second->try_push(std::ref(update));
+        if (update.m_TurnInfo == START_TURN) {
+            std::cout << "Enviando turno despues del change turn!!!" << std::endl;
+        }
+        clientUpdate.second->push(std::ref(update));
     }
 }
 
 void Game::pushUpdatesToClients(std::reference_wrapper<std::vector<GameUpdate>> updates) {
     for (auto& clientQueue : m_QClientUpdates) {
         for (auto& update : updates.get()) {
-            clientQueue.second->try_push(std::ref(update));
+            clientQueue.second->push(std::ref(update));
         }
     }
 }
@@ -170,7 +176,7 @@ bool Game::isStillPlayable() {
 
 void Game::sendInfoTurns(int playerId, GameAction infoTurn) {
     GameUpdate update{};
-    update.m_SelfCondition = infoTurn;
+    update.m_TurnInfo = infoTurn;
     update.player_id = playerId;
     pushUpdateToClients(std::ref(update));
 }

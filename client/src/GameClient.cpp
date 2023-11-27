@@ -69,7 +69,7 @@ void GameClient::InitMixerAndChunk() {
 }
 
 void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
-    if (gameUpdate.m_Movement == GameAction::INVALID_ACTION) {
+    if (gameUpdate.m_CurrentSprite == SPRITE_INVALID) {
         for (auto& worm : m_Worms) {
             worm.second->update(elapsedSeconds);
         }

@@ -55,7 +55,6 @@ void ClientManager::gameLoop() {
 
         lastTime = current;
     }
-
     m_Game.Release();
 }
 

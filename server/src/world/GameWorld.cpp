@@ -53,7 +53,11 @@ void GameWorld::SetWorm(const int& player_number, const float & x_pos, const flo
 std::vector<GameUpdate> GameWorld::getWormsUpdates(bool getAll) const {
     std::vector<GameUpdate> gameUpdates;
     for (auto& worm : worms) {
-        gameUpdates.push_back(worm.second->getUpdate(getAll));
+        auto update = worm.second->getUpdate(getAll);
+        if (update.m_CurrentSprite == SPRITE_INVALID) {
+            continue;
+        }
+        gameUpdates.push_back(update);
     }
     return gameUpdates;
 }
@@ -158,7 +162,8 @@ bool GameWorld::wormsAlive(std::vector<int> &idsDeadWorms) {
 }
 
 bool GameWorld::isWormIDLE(int idPlayer) {
-    return worms.at(idPlayer)->getActionToAnimation()->getCurrentSprite() == SPRITE_WACCUSE_IDLE;
+    SpritesEnum action =  worms.at(idPlayer)->getActionToAnimation()->getCurrentSprite();
+    return  action == SPRITE_WACCUSE_IDLE;
 }
 
 GameUpdate GameWorld::getWormUpdate(bool wasChanged, int idPlayer) {

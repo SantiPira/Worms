@@ -6,6 +6,9 @@ Bate::Bate() {
 }
 
 void Bate::attack(WWorm *attacker, WWorm* attacked, uint8_t force) {
+    if (attacked->getId() == attacker->getId()) {
+        return;
+    }
     float mForce;
     switch (force) {
         case LOW:
@@ -33,6 +36,7 @@ void Bate::attack(WWorm *attacker, WWorm* attacked, uint8_t force) {
     attacker->getDirection() == Direction::LEFT ? xForce *= -1 : xForce *= 1;
     b2Vec2 forceVector = mForce * b2Vec2(xForce * 15, yForce);
     std::cout << "Force vector: " << forceVector.x << " " << forceVector.y << std::endl;
+    attacker->setIsAttacking(true);
     attacked->getBody()->ApplyForceToCenter(forceVector, true);
     attacked->receiveDamage(50);
 }

@@ -7,7 +7,7 @@
 #include "world/entities/action_animations/types/SActionAttacked.h"
 #include "world/entities/action_animations/types/SActionAttack.h"
 
-SpriteAnimations *AnimationFactory::createAnimation(const ActionType& actionType, uint8_t param1) {
+SpriteAnimations *AnimationFactory::createAnimation(const ActionType& actionType, uint8_t param1, uint8_t param2) {
     switch (actionType) {
         case ActionType::MOVE:
             return new SActionMove();

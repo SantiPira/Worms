@@ -6,7 +6,7 @@
 class AnimationFactory {
 public:
     AnimationFactory() = default;
-    static SpriteAnimations* createAnimation(const ActionType& actionType, uint8_t param1 = 0);
+    static SpriteAnimations* createAnimation(const ActionType& actionType, uint8_t param1 = 0, uint8_t param2 = 0);
     static SpriteAnimations* createDeathAnimation();
 
     ~AnimationFactory() = default;

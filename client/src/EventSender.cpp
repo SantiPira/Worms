@@ -74,7 +74,11 @@ void EventSender::stop() {
 }
 
 void EventSender::setItsMyTurn(bool isMyTurn) {
-    std::cout << "ID: " << m_IdPlayer << " Cambio de turno: " << isMyTurn << std::endl;
+    if (isMyTurn) {
+        std::cout << "MI TURNO ID: " << m_IdPlayer << std::endl;
+    } else {
+        std::cout << "NO ES MI TURNO ID: " << m_IdPlayer << std::endl;
+    }
     this->m_IsMyTurn.store(isMyTurn);
 }
 

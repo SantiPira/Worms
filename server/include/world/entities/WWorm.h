@@ -7,6 +7,7 @@
 #include "world/entities/weapons/impl/Bate.h"
 #include "messages/user_actions/ActionType.h"
 #include "world/entities/action_animations/ActionToAnimation.h"
+#include "world/entities/action_animations/types/SActionWeapon.h"
 #include "EntitiesType.h"
 #include "WEntity.h"
 #include <iostream>
