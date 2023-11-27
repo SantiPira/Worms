@@ -5,6 +5,7 @@
 #include "world/entities/weapons/WeaponFactory.h"
 #include "world/entities/weapons/impl/Axe.h"
 #include "world/entities/weapons/impl/Bate.h"
+#include "world/entities/weapons/impl/Bazooka.h"
 #include "messages/user_actions/ActionType.h"
 #include "EntitiesType.h"
 #include "WEntity.h"
