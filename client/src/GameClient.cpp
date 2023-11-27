@@ -76,10 +76,15 @@ void GameClient::InitMixerAndChunk() {
 
 void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
     if (gameUpdate.m_Movement == GameAction::INVALID_ACTION) {
+
+        if (gameUpdate.m_Movement == GameAction::PROJECTILE) {
+            //ACTUALIZO  EL RENDERER DE PROYECTILES.
+        }
+
+
         for (auto& worm : m_Worms) {
             worm.second->update(elapsedSeconds);
         }
-    } else {
         for (auto& worm : m_Worms) {
             if (worm.first == gameUpdate.player_id) {
                 worm.second->update(elapsedSeconds, gameUpdate);

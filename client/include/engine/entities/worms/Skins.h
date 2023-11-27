@@ -283,6 +283,25 @@ struct SaveGreenGranade {
 };
 
 
+//PROJECTILES
+
+struct GreenGranade {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Weapons/grenade.png");
+    BlendMode blendMode = {true, 128, 128, 192};
+    int frames = 10;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 60;
+    int frameHeight = 60;
+    float duration = 2.0f;
+    SDL_Rect srcRect = {0, 0, 60, 60};
+    int initYSprite = 0;
+    float deltaPosX = 80.0f;
+    float deltaPosY = 35.0f;
+    
+};
+
+
+
 
 /*
 struct SkySking {
