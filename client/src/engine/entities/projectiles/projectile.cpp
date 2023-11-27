@@ -1,6 +1,5 @@
 #include "engine/entities/projectiles/projectile.h"
 
-/*
 Projectile::Projectile(SDL_Renderer *renderer, float posX, float posY, float width, float height): 
         m_Renderer(renderer), m_ProjectileXPosition(posX),
          m_ProjectileYPosition(posY), m_Widht(WorldScale::toPixel(width)), m_Height(WorldScale::toPixel(height)) {}
@@ -61,4 +60,3 @@ void Projectile::update(double elapsedSeconds){
 void Projectile::render(){
 
 }
-*/
