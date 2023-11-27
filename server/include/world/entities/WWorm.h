@@ -78,6 +78,8 @@ public:
     [[nodiscard]] bool getIsInContactWithAnotherWorm() const;
     ActionToAnimation* getActionToAnimation();
 
+    b2World *getWorld() const;
+
     void setPosition(b2Vec2 position);
     void setVelocity(b2Vec2 velocity);
     void setAngle(float angle);

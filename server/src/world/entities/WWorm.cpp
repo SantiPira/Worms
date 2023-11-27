@@ -56,6 +56,10 @@ WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRi
     return m_Id;
 }
 
+b2World *WWorm::getWorld() const {
+    return m_World;
+}
+
 b2Body *WWorm::getBody() const {
     return m_Body;
 }

@@ -1,6 +1,8 @@
-#ifndef PROJECTILE_H
-#define PROJECTILE_H
 
+//#ifndef PROJECTILE_H
+//#define PROJECTILE_H
+
+/*
 #include <SDL_render.h>
 #include <iostream>
 #include "messages/sprites/SpritesEnum.h"
@@ -52,3 +54,4 @@ public:
 
 
 #endif
+*/

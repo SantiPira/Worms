@@ -3,6 +3,7 @@
 #include "Weapon.h"
 #include "world/entities/weapons/impl/Axe.h"
 #include "world/entities/weapons/impl/Bate.h"
+#include "world/entities/weapons/impl/Bazooka.h"
 
 class Weapon;
 class WeaponFactory {

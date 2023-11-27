@@ -6,6 +6,8 @@ Weapon *WeaponFactory::createWeapon(WeaponID weaponId) {
             return new Axe();
         case WeaponID::BATE:
             return new Bate();
+        case WeaponID::BAZOOKA:
+            return new Bazooka();
         default:
             return new Axe();
     }

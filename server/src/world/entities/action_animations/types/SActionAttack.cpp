@@ -20,6 +20,11 @@ SpritesEnum SActionAttack::getCurrentSprite(const std::chrono::time_point<std::c
                 return SPRITE_WACCUSE_IDLE;
             }
             return SPRITE_ATTACK_BATE;
+        case BAZOOKA:
+            if (elapsedSeconds.count() > 1.0) {
+                return SPRITE_WACCUSE_IDLE;
+            }
+            return SPRITE_ATTACK_BAZOOKA;
         default:
             break;
     }
