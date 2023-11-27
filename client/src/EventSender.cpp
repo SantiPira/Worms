@@ -17,12 +17,12 @@ void EventSender::run() {
         if (event.type == SDL_KEYDOWN && event.key.repeat == 0) {
             if (key == SDLK_d) {
                 userAction = {ActionType::MOVE, m_IdPlayer, Direction::RIGHT};
+            } else if (key == SDLK_1) {
+                m_SettingsQueue.push("MUESTRO LISTA");
+            } else if (key == SDLK_2) {
+                m_SettingsQueue.push("GUARDO LISTA");
             } else if (key == SDLK_a) {
                 userAction = {ActionType::MOVE, m_IdPlayer, Direction::LEFT};
-            } else if (key == SDLK_1) { 
-                m_SettingsQueue.push("MUESTRO LISTA");
-            } else if (key == SDLK_2) { 
-                m_SettingsQueue.push("GUARDO LISTA"); 
             } else if (key == SDLK_SPACE) {
                 userAction = {ActionType::JUMP, m_IdPlayer};
             } else if (key == SDLK_c) {
@@ -39,7 +39,7 @@ void EventSender::run() {
             }else if (key == SDLK_j) {
                 m_WeaponId = WeaponID::NO_WEAPON;
                 userAction = {ActionType::UNSET_WEAPON, m_IdPlayer};
-            } else if (key == SDLK_b) {
+            }  else if (key == SDLK_b) {
                 m_WeaponId = WeaponID::BATE;
                 userAction = {ActionType::SET_WEAPON, m_IdPlayer, m_WeaponId};
             } else if (key == SDLK_DOWN) {
