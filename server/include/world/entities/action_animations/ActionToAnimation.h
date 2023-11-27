@@ -25,4 +25,10 @@ public:
     void setAction(ActionType action, uint8_t param1 = 0, uint8_t param2 = 0);
 
     SpritesEnum getCurrentSprite() const;
+
+    ActionType getAction() const {
+        return m_Action;
+    }
+
+    ~ActionToAnimation() = default;
 };

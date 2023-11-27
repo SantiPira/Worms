@@ -9,7 +9,7 @@ SpritesEnum SActionAttacked::getCurrentSprite(
     auto current = std::chrono::system_clock::now();
     std::chrono::duration<double> elapsedSeconds = current - startTime;
 
-    if (elapsedSeconds.count() > 3.0) {
+    if (elapsedSeconds.count() > 5.0) {
         m_CurrentSprite = SpritesEnum::SPRITE_WACCUSE_IDLE;
     }
 

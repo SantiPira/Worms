@@ -67,6 +67,10 @@ void Game::endTurn(TurnHandler& turnHandler) {
     sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::END_TURN);
     world.resetWormStatus(turnHandler.getCurrentPlayer());
     endCurrentPlayerTurn(turnHandler);
+    {
+        auto updates = world.getWormsUpdates(false);
+        pushUpdatesToClients(std::ref(updates));
+    }
     while (!world.isQuiet()) {
         world.step();
         bool getAll = false;
@@ -87,10 +91,10 @@ void Game::endTurn(TurnHandler& turnHandler) {
     }
     turnHandler.nextTurn(std::ref(deadWorms));
     world.removeDeadWorms(std::ref(deadWorms));
-    sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::START_TURN);
     std::cout << "Envio el siguiente turno" << std::endl;
     auto finalUpdates = world.getWormsUpdates(true);
     pushUpdatesToClients(std::ref(finalUpdates));
+    sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::START_TURN);
 }
 
 int Game::getPlayers() const {
@@ -188,6 +192,7 @@ bool Game::hasStarted() {
 void Game::endCurrentPlayerTurn(TurnHandler &handler) {
     bool getAll = false;
     while (!world.isWormIDLE(handler.getCurrentPlayer())) {
+        std::cout << "NO DEBERIA ENTRAR" << std::endl;
         auto update = world.getWormUpdate(getAll, handler.getCurrentPlayer());
         pushUpdateToClients(std::ref(update));
     }

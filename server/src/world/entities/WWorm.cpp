@@ -50,6 +50,7 @@ WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRi
     this->m_Dir = isFacingRight ? Direction::RIGHT : Direction::LEFT;
     this->m_SelfCondition = GameAction::WORM_IDLE;
     m_ActionToAnimation = ActionToAnimation();
+    m_OtherDirection = Direction::NONE_DIR;
 }
 
 [[maybe_unused]] uint8_t WWorm::getId() const {
@@ -299,14 +300,14 @@ float WWorm::getWeaponAngle() const {
 }
 
 void WWorm::move(Direction direction) {
-    if (!m_IsInContactWithWWorm || (m_IsInContactWithWWorm && direction != m_Dir)) {
+    this->m_Dir = direction;
+    if (!m_IsInContactWithWWorm || direction != m_OtherDirection) {
         m_ActionToAnimation.resetAnimation();
         m_ActionToAnimation.setAction(ActionType::MOVE);
         m_CurrentActionType = ActionType::MOVE;
         m_IsMoving = true;
         float velocity;
         direction == Direction::LEFT ? velocity = -1.0 : velocity = 1.0;
-        this->m_Dir = direction;
         b2Vec2 vel = b2Vec2(velocity, 0);
         if (m_Weapon != WeaponID::NO_WEAPON) {
             m_Weapon = WeaponID::NO_WEAPON;
@@ -388,5 +389,9 @@ void WWorm::unSetWeapon() {
     m_ActionToAnimation.setAction(ActionType::UNSET_WEAPON, m_Weapon, ActionWeaponType::ACTION_WEAPON_TYPE_UNSET_WEAPON);
     m_Weapon = WeaponID::NO_WEAPON;
     m_CurrentActionType = ActionType::UNSET_WEAPON;
+}
+
+void WWorm::setOtherDirection(Direction otherDirection) {
+    m_OtherDirection = otherDirection;
 }
 

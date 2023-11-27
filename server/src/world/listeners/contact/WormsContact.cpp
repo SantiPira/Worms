@@ -18,13 +18,20 @@ void WormsContact::BeginContact(b2Body* bodyA, b2Body* bodyB) {
     }
     if (wormA != nullptr && wormB != nullptr) {
         std::cout << "[BEGIN WORM COLLIDE]" << std::endl;
-//        if (wormA->getIsAttacking() || wormB->getIsAttacking()) {
-//            return;
-//        }
         wormA->setIsInContactWithAnotherWorm(true);
         wormB->setIsInContactWithAnotherWorm(true);
-        bodyA->SetLinearVelocity(b2Vec2_zero); // Set x velocity to 0
-        bodyB->SetLinearVelocity(b2Vec2_zero); // Set x velocity to 0
+        bodyA->SetLinearVelocity(b2Vec2_zero);
+        bodyB->SetLinearVelocity(b2Vec2_zero);
+        float xA = wormA->getPosition().x;
+        float xB = wormB->getPosition().x;
+
+        if (xA < xB) {
+            wormA->setOtherDirection(Direction::RIGHT);
+            wormB->setOtherDirection(Direction::LEFT);
+        } else {
+            wormA->setOtherDirection(Direction::LEFT);
+            wormB->setOtherDirection(Direction::RIGHT);
+        }
     }
 }
 
@@ -46,9 +53,6 @@ void WormsContact::EndContact(b2Body* bodyA, b2Body* bodyB) {
 
     if (wormA != nullptr && wormB != nullptr) {
         std::cout << "END WORM COLLIDE" << std::endl;
-//        if (wormA->getIsAttacking() || wormB->getIsAttacking()) {
-//            return;
-//        }
         wormA->setIsInContactWithAnotherWorm(false);
         wormB->setIsInContactWithAnotherWorm(false);
     }

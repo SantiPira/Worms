@@ -47,6 +47,7 @@ private:
     GameUpdate m_PreviousState;
     ActionType m_CurrentActionType = ActionType::NONE;
     bool m_IsInContactWithWWorm = false;
+    Direction m_OtherDirection{};
     ActionToAnimation m_ActionToAnimation;
 
 public:
@@ -100,6 +101,7 @@ public:
     void resetWormStatus();
     void setWasChanged(bool wasChanged);
     void setIsInContactWithAnotherWorm(bool isInContactWithAnotherWorm);
+    void setOtherDirection(Direction otherDirection);
 
     GameUpdate getUpdate(bool wormChanged);
 

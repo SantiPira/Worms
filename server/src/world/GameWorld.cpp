@@ -113,8 +113,11 @@ GameWorld::~GameWorld() {
 }
 
 void GameWorld::resetWormStatus(int idPlayer) {
-    worms.at(idPlayer)->resetWormStatus();
-    m_world.Step(0,0,0);
+    WWorm* current = worms.at(idPlayer);
+    if (current->getActionToAnimation()->getAction() != ATTACK) {
+        current->resetWormStatus();
+        m_world.Step(0,0,0);
+    }
 }
 
 bool GameWorld::isQuiet() {
