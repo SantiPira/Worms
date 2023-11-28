@@ -16,7 +16,7 @@ class ClientReceiver: public Thread {
     int m_IdPlayer;
 
 private:
-    bool manageTurn(GameAction action, int id);
+    void manageTurn(GameAction turnInfo, int id);
 
 public:
     ClientReceiver(Protocol& protocol, ProtectedQueue<GameUpdate>& gameUpdates, EventSender& eventSender,

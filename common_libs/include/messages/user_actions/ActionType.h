@@ -20,7 +20,8 @@ enum ActionType : uint8_t {
 
 enum Direction : uint8_t {
     LEFT = 0X00,
-    RIGHT = 0X01
+    RIGHT = 0X01,
+    NONE_DIR = 0X02
 };
 
 inline Direction operator!(Direction dir) {

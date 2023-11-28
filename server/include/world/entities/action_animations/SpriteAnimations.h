@@ -9,5 +9,5 @@ protected:
 public:
     virtual ~SpriteAnimations() = default;
     [[nodiscard]] virtual SpritesEnum
-    getCurrentSprite(const std::chrono::time_point<std::chrono::system_clock>& startTime) const = 0;
+    getCurrentSprite(const std::chrono::time_point<std::chrono::system_clock>& startTime) = 0;
 };

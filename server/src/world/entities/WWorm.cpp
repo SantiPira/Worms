@@ -50,6 +50,7 @@ WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRi
     this->m_Dir = isFacingRight ? Direction::RIGHT : Direction::LEFT;
     this->m_SelfCondition = GameAction::WORM_IDLE;
     m_ActionToAnimation = ActionToAnimation();
+    m_OtherDirection = Direction::NONE_DIR;
 }
 
 [[maybe_unused]] uint8_t WWorm::getId() const {
@@ -89,7 +90,7 @@ int32 WWorm::getScore() const {
 }
 
 bool WWorm::getIsDead() const {
-    return m_IsDead;
+    return m_Health == 0;
 }
 
 bool WWorm::getIsFacingRight() const {
@@ -196,28 +197,6 @@ GameUpdate WWorm::getUpdate(bool wormChanged) {
         return currentState;
     }
 
-//    if (m_IsAttacking) {
-//        auto now = std::chrono::system_clock::now();
-//        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - m_TimeState);
-//        currentState.m_CurrentSprite = SPRITE_WACCUSE_ATTACK;
-//        if (elapsed.count() > 1000) {
-//            m_IsAttacking = false;
-//            currentState.m_IsAttacking = m_IsAttacking;
-//            currentState.m_CurrentSprite = SPRITE_WACCUSE_IDLE;
-//            m_TimeState = std::chrono::system_clock::now();
-//        }
-//        return currentState;
-//    }
-//    if (m_Weapon) {
-//        auto now = std::chrono::system_clock::now();
-//        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - m_TimeState);
-//        if (elapsed.count() > 1000) {
-//            currentState.m_Weapon = m_Weapon;
-//            m_TimeState = std::chrono::system_clock::now();
-//        }
-//        return currentState;
-//    }
-
     return {};
 }
 
@@ -254,7 +233,6 @@ void WWorm::attack(uint8_t force) {
             if (wentity != nullptr && wentity->getEntityType() == EntitiesType::ENTITY_WORM) {
                 auto* w = reinterpret_cast<WWorm*>(entity->GetUserData().pointer);
                 std::unique_ptr<Weapon> weaponPtr(weaponFactory.createWeapon(m_Weapon));
-                this->m_IsAttacking = true;
                 weaponPtr->attack(this, w, force);
             }
         }
@@ -293,8 +271,8 @@ void WWorm::receiveDamage(int damage) {
     m_ActionToAnimation.setAction(ActionType::ATTACKED);
     if (damage >= m_Health) {
         m_Health = 0;
-        m_ActionToAnimation.resetAnimation();
-        m_ActionToAnimation.setAction(ActionType::DYING);
+//        m_ActionToAnimation.resetAnimation();
+//        m_ActionToAnimation.setAction(ActionType::DYING);
     } else {
         m_Health -= damage;
     }
@@ -322,14 +300,14 @@ float WWorm::getWeaponAngle() const {
 }
 
 void WWorm::move(Direction direction) {
-    if (!m_IsInContactWithWWorm || (m_IsInContactWithWWorm && direction != m_Dir)) {
+    this->m_Dir = direction;
+    if (!m_IsInContactWithWWorm || direction != m_OtherDirection) {
         m_ActionToAnimation.resetAnimation();
         m_ActionToAnimation.setAction(ActionType::MOVE);
         m_CurrentActionType = ActionType::MOVE;
         m_IsMoving = true;
         float velocity;
         direction == Direction::LEFT ? velocity = -1.0 : velocity = 1.0;
-        this->m_Dir = direction;
         b2Vec2 vel = b2Vec2(velocity, 0);
         if (m_Weapon != WeaponID::NO_WEAPON) {
             m_Weapon = WeaponID::NO_WEAPON;
@@ -404,5 +382,16 @@ void WWorm::setIsInContactWithAnotherWorm(bool isInContactWithAnotherWorm) {
 
 ActionToAnimation *WWorm::getActionToAnimation() {
     return &m_ActionToAnimation;
+}
+
+void WWorm::unSetWeapon() {
+    m_ActionToAnimation.resetAnimation();
+    m_ActionToAnimation.setAction(ActionType::UNSET_WEAPON, m_Weapon, ActionWeaponType::ACTION_WEAPON_TYPE_UNSET_WEAPON);
+    m_Weapon = WeaponID::NO_WEAPON;
+    m_CurrentActionType = ActionType::UNSET_WEAPON;
+}
+
+void WWorm::setOtherDirection(Direction otherDirection) {
+    m_OtherDirection = otherDirection;
 }
 

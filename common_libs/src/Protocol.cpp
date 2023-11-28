@@ -114,6 +114,7 @@ void Protocol::sendGameUpdate(GameUpdate &update) {
     sendFloat(update.m_VelocityX);
     sendFloat(update.m_VelocityY);
     sendByte(update.m_CurrentSprite);
+    sendByte(update.m_TurnInfo);
 }
 
 GameInfo Protocol::recvGameInfo() {
@@ -165,6 +166,7 @@ GameUpdate Protocol::recvGameUpdate() {
     update.m_VelocityX = recvFloat();
     update.m_VelocityY = recvFloat();
     update.m_CurrentSprite = SpritesEnum(recvByte());
+    update.m_TurnInfo = GameAction(recvByte());
     return update;
 }
 

@@ -8,5 +8,5 @@ private:
     WeaponID m_WeaponId;
 public:
     explicit SActionAttack(uint8_t weaponId);
-    [[nodiscard]] SpritesEnum getCurrentSprite(const std::chrono::time_point<std::chrono::system_clock>& startTime) const override;
+    [[nodiscard]] SpritesEnum getCurrentSprite(const std::chrono::time_point<std::chrono::system_clock>& startTime) override;
 };

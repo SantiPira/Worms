@@ -23,10 +23,12 @@ struct GameUpdate {
     float m_VelocityX;
     float m_VelocityY;
     SpritesEnum m_CurrentSprite;
+    GameAction m_TurnInfo;
 
-    GameUpdate() : player_id(0), x_pos(0), y_pos(0), width(0.0f), height(0.0f), m_TimeDuration(0.0f),
+    GameUpdate() : player_id(0xFF), x_pos(0), y_pos(0), width(0.0f), height(0.0f), m_TimeDuration(0.0f),
     m_Movement(INVALID_ACTION), m_Weapon(NO_WEAPON), m_IsAttacking(false), m_Health(0), m_Dir(Direction::RIGHT),
-    m_SelfCondition(GameAction::WORM_NONE), m_VelocityX(0.0f), m_VelocityY(0.0f), m_CurrentSprite(SPRITE_WACCUSE_IDLE) {}
+    m_SelfCondition(GameAction::WORM_NONE), m_VelocityX(0.0f), m_VelocityY(0.0f), m_CurrentSprite(SPRITE_INVALID),
+    m_TurnInfo(INVALID_ACTION) {}
 
     bool operator!=(const GameUpdate& other) const;
 };

@@ -7,6 +7,7 @@
 #include "world/entities/weapons/impl/Bate.h"
 #include "messages/user_actions/ActionType.h"
 #include "world/entities/action_animations/ActionToAnimation.h"
+#include "world/entities/action_animations/types/SActionWeapon.h"
 #include "EntitiesType.h"
 #include "WEntity.h"
 #include <iostream>
@@ -46,6 +47,7 @@ private:
     GameUpdate m_PreviousState;
     ActionType m_CurrentActionType = ActionType::NONE;
     bool m_IsInContactWithWWorm = false;
+    Direction m_OtherDirection{};
     ActionToAnimation m_ActionToAnimation;
 
 public:
@@ -99,6 +101,7 @@ public:
     void resetWormStatus();
     void setWasChanged(bool wasChanged);
     void setIsInContactWithAnotherWorm(bool isInContactWithAnotherWorm);
+    void setOtherDirection(Direction otherDirection);
 
     GameUpdate getUpdate(bool wormChanged);
 
@@ -123,4 +126,6 @@ public:
     float getWidth() const;
 
     float getHeight() const;
+
+    void unSetWeapon();
 };

@@ -20,25 +20,26 @@ SActionWeapon::SActionWeapon(uint8_t weaponType, uint8_t actionWeaponType) {
     }
 }
 
-SpritesEnum SActionWeapon::getCurrentSprite(const std::chrono::time_point<std::chrono::system_clock>& startTime) const {
+SpritesEnum SActionWeapon::getCurrentSprite(const std::chrono::time_point<std::chrono::system_clock>& startTime) {
     auto current = std::chrono::system_clock::now();
     std::chrono::duration<double> elapsedSeconds = current - startTime;
     switch (m_ActionWeaponType) {
         case ActionWeaponType::ACTION_WEAPON_TYPE_SET_WEAPON:
             if (elapsedSeconds.count() > 1.0) {
-                return m_Sequence.hasWeapon;
+                m_CurrentSprite = m_Sequence.hasWeapon;
+                break;
             }
-            return m_Sequence.setWeapon;
+            m_CurrentSprite = m_Sequence.setWeapon;
+            break;
         case ActionWeaponType::ACTION_WEAPON_TYPE_HAS_WEAPON:
-            if (elapsedSeconds.count() > 1.0) {
-                return m_Sequence.saveWeapon;
-            }
-            return m_Sequence.hasWeapon;
+            m_CurrentSprite = m_Sequence.hasWeapon;
+            break;
         case ActionWeaponType::ACTION_WEAPON_TYPE_UNSET_WEAPON:
             if (elapsedSeconds.count() > 1.0) {
-                return SPRITE_WACCUSE_IDLE;
+                m_CurrentSprite = SpritesEnum::SPRITE_WACCUSE_IDLE;
+                break;
             }
-            return m_Sequence.saveWeapon;
+            m_CurrentSprite = m_Sequence.saveWeapon;
         default:
             break;
     }
@@ -49,7 +50,6 @@ Squence SActionWeapon::buildAxeSequence() {
     Squence sequence{};
     sequence.setWeapon = SpritesEnum::SPRITE_SETTING_AXE;
     sequence.hasWeapon = SpritesEnum::SPRITE_HAS_AXE;
-    sequence.saveWeapon = SpritesEnum::SPRITE_SAVING_AXE;
     return sequence;
 }
 
@@ -57,7 +57,6 @@ Squence SActionWeapon::buildBateSequence() {
     Squence sequence{};
     sequence.setWeapon = SpritesEnum::SPRITE_SETTING_BATE;
     sequence.hasWeapon = SpritesEnum::SPRITE_HAS_BATE;
-    sequence.saveWeapon = SpritesEnum::SPRITE_SAVING_BATE;
     return sequence;
 }
 

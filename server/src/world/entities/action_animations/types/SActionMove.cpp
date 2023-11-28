@@ -4,7 +4,7 @@ SActionMove::SActionMove() {
     m_CurrentSprite = SpritesEnum::SPRITE_WALK;
 }
 
-SpritesEnum SActionMove::getCurrentSprite(const std::chrono::time_point<std::chrono::system_clock>& startTime) const {
+SpritesEnum SActionMove::getCurrentSprite(const std::chrono::time_point<std::chrono::system_clock>& startTime) {
     return m_CurrentSprite;
 }
 
