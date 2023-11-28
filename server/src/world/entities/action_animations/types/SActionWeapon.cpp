@@ -10,6 +10,9 @@ SActionWeapon::SActionWeapon(uint8_t weaponType, uint8_t actionWeaponType) {
         case WeaponID::BATE:
             m_Sequence = buildBateSequence();
             break;
+        case WeaponID::BAZOOKA:
+            m_Sequence = buildBazookaSequence();
+            break;
         default:
             m_Sequence = buildAxeSequence();
             break;
@@ -53,5 +56,13 @@ Squence SActionWeapon::buildBateSequence() {
     Squence sequence{};
     sequence.setWeapon = SpritesEnum::SPRITE_SETTING_BATE;
     sequence.hasWeapon = SpritesEnum::SPRITE_HAS_BATE;
+    return sequence;
+}
+
+Squence SActionWeapon::buildBazookaSequence() {
+    Squence sequence{};
+    sequence.setWeapon = SpritesEnum::SPRITE_SETTING_BAZOOKA;
+    sequence.hasWeapon = SpritesEnum::SPRITE_HAS_BAZOOKA;
+    sequence.saveWeapon = SpritesEnum::SPRITE_SAVING_BAZOOKA;
     return sequence;
 }

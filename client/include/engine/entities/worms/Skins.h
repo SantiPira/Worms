@@ -192,6 +192,49 @@ struct AttackAxe {
     float deltaPosX = 80.0f;
     float deltaPosY = 35.0f;
 };
+
+struct SettingBazooka {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wbazlnk.png");
+    BlendMode blendMode = {true, 128, 128, 192};
+    int frames = 7;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 26;
+    int frameHeight = 41;
+    float duration = 1.0f;
+    SDL_Rect srcRect = {13, 16, 33, 27};
+    int initYSprite = 16;
+    float deltaPosX = 25.6f;
+    float deltaPosY = 40.96f;
+};
+
+struct HasBazooka {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wbaz.png");
+    BlendMode blendMode = {true, 128, 128, 192};
+    int frames = 3;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 26;
+    int frameHeight = 41;
+    float duration = 1.0f;
+    SDL_Rect srcRect = {19, 916, 23, 27};
+    int initYSprite = 916;
+    float deltaPosX = 25.6f;
+    float deltaPosY = 40.96f;
+};
+
+struct SavingBazooka {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wbazbak.png");
+    BlendMode blendMode = {true, 128, 128, 192};
+    int frames = 7;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 26;
+    int frameHeight = 41;
+    float duration = 1.0f;
+    SDL_Rect srcRect = {13, 16, 33, 27};
+    int initYSprite = 16;
+    float deltaPosX = 25.6f;
+    float deltaPosY = 40.96f;
+};
+
 /*
 struct SkySking {
     const std::string spritePath = "../../resources/Fondos/cielo.png"

@@ -27,10 +27,17 @@ void GameClient::Init(const std::vector<Grd>& beams, int idPlayer, std::vector<G
     sky = new Texture(std::filesystem::current_path().concat(Cloud_Sky.c_str()).c_str(), _renderer, {false, 128, 128, 192});
     sky->init();
     sky->setSourceRect(&m_SourceRect);
+
+    
     water = new Texture(std::filesystem::current_path().concat(Water.c_str()).c_str(), _renderer, {false, 128, 128, 192});
     water->init();
     const SDL_Rect srcWaterRect = {0, 385, 1024, 46};
     water->setSourceRect(&srcWaterRect);
+
+    const SDL_Rect weapons_list_rect = {0,0, 160, 64};
+    weapons_list = new Texture(std::filesystem::current_path().concat(WeaponsList.c_str()).c_str(), _renderer, {false, 128, 128, 192}); 
+    weapons_list->init();
+    weapons_list->setSourceRect(&weapons_list_rect);
 
     //La camara funciona con bugs.
     //InitCamera();
@@ -151,8 +158,13 @@ void GameClient::Render() {
         worm->render();
     }
 
-    SDL_RenderPresent(_renderer);
+    if(se_muestra_la_lista_de_armas) {
+        SDL_Rect weapons_list_dst_rect = {0, 0, 160, 64};
+        weapons_list->render(&weapons_list_dst_rect, false);
+    }
+    
 
+    SDL_RenderPresent(_renderer);
 }
 
 void GameClient::Release() {

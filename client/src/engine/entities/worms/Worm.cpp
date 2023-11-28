@@ -19,11 +19,60 @@ void Worm::init() {
         HasBate wHasBate;
         SavingBate wSavingBate;
         AttackAxe wAttackAxe;
+        SettingBazooka wSettingBazooka;
+        HasBazooka wHasBazooka;
+        SavingBazooka wSavingBazooka;
+
+
     SDL_Rect destRect = {
                 static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
                 static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)),
                 static_cast<int>(m_Widht), static_cast<int>(m_Height)
         };
+
+
+        m_SpritesMap.emplace(SpritesEnum::SPRITE_SETTING_BAZOOKA, getWaccuseAnimation(
+            wSettingBazooka.spritePath,
+            wSettingBazooka.blendMode,
+            wSettingBazooka.frames,
+            wSettingBazooka.distanceBetweenFrames,
+            wSettingBazooka.frameWidth,
+            wSettingBazooka.frameHeight,
+            wSettingBazooka.duration,
+            wSettingBazooka.srcRect,
+            wSettingBazooka.initYSprite,
+            destRect,
+            wSettingBazooka.deltaPosX,
+            wSettingBazooka.deltaPosY));
+
+        m_SpritesMap.emplace(SpritesEnum::SPRITE_HAS_BAZOOKA, getWaccuseAnimation(
+            wHasBazooka.spritePath,
+            wHasBazooka.blendMode,
+            wHasBazooka.frames,
+            wHasBazooka.distanceBetweenFrames,
+            wHasBazooka.frameWidth,
+            wHasBazooka.frameHeight,
+            wHasBazooka.duration,
+            wHasBazooka.srcRect,
+            wHasBazooka.initYSprite,
+            destRect,
+            wHasBazooka.deltaPosX,
+            wHasBazooka.deltaPosY));
+
+        m_SpritesMap.emplace(SpritesEnum::SPRITE_SAVING_BAZOOKA, getWaccuseAnimation(
+            wSavingBazooka.spritePath,
+            wSavingBazooka.blendMode,
+            wSavingBazooka.frames,
+            wSavingBazooka.distanceBetweenFrames,
+            wSavingBazooka.frameWidth,
+            wSavingBazooka.frameHeight,
+            wSavingBazooka.duration,
+            wSavingBazooka.srcRect,
+            wSavingBazooka.initYSprite,
+            destRect,
+            wSavingBazooka.deltaPosX,
+            wSavingBazooka.deltaPosY));
+
 
         m_SpritesMap.emplace(SpritesEnum::SPRITE_WACCUSE_IDLE, getWaccuseAnimation(
                 waccuseIdle.spritePath,
@@ -38,6 +87,7 @@ void Worm::init() {
                 destRect,
                 waccuseIdle.deltaPosX,
                 waccuseIdle.deltaPosY));
+                
         m_SpritesMap.emplace(SpritesEnum::SPRITE_WALK, getWaccuseAnimation(
                 waccuseWalk.spritePath,
                 waccuseWalk.blendMode,
