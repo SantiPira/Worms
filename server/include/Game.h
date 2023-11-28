@@ -53,6 +53,6 @@ private:
 
     void processAttackTurn(TurnHandler &turnHandler, InstructionFactory &instructionFactory, UserAction userAction);
 
-    void finishTurn(int idCurrentPlayer);
+    void finishTurn(int idCurrentPlayer, const ActionType& type);
     void startTurn(TurnHandler& turnHandler);
 };

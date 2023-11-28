@@ -49,7 +49,7 @@ public:
     void StartWorld();
     void SetWorm(const int& player_number, const float & x_pos, const float& y_pos);
     void execute(IWormInstruction* instruction, int playerId);
-    std::vector<GameUpdate> getWormsUpdates(bool getAll, int idExcludePlayer = -1) const;
+    std::vector<GameUpdate> getWormsUpdates(bool getAll) const;
 
     void step();
 
@@ -59,7 +59,7 @@ public:
 
     ~GameWorld();
 
-    void resetWormStatus(int idPlayer);
+    void resetWormStatus(int idPlayer, const ActionType& type);
 
     bool isQuiet();
 
@@ -78,4 +78,8 @@ public:
     void getWormUpdate(int idPlayer, GameUpdate& update);
 
     bool attackedWormsMoving(int idPlayer);
+
+    bool allElementsIDLE();
+
+    void getDeathWormsUpdates(std::vector<int>& idsDeadWorms);
 };

@@ -2,7 +2,7 @@
 
 Bate::Bate() {
     this->m_WeaponId = WeaponID::BATE;
-    this->distance = 1.0f;
+    this->distance = 3.0f;
 }
 
 void Bate::attack(WWorm *attacker, WWorm* attacked, uint8_t force) {
@@ -38,7 +38,7 @@ void Bate::attack(WWorm *attacker, WWorm* attacked, uint8_t force) {
     std::cout << "Force vector: " << forceVector.x << " " << forceVector.y << std::endl;
     attacker->setIsAttacking(true);
     attacked->getBody()->ApplyForceToCenter(forceVector, true);
-    attacked->receiveDamage(50);
+    attacked->receiveDamage(100);
 }
 
 void Bate::setWeaponId(WeaponID weaponId) {

@@ -49,7 +49,7 @@ void Game::processTurns(TurnHandler& turnHandler, InstructionFactory& instructio
             }
             waitFrameTime();
         }
-        finishTurn(turnHandler.getCurrentPlayer());
+        finishTurn(turnHandler.getCurrentPlayer(), ActionType::NONE);
         startTurn(std::ref(turnHandler));
     }  catch (const ClosedQueue& cqe) {
     } catch (...) {
@@ -160,9 +160,9 @@ bool Game::hasStarted() {
     return m_HasStarted;
 }
 
-void Game::finishTurn(int idCurrentPlayer) {
+void Game::finishTurn(int idCurrentPlayer, const ActionType& type) {
     sendInfoTurns(idCurrentPlayer, GameAction::END_TURN);
-    world.resetWormStatus(idCurrentPlayer);
+    world.resetWormStatus(idCurrentPlayer, type);
     GameUpdate update;
     world.getWormUpdate(idCurrentPlayer, std::ref(update));
     pushUpdateToClients(std::ref(update));
@@ -174,7 +174,7 @@ void Game::startTurn(TurnHandler& turnHandler) {
 }
 
 void Game::processAttackTurn(TurnHandler &turnHandler, InstructionFactory &instructionFactory, UserAction userAction) {
-    finishTurn(turnHandler.getCurrentPlayer());
+    finishTurn(turnHandler.getCurrentPlayer(), userAction.getAction());
     auto* attackInstruction = instructionFactory.createInstruction(userAction);
     world.execute(attackInstruction, userAction.getIdPlayer());
     /*ANIMACION DE ATAQUE DEL WORM*/
@@ -189,11 +189,27 @@ void Game::processAttackTurn(TurnHandler &turnHandler, InstructionFactory &instr
     world.getWormUpdate(turnHandler.getCurrentPlayer(), std::ref(update));
     pushUpdateToClients(std::ref(update));
     /*TERMINA LA ANIMACION DEL ATAQUE DE WORM, Y YA SE ENVIO AL CLIENTE.*/
-
-    while(world.attackedWormsMoving(turnHandler.getCurrentPlayer())) {
-        std::vector<GameUpdate> updates;
-        world.getWormsUpdates(updates);
-        world.step();
+    world.step();
+    while(!world.allElementsIDLE()) {
+        auto updates = world.getWormsUpdates(false);
+        pushUpdatesToClients(std::ref(updates));
         waitFrameTime();
+        world.step();
     }
+    std::vector<int> deadWormsIds;
+    world.getDeadWormsIds(deadWormsIds);
+    world.getDeathWormsUpdates(deadWormsIds); //estaria muerto
+    size_t i = 0;
+    while (i != deadWormsIds.size()) {
+        auto updates = world.getWormsUpdates(false);
+        for (auto& up : updates) {
+            if (up.m_CurrentSprite == SPRITE_WACCUSE_GRAVE) {
+                ++i;
+            }
+        }
+        pushUpdatesToClients(std::ref(updates));
+    }
+    world.removeDeadWorms(deadWormsIds);
+    turnHandler.nextTurn(std::ref(deadWormsIds));
+    sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::START_TURN);
 }

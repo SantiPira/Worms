@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "world/GameWorld.h"
 
 GameWorld::GameWorld(const std::string &file_map_path) : players(1), width(20.0f), height(20.0f),
@@ -50,7 +51,7 @@ void GameWorld::SetWorm(const int& player_number, const float & x_pos, const flo
     std::cout << "ID [" << player_number << "] - POS (" << x_pos << ", " << y_pos << ")" << std::endl;
 }
 
-std::vector<GameUpdate> GameWorld::getWormsUpdates(bool getAll, int idExcludePlayer) const {
+std::vector<GameUpdate> GameWorld::getWormsUpdates(bool getAll) const {
     std::vector<GameUpdate> gameUpdates;
     for (auto& worm : worms) {
         auto update = worm.second->getUpdate(getAll);
@@ -112,9 +113,9 @@ GameWorld::~GameWorld() {
     }
 }
 
-void GameWorld::resetWormStatus(int idPlayer) {
+void GameWorld::resetWormStatus(int idPlayer, const ActionType& type) {
     WWorm* current = worms.at(idPlayer);
-    if (current->getActionToAnimation()->getAction() != ATTACK) {
+    if (type != ATTACK) {
         current->resetWormStatus();
         m_world.Step(0,0,0);
     }
@@ -173,15 +174,18 @@ void GameWorld::getWormUpdate(int idPlayer, GameUpdate& update) {
     update = worms.at(idPlayer)->getUpdate(false);
 }
 
-bool GameWorld::attackedWormsMoving(int idPlayer) {
-    for (auto& worm : worms) {
-        if (worm.first != idPlayer) {
-            if (worm.second->getVelocity() != b2Vec2_zero) {
-                return true;
-            }
-        }
+bool GameWorld::allElementsIDLE() {
+    bool isIDLE = std::all_of(worms.begin(), worms.end(), [](std::pair<const int, WWorm*>& worm) {
+        return worm.second->getVelocity().x == 0 && worm.second->getVelocity().y == 0;
+    });
+    return isIDLE;
+}
+
+void GameWorld::getDeathWormsUpdates(std::vector<int>& idsDeadWorms) {
+    for (auto& id : idsDeadWorms) {
+        worms.at(id)->getActionToAnimation()->resetAnimation();
+        worms.at(id)->getActionToAnimation()->setAction(ActionType::DYING);
     }
-    return false;
 }
 
 

@@ -90,7 +90,7 @@ int32 WWorm::getScore() const {
 }
 
 bool WWorm::getIsDead() const {
-    return m_IsDead;
+    return m_Health == 0;
 }
 
 bool WWorm::getIsFacingRight() const {
@@ -271,8 +271,8 @@ void WWorm::receiveDamage(int damage) {
     m_ActionToAnimation.setAction(ActionType::ATTACKED);
     if (damage >= m_Health) {
         m_Health = 0;
-        m_ActionToAnimation.resetAnimation();
-        m_ActionToAnimation.setAction(ActionType::DYING);
+//        m_ActionToAnimation.resetAnimation();
+//        m_ActionToAnimation.setAction(ActionType::DYING);
     } else {
         m_Health -= damage;
     }
