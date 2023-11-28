@@ -19,6 +19,7 @@ class Game : public Thread {
     std::atomic<bool> m_HasStarted;
     int m_PopMessageQuantity;
     GameWorld world;
+    ActionType m_BrokeAction;
 
 public:
     Game(int id, std::string gameName, std::string mapName, int players);
@@ -49,7 +50,9 @@ private:
     void sendInfoTurns(int playerId, GameAction infoTurn);
     void processTurns(TurnHandler& turnHandler, InstructionFactory& instructionFactory);
     void waitFrameTime();
-    void endTurn(TurnHandler& turnHandler);
 
-    void endCurrentPlayerTurn(TurnHandler &handler);
+    void processAttackTurn(TurnHandler &turnHandler, InstructionFactory &instructionFactory, UserAction userAction);
+
+    void finishTurn(int idCurrentPlayer);
+    void startTurn(TurnHandler& turnHandler);
 };

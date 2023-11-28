@@ -50,7 +50,7 @@ void GameWorld::SetWorm(const int& player_number, const float & x_pos, const flo
     std::cout << "ID [" << player_number << "] - POS (" << x_pos << ", " << y_pos << ")" << std::endl;
 }
 
-std::vector<GameUpdate> GameWorld::getWormsUpdates(bool getAll) const {
+std::vector<GameUpdate> GameWorld::getWormsUpdates(bool getAll, int idExcludePlayer) const {
     std::vector<GameUpdate> gameUpdates;
     for (auto& worm : worms) {
         auto update = worm.second->getUpdate(getAll);
@@ -143,14 +143,14 @@ bool GameWorld::isAlive(int idPlayer) {
     return worms.at(idPlayer)->getHealth() > 0;
 }
 
-bool GameWorld::wormBrokeTurn(const UserAction &userAction, const int& idPlayer) {
+bool GameWorld::wormBrokeTurn(const UserAction &userAction) {
     for (auto& worm : worms) {
         if (worm.second->getHealth() == 0) {
             return true;
         }
     }
-    if (userAction.getAction() == ATTACK && userAction.getIdPlayer() == idPlayer) {
-        return worms.at(idPlayer)->getIsAttacking();
+    if (userAction.getAction() == ATTACK) {
+        return true;
     }
     return false;
 }
@@ -169,8 +169,19 @@ bool GameWorld::isWormIDLE(int idPlayer) {
     return  action == SPRITE_WACCUSE_IDLE;
 }
 
-GameUpdate GameWorld::getWormUpdate(bool wasChanged, int idPlayer) {
-    return worms.at(idPlayer)->getUpdate(wasChanged);
+void GameWorld::getWormUpdate(int idPlayer, GameUpdate& update) {
+    update = worms.at(idPlayer)->getUpdate(false);
+}
+
+bool GameWorld::attackedWormsMoving(int idPlayer) {
+    for (auto& worm : worms) {
+        if (worm.first != idPlayer) {
+            if (worm.second->getVelocity() != b2Vec2_zero) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 
