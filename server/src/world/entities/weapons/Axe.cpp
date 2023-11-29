@@ -1,6 +1,6 @@
 #include "world/entities/weapons/impl/Axe.h"
 
-Axe::Axe() : damage(50), distance(1.5f) {
+Axe::Axe() : damage(1), distance(1.5f) {
     this->m_WeaponId = WeaponID::AXE;
 }
 

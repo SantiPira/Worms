@@ -216,13 +216,13 @@ struct BateNegativeAngles {
     BlendMode blendMode = {true, 192, 192, 128};
     int frames = 15;
     int distanceBetweenFrames = 60;
-    int frameWidth = 60;
-    int frameHeight = 40;
+    int frameWidth = 64;
+    int frameHeight = 60;
     float duration = 0.5f;
     SDL_Rect srcRect = {8, 0, 51, 43};
     int initYSprite = 0;
-    float deltaPosX = 80.0f;
-    float deltaPosY = 35.0f;
+    float deltaPosX = 75.0f;
+    float deltaPosY = 75.0f;
     float unitAngle = 6.0f;
 };
 

@@ -264,13 +264,31 @@ void Worm::updateBateAttack(double elapsedSeconds, const GameUpdate &gameUpdate)
         pickedFrame = static_cast<int>(angle / hasBate.unitAngle);
         m_CurrentSprite = SpritesEnum::SPRITE_HAS_BATE_POSITIVE_ANGLES;
     } else if (angle < 0) {
-        pickedFrame = abs(static_cast<int>(angle / hasBate.unitAngle));
+        // Normalizar el ángulo para que varíe de 0 a 84
+        float normalizedAngle = angle + 90;
+        // Dividir por 6 para obtener el índice de sprite correspondiente
+        pickedFrame = static_cast<int>(normalizedAngle / 6);
         m_CurrentSprite = SpritesEnum::SPRITE_HAS_BATE_NEGATIVE_ANGLES;
     } else {
         m_CurrentSprite = SpritesEnum::SPRITE_HAS_BATE_INIT_POSITION;
     }
     m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds, pickedFrame);
 }
+//void Worm::updateBateAttack(double elapsedSeconds, const GameUpdate &gameUpdate) {
+//    HasBate hasBate;
+//    float angle = gameUpdate.m_WeaponAngle;
+//    int pickedFrame = -1;
+//    if (angle > 0) {
+//        pickedFrame = static_cast<int>(angle / hasBate.unitAngle);
+//        m_CurrentSprite = SpritesEnum::SPRITE_HAS_BATE_POSITIVE_ANGLES;
+//    } else if (angle < 0) {
+//        pickedFrame = abs(static_cast<int>(angle / hasBate.unitAngle));
+//        m_CurrentSprite = SpritesEnum::SPRITE_HAS_BATE_NEGATIVE_ANGLES;
+//    } else {
+//        m_CurrentSprite = SpritesEnum::SPRITE_HAS_BATE_INIT_POSITION;
+//    }
+//    m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds, pickedFrame);
+//}
 
 void Worm::render() {
     bool isFlip = true;
