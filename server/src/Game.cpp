@@ -48,6 +48,7 @@ void Game::processTurns(TurnHandler& turnHandler, InstructionFactory& instructio
                 pushUpdateToClients(std::ref(update));
             }
             waitFrameTime();
+            world.updateWormsMove();
         }
         finishTurn(turnHandler.getCurrentPlayer(), ActionType::NONE);
         startTurn(std::ref(turnHandler));

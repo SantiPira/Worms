@@ -82,4 +82,6 @@ public:
     bool allElementsIDLE();
 
     void getDeathWormsUpdates(std::vector<int>& idsDeadWorms);
+
+    void updateWormsMove();
 };

@@ -188,5 +188,14 @@ void GameWorld::getDeathWormsUpdates(std::vector<int>& idsDeadWorms) {
     }
 }
 
+void GameWorld::updateWormsMove() {
+    for (auto& worm : worms) {
+        if (worm.second->isMoving()) {
+            worm.second->move(worm.second->getDirection());
+        }
+    }
+
+}
+
 
 

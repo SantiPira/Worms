@@ -17,6 +17,7 @@ WBeam::WBeam(b2World* world, const Grd& beam) {
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &shape;
     fixtureDef.density = 1;
+    fixtureDef.friction = 0.3f;
     m_BeamBody->CreateFixture(&fixtureDef);
 }
 

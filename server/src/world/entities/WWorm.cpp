@@ -17,7 +17,7 @@ WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRi
     b2PolygonShape shape;
     shape.SetAsBox(m_Width, m_Height);
     b2FixtureDef fd;
-    fd.friction = 0.0f;
+    fd.friction = 0.3f;
     fd.shape = &shape;
     fd.density = 20.0f;
     fd.restitution = 0.0f;
@@ -389,5 +389,9 @@ void WWorm::unSetWeapon() {
 
 void WWorm::setOtherDirection(Direction otherDirection) {
     m_OtherDirection = otherDirection;
+}
+
+bool WWorm::isMoving() const {
+    return m_IsMoving;
 }
 

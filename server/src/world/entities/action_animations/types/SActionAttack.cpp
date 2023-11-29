@@ -21,8 +21,9 @@ SpritesEnum SActionAttack::getCurrentSprite(const std::chrono::time_point<std::c
         case BATE:
             if (elapsedSeconds.count() > 1.0) {
                 m_CurrentSprite = SPRITE_WACCUSE_IDLE;
+                break;
             }
-            m_CurrentSprite = SPRITE_ATTACK_BATE;
+            m_CurrentSprite = SPRITE_ATTACK_AXE;
             break;
         default:
             break;

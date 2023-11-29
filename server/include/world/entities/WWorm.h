@@ -79,6 +79,7 @@ public:
     [[nodiscard]] GameUpdate getPreviousState() const;
     [[nodiscard]] bool getIsInContactWithAnotherWorm() const;
     ActionToAnimation* getActionToAnimation();
+    bool isMoving() const;
 
     void setPosition(b2Vec2 position);
     void setVelocity(b2Vec2 velocity);
