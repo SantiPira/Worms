@@ -9,21 +9,21 @@ void Bate::attack(WWorm *attacker, WWorm* attacked, uint8_t force) {
     if (attacked->getId() == attacker->getId()) {
         return;
     }
-    float mForce = 150;     // LOW = 70
-//    switch (force) {
-//        case LOW:
-//            mForce = 100;
-//            break;
-//        case MEDIUM:
-//            mForce = 200;
-//            break;
-//        case HIGH:
-//            mForce = 300;
-//            break;
-//        default:
-//            mForce = 100;
-//            break;
-//    }
+    float mForce;
+    switch (force) {
+        case LOW:
+            mForce = 70;
+            break;
+        case MEDIUM:
+            mForce = 150;
+            break;
+        case HIGH:
+            mForce = 250;
+            break;
+        default:
+            mForce = 70;
+            break;
+    }
     std::cout << "Bate attack. FORCE : [" << mForce << "]." << std::endl;
     float distanceBetween = b2Distance(attacker->getPosition(), attacked->getPosition());
     if (distanceBetween > distance) {
