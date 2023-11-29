@@ -11,15 +11,6 @@ void Bazooka::attack(WWorm *attacker, WWorm *attacked, uint8_t force) {
     attacker->getActionToAnimation()->resetAnimation();
     attacker->getActionToAnimation()->setAction(ActionType::ATTACK, m_WeaponId, 0);
 
-    /*
-    float distanceBetween = b2Distance(attacker->getPosition(), attacked->getPosition());
-
-    if(distanceBetween > distance) {
-        return;
-    }
-    */
-
-
     // Ángulo para la bazooka
     float angle =  0.0f;   //attacker->getWeaponAngle();
 
@@ -31,7 +22,7 @@ void Bazooka::attack(WWorm *attacker, WWorm *attacked, uint8_t force) {
 
      // Crear la forma del proyectil
     b2CircleShape projectileShape;
-    projectileShape.m_radius = 0.1f;  // Radio del proyectil
+    projectileShape.m_radius = 0.13f;  // Radio del proyectil
 
 
     // Definir las propiedades del proyectil (densidad, fricción, restitución)
@@ -42,17 +33,13 @@ void Bazooka::attack(WWorm *attacker, WWorm *attacked, uint8_t force) {
     projectileFixtureDef.restitution = 0.0f;
     projectileBody->CreateFixture(&projectileFixtureDef);
 
-
-    // Calcular la velocidad inicial del proyectil
-    float projectileSpeed = 10.0f;  // Puedes ajustar la velocidad según tus necesidades
-    b2Vec2 projectileVelocity(projectileSpeed * cos(angle), projectileSpeed * sin(angle));
-
-    // Aplicar la velocidad inicial al proyectil
-    projectileBody->SetLinearVelocity(projectileVelocity);
+    b2Vec2 initialForce(cos(angle)*projectileBody->GetMass()*9.8, sin(angle)*projectileBody->GetMass()*9.8);
+    projectileBody->ApplyLinearImpulseToCenter(initialForce, true);
 
     b2Vec2 projectilePosition = projectileBody->GetPosition();
 
-    if(projectilePosition == attacked->getPosition()) {
+    if((projectilePosition - attacked->getPosition()).Length() < 3) {
+        attacker->setIsAttacking(true);
         attacked->receiveDamage(damage);
     }
 }
