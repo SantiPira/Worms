@@ -98,7 +98,7 @@ public:
     void setDirection(Direction dir);
     void setIsAttacking(bool isAttacking);
     void setSelfCondition(GameAction selfCondition);
-    void setWeaponAngle(float angle, ActionType actionType);
+    void setWeaponAngle(float angle, bool isIncreasing, ActionType actionType);
     void resetWormStatus();
     void setWasChanged(bool wasChanged);
     void setIsInContactWithAnotherWorm(bool isInContactWithAnotherWorm);

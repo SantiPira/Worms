@@ -25,7 +25,7 @@ public:
               SDL_Rect srcRect, int initYSprite, SDL_Rect destRect, float deltaPosX, float deltaPosY);
 
     void init();
-    void update(double elapsedSeconds);
+    void update(double elapsedSeconds, int specificFrame = -1);
     void render(bool isFlip) const;
 
 

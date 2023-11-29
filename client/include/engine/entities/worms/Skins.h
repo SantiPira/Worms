@@ -154,15 +154,18 @@ struct SettingBate {
 struct HasBate {
     const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wbsbaim.png");
     BlendMode blendMode = {true, 192, 192, 128};
-    int frames = 2;
+    int frames = 1;
     int distanceBetweenFrames = 60;
     int frameWidth = 60;
     int frameHeight = 40;
     float duration = 0.5f;
-    SDL_Rect srcRect = {13, 915, 47, 29};
+    SDL_Rect srcRect = {13, 915, 47, 28};
     int initYSprite = 915;
     float deltaPosX = 80.0f;
     float deltaPosY = 35.0f;
+    int initFrameAngle = 15;
+    int totalFrames = 31;
+    float unitAngle = 6.0f;
 };
 
 struct SavingBate {
@@ -192,18 +195,34 @@ struct AttackAxe {
     float deltaPosX = 80.0f;
     float deltaPosY = 35.0f;
 };
-/*
-struct SkySking {
-    const std::string spritePath = "../../resources/Fondos/cielo.png"
-    BlendMode blendMode = {false, 128, 128, 192};
-    int frames = 1;
-    int distanceBetweenFrames = 0;
-    int frameWidth = 4096;
-    int frameHeight = 2304;
-    float duration = 1.0f;
-    SDL_Rect srcRect = {0, 0, 512, 512};
-    int initYSprite = 17;
-    float deltaPosX = 25.6f;
-    float deltaPosY = 40.96f;
+
+struct BatePositiveAngles {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wbsbaim.png");
+    BlendMode blendMode = {true, 192, 192, 128};
+    int frames = 15;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 64;
+    int frameHeight = 60;
+    float duration = 0.5f;
+    SDL_Rect srcRect = {14, 975, 46, 46};
+    int initYSprite = 975;
+    float deltaPosX = 80.0f;
+    float deltaPosY = 33.0f;
+    float unitAngle = 6.0f;
 };
-*/
+
+struct BateNegativeAngles {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wbsbaim.png");
+    BlendMode blendMode = {true, 192, 192, 128};
+    int frames = 15;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 60;
+    int frameHeight = 40;
+    float duration = 0.5f;
+    SDL_Rect srcRect = {8, 0, 51, 43};
+    int initYSprite = 0;
+    float deltaPosX = 80.0f;
+    float deltaPosY = 35.0f;
+    float unitAngle = 6.0f;
+};
+

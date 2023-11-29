@@ -186,6 +186,7 @@ GameUpdate WWorm::getUpdate(bool wormChanged) {
     currentState.m_VelocityX = getVelocity().x;
     currentState.m_VelocityY = getVelocity().y;
     currentState.m_CurrentSprite = m_ActionToAnimation.getCurrentSprite(this);
+    currentState.m_WeaponAngle = m_WeaponAngle * 180.0f / b2_pi;
 
     if (currentState != m_PreviousState) {
         wormChanged = true;
@@ -288,7 +289,7 @@ EntitiesType WWorm::getEntityType() {
     return m_EntityType;
 }
 
-void WWorm::setWeaponAngle(float angle, ActionType actionType) {
+void WWorm::setWeaponAngle(float angle, bool isIncreasing, ActionType actionType) {
     m_CurrentActionType = actionType;
     this->m_WeaponAngle = angle;
 }
@@ -300,18 +301,20 @@ float WWorm::getWeaponAngle() const {
 void WWorm::move(Direction direction) {
     this->m_Dir = direction;
     if (!m_IsInContactWithWWorm || direction != m_OtherDirection) {
-        m_ActionToAnimation.resetAnimation();
-        m_ActionToAnimation.setAction(ActionType::MOVE);
         m_CurrentActionType = ActionType::MOVE;
-        m_IsMoving = true;
         float velocity;
         direction == Direction::LEFT ? velocity = -1.0 : velocity = 1.0;
         b2Vec2 vel = b2Vec2(velocity, 0);
         if (m_Weapon != WeaponID::NO_WEAPON) {
-            m_Weapon = WeaponID::NO_WEAPON;
+            unSetWeapon();
         }
-        this->m_Velocity = vel;
-        this->m_Body->SetLinearVelocity(vel);
+        if (getVelocity().y == 0) {
+            this->m_Velocity = vel;
+            this->m_Body->SetLinearVelocity(vel);
+            m_ActionToAnimation.resetAnimation();
+            m_ActionToAnimation.setAction(ActionType::MOVE);
+            m_IsMoving = true;
+        }
     }
 }
 
@@ -384,6 +387,7 @@ void WWorm::unSetWeapon() {
     m_ActionToAnimation.resetAnimation();
     m_ActionToAnimation.setAction(ActionType::UNSET_WEAPON, m_Weapon, ActionWeaponType::ACTION_WEAPON_TYPE_UNSET_WEAPON);
     m_Weapon = WeaponID::NO_WEAPON;
+    m_WeaponAngle = 0.0f;
     m_CurrentActionType = ActionType::UNSET_WEAPON;
 }
 

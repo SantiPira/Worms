@@ -32,7 +32,7 @@ void Bate::attack(WWorm *attacker, WWorm* attacked, uint8_t force) {
 
     float angle = attacker->getWeaponAngle();
     float xForce = cos(angle);
-    //float yForce = -abs(sin(angle)); // Asegurarse de que la fuerza en Y sea negativa
+    //float yForce = sin(angle);
     attacker->getDirection() == Direction::LEFT ? xForce *= -1 : xForce *= 1;
     b2Vec2 forceVector = mForce * b2Vec2(1.5f, 1.5f);   //VALORES OK PARA UN GOLPE MEDIANO / ALTO
     std::cout << "Force vector: " << forceVector.x << " " << forceVector.y << std::endl;

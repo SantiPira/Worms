@@ -21,7 +21,7 @@ SpritesEnum SActionWeapon::getCurrentSprite(const std::chrono::time_point<std::c
     std::chrono::duration<double> elapsedSeconds = current - startTime;
     switch (m_ActionWeaponType) {
         case ActionWeaponType::ACTION_WEAPON_TYPE_SET_WEAPON:
-            if (elapsedSeconds.count() > 1.0) {
+            if (elapsedSeconds.count() > 0.5) {
                 m_CurrentSprite = m_Sequence.hasWeapon;
                 break;
             }
@@ -31,7 +31,7 @@ SpritesEnum SActionWeapon::getCurrentSprite(const std::chrono::time_point<std::c
             m_CurrentSprite = m_Sequence.hasWeapon;
             break;
         case ActionWeaponType::ACTION_WEAPON_TYPE_UNSET_WEAPON:
-            if (elapsedSeconds.count() > 1.0) {
+            if (elapsedSeconds.count() > 0.5) {
                 m_CurrentSprite = SpritesEnum::SPRITE_WACCUSE_IDLE;
                 break;
             }

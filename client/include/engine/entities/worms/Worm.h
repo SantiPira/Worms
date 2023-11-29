@@ -20,6 +20,7 @@ class Worm {
     SpritesEnum m_CurrentSprite;
     Direction m_Dir;
     std::vector<SDL_Rect > m_DieRects;
+    GameUpdate m_LastUpdate{};
  public:
     SDL_Renderer* m_Renderer;
     std::unordered_map<SpritesEnum, std::unique_ptr<Animation>> m_SpritesMap;
@@ -41,7 +42,8 @@ private:
     void update(double elapsedSeconds, const GameUpdate& gameUpdate);
     void update(double elapsedSeconds);
     void render();
-    void renderDie();
 
     ~Worm() = default;
+
+    void updateBateAttack(double elapsedSeconds, const GameUpdate &gameUpdate);
 };
