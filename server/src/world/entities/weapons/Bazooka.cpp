@@ -1,7 +1,6 @@
-/*
 #include "world/entities/weapons/impl/Bazooka.h"
 
-Bazooka::Bazooka() : damage(50), distance(2.0f) {
+Bazooka::Bazooka() : damage(100), distance(2.0f) {
     this->m_WeaponId = WeaponID::BAZOOKA;
 }
 
@@ -12,14 +11,17 @@ void Bazooka::attack(WWorm *attacker, WWorm *attacked, uint8_t force) {
     attacker->getActionToAnimation()->resetAnimation();
     attacker->getActionToAnimation()->setAction(ActionType::ATTACK, m_WeaponId, 0);
 
+    /*
     float distanceBetween = b2Distance(attacker->getPosition(), attacked->getPosition());
 
     if(distanceBetween > distance) {
         return;
     }
+    */
+
 
     // Ángulo para la bazooka
-    float angle = attacker->getWeaponAngle();
+    float angle =  0.0f;   //attacker->getWeaponAngle();
 
     // Crear el proyectil
     b2BodyDef projectileBodyDef;
@@ -62,4 +64,3 @@ void Bazooka::setWeaponId(WeaponID weaponId) {
 WeaponID Bazooka::getWeaponId() const {
     return this->m_WeaponId;
 }
-*/

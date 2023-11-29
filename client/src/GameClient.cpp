@@ -43,7 +43,7 @@ void GameClient::Init(const std::vector<Grd>& beams, int idPlayer, std::vector<G
     //InitCamera();
 
     //Corro el audio con el chunk.
-    mixer->PlayChannel(-1, *chunk, -1);
+    //mixer->PlayChannel(-1, *chunk, -1);
 
 }
 

@@ -5,6 +5,7 @@
 #include "world/entities/weapons/WeaponFactory.h"
 #include "world/entities/weapons/impl/Axe.h"
 #include "world/entities/weapons/impl/Bate.h"
+#include "world/entities/weapons/impl/Bazooka.h"
 #include "messages/user_actions/ActionType.h"
 #include "world/entities/action_animations/ActionToAnimation.h"
 #include "world/entities/action_animations/types/SActionWeapon.h"
@@ -75,6 +76,7 @@ public:
     [[nodiscard]] bool getIsAttacking() const;
     [[nodiscard]] GameAction getSelfCondition() const;
     [[nodiscard]] float getWeaponAngle() const;
+    [[nodiscard]] b2World *getWorld() const;
     EntitiesType getEntityType() override;
     [[nodiscard]] GameUpdate getPreviousState() const;
     [[nodiscard]] bool getIsInContactWithAnotherWorm() const;
