@@ -271,8 +271,6 @@ void WWorm::receiveDamage(int damage) {
     m_ActionToAnimation.setAction(ActionType::ATTACKED);
     if (damage >= m_Health) {
         m_Health = 0;
-//        m_ActionToAnimation.resetAnimation();
-//        m_ActionToAnimation.setAction(ActionType::DYING);
     } else {
         m_Health -= damage;
     }
@@ -336,20 +334,18 @@ GameAction WWorm::getMovement() {
 }
 
 void WWorm::resetWormStatus() {
-    //if (m_CurrentActionType == ActionType::MOVE || m_CurrentActionType == ActionType::JUMP) {
-        m_IsAttacking = false;
-        m_IsShooting = false;
-        m_IsJumping = false;
-        m_IsFalling = false;
-        m_IsMoving = false;
-        m_IsFacingRight = false;
-        m_Weapon = WeaponID::NO_WEAPON;
-        m_SelfCondition = m_SelfCondition == WORM_DIE ? WORM_DIE : WORM_IDLE;
-        m_WeaponAngle = 0;
-        stopMove();
-        m_ActionToAnimation.resetAnimation();
-        m_ActionToAnimation.setAction(getIsDead() ? ActionType::DYING : ActionType::NONE);
-   // }
+    m_IsAttacking = false;
+    m_IsShooting = false;
+    m_IsJumping = false;
+    m_IsFalling = false;
+    m_IsMoving = false;
+    m_IsFacingRight = false;
+    m_Weapon = WeaponID::NO_WEAPON;
+    m_SelfCondition = m_SelfCondition == WORM_DIE ? WORM_DIE : WORM_IDLE;
+    m_WeaponAngle = 0;
+    stopMove();
+    m_ActionToAnimation.resetAnimation();
+    m_ActionToAnimation.setAction(getIsDead() ? ActionType::DYING : ActionType::NONE);
 }
 
 void WWorm::setWasChanged(bool wasChanged) {

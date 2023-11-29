@@ -170,8 +170,8 @@ bool GameWorld::isWormIDLE(int idPlayer) {
     return  action == SPRITE_WACCUSE_IDLE;
 }
 
-void GameWorld::getWormUpdate(int idPlayer, GameUpdate& update) {
-    update = worms.at(idPlayer)->getUpdate(false);
+GameUpdate GameWorld::getWormUpdate(int idPlayer, bool getAll) {
+    return worms.at(idPlayer)->getUpdate(getAll);
 }
 
 bool GameWorld::allElementsIDLE() {

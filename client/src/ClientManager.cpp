@@ -54,6 +54,7 @@ void ClientManager::gameLoop() {
         m_Game.Render();
 
         lastTime = current;
+        SDL_Delay(8);
     }
     m_Game.Release();
 }

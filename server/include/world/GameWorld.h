@@ -75,7 +75,7 @@ public:
 
     bool isWormIDLE(int idPlayer);
 
-    void getWormUpdate(int idPlayer, GameUpdate& update);
+    GameUpdate getWormUpdate(int idPlayer, bool getAll);
 
     bool attackedWormsMoving(int idPlayer);
 

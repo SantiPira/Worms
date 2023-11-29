@@ -8,10 +8,10 @@ void Axe::attack(WWorm *attacker, WWorm *attacked, uint8_t force) {
     if (attacked->getId() == attacker->getId()) {
         return;
     }
-    attacker->getActionToAnimation()->resetAnimation();
-    attacker->getActionToAnimation()->setAction(ActionType::ATTACK, m_WeaponId);
     float distanceBetween = b2Distance(attacker->getPosition(), attacked->getPosition());
     if (distanceBetween <= distance) {
+        attacker->getActionToAnimation()->resetAnimation();
+        attacker->getActionToAnimation()->setAction(ActionType::ATTACK, m_WeaponId);
         attacker->setIsAttacking(true);
         attacked->receiveDamage(damage);
     }
