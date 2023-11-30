@@ -23,6 +23,9 @@ void Game::run() {
         pushUpdatesToClients(std::ref(updates));
     }
 
+    world.step();
+    allElementsIdle();
+
     while (m_KeepRunning) {
         processTurns(turnHandler, instructionFactory);
     }
