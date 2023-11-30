@@ -42,6 +42,9 @@ void Bazooka::attack(WWorm *attacker, WWorm *attacked, uint8_t force) {
         attacker->setIsAttacking(true);
         attacked->receiveDamage(damage);
     }
+
+    attacker->tieneProyectil = true;
+    attacker->proyectil = projectileBody;
 }
 
 void Bazooka::setWeaponId(WeaponID weaponId) {

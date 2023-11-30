@@ -52,6 +52,10 @@ private:
     ActionToAnimation m_ActionToAnimation;
 
 public:
+    bool tieneProyectil{false};
+    b2Body* proyectil;
+
+public:
     WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRight, uint16_t wormCategory,
           const std::vector<uint16_t>& categories);
 

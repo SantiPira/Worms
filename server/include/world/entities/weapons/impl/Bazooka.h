@@ -9,6 +9,7 @@ private:
     int damage;
     float distance;
     float radius{3.0f};
+
 public:
     Bazooka();
     void attack(WWorm* attacker, WWorm* attacked, uint8_t force) override;

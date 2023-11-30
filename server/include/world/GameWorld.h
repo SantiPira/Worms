@@ -43,6 +43,9 @@ private:
     ContactListener contactListener;
 
 public:
+    b2Body* projectile;
+
+public:
 
     explicit GameWorld(const std::string &map_path);
     void Setup();
@@ -84,4 +87,6 @@ public:
     void getDeathWormsUpdates(std::vector<int>& idsDeadWorms);
 
     void updateWormsMove();
+
+    b2Body* getProjectile();
 };

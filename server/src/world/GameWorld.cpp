@@ -176,8 +176,17 @@ GameUpdate GameWorld::getWormUpdate(int idPlayer, bool getAll) {
 
 bool GameWorld::allElementsIDLE() {
     bool isIDLE = std::all_of(worms.begin(), worms.end(), [](std::pair<const int, WWorm*>& worm) {
+
+        if (worm.second->tieneProyectil){
+            if (worm.second->proyectil->GetLinearVelocity().x != 0 || worm.second->proyectil->GetLinearVelocity().y != 0) {
+                return false;
+            }
+        }
+
         return worm.second->getVelocity().x == 0 && worm.second->getVelocity().y == 0;
     });
+
+
     return isIDLE;
 }
 
@@ -197,5 +206,18 @@ void GameWorld::updateWormsMove() {
 
 }
 
+
+b2Body* GameWorld::getProjectile(){
+
+    b2Body* p_projectile = nullptr;
+
+    for (auto& worm : worms) {
+        if (worm.second->tieneProyectil) {
+            p_projectile = worm.second->proyectil;
+        }
+    }
+
+    return p_projectile;
+}
 
 

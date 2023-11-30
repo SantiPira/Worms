@@ -59,6 +59,10 @@ void ClientManager::gameLoop(EventSender& eventSender) {
 
         gameUpdates.try_pop(svUpdate);
 
+        if(svUpdate.m_Movement == GameAction::PROJECTILE_LAUNCHED) {
+            std::cout << "LANZE UN PROYECTIL!!!!!!\n";
+        }
+
         m_Game.Update(elapsedSeconds.count(), svUpdate);
         m_Game.Render();
 

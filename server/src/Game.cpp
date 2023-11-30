@@ -227,8 +227,22 @@ void Game::processAttackTurn(TurnHandler &turnHandler, InstructionFactory &instr
 }
 
 void Game::allElementsIdle() {
+
+    b2Body* projectile = world.getProjectile();
+    GameUpdate projectileUpdate;
+
     while(!world.allElementsIDLE()) {
         auto updates = world.getWormsUpdates(false);
+
+        if (projectile != nullptr) {
+            projectileUpdate.player_id = 0xFE;
+            projectileUpdate.x_pos = projectile->GetLinearVelocity().x;
+            projectileUpdate.y_pos = projectile->GetLinearVelocity().y;
+            projectileUpdate.m_Movement = GameAction::PROJECTILE_LAUNCHED;
+            updates.push_back((projectileUpdate));
+        }
+
+
         pushUpdatesToClients(std::ref(updates));
         waitFrameTime();
         world.step();
