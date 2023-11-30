@@ -277,6 +277,10 @@ void WWorm::receiveDamage(int damage) {
     }
 }
 
+b2World *WWorm::getWorld() const {
+    return m_World;
+}
+
 GameAction WWorm::getSelfCondition() const {
     return this->m_SelfCondition;
 }

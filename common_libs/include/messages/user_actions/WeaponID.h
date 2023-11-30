@@ -3,7 +3,8 @@
 enum WeaponID : uint8_t {
     AXE = 0X00,
     NO_WEAPON = 0X01,
-    BATE = 0X02
+    BATE = 0X02,
+    BAZOOKA = 0X03
 };
 
 enum BateForce : uint8_t {
