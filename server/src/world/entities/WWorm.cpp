@@ -219,7 +219,8 @@ void WWorm::stopMove() {
     m_CurrentActionType = ActionType::STOP_MOVE;
     m_ActionToAnimation.resetAnimation();
     m_ActionToAnimation.setAction(ActionType::STOP_MOVE);
-    b2Vec2 vel = b2Vec2_zero;
+    //prueba piloto simulacion fin de turno
+    b2Vec2 vel = b2Vec2(0,m_Body->GetLinearVelocity().y);
     this->m_Body->SetLinearVelocity(vel);
     this->m_Velocity = vel;
     m_IsMoving = false;

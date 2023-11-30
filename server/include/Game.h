@@ -55,4 +55,5 @@ private:
 
     void finishTurn(int idCurrentPlayer, const ActionType& type);
     void startTurn(TurnHandler& turnHandler);
+    void allElementsIdle();
 };
