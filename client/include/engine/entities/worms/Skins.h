@@ -226,3 +226,46 @@ struct BateNegativeAngles {
     float unitAngle = 6.0f;
 };
 
+
+struct NormalAttackBate {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wbsbbk2.png");
+    BlendMode blendMode = {true, 192, 192, 128};
+    int frames = 10;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 45;
+    int frameHeight = 45;
+    float duration = 2.0f;
+    SDL_Rect srcRect = {0, 14, 42, 29};
+    int initYSprite = 14;
+    float deltaPosX = 75.0f;
+    float deltaPosY = 50.0f;
+};
+
+struct PositiveAnglesAttackBate {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wbsbswn.png");
+    BlendMode blendMode = {true, 192, 192, 128};
+    int frames = 15;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 54;
+    int frameHeight = 55;
+    float duration = 2.0f;
+    SDL_Rect srcRect = {0, 960, 44, 43};
+    int initYSprite = 960;
+    float deltaPosX = 75.0f;
+    float deltaPosY = 70.0f;
+};
+
+struct NegativeAnglesAttackBate {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wbsbswn.png");
+    BlendMode blendMode = {true, 192, 192, 128};
+    int frames = 15;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 54;
+    int frameHeight = 55;
+    float duration = 2.0f;
+    SDL_Rect srcRect = {0, 14, 44, 46};
+    int initYSprite = 14;
+    float deltaPosX = 85.0f;
+    float deltaPosY = 35.0f;
+};
+

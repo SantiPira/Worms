@@ -11,10 +11,6 @@ SpritesEnum ActionToAnimation::getCurrentSprite(WWorm* worm) {
         sprite = SPRITE_WACCUSE_IDLE;
     }
     m_CurrentSprite = sprite;
-//    if (sprite == SpritesEnum::SPRITE_WACCUSE_GRAVE && worm->getVelocity() != b2Vec2_zero) {
-//        sprite = SpritesEnum::SPRITE_WALK;
-//        m_CurrentSprite = sprite;
-//    }
     return m_CurrentSprite;
 }
 

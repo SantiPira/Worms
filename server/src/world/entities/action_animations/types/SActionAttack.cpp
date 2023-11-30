@@ -23,7 +23,7 @@ SpritesEnum SActionAttack::getCurrentSprite(const std::chrono::time_point<std::c
                 m_CurrentSprite = SPRITE_WACCUSE_IDLE;
                 break;
             }
-            m_CurrentSprite = SPRITE_ATTACK_AXE;
+            m_CurrentSprite = SPRITE_ATTACK_BATE;
             break;
         default:
             break;

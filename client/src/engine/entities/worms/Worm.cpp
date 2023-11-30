@@ -21,6 +21,9 @@ void Worm::init() {
         AttackAxe wAttackAxe;
         BatePositiveAngles batePositiveAngles;
         BateNegativeAngles bateNegativeAngles;
+        NormalAttackBate wNormalAttackBate;
+        PositiveAnglesAttackBate wPositiveAnglesAttackBate;
+        NegativeAnglesAttackBate wNegativeAnglesAttackBate;
     SDL_Rect destRect = {
                 static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
                 static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)),
@@ -230,6 +233,48 @@ void Worm::init() {
             bateNegativeAngles.deltaPosX,
             bateNegativeAngles.deltaPosY));
 
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_ATTACK_BATE_NORMAL, getWaccuseAnimation(
+            wNormalAttackBate.spritePath,
+            wNormalAttackBate.blendMode,
+            wNormalAttackBate.frames,
+            wNormalAttackBate.distanceBetweenFrames,
+            wNormalAttackBate.frameWidth,
+            wNormalAttackBate.frameHeight,
+            wNormalAttackBate.duration,
+            wNormalAttackBate.srcRect,
+            wNormalAttackBate.initYSprite,
+            destRect,
+            wNormalAttackBate.deltaPosX,
+            wNormalAttackBate.deltaPosY));
+
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_ATTACK_BATE_POSITIVE_ANGLES, getWaccuseAnimation(
+            wPositiveAnglesAttackBate.spritePath,
+            wPositiveAnglesAttackBate.blendMode,
+            wPositiveAnglesAttackBate.frames,
+            wPositiveAnglesAttackBate.distanceBetweenFrames,
+            wPositiveAnglesAttackBate.frameWidth,
+            wPositiveAnglesAttackBate.frameHeight,
+            wPositiveAnglesAttackBate.duration,
+            wPositiveAnglesAttackBate.srcRect,
+            wPositiveAnglesAttackBate.initYSprite,
+            destRect,
+            wPositiveAnglesAttackBate.deltaPosX,
+            wPositiveAnglesAttackBate.deltaPosY));
+
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_ATTACK_BATE_NEGATIVE_ANGLES, getWaccuseAnimation(
+            wNegativeAnglesAttackBate.spritePath,
+            wNegativeAnglesAttackBate.blendMode,
+            wNegativeAnglesAttackBate.frames,
+            wNegativeAnglesAttackBate.distanceBetweenFrames,
+            wNegativeAnglesAttackBate.frameWidth,
+            wNegativeAnglesAttackBate.frameHeight,
+            wNegativeAnglesAttackBate.duration,
+            wNegativeAnglesAttackBate.srcRect,
+            wNegativeAnglesAttackBate.initYSprite,
+            destRect,
+            wNegativeAnglesAttackBate.deltaPosX,
+            wNegativeAnglesAttackBate.deltaPosY));
+
     for (auto& sprite : m_SpritesMap) {
         sprite.second->init();
     }
@@ -239,7 +284,10 @@ void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
     m_LastUpdate = gameUpdate;
     if (gameUpdate.m_CurrentSprite == SpritesEnum::SPRITE_HAS_BATE) {
         updateBateAttack(elapsedSeconds, gameUpdate);
-    } else {
+    } else if (gameUpdate.m_CurrentSprite == SpritesEnum::SPRITE_ATTACK_BATE) {
+        updateBateHeat(elapsedSeconds, gameUpdate);
+    }
+    else {
         m_CurrentSprite = gameUpdate.m_CurrentSprite;
         m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
     }
@@ -264,9 +312,7 @@ void Worm::updateBateAttack(double elapsedSeconds, const GameUpdate &gameUpdate)
         pickedFrame = static_cast<int>(angle / hasBate.unitAngle);
         m_CurrentSprite = SpritesEnum::SPRITE_HAS_BATE_POSITIVE_ANGLES;
     } else if (angle < 0) {
-        // Normalizar el ángulo para que varíe de 0 a 84
         float normalizedAngle = angle + 90;
-        // Dividir por 6 para obtener el índice de sprite correspondiente
         pickedFrame = static_cast<int>(normalizedAngle / 6);
         m_CurrentSprite = SpritesEnum::SPRITE_HAS_BATE_NEGATIVE_ANGLES;
     } else {
@@ -274,28 +320,22 @@ void Worm::updateBateAttack(double elapsedSeconds, const GameUpdate &gameUpdate)
     }
     m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds, pickedFrame);
 }
-//void Worm::updateBateAttack(double elapsedSeconds, const GameUpdate &gameUpdate) {
-//    HasBate hasBate;
-//    float angle = gameUpdate.m_WeaponAngle;
-//    int pickedFrame = -1;
-//    if (angle > 0) {
-//        pickedFrame = static_cast<int>(angle / hasBate.unitAngle);
-//        m_CurrentSprite = SpritesEnum::SPRITE_HAS_BATE_POSITIVE_ANGLES;
-//    } else if (angle < 0) {
-//        pickedFrame = abs(static_cast<int>(angle / hasBate.unitAngle));
-//        m_CurrentSprite = SpritesEnum::SPRITE_HAS_BATE_NEGATIVE_ANGLES;
-//    } else {
-//        m_CurrentSprite = SpritesEnum::SPRITE_HAS_BATE_INIT_POSITION;
-//    }
-//    m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds, pickedFrame);
-//}
 
 void Worm::render() {
     bool isFlip = true;
     if (m_Dir == Direction::LEFT) {
         isFlip = false;
     }
-    m_SpritesMap.at(m_CurrentSprite)->render(isFlip);
+    bool bateAttack = m_LastUpdate.m_CurrentSprite == SPRITE_ATTACK_BATE;
+    std::unique_ptr<Animation> &anim = m_SpritesMap.at(m_CurrentSprite);
+    if (bateAttack) {
+        m_Dir == Direction::LEFT ? anim->setDestRect({anim->getDestRect().x - 20, anim->getDestRect().y, anim->getFrameWidth(), anim->getFrameHeight()})
+                                 : anim->setDestRect({anim->getDestRect().x + 20, anim->getDestRect().y, anim->getFrameWidth(), anim->getFrameHeight()});
+        anim->render(isFlip);
+    } else {
+        anim->render(isFlip);
+    }
+    //m_SpritesMap.at(m_CurrentSprite)->render(isFlip);
 }
 
 std::unique_ptr<Animation> Worm::getWaccuseAnimation(const std::string& spritePath, BlendMode blendMode, int frames,
@@ -318,6 +358,24 @@ void Worm::update(double elapsedSeconds) {
     } else {
         m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
     }
+}
+
+void Worm::updateBateHeat(double seconds, const GameUpdate &update) {
+    HasBate hasBate;
+    NormalAttackBate normalAttackBate;
+    float angle = update.m_WeaponAngle;
+    int pickedFrame = -1;
+    if (angle > 0) {
+        pickedFrame = static_cast<int>(angle / hasBate.unitAngle);
+        m_CurrentSprite = SpritesEnum::SPRITE_ATTACK_BATE_POSITIVE_ANGLES;
+    } else if (angle < 0) {
+        float normalizedAngle = angle + 90;
+        pickedFrame = static_cast<int>(normalizedAngle / 6);
+        m_CurrentSprite = SpritesEnum::SPRITE_ATTACK_BATE_NEGATIVE_ANGLES;
+    } else {
+        m_CurrentSprite = SpritesEnum::SPRITE_ATTACK_BATE_NORMAL;
+    }
+    m_SpritesMap.at(m_CurrentSprite)->update(seconds, pickedFrame);
 }
 
 
