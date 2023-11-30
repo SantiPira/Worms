@@ -30,7 +30,9 @@ void ClientSender::run() {
 
 void ClientSender::stop() {
     m_KeepRunning.store(false);
-    m_SelfQueue->push(GameUpdate {});
+    if(!m_SelfQueue->isClosed()) {
+        m_SelfQueue->push(GameUpdate {});
+    }
     if( !m_Protocol.isClosed()) {
         m_Protocol.close();
     }
