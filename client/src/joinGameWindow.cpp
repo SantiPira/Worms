@@ -14,7 +14,8 @@ JoinGameWindow::JoinGameWindow(QWidget *parent, Juego* juego) : QWidget(parent),
                                                          " - Jugadores permitidos: " + QString::number(partida.m_Players)
                                                          + " - Jugadores conectados: " +
                                                          QString::number(partida.m_PlayersConnected));
-        item->data(Qt::UserRole).setValue(partida.m_idGame);
+        //store in item gameId in a map
+        item->setData(Qt::UserRole, partida.m_idGame);
         listWidget->addItem(item);
     }
 
@@ -25,8 +26,9 @@ JoinGameWindow::JoinGameWindow(QWidget *parent, Juego* juego) : QWidget(parent),
 }
 
 void JoinGameWindow::slotJoinGame(QListWidgetItem *selectedItem) {
-    idGame = selectedItem->data(Qt::UserRole).toInt();
-    m_Juego->joinGame(idGame, m_GameProperties.at(idGame).m_Players);
+    //select partida.m_idGame
+    int id = selectedItem->data(Qt::UserRole).toInt();
+    m_Juego->joinGame(id, m_GameProperties.at(id).m_Players);
 
     this->close();
 }
