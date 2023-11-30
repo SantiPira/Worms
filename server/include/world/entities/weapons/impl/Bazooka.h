@@ -3,6 +3,7 @@
 #include "world/entities/weapons/Weapon.h"
 #include "world/entities/WWorm.h"
 
+class WWorm;
 class Bazooka : public Weapon {
 private:
     int damage;
