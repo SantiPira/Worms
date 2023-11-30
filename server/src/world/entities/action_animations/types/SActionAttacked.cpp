@@ -5,12 +5,12 @@ SActionAttacked::SActionAttacked() {
 }
 
 SpritesEnum SActionAttacked::getCurrentSprite(
-        const std::chrono::time_point<std::chrono::system_clock> &startTime) const {
+        const std::chrono::time_point<std::chrono::system_clock> &startTime) {
     auto current = std::chrono::system_clock::now();
     std::chrono::duration<double> elapsedSeconds = current - startTime;
 
-    if (elapsedSeconds.count() > 3.0) {
-        return SPRITE_WACCUSE_IDLE;
+    if (elapsedSeconds.count() > 5.0) {
+        m_CurrentSprite = SpritesEnum::SPRITE_WACCUSE_IDLE;
     }
 
     return m_CurrentSprite;

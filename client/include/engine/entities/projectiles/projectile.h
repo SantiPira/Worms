@@ -1,4 +1,7 @@
-#pragma once
+/*
+#ifndef PROJECTILE_H
+#define PROJECTILE_H
+
 
 #include <SDL_render.h>
 #include <iostream>
@@ -15,37 +18,41 @@
 #include <unordered_map>
 #include <vector>
 
-class Worm {
- private:
+
+class Projectile{
+private:
     SpritesEnum m_CurrentSprite;
     Direction m_Dir;
-    std::vector<SDL_Rect > m_DieRects;
-    GameUpdate m_LastUpdate{};
- public:
+
+public:
     SDL_Renderer* m_Renderer;
     std::unordered_map<SpritesEnum, std::unique_ptr<Animation>> m_SpritesMap;
-    float m_WormXPosition;
-    float m_WormYPosition;
+    float m_ProjectileXPosition;
+    float m_ProjectileYPosition;
     float m_Widht;
     float m_Height;
 
+    bool is_launched{false};
+    bool exploded{false};
+
 private:
-    std::unique_ptr<Animation> getWaccuseAnimation(const std::string& spritePath, BlendMode blendMode, int frames,
+    std::unique_ptr<Animation> getProjectileAnimation(const std::string& spritePath, BlendMode blendMode, int frames,
                                                    int distanceBetweenFrames,
                                                    int frameWidth, int frameHeight, float duration, SDL_Rect srcRect,
                                                    int initYSprite, SDL_Rect destRect, float deltaPosX, float deltaPosY);
 
- public:
-    Worm(SDL_Renderer *renderer, float posX, float posY, float d, float d1);
+
+public:
+    Projectile(SDL_Renderer *renderer);
 
     void init();
     void update(double elapsedSeconds, const GameUpdate& gameUpdate);
     void update(double elapsedSeconds);
     void render();
 
-    ~Worm() = default;
+    ~Projectile() = default;
 
-    void updateBateAttack(double elapsedSeconds, const GameUpdate &gameUpdate);
-
-    void updateBateHeat(double seconds, const GameUpdate &update);
 };
+
+#endif
+*/

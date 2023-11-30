@@ -4,22 +4,27 @@ SActionAttack::SActionAttack(uint8_t weaponId) {
     m_WeaponId = WeaponID(weaponId);
 }
 
-SpritesEnum SActionAttack::getCurrentSprite(const std::chrono::time_point<std::chrono::system_clock> &startTime) const {
+SpritesEnum SActionAttack::getCurrentSprite(const std::chrono::time_point<std::chrono::system_clock> &startTime) {
     auto current = std::chrono::system_clock::now();
     std::chrono::duration<double> elapsedSeconds = current - startTime;
     switch (m_WeaponId) {
         case WeaponID::AXE:
             if (elapsedSeconds.count() > 1.0) {
-                return SPRITE_WACCUSE_IDLE;
+                m_CurrentSprite = SPRITE_WACCUSE_IDLE;
+                break;
             }
-            return SPRITE_ATTACK_AXE;
+            m_CurrentSprite = SPRITE_ATTACK_AXE;
+            break;
         case NO_WEAPON:
-            return SPRITE_WACCUSE_IDLE;
+            m_CurrentSprite = SPRITE_WACCUSE_IDLE;
+            break;
         case BATE:
             if (elapsedSeconds.count() > 1.0) {
-                return SPRITE_WACCUSE_IDLE;
+                m_CurrentSprite = SPRITE_WACCUSE_IDLE;
+                break;
             }
-            return SPRITE_ATTACK_BATE;
+            m_CurrentSprite = SPRITE_ATTACK_BATE;
+            break;
         default:
             break;
     }

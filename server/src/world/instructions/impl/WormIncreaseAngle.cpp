@@ -8,10 +8,10 @@ WormIncreaseAngle::WormIncreaseAngle(int idPlayer) {
 void WormIncreaseAngle::execute(WWorm *worm) {
     float radianAngle = worm->getWeaponAngle();
     float gradAngle = radianAngle * 180.0f / b2_pi;
-    gradAngle = gradAngle + 5.0f;
+    gradAngle = gradAngle + 6.0f;
     if (gradAngle > 90.0f) {
         gradAngle = 90.0f;
     }
     float angle = gradAngle * b2_pi / 180.0f;
-    worm->setWeaponAngle(angle, m_ActionType);
+    worm->setWeaponAngle(angle, true, m_ActionType);
 }

@@ -7,6 +7,10 @@ MatchesMonitor::MatchesMonitor() {}
 void MatchesMonitor::removeGame(int id) {
     // this lock is commented as this method is used as private
     //std::lock_guard<std::mutex> lock(m_Mutex);
+    Game * gameToRemove = m_Games.at(id);
+    if(! gameToRemove->hasStarted()) {
+        m_Games.at(id)->start();
+    }
     m_Games.at(id)->kill();
     m_Games.at(id)->join();
     m_Games.erase(id);
@@ -34,10 +38,12 @@ std::vector<GameProperty> MatchesMonitor::getGameProperties() {
     std::lock_guard<std::mutex> lock(m_Mutex);
     std::vector<GameProperty> gameProperties;
     for (auto& game : m_Games) {
-        gameProperties.emplace_back(game.second->getIdGame(), game.second->getGameName(),
-                                         game.second->getMapName(),
-                                         static_cast<int>(game.second->getClientUpdates()->size()),
-                                         game.second->getPlayers());
+        if(!game.second->isReadyToStart()) {
+            gameProperties.emplace_back(game.second->getIdGame(), game.second->getGameName(),
+                                             game.second->getMapName(),
+                                             static_cast<int>(game.second->getClientUpdates()->size()),
+                                             game.second->getPlayers());
+        }
     }
     return gameProperties;
 }

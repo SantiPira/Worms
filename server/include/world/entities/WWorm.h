@@ -5,8 +5,10 @@
 #include "world/entities/weapons/WeaponFactory.h"
 #include "world/entities/weapons/impl/Axe.h"
 #include "world/entities/weapons/impl/Bate.h"
+#include "world/entities/weapons/impl/Bazooka.h"
 #include "messages/user_actions/ActionType.h"
 #include "world/entities/action_animations/ActionToAnimation.h"
+#include "world/entities/action_animations/types/SActionWeapon.h"
 #include "EntitiesType.h"
 #include "WEntity.h"
 #include <iostream>
@@ -46,6 +48,7 @@ private:
     GameUpdate m_PreviousState;
     ActionType m_CurrentActionType = ActionType::NONE;
     bool m_IsInContactWithWWorm = false;
+    Direction m_OtherDirection{};
     ActionToAnimation m_ActionToAnimation;
 
 public:
@@ -73,10 +76,12 @@ public:
     [[nodiscard]] bool getIsAttacking() const;
     [[nodiscard]] GameAction getSelfCondition() const;
     [[nodiscard]] float getWeaponAngle() const;
+    [[nodiscard]] b2World *getWorld() const;
     EntitiesType getEntityType() override;
     [[nodiscard]] GameUpdate getPreviousState() const;
     [[nodiscard]] bool getIsInContactWithAnotherWorm() const;
     ActionToAnimation* getActionToAnimation();
+    bool isMoving() const;
 
     void setPosition(b2Vec2 position);
     void setVelocity(b2Vec2 velocity);
@@ -95,10 +100,11 @@ public:
     void setDirection(Direction dir);
     void setIsAttacking(bool isAttacking);
     void setSelfCondition(GameAction selfCondition);
-    void setWeaponAngle(float angle, ActionType actionType);
+    void setWeaponAngle(float angle, bool isIncreasing, ActionType actionType);
     void resetWormStatus();
     void setWasChanged(bool wasChanged);
     void setIsInContactWithAnotherWorm(bool isInContactWithAnotherWorm);
+    void setOtherDirection(Direction otherDirection);
 
     GameUpdate getUpdate(bool wormChanged);
 
@@ -123,4 +129,6 @@ public:
     float getWidth() const;
 
     float getHeight() const;
+
+    void unSetWeapon();
 };

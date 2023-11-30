@@ -8,6 +8,9 @@ void ClientSender::run() {
     try {
         while (m_KeepRunning) {
             auto update = m_SelfQueue->pop();
+            if (update.player_id == 0xFF) {
+                continue;
+            }
             m_Protocol.sendGameUpdate(update);
         }
     } catch (const LibError& e) {
@@ -27,6 +30,10 @@ void ClientSender::run() {
 
 void ClientSender::stop() {
     m_KeepRunning.store(false);
+    m_SelfQueue->push(GameUpdate {});
+    if( !m_Protocol.isClosed()) {
+        m_Protocol.close();
+    }
 }
 
 void ClientSender::setPlayerId(int idPlayer) {

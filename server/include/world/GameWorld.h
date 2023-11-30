@@ -57,10 +57,9 @@ public:
 
     void setStaticBody(std::pair<const int, WWorm *> &worm);
 
-    //destructor
     ~GameWorld();
 
-    void resetWormStatus(int idPlayer);
+    void resetWormStatus(int idPlayer, const ActionType& type);
 
     bool isQuiet();
 
@@ -73,4 +72,16 @@ public:
     bool wormBrokeTurn(const UserAction& userAction);
 
     bool wormsAlive(std::vector<int>& idsDeadWorms);
+
+    bool isWormIDLE(int idPlayer);
+
+    GameUpdate getWormUpdate(int idPlayer, bool getAll);
+
+    bool attackedWormsMoving(int idPlayer);
+
+    bool allElementsIDLE();
+
+    void getDeathWormsUpdates(std::vector<int>& idsDeadWorms);
+
+    void updateWormsMove();
 };

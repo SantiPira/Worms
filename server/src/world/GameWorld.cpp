@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "world/GameWorld.h"
 
 GameWorld::GameWorld(const std::string &file_map_path) : players(1), width(20.0f), height(20.0f),
@@ -53,7 +54,11 @@ void GameWorld::SetWorm(const int& player_number, const float & x_pos, const flo
 std::vector<GameUpdate> GameWorld::getWormsUpdates(bool getAll) const {
     std::vector<GameUpdate> gameUpdates;
     for (auto& worm : worms) {
-        gameUpdates.push_back(worm.second->getUpdate(getAll));
+        auto update = worm.second->getUpdate(getAll);
+        if (update.m_CurrentSprite == SPRITE_INVALID) {
+            continue;
+        }
+        gameUpdates.push_back(update);
     }
     return gameUpdates;
 }
@@ -108,9 +113,12 @@ GameWorld::~GameWorld() {
     }
 }
 
-void GameWorld::resetWormStatus(int idPlayer) {
-    worms.at(idPlayer)->resetWormStatus();
-    m_world.Step(0,0,0);
+void GameWorld::resetWormStatus(int idPlayer, const ActionType& type) {
+    WWorm* current = worms.at(idPlayer);
+    if (type != ATTACK) {
+        current->resetWormStatus();
+        m_world.Step(0,0,0);
+    }
 }
 
 bool GameWorld::isQuiet() {
@@ -131,16 +139,6 @@ void GameWorld::getDeadWormsIds(std::vector<int> &deadWormsIds) {
     }
 }
 
-//void GameWorld::passAway(int &id) {
-//    WWorm* worm = worms.at(id);
-//    b2Vec2 pos = worm->getPosition();
-//    float widthWorm = worm->getWidth();
-//    float heightWorm = worm->getHeight();
-//    deadWorms.insert(std::make_pair(id, new WDeadWorm(&m_world, id, pos, widthWorm, heightWorm)));
-//    worms.erase(id);
-//    wormsPositions.erase(id);
-//    delete worm;
-//}
 
 bool GameWorld::isAlive(int idPlayer) {
     return worms.at(idPlayer)->getHealth() > 0;
@@ -165,6 +163,38 @@ bool GameWorld::wormsAlive(std::vector<int> &idsDeadWorms) {
         }
     }
     return false;
+}
+
+bool GameWorld::isWormIDLE(int idPlayer) {
+    SpritesEnum action =  worms.at(idPlayer)->getActionToAnimation()->getCurrentSprite();
+    return  action == SPRITE_WACCUSE_IDLE;
+}
+
+GameUpdate GameWorld::getWormUpdate(int idPlayer, bool getAll) {
+    return worms.at(idPlayer)->getUpdate(getAll);
+}
+
+bool GameWorld::allElementsIDLE() {
+    bool isIDLE = std::all_of(worms.begin(), worms.end(), [](std::pair<const int, WWorm*>& worm) {
+        return worm.second->getVelocity().x == 0 && worm.second->getVelocity().y == 0;
+    });
+    return isIDLE;
+}
+
+void GameWorld::getDeathWormsUpdates(std::vector<int>& idsDeadWorms) {
+    for (auto& id : idsDeadWorms) {
+        worms.at(id)->getActionToAnimation()->resetAnimation();
+        worms.at(id)->getActionToAnimation()->setAction(ActionType::DYING);
+    }
+}
+
+void GameWorld::updateWormsMove() {
+    for (auto& worm : worms) {
+        if (worm.second->isMoving()) {
+            worm.second->move(worm.second->getDirection());
+        }
+    }
+
 }
 
 

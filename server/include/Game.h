@@ -16,8 +16,10 @@ class Game : public Thread {
     std::unordered_map<int, ProtectedQueue<GameUpdate>*> m_QClientUpdates;
     ProtectedQueue<UserAction> m_InputActions;
     std::atomic<bool> m_KeepRunning;
+    std::atomic<bool> m_HasStarted;
     int m_PopMessageQuantity;
     GameWorld world;
+    ActionType m_BrokeAction;
 
 public:
     Game(int id, std::string gameName, std::string mapName, int players);
@@ -39,6 +41,7 @@ public:
     void setupWorld();
     bool isStillPlayable();
     void kill();
+    bool hasStarted();
 
 private:
     void pushUpdatesToClients(std::reference_wrapper<std::vector<GameUpdate>> updates);
@@ -47,5 +50,10 @@ private:
     void sendInfoTurns(int playerId, GameAction infoTurn);
     void processTurns(TurnHandler& turnHandler, InstructionFactory& instructionFactory);
     void waitFrameTime();
-    void endTurn(TurnHandler& turnHandler);
+
+    void processAttackTurn(TurnHandler &turnHandler, InstructionFactory &instructionFactory, UserAction userAction);
+
+    void finishTurn(int idCurrentPlayer, const ActionType& type);
+    void startTurn(TurnHandler& turnHandler);
+    void allElementsIdle();
 };

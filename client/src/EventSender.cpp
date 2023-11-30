@@ -12,16 +12,23 @@ void EventSender::run() {
             stop();
             break;
         }
+
         SDL_Keycode key = event.key.keysym.sym;
+
         UserAction userAction;
         if (event.type == SDL_KEYDOWN && event.key.repeat == 0) {
             if (key == SDLK_d) {
                 userAction = {ActionType::MOVE, m_IdPlayer, Direction::RIGHT};
+            } else if (key == SDLK_1) {
+                m_SettingsQueue.push("MUESTRO LISTA");
+            } else if (key == SDLK_2) {
+                m_SettingsQueue.push("GUARDO LISTA");
             } else if (key == SDLK_a) {
                 userAction = {ActionType::MOVE, m_IdPlayer, Direction::LEFT};
             } else if (key == SDLK_SPACE) {
                 userAction = {ActionType::JUMP, m_IdPlayer};
             } else if (key == SDLK_c) {
+                std::cout << "ATACO\n";
                 m_StartAttackTime = std::chrono::system_clock::now();
             } else if (key == SDLK_h) {
                 m_WeaponId = WeaponID::AXE;
@@ -50,6 +57,7 @@ void EventSender::run() {
             if (key == SDLK_d || key == SDLK_a) {
                 userAction = {ActionType::STOP_MOVE, m_IdPlayer};
             } else if (key == SDLK_c) {
+                std::cout << "ENVIO ATAQUE\n";
                 userAction = attack();
             } else {
                 std::cout << "key no mapeada: " << key << std::endl;
@@ -77,9 +85,15 @@ void EventSender::stop() {
 }
 
 void EventSender::setItsMyTurn(bool isMyTurn) {
-    std::cout << "ID: " << m_IdPlayer << " Cambio de turno: " << isMyTurn << std::endl;
+    if (isMyTurn) {
+        std::cout << "MI TURNO ID: " << m_IdPlayer << std::endl;
+    } else {
+        std::cout << "NO ES MI TURNO ID: " << m_IdPlayer << std::endl;
+    }
     this->m_IsMyTurn.store(isMyTurn);
 }
+
+
 
 UserAction EventSender::attack() {
     std::chrono::duration<double> elapsedSeconds{};
@@ -102,9 +116,14 @@ UserAction EventSender::attack() {
             return {ActionType::ATTACK, m_IdPlayer, force};
         case WeaponID::AXE:
             return {ActionType::ATTACK, m_IdPlayer};
+        case WeaponID::BAZOOKA:
+            std::cout << "KABOOM\n";
+            return {ActionType::ATTACK, m_IdPlayer};
         case WeaponID::NO_WEAPON:
             return {};
         default:
             return {};
     }
 }
+
+

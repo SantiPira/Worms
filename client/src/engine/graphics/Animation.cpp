@@ -12,7 +12,12 @@ void Animation::init() {
     m_Texture->init();
 }
 
-void Animation::update(double elapsedSeconds) {
+void Animation::update(double elapsedSeconds, int specificFrame) {
+    if (specificFrame != -1) {
+        m_SourceRect.y = (specificFrame * m_DistanceBetweenFrames) + m_InitYSprite;
+        m_Texture->setSourceRect(&m_SourceRect);
+        return;
+    }
     m_CurrentTime += elapsedSeconds;
 
     if (m_CurrentTime > m_Duration) {

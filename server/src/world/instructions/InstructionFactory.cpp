@@ -17,6 +17,8 @@ IWormInstruction* InstructionFactory::createInstruction(UserAction userAction) {
             return new WormUnSetWeapon(userAction.getIdPlayer());
         case INCREASE_ANGLE:
             return new WormIncreaseAngle(userAction.getIdPlayer());
+        case DECREASE_ANGLE:
+            return new WormDecreaseAngle(userAction.getIdPlayer());
         case NONE:
             return new WormNone(userAction.getIdPlayer());
         default:

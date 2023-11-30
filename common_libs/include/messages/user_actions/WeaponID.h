@@ -15,6 +15,6 @@ enum BateForce : uint8_t {
 
 enum BatePotency {
     LOW_POTENCY = 0,
-    MEDIUM_POTENCY = 10,
-    HIGH_POTENCY = 20
+    MEDIUM_POTENCY = 2,
+    HIGH_POTENCY = 6
 };

@@ -15,6 +15,8 @@ SpriteAnimations *AnimationFactory::createAnimation(const ActionType& actionType
             return new SActionJump();
         case ActionType::SET_WEAPON:
             return new SActionWeapon(param1, param2);
+        case ActionType::UNSET_WEAPON:
+            return new SActionWeapon(param1, param2);
         case ActionType::DYING:
             return new SActionDeath();
         case ActionType::ATTACKED:

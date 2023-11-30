@@ -2,23 +2,26 @@
 
 Bate::Bate() {
     this->m_WeaponId = WeaponID::BATE;
-    this->distance = 1.0f;
+    this->distance = 3.0f;
 }
 
 void Bate::attack(WWorm *attacker, WWorm* attacked, uint8_t force) {
+    if (attacked->getId() == attacker->getId()) {
+        return;
+    }
     float mForce;
     switch (force) {
         case LOW:
-            mForce = 100;
+            mForce = 70;
             break;
         case MEDIUM:
-            mForce = 200;
+            mForce = 150;
             break;
         case HIGH:
-            mForce = 300;
+            mForce = 250;
             break;
         default:
-            mForce = 100;
+            mForce = 70;
             break;
     }
     std::cout << "Bate attack. FORCE : [" << mForce << "]." << std::endl;
@@ -31,10 +34,13 @@ void Bate::attack(WWorm *attacker, WWorm* attacked, uint8_t force) {
     float xForce = cos(angle);
     float yForce = sin(angle);
     attacker->getDirection() == Direction::LEFT ? xForce *= -1 : xForce *= 1;
-    b2Vec2 forceVector = mForce * b2Vec2(xForce * 15, yForce);
+    b2Vec2 forceVector = mForce * b2Vec2(xForce, yForce);   //VALORES OK PARA UN GOLPE MEDIANO / ALTO
     std::cout << "Force vector: " << forceVector.x << " " << forceVector.y << std::endl;
-    attacked->getBody()->ApplyForceToCenter(forceVector, true);
-    attacked->receiveDamage(50);
+    attacker->setIsAttacking(true);
+    attacked->getBody()->ApplyLinearImpulseToCenter(forceVector, true);
+    attacked->receiveDamage(1);
+    attacker->getActionToAnimation()->resetAnimation();
+    attacker->getActionToAnimation()->setAction(ActionType::ATTACK, m_WeaponId);
 }
 
 void Bate::setWeaponId(WeaponID weaponId) {

@@ -19,14 +19,65 @@ void Worm::init() {
         HasBate wHasBate;
         SavingBate wSavingBate;
         AttackAxe wAttackAxe;
+        BatePositiveAngles batePositiveAngles;
+        BateNegativeAngles bateNegativeAngles;
+        NormalAttackBate wNormalAttackBate;
+        PositiveAnglesAttackBate wPositiveAnglesAttackBate;
+        NegativeAnglesAttackBate wNegativeAnglesAttackBate;
         SettingBazooka wSettingBazooka;
         HasBazooka wHasBazooka;
         SavingBazooka wSavingBazooka;
+
+
     SDL_Rect destRect = {
                 static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
                 static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)),
                 static_cast<int>(m_Widht), static_cast<int>(m_Height)
         };
+
+
+        m_SpritesMap.emplace(SpritesEnum::SPRITE_SETTING_BAZOOKA, getWaccuseAnimation(
+            wSettingBazooka.spritePath,
+            wSettingBazooka.blendMode,
+            wSettingBazooka.frames,
+            wSettingBazooka.distanceBetweenFrames,
+            wSettingBazooka.frameWidth,
+            wSettingBazooka.frameHeight,
+            wSettingBazooka.duration,
+            wSettingBazooka.srcRect,
+            wSettingBazooka.initYSprite,
+            destRect,
+            wSettingBazooka.deltaPosX,
+            wSettingBazooka.deltaPosY));
+
+        m_SpritesMap.emplace(SpritesEnum::SPRITE_HAS_BAZOOKA, getWaccuseAnimation(
+            wHasBazooka.spritePath,
+            wHasBazooka.blendMode,
+            wHasBazooka.frames,
+            wHasBazooka.distanceBetweenFrames,
+            wHasBazooka.frameWidth,
+            wHasBazooka.frameHeight,
+            wHasBazooka.duration,
+            wHasBazooka.srcRect,
+            wHasBazooka.initYSprite,
+            destRect,
+            wHasBazooka.deltaPosX,
+            wHasBazooka.deltaPosY));
+
+        m_SpritesMap.emplace(SpritesEnum::SPRITE_SAVING_BAZOOKA, getWaccuseAnimation(
+            wSavingBazooka.spritePath,
+            wSavingBazooka.blendMode,
+            wSavingBazooka.frames,
+            wSavingBazooka.distanceBetweenFrames,
+            wSavingBazooka.frameWidth,
+            wSavingBazooka.frameHeight,
+            wSavingBazooka.duration,
+            wSavingBazooka.srcRect,
+            wSavingBazooka.initYSprite,
+            destRect,
+            wSavingBazooka.deltaPosX,
+            wSavingBazooka.deltaPosY));
+
 
         m_SpritesMap.emplace(SpritesEnum::SPRITE_WACCUSE_IDLE, getWaccuseAnimation(
                 waccuseIdle.spritePath,
@@ -41,6 +92,7 @@ void Worm::init() {
                 destRect,
                 waccuseIdle.deltaPosX,
                 waccuseIdle.deltaPosY));
+
         m_SpritesMap.emplace(SpritesEnum::SPRITE_WALK, getWaccuseAnimation(
                 waccuseWalk.spritePath,
                 waccuseWalk.blendMode,
@@ -161,20 +213,6 @@ void Worm::init() {
             waSettingBate.deltaPosX,
             waSettingBate.deltaPosY));
 
-    m_SpritesMap.emplace(SpritesEnum::SPRITE_HAS_BATE, getWaccuseAnimation(
-            wHasBate.spritePath,
-            wHasBate.blendMode,
-            wHasBate.frames,
-            wHasBate.distanceBetweenFrames,
-            wHasBate.frameWidth,
-            wHasBate.frameHeight,
-            wHasBate.duration,
-            wHasBate.srcRect,
-            wHasBate.initYSprite,
-            destRect,
-            wHasBate.deltaPosX,
-            wHasBate.deltaPosY));
-
     m_SpritesMap.emplace(SpritesEnum::SPRITE_SAVING_BATE, getWaccuseAnimation(
             wSavingBate.spritePath,
             wSavingBate.blendMode,
@@ -203,46 +241,89 @@ void Worm::init() {
             wAttackAxe.deltaPosX,
             wAttackAxe.deltaPosY));
 
-    m_SpritesMap.emplace(SpritesEnum::SPRITE_SETTING_BAZOOKA, getWaccuseAnimation(
-            wSettingBazooka.spritePath,
-            wSettingBazooka.blendMode,
-            wSettingBazooka.frames,
-            wSettingBazooka.distanceBetweenFrames,
-            wSettingBazooka.frameWidth,
-            wSettingBazooka.frameHeight,
-            wSettingBazooka.duration,
-            wSettingBazooka.srcRect,
-            wSettingBazooka.initYSprite,
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_HAS_BATE_INIT_POSITION, getWaccuseAnimation(
+            wHasBate.spritePath,
+            wHasBate.blendMode,
+            wHasBate.frames,
+            wHasBate.distanceBetweenFrames,
+            wHasBate.frameWidth,
+            wHasBate.frameHeight,
+            wHasBate.duration,
+            wHasBate.srcRect,
+            wHasBate.initYSprite,
             destRect,
-            wSettingBazooka.deltaPosX,
-            wSettingBazooka.deltaPosY));
+            wHasBate.deltaPosX,
+            wHasBate.deltaPosY));
 
-    m_SpritesMap.emplace(SpritesEnum::SPRITE_HAS_BAZOOKA, getWaccuseAnimation(
-            wHasBazooka.spritePath,
-            wHasBazooka.blendMode,
-            wHasBazooka.frames,
-            wHasBazooka.distanceBetweenFrames,
-            wHasBazooka.frameWidth,
-            wHasBazooka.frameHeight,
-            wHasBazooka.duration,
-            wHasBazooka.srcRect,
-            wHasBazooka.initYSprite,
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_HAS_BATE_POSITIVE_ANGLES, getWaccuseAnimation(
+            batePositiveAngles.spritePath,
+            batePositiveAngles.blendMode,
+            batePositiveAngles.frames,
+            batePositiveAngles.distanceBetweenFrames,
+            batePositiveAngles.frameWidth,
+            batePositiveAngles.frameHeight,
+            batePositiveAngles.duration,
+            batePositiveAngles.srcRect,
+            batePositiveAngles.initYSprite,
             destRect,
-            wHasBazooka.deltaPosX,
-            wHasBazooka.deltaPosY));
-    m_SpritesMap.emplace(SpritesEnum::SPRITE_SAVING_BAZOOKA, getWaccuseAnimation(
-            wSavingBazooka.spritePath,
-            wSavingBazooka.blendMode,
-            wSavingBazooka.frames,
-            wSavingBazooka.distanceBetweenFrames,
-            wSavingBazooka.frameWidth,
-            wSavingBazooka.frameHeight,
-            wSavingBazooka.duration,
-            wSavingBazooka.srcRect,
-            wSavingBazooka.initYSprite,
+            batePositiveAngles.deltaPosX,
+            batePositiveAngles.deltaPosY));
+
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_HAS_BATE_NEGATIVE_ANGLES, getWaccuseAnimation(
+            bateNegativeAngles.spritePath,
+            bateNegativeAngles.blendMode,
+            bateNegativeAngles.frames,
+            bateNegativeAngles.distanceBetweenFrames,
+            bateNegativeAngles.frameWidth,
+            bateNegativeAngles.frameHeight,
+            bateNegativeAngles.duration,
+            bateNegativeAngles.srcRect,
+            bateNegativeAngles.initYSprite,
             destRect,
-            wSavingBazooka.deltaPosX,
-            wSavingBazooka.deltaPosY));
+            bateNegativeAngles.deltaPosX,
+            bateNegativeAngles.deltaPosY));
+
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_ATTACK_BATE_NORMAL, getWaccuseAnimation(
+            wNormalAttackBate.spritePath,
+            wNormalAttackBate.blendMode,
+            wNormalAttackBate.frames,
+            wNormalAttackBate.distanceBetweenFrames,
+            wNormalAttackBate.frameWidth,
+            wNormalAttackBate.frameHeight,
+            wNormalAttackBate.duration,
+            wNormalAttackBate.srcRect,
+            wNormalAttackBate.initYSprite,
+            destRect,
+            wNormalAttackBate.deltaPosX,
+            wNormalAttackBate.deltaPosY));
+
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_ATTACK_BATE_POSITIVE_ANGLES, getWaccuseAnimation(
+            wPositiveAnglesAttackBate.spritePath,
+            wPositiveAnglesAttackBate.blendMode,
+            wPositiveAnglesAttackBate.frames,
+            wPositiveAnglesAttackBate.distanceBetweenFrames,
+            wPositiveAnglesAttackBate.frameWidth,
+            wPositiveAnglesAttackBate.frameHeight,
+            wPositiveAnglesAttackBate.duration,
+            wPositiveAnglesAttackBate.srcRect,
+            wPositiveAnglesAttackBate.initYSprite,
+            destRect,
+            wPositiveAnglesAttackBate.deltaPosX,
+            wPositiveAnglesAttackBate.deltaPosY));
+
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_ATTACK_BATE_NEGATIVE_ANGLES, getWaccuseAnimation(
+            wNegativeAnglesAttackBate.spritePath,
+            wNegativeAnglesAttackBate.blendMode,
+            wNegativeAnglesAttackBate.frames,
+            wNegativeAnglesAttackBate.distanceBetweenFrames,
+            wNegativeAnglesAttackBate.frameWidth,
+            wNegativeAnglesAttackBate.frameHeight,
+            wNegativeAnglesAttackBate.duration,
+            wNegativeAnglesAttackBate.srcRect,
+            wNegativeAnglesAttackBate.initYSprite,
+            destRect,
+            wNegativeAnglesAttackBate.deltaPosX,
+            wNegativeAnglesAttackBate.deltaPosY));
 
     for (auto& sprite : m_SpritesMap) {
         sprite.second->init();
@@ -250,8 +331,16 @@ void Worm::init() {
 }
 
 void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
-    m_CurrentSprite = gameUpdate.m_CurrentSprite;
-    m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
+    m_LastUpdate = gameUpdate;
+    if (gameUpdate.m_CurrentSprite == SpritesEnum::SPRITE_HAS_BATE) {
+        updateBateAttack(elapsedSeconds, gameUpdate);
+    } else if (gameUpdate.m_CurrentSprite == SpritesEnum::SPRITE_ATTACK_BATE) {
+        updateBateHeat(elapsedSeconds, gameUpdate);
+    }
+    else {
+        m_CurrentSprite = gameUpdate.m_CurrentSprite;
+        m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
+    }
 
     if (gameUpdate.m_Movement != GameAction::INVALID_ACTION) {
         m_Dir = gameUpdate.m_Dir;
@@ -265,12 +354,38 @@ void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
     }
 }
 
+void Worm::updateBateAttack(double elapsedSeconds, const GameUpdate &gameUpdate) {
+    HasBate hasBate;
+    float angle = gameUpdate.m_WeaponAngle;
+    int pickedFrame = -1;
+    if (angle > 0) {
+        pickedFrame = static_cast<int>(angle / hasBate.unitAngle);
+        m_CurrentSprite = SpritesEnum::SPRITE_HAS_BATE_POSITIVE_ANGLES;
+    } else if (angle < 0) {
+        float normalizedAngle = angle + 90;
+        pickedFrame = static_cast<int>(normalizedAngle / 6);
+        m_CurrentSprite = SpritesEnum::SPRITE_HAS_BATE_NEGATIVE_ANGLES;
+    } else {
+        m_CurrentSprite = SpritesEnum::SPRITE_HAS_BATE_INIT_POSITION;
+    }
+    m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds, pickedFrame);
+}
+
 void Worm::render() {
     bool isFlip = true;
     if (m_Dir == Direction::LEFT) {
         isFlip = false;
     }
-    m_SpritesMap.at(m_CurrentSprite)->render(isFlip);
+    bool bateAttack = m_LastUpdate.m_CurrentSprite == SPRITE_ATTACK_BATE;
+    std::unique_ptr<Animation> &anim = m_SpritesMap.at(m_CurrentSprite);
+    if (bateAttack) {
+        m_Dir == Direction::LEFT ? anim->setDestRect({anim->getDestRect().x - 20, anim->getDestRect().y, anim->getFrameWidth(), anim->getFrameHeight()})
+                                 : anim->setDestRect({anim->getDestRect().x + 20, anim->getDestRect().y, anim->getFrameWidth(), anim->getFrameHeight()});
+        anim->render(isFlip);
+    } else {
+        anim->render(isFlip);
+    }
+    //m_SpritesMap.at(m_CurrentSprite)->render(isFlip);
 }
 
 std::unique_ptr<Animation> Worm::getWaccuseAnimation(const std::string& spritePath, BlendMode blendMode, int frames,
@@ -282,34 +397,35 @@ std::unique_ptr<Animation> Worm::getWaccuseAnimation(const std::string& spritePa
                                                     deltaPosX, deltaPosY));
 }
 
-void Worm::renderDie() {
-    /*BlobSkin blobSkin;
-    Animation* explotion = new Animation(blobSkin.spritePath,
-                                         m_Renderer,
-                                         blobSkin.blendMode,
-                                         blobSkin.frames,
-                                         blobSkin.distanceBetweenFrames,
-                                         blobSkin.frameWidth,
-                                         blobSkin.frameHeight,
-                                         blobSkin.duration,
-                                         blobSkin.srcRect,
-                                         blobSkin.initYSprite,
-                                         {static_cast<int>(m_WormXPosition), static_cast<int>(m_WormYPosition),
-                                          blobSkin.frameWidth, blobSkin.frameHeight},
-                                         blobSkin.deltaPosX,
-                                         blobSkin.deltaPosY);
-    explotion->init();
-    explotion.*/
-
-}
-
 void Worm::update(double elapsedSeconds) {
     Animation* anim = m_SpritesMap.at(m_CurrentSprite).get();
     float tempX = WorldScale::worldToPixelX(m_WormXPosition, anim->getDeltaPosX());
     float tempY = WorldScale::worldToPixelY(m_WormYPosition, anim->getDeltaPosY());
     anim->setDestRect({static_cast<int>(tempX), static_cast<int>(tempY), anim->getFrameWidth(),
                        anim->getFrameHeight()});
-    m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
+    if (m_LastUpdate.m_CurrentSprite == SPRITE_HAS_BATE) {
+        updateBateAttack(elapsedSeconds, m_LastUpdate);
+    } else {
+        m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
+    }
+}
+
+void Worm::updateBateHeat(double seconds, const GameUpdate &update) {
+    HasBate hasBate;
+    NormalAttackBate normalAttackBate;
+    float angle = update.m_WeaponAngle;
+    int pickedFrame = -1;
+    if (angle > 0) {
+        pickedFrame = static_cast<int>(angle / hasBate.unitAngle);
+        m_CurrentSprite = SpritesEnum::SPRITE_ATTACK_BATE_POSITIVE_ANGLES;
+    } else if (angle < 0) {
+        float normalizedAngle = angle + 90;
+        pickedFrame = static_cast<int>(normalizedAngle / 6);
+        m_CurrentSprite = SpritesEnum::SPRITE_ATTACK_BATE_NEGATIVE_ANGLES;
+    } else {
+        m_CurrentSprite = SpritesEnum::SPRITE_ATTACK_BATE_NORMAL;
+    }
+    m_SpritesMap.at(m_CurrentSprite)->update(seconds, pickedFrame);
 }
 
 
