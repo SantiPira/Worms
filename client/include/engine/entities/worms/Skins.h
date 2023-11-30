@@ -253,6 +253,7 @@ struct PositiveAnglesAttackBate {
     int initYSprite = 960;
     float deltaPosX = 75.0f;
     float deltaPosY = 70.0f;
+};
 
 struct SettingBazooka {
     const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wbazlnk.png");
@@ -309,4 +310,3 @@ struct NegativeAnglesAttackBate {
     float deltaPosX = 85.0f;
     float deltaPosY = 35.0f;
 };
-

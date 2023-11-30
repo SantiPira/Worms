@@ -43,11 +43,11 @@ void EventSender::run() {
                 m_WeaponId = WeaponID::BATE;
                 userAction = {ActionType::SET_WEAPON, m_IdPlayer, m_WeaponId};
             } else if (key == SDLK_DOWN) {
-                if (m_WeaponId == WeaponID::BATE) {
+                if (m_WeaponId == WeaponID::BATE || m_WeaponId == WeaponID::BAZOOKA) {
                     userAction = {ActionType::DECREASE_ANGLE, m_IdPlayer};
                 }
             } else if (key == SDLK_UP) {
-                if (m_WeaponId == WeaponID::BATE) {
+                if (m_WeaponId == WeaponID::BATE || m_WeaponId == WeaponID::BAZOOKA) {
                     userAction = {ActionType::INCREASE_ANGLE, m_IdPlayer};
                 }
             } else {
