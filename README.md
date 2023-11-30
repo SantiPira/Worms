@@ -1,5 +1,5 @@
 # Worms
-
+IMPORTANTE REVISAR LICENSE GOOGLE FONTS
 ## Cosas por hacer
 - Refactor parse map para que lea tambien gusanos y agua
 - Colision entre gusanos, no se porque no esta funcionando al 100%. A veces se mueven los dos, a veces solo uno

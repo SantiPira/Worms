@@ -13,8 +13,13 @@ struct GameProperty {
     int m_PlayersConnected{};
     int m_Players{};
     int m_IdPlayer = 0;
+    std::string m_PlayerName{};
+
     GameProperty(int idGame, std::string gameName, std::string mapName, int playersConnected, int players);
-    GameProperty(int idGame, std::string gameName, std::string mapName, int playersConnected, int players, int idPlayer);
+    GameProperty(int idGame, std::string gameName, std::string mapName, int playersConnected, int players,
+                 std::string playerName);
+    GameProperty(int idGame, std::string gameName, std::string mapName, int playersConnected, int players, int idPlayer,
+                 std::string playerName);
     explicit GameProperty(int idPlayer) : m_IdPlayer(idPlayer) {}
 };
 

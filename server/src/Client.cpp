@@ -46,7 +46,8 @@ void Client::lobbyGame() {
                 m_IdGame = m_Matches->createGame(clientResponse.getGameProperties()[0].m_GameName,
                                                  clientResponse.getGameProperties()[0].m_MapName,
                                                  clientResponse.getGameProperties()[0].m_Players);
-                m_IdPlayer = m_Matches->addPlayer(m_IdGame, &m_UpdatesGame);
+                m_PlayerName = clientResponse.getGameProperties()[0].m_PlayerName;
+                m_IdPlayer = m_Matches->addPlayer(m_IdGame, &m_UpdatesGame, std::ref(m_PlayerName));
                 GameInfo response(InitGameEnum::ID_PLAYER, m_IdPlayer);
                 m_Protocol.sendGameInfo(response);
                 m_InputActions = m_Matches->getInputActionGame(m_IdGame);
@@ -55,7 +56,8 @@ void Client::lobbyGame() {
             }
             case JOIN_GAME: {
                 m_IdGame = clientResponse.getGameProperties()[0].m_idGame;
-                m_IdPlayer = m_Matches->addPlayer(m_IdGame, &m_UpdatesGame);
+                m_PlayerName = clientResponse.getGameProperties()[0].m_PlayerName;
+                m_IdPlayer = m_Matches->addPlayer(m_IdGame, &m_UpdatesGame, std::ref(m_PlayerName));
                 GameInfo response(InitGameEnum::ID_PLAYER, m_IdPlayer);
                 m_Protocol.sendGameInfo(response);
                 m_InputActions = m_Matches->getInputActionGame(m_IdGame);

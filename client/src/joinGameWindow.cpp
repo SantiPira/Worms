@@ -4,6 +4,9 @@ JoinGameWindow::JoinGameWindow(QWidget *parent, Juego* juego) : QWidget(parent),
     QVBoxLayout *layout = new QVBoxLayout();
 
     auto gamesInfo = m_Juego->getGamesInfo();
+    layout->addWidget(new QLabel("Nombre del jugador:"));
+    m_EditPlayerName.setPlaceholderText("Ingrese su nombre");
+    layout->addWidget(&m_EditPlayerName);
         
     QListWidget *listWidget = new QListWidget();
 
@@ -26,9 +29,9 @@ JoinGameWindow::JoinGameWindow(QWidget *parent, Juego* juego) : QWidget(parent),
 }
 
 void JoinGameWindow::slotJoinGame(QListWidgetItem *selectedItem) {
-    //select partida.m_idGame
     int id = selectedItem->data(Qt::UserRole).toInt();
-    m_Juego->joinGame(id, m_GameProperties.at(id).m_Players);
+    QString playerName = m_EditPlayerName.text();
+    m_Juego->joinGame(id, m_GameProperties.at(id).m_Players, playerName.toStdString());
 
     this->close();
 }

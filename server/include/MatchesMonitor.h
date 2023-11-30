@@ -15,7 +15,7 @@ class MatchesMonitor {
     void removeGame(int id);
     std::string getMapName(int idGame);
     std::vector<GameProperty> getGameProperties();
-    int addPlayer(int id, ProtectedQueue<GameUpdate>* qClientUpdates);
+    int addPlayer(int id, ProtectedQueue<GameUpdate>* qClientUpdates, std::string& playerName);
     ProtectedQueue<UserAction>* getInputActionGame(int idGame);
     ~MatchesMonitor() = default;
 

@@ -1,4 +1,6 @@
 #include "client_juego.h"
+
+#include <utility>
 #include "menuWindow.h"
 
 GameInfo Juego::getGamesInfo(){
@@ -23,9 +25,10 @@ void Juego::menu_window(){
     menu->show();
 }
 
-void Juego::createGame(const std::string& mapa, const std::string& nombre, const std::string& cantidad_jugadores) {
+void Juego::createGame(const std::string& mapa, const std::string& nombre, const std::string& playerName,
+                       const std::string& cantidad_jugadores) {
     m_Players = std::stoi(cantidad_jugadores);
-    GameProperty gameProperty(0, nombre, mapa, 0, std::stoi(cantidad_jugadores));
+    GameProperty gameProperty(0, nombre, mapa, 0, std::stoi(cantidad_jugadores), playerName);
     GameInfo gameInfo(InitGameEnum::CREATE_GAME, {gameProperty});
     m_Protocol.sendGameInfo(std::ref(gameInfo));
     GameInfo serverResponse = m_Protocol.recvGameInfo();
@@ -38,9 +41,9 @@ void Juego::createGame(const std::string& mapa, const std::string& nombre, const
     std::cout<<"La cantidad de jugadores es: "<<cantidad_jugadores<<std::endl;
 }
 
-void Juego::joinGame(int idGame, int players) {
+void Juego::joinGame(int idGame, int players, std::string playerName) {
     m_Players = players;
-    GameProperty gameProperty(idGame, "", "", 0, 0);
+    GameProperty gameProperty(idGame, "", "", 0, 0, std::move(playerName));
     GameInfo gameInfo(InitGameEnum::JOIN_GAME, {gameProperty});
     m_Protocol.sendGameInfo(std::ref(gameInfo));
     GameInfo serverResponse = m_Protocol.recvGameInfo();

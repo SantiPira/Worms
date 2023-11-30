@@ -43,8 +43,8 @@ void GameWorld::StartWorld() {
     staticBody->CreateFixture(&myFixtureDef);
 }
 
-void GameWorld::SetWorm(const int& player_number, const float & x_pos, const float& y_pos) {
-    auto* wormEntity = new WWorm(&m_world, player_number, x_pos, y_pos, x_pos <= width/2, m_WormCategory,
+void GameWorld::SetWorm(const int& player_number, const std::string& playerName, const float & x_pos, const float& y_pos) {
+    auto* wormEntity = new WWorm(&m_world, playerName, player_number, x_pos, y_pos, x_pos <= width/2, m_WormCategory,
                                  {m_WaterCategory});
     worms.insert(std::make_pair(player_number, wormEntity));
     wormsPositions.insert(std::make_pair(player_number, b2Vec2(x_pos, y_pos)));

@@ -25,6 +25,10 @@ CreateGameWindow::CreateGameWindow(QWidget *parent, Juego* juego) : QWidget(pare
     layoutV->addWidget(new QLabel("Nombre de la partida:"));
     layoutV->addWidget(&this->editGameName);
 
+    // Crear widget para name del player
+    editPlayerName.setPlaceholderText("Nombre del jugador");
+    layoutV->addWidget(&editPlayerName);
+
     comboBoxPlayers = new QComboBox();
     comboBoxPlayers->addItem("1");
     comboBoxPlayers->addItem("2");
@@ -48,7 +52,9 @@ void CreateGameWindow::slotCreateGame() {
     QString mapa_seleccionado = this->comboBoxMapa->currentText();
     QString name = this->editGameName.text();
     QString amountPlayers = this->comboBoxPlayers->currentText();
+    QString playerName = this->editPlayerName.text();
 
-    m_Juego->createGame(mapa_seleccionado.toStdString(), name.toStdString(), amountPlayers.toStdString());
+    m_Juego->createGame(mapa_seleccionado.toStdString(), name.toStdString(), playerName.toStdString(),
+                        amountPlayers.toStdString());
     this->close();
 }

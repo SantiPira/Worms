@@ -24,9 +24,9 @@ int MatchesMonitor::createGame(std::string gameName, std::string mapName, int pl
     return id;
 }
 
-int MatchesMonitor::addPlayer(int id, ProtectedQueue<GameUpdate>* qClientUpdates) {
+int MatchesMonitor::addPlayer(int id, ProtectedQueue<GameUpdate>* qClientUpdates, std::string& playerName) {
     std::lock_guard<std::mutex> lock(m_Mutex);
-    return m_Games.at(id)->addPlayer(qClientUpdates);
+    return m_Games.at(id)->addPlayer(qClientUpdates, std::ref(playerName));
 }
 
 ProtectedQueue<UserAction> *MatchesMonitor::getInputActionGame(int idGame) {

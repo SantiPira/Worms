@@ -1,8 +1,9 @@
 #include "engine/entities/worms/Worm.h"
 
-Worm::Worm(SDL_Renderer *renderer, float posX, float posY, float width, float height)
-        : m_Renderer(renderer), m_WormXPosition(posX),
-          m_WormYPosition(posY), m_Widht(WorldScale::toPixel(width)), m_Height(WorldScale::toPixel(height)) {}
+Worm::Worm(int idPlayer, std::string playerName, SDL_Renderer *renderer, float posX, float posY, float width,
+           float height) : m_IdPlayer(idPlayer), m_PlayerName(std::move(playerName)), m_Renderer(renderer),
+           m_WormXPosition(posX), m_WormYPosition(posY), m_Widht(WorldScale::toPixel(width)),
+           m_Height(WorldScale::toPixel(height)) {}
 
 void Worm::init() {
         m_CurrentSprite = SpritesEnum::SPRITE_WACCUSE_IDLE;
@@ -33,6 +34,18 @@ void Worm::init() {
                 static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
                 static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)),
                 static_cast<int>(m_Widht), static_cast<int>(m_Height)
+        };
+
+    m_NameDestRect = {
+                static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
+                static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)) - 20,
+                static_cast<int>(FONT_SIZE), static_cast<int>(FONT_SIZE)
+        };
+
+    m_HealthDestRect = {
+                static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
+                static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)) - 10,
+                static_cast<int>(FONT_SIZE), static_cast<int>(FONT_SIZE)
         };
 
 
@@ -333,8 +346,10 @@ void Worm::init() {
 void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
     m_LastUpdate = gameUpdate;
     if (gameUpdate.m_CurrentSprite == SpritesEnum::SPRITE_HAS_BATE) {
+        m_Health = static_cast<int>(gameUpdate.m_Health);
         updateBateAttack(elapsedSeconds, gameUpdate);
     } else if (gameUpdate.m_CurrentSprite == SpritesEnum::SPRITE_ATTACK_BATE) {
+        m_Health = static_cast<int>(gameUpdate.m_Health);
         updateBateHeat(elapsedSeconds, gameUpdate);
     }
     else {
@@ -343,6 +358,7 @@ void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
     }
 
     if (gameUpdate.m_Movement != GameAction::INVALID_ACTION) {
+        m_Health = static_cast<int>(gameUpdate.m_Health);
         m_Dir = gameUpdate.m_Dir;
         Animation* anim = m_SpritesMap.at(m_CurrentSprite).get();
         float tempX = WorldScale::worldToPixelX(gameUpdate.x_pos, anim->getDeltaPosX());
@@ -351,6 +367,16 @@ void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
                            anim->getFrameHeight()});
         m_WormXPosition = gameUpdate.x_pos;
         m_WormYPosition = gameUpdate.y_pos;
+        m_HealthDestRect = {
+                static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
+                static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)) - 10,
+                static_cast<int>(FONT_SIZE), static_cast<int>(FONT_SIZE)
+        };
+        m_NameDestRect = {
+                static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
+                static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)) - 20,
+                static_cast<int>(FONT_SIZE), static_cast<int>(FONT_SIZE)
+        };
     }
 }
 
@@ -385,7 +411,7 @@ void Worm::render() {
     } else {
         anim->render(isFlip);
     }
-    //m_SpritesMap.at(m_CurrentSprite)->render(isFlip);
+    renderInfoWorm();
 }
 
 std::unique_ptr<Animation> Worm::getWaccuseAnimation(const std::string& spritePath, BlendMode blendMode, int frames,
@@ -427,5 +453,36 @@ void Worm::updateBateHeat(double seconds, const GameUpdate &update) {
     }
     m_SpritesMap.at(m_CurrentSprite)->update(seconds, pickedFrame);
 }
+
+void Worm::renderInfoWorm() {
+    TTF_Font* font = TTF_OpenFont(std::filesystem::current_path()
+            .concat("/resources/Fonts/Orbitron-SemiBold.ttf").c_str(), 20);
+
+    // Crear color para el texto
+    SDL_Color textColor = {0, 0, 0, 255}; // BLACK
+
+    // Convertir el nombre del jugador a SDL_Texture
+    SDL_Surface* playerNameSurface = TTF_RenderText_Solid(font, m_PlayerName.c_str(), textColor);
+    SDL_Texture* playerNameTexture = SDL_CreateTextureFromSurface(m_Renderer, playerNameSurface);
+
+    // Renderizar el nombre del jugador
+    SDL_RenderCopy(m_Renderer, playerNameTexture, NULL, &m_NameDestRect);
+
+    // Convertir la vida a SDL_Texture
+    std::string healthStr = std::to_string(m_Health);
+    SDL_Surface* healthSurface = TTF_RenderText_Solid(font, healthStr.c_str(), textColor);
+    SDL_Texture* healthTexture = SDL_CreateTextureFromSurface(m_Renderer, healthSurface);
+
+    // Renderizar la vida
+    SDL_RenderCopy(m_Renderer, healthTexture, NULL, &m_HealthDestRect);
+
+    // Limpiar
+    SDL_FreeSurface(playerNameSurface);
+    SDL_DestroyTexture(playerNameTexture);
+    SDL_FreeSurface(healthSurface);
+    SDL_DestroyTexture(healthTexture);
+    TTF_CloseFont(font);
+}
+
 
 

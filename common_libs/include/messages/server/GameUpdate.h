@@ -5,9 +5,11 @@
 #include "messages/user_actions/ActionType.h"
 #include "messages/sprites/SpritesEnum.h"
 #include <unordered_set>
+#include <string>
 
 struct GameUpdate {
     uint8_t player_id;
+    std::string m_PlayerName;
     float x_pos;
     float y_pos;
     float width;

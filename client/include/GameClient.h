@@ -18,6 +18,7 @@
 class GameClient {
  private:
     int m_IdPlayer;
+//    std::string m_PlayerName;
 
     SDL_Window *_window;
     SDL_Renderer *_renderer;

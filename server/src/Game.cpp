@@ -78,16 +78,18 @@ int Game::getPlayers() const {
     return m_Players;
 }
 
-int Game::addPlayer(ProtectedQueue<GameUpdate> *qClientUpdates) {
+int Game::addPlayer(ProtectedQueue<GameUpdate> *qClientUpdates, std::string& playerName) {
     if(this->isReadyToStart()) {
         return -1;
     } else {
         m_QClientUpdates.insert(std::make_pair(m_QClientUpdates.size(), qClientUpdates));
+        int idPlayer = m_QClientUpdates.size() - 1;
+        m_PlayersInfo.insert(std::make_pair(idPlayer, std::ref(playerName)));
         if (isReadyToStart()) {
             m_HasStarted = true;
             start();
         }
-        return m_QClientUpdates.size() - 1;
+        return idPlayer;
     }
 }
 
@@ -135,7 +137,7 @@ void Game::setupWorld() {
     this->world.Setup();
     for (auto& clientId : m_QClientUpdates) {
         float randPosX = static_cast<float>(rand() % 20);
-        world.SetWorm(clientId.first,randPosX, 11.0f);//cambiar por posicion random
+        world.SetWorm(clientId.first, m_PlayersInfo.at(clientId.first), randPosX, 11.0f);//cambiar por posicion random
     }
 }
 

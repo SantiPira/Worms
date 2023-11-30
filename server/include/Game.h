@@ -1,7 +1,7 @@
 #pragma once
 
 #include <atomic>
-#include <unordered_set>
+#include <unordered_map>
 #include "../../common_libs/include/Thread.h"
 #include "world/GameWorld.h"
 #include "messages/user_actions/UserAction.h"
@@ -20,6 +20,7 @@ class Game : public Thread {
     int m_PopMessageQuantity;
     GameWorld world;
     ActionType m_BrokeAction;
+    std::unordered_map<int, std::string&> m_PlayersInfo;
 
 public:
     Game(int id, std::string gameName, std::string mapName, int players);
@@ -28,7 +29,7 @@ public:
     std::string getGameName() const;
     std::string getMapName() const;
     int getPlayers() const;
-    int addPlayer(ProtectedQueue<GameUpdate>* qClientUpdates);
+    int addPlayer(ProtectedQueue<GameUpdate>* qClientUpdates, std::string& playerName);
     ProtectedQueue<UserAction>* getInputActions();
     void stop();
     ~Game() override = default;

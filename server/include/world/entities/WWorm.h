@@ -19,6 +19,7 @@
 class WWorm : public WEntity {
 private:
     uint8_t m_Id;
+    std::string m_PlayerName;
     b2World* m_World{};
     b2Body* m_Body{};
     float m_Width{};
@@ -56,10 +57,9 @@ public:
     b2Body* proyectil;
 
 public:
-    WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRight, uint16_t wormCategory,
+    WWorm(b2World* world, std::string playerName, uint8_t id, float posX, float posY, bool isFacingRight, uint16_t wormCategory,
           const std::vector<uint16_t>& categories);
 
-    WWorm();
     [[maybe_unused]] [[nodiscard]] uint8_t getId() const;
     [[nodiscard]] b2Body* getBody() const;
     [[nodiscard]] b2Vec2 getPosition() const;

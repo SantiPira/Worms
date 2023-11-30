@@ -21,6 +21,7 @@ public:
 private:
     QPushButton buttonCreateGame;
     QLineEdit editGameName;
+    QLineEdit m_EditPlayerName;
     int idGame{};
     std::unordered_map<int, GameProperty> m_GameProperties;
 

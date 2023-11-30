@@ -84,6 +84,7 @@ void Protocol::sendGameInfo(GameInfo& gameInfo) {
         sendByte(gameProperty.m_PlayersConnected);
         sendByte(gameProperty.m_Players);
         sendByte(gameProperty.m_IdPlayer);
+        sendString(gameProperty.m_PlayerName);
     }
 }
 
@@ -100,6 +101,7 @@ void Protocol::sendMap(std::reference_wrapper<std::vector<Grd>> map) {
 
 void Protocol::sendGameUpdate(GameUpdate &update) {
     sendByte(update.player_id);
+    sendString(update.m_PlayerName);
     sendFloat(update.x_pos);
     sendFloat(update.y_pos);
     sendFloat(update.width);
@@ -130,7 +132,8 @@ GameInfo Protocol::recvGameInfo() {
         int players = recvByte();
         int playersConnected = recvByte();
         int idPlayer = recvByte();
-        gameProperties.emplace_back(idGame, gameName, mapName, players, playersConnected, idPlayer);
+        std::string playerName = recvString();
+        gameProperties.emplace_back(idGame, gameName, mapName, players, playersConnected, idPlayer, playerName);
     }
     gameInfo.setGameProperties(gameProperties);
     return gameInfo;
@@ -153,6 +156,7 @@ std::vector<Grd> Protocol::recvMap() {
 GameUpdate Protocol::recvGameUpdate() {
     GameUpdate update{};
     update.player_id = recvByte();
+    update.m_PlayerName = recvString();
     update.x_pos = recvFloat();
     update.y_pos = recvFloat();
     update.width = recvFloat();

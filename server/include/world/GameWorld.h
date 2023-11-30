@@ -50,7 +50,7 @@ public:
     explicit GameWorld(const std::string &map_path);
     void Setup();
     void StartWorld();
-    void SetWorm(const int& player_number, const float & x_pos, const float& y_pos);
+    void SetWorm(const int& player_number, const std::string& playerName, const float & x_pos, const float& y_pos);
     void execute(IWormInstruction* instruction, int playerId);
     std::vector<GameUpdate> getWormsUpdates(bool getAll) const;
 

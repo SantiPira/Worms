@@ -25,11 +25,12 @@ class Juego{
 
     explicit Juego(const std::string& ip, const std::string& puerto, WaitingWindow* waitingWindow);
 
-    void joinGame(int idGame, int cantPlayers);
+    void joinGame(int idGame, int cantPlayers, std::string playerName);
 
     GameInfo getGamesInfo();
 
-    void createGame(const std::string& mapa, const std::string& nombre, const std::string& cantidad_jugadores);
+    void createGame(const std::string& mapa, const std::string& nombre, const std::string& playerName,
+                    const std::string& cantidad_jugadores);
 
     void menu_window();
 

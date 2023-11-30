@@ -1,8 +1,8 @@
 #include "world/entities/WWorm.h"
 
-WWorm::WWorm() : m_Id(0xFF) {}
+#include <utility>
 
-WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRight, uint16_t wormCategory,
+WWorm::WWorm(b2World* world, std::string playerName, uint8_t id, float posX, float posY, bool isFacingRight, uint16_t wormCategory,
              const std::vector<uint16_t>& categories) {
     m_World = world;
     m_Width = 0.50f; //Valores cargados por config?
@@ -33,6 +33,7 @@ WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRi
     m_WasChanged = true;
 
     this->m_Id = id;
+    this->m_PlayerName = std::move(playerName);
     this->m_Position = b2Vec2_zero;
     this->m_Velocity = b2Vec2_zero;
     this->m_Angle = 0;
@@ -174,6 +175,7 @@ void WWorm::setIsShooting(bool isShooting) {
 GameUpdate WWorm::getUpdate(bool wormChanged) {
     GameUpdate currentState;
     currentState.player_id = m_Id;
+    currentState.m_PlayerName = m_PlayerName;
     currentState.x_pos = getPosition().x;
     currentState.y_pos = getPosition().y;
     currentState.width = m_Width * 2;

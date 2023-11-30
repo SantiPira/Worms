@@ -22,7 +22,7 @@ private:
     QLineEdit editGameName;
     QComboBox *comboBoxMapa;
     QComboBox *comboBoxPlayers;
-
+    QLineEdit editPlayerName;
 public slots:
     void slotCreateGame();
 };
