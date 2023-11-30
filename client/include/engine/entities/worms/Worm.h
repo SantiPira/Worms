@@ -17,7 +17,13 @@
 #include <utility>
 #include <SDL_ttf.h>
 
-#define FONT_SIZE 17
+#define FONT_SIZE 20
+#define HEALTH_WIDTH_FONT 25
+#define HEALTH_HEIGHT_FONT 25
+#define HEALTH_RECT_Y 15
+#define NAME_RECT_Y 30
+#define NAME_WIDTH_FONT 30
+#define NAME_HEIGHT_FONT 20
 
 class Worm {
  private:

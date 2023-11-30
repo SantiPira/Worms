@@ -38,14 +38,14 @@ void Worm::init() {
 
     m_NameDestRect = {
                 static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
-                static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)) - 20,
-                static_cast<int>(FONT_SIZE), static_cast<int>(FONT_SIZE)
+                static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)) - NAME_RECT_Y,
+                static_cast<int>(NAME_WIDTH_FONT), static_cast<int>(NAME_HEIGHT_FONT)
         };
 
     m_HealthDestRect = {
                 static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
-                static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)) - 10,
-                static_cast<int>(FONT_SIZE), static_cast<int>(FONT_SIZE)
+                static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)) - HEALTH_RECT_Y,
+                static_cast<int>(HEALTH_WIDTH_FONT), static_cast<int>(HEALTH_HEIGHT_FONT)
         };
 
 
@@ -369,13 +369,13 @@ void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
         m_WormYPosition = gameUpdate.y_pos;
         m_HealthDestRect = {
                 static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
-                static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)) - 10,
-                static_cast<int>(FONT_SIZE), static_cast<int>(FONT_SIZE)
+                static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)) - HEALTH_RECT_Y,
+                static_cast<int>(HEALTH_WIDTH_FONT), static_cast<int>(HEALTH_HEIGHT_FONT)
         };
         m_NameDestRect = {
                 static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
-                static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)) - 20,
-                static_cast<int>(FONT_SIZE), static_cast<int>(FONT_SIZE)
+                static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)) - NAME_RECT_Y,
+                static_cast<int>(NAME_WIDTH_FONT), static_cast<int>(NAME_HEIGHT_FONT)
         };
     }
 }
@@ -456,7 +456,7 @@ void Worm::updateBateHeat(double seconds, const GameUpdate &update) {
 
 void Worm::renderInfoWorm() {
     TTF_Font* font = TTF_OpenFont(std::filesystem::current_path()
-            .concat("/resources/Fonts/Orbitron-SemiBold.ttf").c_str(), 20);
+            .concat("/resources/Fonts/Orbitron-SemiBold.ttf").c_str(), 25);
 
     // Crear color para el texto
     SDL_Color textColor = {0, 0, 0, 255}; // BLACK
