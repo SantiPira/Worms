@@ -458,31 +458,22 @@ void Worm::renderInfoWorm() {
     TTF_Font* font = TTF_OpenFont(std::filesystem::current_path()
             .concat("/resources/Fonts/Orbitron-SemiBold.ttf").c_str(), 25);
 
-    // Crear color para el texto
-    SDL_Color textColor = {0, 0, 0, 255}; // BLACK
+    SDL_Color textColor = {0, 0, 0, 255};
 
-    // Convertir el nombre del jugador a SDL_Texture
     SDL_Surface* playerNameSurface = TTF_RenderText_Solid(font, m_PlayerName.c_str(), textColor);
     SDL_Texture* playerNameTexture = SDL_CreateTextureFromSurface(m_Renderer, playerNameSurface);
 
-    // Renderizar el nombre del jugador
     SDL_RenderCopy(m_Renderer, playerNameTexture, NULL, &m_NameDestRect);
 
-    // Convertir la vida a SDL_Texture
     std::string healthStr = std::to_string(m_Health);
     SDL_Surface* healthSurface = TTF_RenderText_Solid(font, healthStr.c_str(), textColor);
     SDL_Texture* healthTexture = SDL_CreateTextureFromSurface(m_Renderer, healthSurface);
 
-    // Renderizar la vida
     SDL_RenderCopy(m_Renderer, healthTexture, NULL, &m_HealthDestRect);
 
-    // Limpiar
     SDL_FreeSurface(playerNameSurface);
     SDL_DestroyTexture(playerNameTexture);
     SDL_FreeSurface(healthSurface);
     SDL_DestroyTexture(healthTexture);
     TTF_CloseFont(font);
 }
-
-
-
