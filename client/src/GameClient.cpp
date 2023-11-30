@@ -17,9 +17,6 @@ void GameClient::Init(const std::vector<Grd>& beams, int idPlayer, std::vector<G
     }
 
     for (auto& gameUpdate : initInfo) {
-//        if (gameUpdate.player_id == m_IdPlayer) {
-//            m_PlayerName = gameUpdate.m_PlayerName;
-//        }
         auto* worm = new Worm(gameUpdate.player_id, gameUpdate.m_PlayerName, _renderer, gameUpdate.x_pos, gameUpdate.y_pos, gameUpdate.width, gameUpdate.height);
         worm->init();
         m_Worms.insert(std::make_pair(gameUpdate.player_id, worm));
