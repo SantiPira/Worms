@@ -8,25 +8,28 @@ void  ClientReceiver::run() {
     while (!m_Protocol.isClosed()) {
         auto gameUpdate = m_Protocol.recvGameUpdate();
         if (gameUpdate.m_TurnInfo != INVALID_ACTION) {
-            manageTurn(gameUpdate.m_TurnInfo, gameUpdate.player_id);
+            manageTurn(std::ref(gameUpdate), gameUpdate.player_id);
         } else {
             m_GameUpdates.push(gameUpdate);
         }
     }
 }
 
-void ClientReceiver::manageTurn(GameAction turnInfo, int id) {
+void ClientReceiver::manageTurn(const GameUpdate& turnInfo, int id) {
+    if (turnInfo.m_TurnInfo == START_TURN) {
+        m_GameUpdates.push(turnInfo);
+    }
     if (id != m_IdPlayer) {
-        if (turnInfo == START_TURN) {
+        if (turnInfo.m_TurnInfo == START_TURN) {
             std::cout << "Player " << id << " started turn" << std::endl;
-        } else if (turnInfo == END_TURN) {
+        } else if (turnInfo.m_TurnInfo == END_TURN) {
             std::cout << "Player " << id << " ended turn" << std::endl;
         }
         return;
     }
-    if (turnInfo == START_TURN) {
+    if (turnInfo.m_TurnInfo == START_TURN) {
         m_EventSender.setItsMyTurn(true);
-    } else if (turnInfo == END_TURN) {
+    } else if (turnInfo.m_TurnInfo == END_TURN) {
         m_EventSender.setItsMyTurn(false);
     } else {
         throw std::runtime_error("Invalid turn info");

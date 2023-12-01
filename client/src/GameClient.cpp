@@ -2,9 +2,11 @@
 
 #include <thread>
 #include <iostream>
+#include <utility>
 
 
-void GameClient::Init(const std::vector<Grd>& beams, int idPlayer, std::vector<GameUpdate>& initInfo) {
+void GameClient::Init(const std::vector<Grd>& beams, int idPlayer, std::vector<GameUpdate>& initInfo,
+                      const GameUpdate& turnInfo) {
     InitSDL();
     CreateWindowAndRender();
     InitMixerAndChunk();
@@ -44,7 +46,7 @@ void GameClient::Init(const std::vector<Grd>& beams, int idPlayer, std::vector<G
 
     //Corro el audio con el chunk.
     //mixer->PlayChannel(-1, *chunk, -1);
-
+    m_Timer = {turnInfo.m_PlayerName, turnInfo.player_id, turnInfo.m_SecondsPerTurn, {400, 10, 100, 70}, std::chrono::steady_clock::now()};
 }
 
 void GameClient::InitCamera() {
@@ -168,7 +170,29 @@ void GameClient::Render() {
         SDL_Rect weapons_list_dst_rect = {0, 0, 160, 64};
         weapons_list->render(&weapons_list_dst_rect, false);
     }
-    
+
+    auto now = std::chrono::steady_clock::now();
+    auto elapsedSeconds = std::chrono::duration_cast<std::chrono::seconds>(now - m_Timer.m_StartTime).count();
+    auto remainingSeconds = m_Timer.m_SecondsPerTurn - elapsedSeconds;
+
+    // Crear el texto del temporizador
+    std::stringstream ss;
+    ss << "Turn: " << m_Timer.m_PlayerTurnName << " " << remainingSeconds << "s";
+
+    // Crear una textura a partir del texto
+    TTF_Font* font = TTF_OpenFont(std::filesystem::current_path()
+                                          .concat("/resources/Fonts/Dhurjati-Regular.ttf").c_str(), 16);
+    SDL_Color textColor = {0, 0, 0, 255}; // Blanco
+    SDL_Surface* textSurface = TTF_RenderText_Solid(font, ss.str().c_str(), textColor);
+    SDL_Texture* textTexture = SDL_CreateTextureFromSurface(_renderer, textSurface);
+
+    // Renderizar la textura en m_TimerDestRect
+    SDL_RenderCopy(_renderer, textTexture, NULL, &m_Timer.m_TimerDestRect);
+
+    // Limpiar
+    SDL_FreeSurface(textSurface);
+    SDL_DestroyTexture(textTexture);
+    TTF_CloseFont(font);
 
     SDL_RenderPresent(_renderer);
 }
@@ -177,6 +201,14 @@ void GameClient::Release() {
     SDL_DestroyRenderer(_renderer);
     SDL_DestroyWindow(_window);
     SDL_Quit();
+}
+
+void GameClient::resetTurn(uint8_t idPlayer, std::string playerName, double secondsPerTurn) {
+    std::cout << "Seconds per turn: " << secondsPerTurn << std::endl;
+    m_Timer.m_IdPlayerTurn = idPlayer;
+    m_Timer.m_PlayerTurnName = std::move(playerName);
+    m_Timer.m_SecondsPerTurn = secondsPerTurn;
+    m_Timer.m_StartTime = std::chrono::steady_clock::now();
 }
 
 

@@ -48,7 +48,7 @@ private:
     void pushUpdatesToClients(std::reference_wrapper<std::vector<GameUpdate>> updates);
     void pushUpdateToClients(GameUpdate& update);
 
-    void sendInfoTurns(int playerId, GameAction infoTurn);
+    void sendInfoTurns(int playerId, double secondsPerTurn, GameAction infoTurn);
     void processTurns(TurnHandler& turnHandler, InstructionFactory& instructionFactory);
     void waitFrameTime();
 

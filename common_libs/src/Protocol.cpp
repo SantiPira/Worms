@@ -118,6 +118,7 @@ void Protocol::sendGameUpdate(GameUpdate &update) {
     sendByte(update.m_CurrentSprite);
     sendByte(update.m_TurnInfo);
     sendFloat(update.m_WeaponAngle);
+    sendByte(static_cast<uint8_t>(update.m_SecondsPerTurn));
 }
 
 GameInfo Protocol::recvGameInfo() {
@@ -173,6 +174,7 @@ GameUpdate Protocol::recvGameUpdate() {
     update.m_CurrentSprite = SpritesEnum(recvByte());
     update.m_TurnInfo = GameAction(recvByte());
     update.m_WeaponAngle = recvFloat();
+    update.m_SecondsPerTurn = static_cast<double>(recvByte());
     return update;
 }
 
@@ -203,7 +205,4 @@ UserAction Protocol::recvUserAction() {
     userAction.setParam2(recvByte());
     return userAction;
 }
-
-
-
 

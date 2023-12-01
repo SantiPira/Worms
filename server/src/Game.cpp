@@ -13,9 +13,8 @@ void Game::run() {
     for (int i = 0; i < m_Players; i++) {
         idPlayers.push_back(i);
     }
-    sendInfoTurns(0, GameAction::START_TURN);
-
     TurnHandler turnHandler(0, idPlayers);
+    sendInfoTurns(0, turnHandler.getSecondsPerTurn(), GameAction::START_TURN);
     InstructionFactory instructionFactory;
     {
         bool getAll = true;
@@ -160,10 +159,12 @@ bool Game::isStillPlayable() {
     return m_QClientUpdates.size()-1 >= compare;
 }
 
-void Game::sendInfoTurns(int playerId, GameAction infoTurn) {
+void Game::sendInfoTurns(int playerId, double secondsPerTurn, GameAction infoTurn) {
     GameUpdate update{};
     update.m_TurnInfo = infoTurn;
     update.player_id = playerId;
+    update.m_PlayerName = m_PlayersInfo.at(playerId);
+    update.m_SecondsPerTurn = secondsPerTurn;
     pushUpdateToClients(std::ref(update));
 }
 
@@ -172,7 +173,7 @@ bool Game::hasStarted() {
 }
 
 void Game::finishTurn(int idCurrentPlayer, const ActionType& type) {
-    sendInfoTurns(idCurrentPlayer, GameAction::END_TURN);
+    sendInfoTurns(idCurrentPlayer, 0, GameAction::END_TURN);
     world.resetWormStatus(idCurrentPlayer, type);
     auto update = world.getWormUpdate(idCurrentPlayer, false);
     pushUpdateToClients(std::ref(update));
@@ -180,7 +181,7 @@ void Game::finishTurn(int idCurrentPlayer, const ActionType& type) {
 
 void Game::startTurn(TurnHandler& turnHandler) {
     turnHandler.nextTurn({});
-    sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::START_TURN);
+    sendInfoTurns(turnHandler.getCurrentPlayer(), turnHandler.getSecondsPerTurn(), GameAction::START_TURN);
 }
 
 void Game::processAttackTurn(TurnHandler &turnHandler, InstructionFactory &instructionFactory, UserAction userAction) {
@@ -225,7 +226,7 @@ void Game::processAttackTurn(TurnHandler &turnHandler, InstructionFactory &instr
     }
     world.removeDeadWorms(deadWormsIds);
     turnHandler.nextTurn(std::ref(deadWormsIds));
-    sendInfoTurns(turnHandler.getCurrentPlayer(), GameAction::START_TURN);
+    sendInfoTurns(turnHandler.getCurrentPlayer(), turnHandler.getSecondsPerTurn(), GameAction::START_TURN);
 }
 
 void Game::allElementsIdle() {

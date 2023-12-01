@@ -17,5 +17,6 @@ bool GameUpdate::operator!=(const GameUpdate& other) const {
            m_CurrentSprite != other.m_CurrentSprite ||
            m_TurnInfo != other.m_TurnInfo ||
            m_WeaponAngle != other.m_WeaponAngle ||
-           m_PlayerName != other.m_PlayerName;
+           m_PlayerName != other.m_PlayerName ||
+           m_SecondsPerTurn != other.m_SecondsPerTurn;
 }

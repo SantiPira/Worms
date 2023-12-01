@@ -24,5 +24,6 @@ public:
     TurnHandler(TurnHandler&& other) = delete;
 
 
+    [[nodiscard]] double getSecondsPerTurn() const;
 };
 

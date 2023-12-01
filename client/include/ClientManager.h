@@ -24,4 +24,7 @@ class ClientManager {
     ~ClientManager() = default;
     ClientManager(const ClientManager&) = delete;
     ClientManager(ClientManager&&) = delete;
+
+private:
+    void manageTurn(const GameUpdate& turnInfo);
 };

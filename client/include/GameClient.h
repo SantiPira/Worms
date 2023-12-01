@@ -14,6 +14,18 @@
 #include <vector>
 #include "../include/camara.h"
 #include "engine/entities/worms/Skins.h"
+#include <chrono>
+#include <SDL_ttf.h>
+#include <sstream>
+
+
+struct Timer {
+    std::string m_PlayerTurnName{};
+    int m_IdPlayerTurn{};
+    double m_SecondsPerTurn{};
+    SDL_Rect m_TimerDestRect = {400, 10, 100, 70};
+    std::chrono::time_point<std::chrono::steady_clock> m_StartTime{};
+};
 
 class GameClient {
  private:
@@ -34,6 +46,7 @@ class GameClient {
     SDL2pp::Mixer *mixer;
     SDL2pp::Chunk *chunk;
     Camara* camara;
+    Timer m_Timer;
 
    public:
    bool se_muestra_la_lista_de_armas{false};
@@ -48,11 +61,14 @@ class GameClient {
     void InitCamera();
 
  public:
-    void Init(const std::vector<Grd>& beams, int idPlayer, std::vector<GameUpdate>& initInfo);
+    void Init(const std::vector<Grd>& beams, int idPlayer, std::vector<GameUpdate>& initInfo,
+              const GameUpdate& turnInfo);
 
     void Update(double elapsedSeconds, const GameUpdate& gameUpdate);
 
     void Render();
 
     void Release();
+
+    void resetTurn(uint8_t idPlayer, std::string playerName, double secondsPerTurn);
 };

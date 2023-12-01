@@ -43,5 +43,9 @@ int TurnHandler::getCurrentPlayer() const {
     return idCurrentPlayer;
 }
 
+double TurnHandler::getSecondsPerTurn() const {
+    return m_MaxTurnSeconds;
+}
+
 
 

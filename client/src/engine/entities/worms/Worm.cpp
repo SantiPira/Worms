@@ -456,7 +456,7 @@ void Worm::updateBateHeat(double seconds, const GameUpdate &update) {
 
 void Worm::renderInfoWorm() {
     TTF_Font* font = TTF_OpenFont(std::filesystem::current_path()
-            .concat("/resources/Fonts/Orbitron-SemiBold.ttf").c_str(), 25);
+            .concat("/resources/Fonts/Dhurjati-Regular.ttf").c_str(), 30);
 
     SDL_Color textColor = {0, 0, 0, 255};
 
