@@ -1,21 +1,20 @@
+// main.cpp
 #include <iostream>
 #include <QApplication>
-#include <SDL.h>
-#include "mainWindow.h"
-#include "GameClient.h"
-#include "ClientManager.h"
 #include "messages/server/GameUpdate.h"
 #include "waitingWindow.h"
+#include "StartWindow.h"
+#include "ClientManager.h"
 
 int main(int argc, char *argv[]) {
-    try{
+    try {
         QApplication app(argc, argv);
-        WaitingWindow* waitingWindow = new WaitingWindow();
-        MainWindow window_connect(nullptr, waitingWindow);
-        window_connect.show();
+        StartWindow startWindow;
+        startWindow.show();
         app.exec();
         try {
-            ClientManager clientManager(window_connect.getProtocol(), window_connect.getIdPlayer(), window_connect.getCantPlayers(), waitingWindow);
+            ClientManager clientManager(startWindow.getProtocol(), startWindow.getIdPlayer(),
+                                        startWindow.getCantPlayers(), startWindow.getWaitingWindow());
             clientManager.init();
             //TODO: tener una ventana de QT con fin de juego
 
@@ -25,10 +24,10 @@ int main(int argc, char *argv[]) {
             SDL_Quit();
             return -1;
         }
-    }catch(std::exception &e){
+    } catch (std::exception &e) {
         std::cerr << e.what() << std::endl;
         return 1;
-    }catch(...){
+    } catch (...) {
         std::cerr << "Unknown exception" << std::endl;
         return 1;
     }
