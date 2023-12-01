@@ -5,8 +5,8 @@ CreateGameWindow::CreateGameWindow(QWidget *parent, Juego* juego) : QWidget(pare
 
     setWindowTitle("Creacion de partidas");
     buttonCreateGame.setStyleSheet("font-size: 12pt; spacing: 10px; margin: 10px; padding: 10px; border: 2px solid black; background-color: black; color: white; width: 100px; height: 50px;");
-    buttonCreateGame.setCursor(QCursor(Qt::PointingHandCursor)); // Cambia el cursor al pasar el ratón
-    buttonCreateGame.setStyleSheet("QPushButton:hover { background-color: #555; }"); // Cambia el color al pasar el ratón
+    buttonCreateGame.setCursor(QCursor(Qt::PointingHandCursor));
+    buttonCreateGame.setStyleSheet("QPushButton:hover { background-color: #555; }");
     resize(300, 200);
 
     setStyleSheet("QPushButton { font-size: 16px; background-color: #3498db; color: #ffffff; }"
@@ -40,6 +40,17 @@ CreateGameWindow::CreateGameWindow(QWidget *parent, Juego* juego) : QWidget(pare
 
     layoutV->addWidget(&buttonCreateGame);
 
+    backButton = new QPushButton("Volver al Menu");
+    backButton->setCursor(QCursor(Qt::PointingHandCursor));
+    backButton->setStyleSheet("QPushButton:hover { background-color: #555; }");
+    connect(backButton, &QPushButton::clicked, this, &CreateGameWindow::slotGoBack);
+
+    QHBoxLayout *layoutH = new QHBoxLayout();
+    layoutH->addWidget(backButton, 0, Qt::AlignLeft);
+    layoutH->addStretch();
+    layoutH->setContentsMargins(0, 0, 0, 0);
+
+    layoutV->addLayout(layoutH);
     setLayout(layoutV);
 
     connect(&buttonCreateGame, &QPushButton::clicked, this, &CreateGameWindow::slotCreateGame);
@@ -56,5 +67,11 @@ void CreateGameWindow::slotCreateGame() {
 
     m_Juego->createGame(mapa_seleccionado.toStdString(), name.toStdString(), playerName.toStdString(),
                         amountPlayers.toStdString());
+    this->close();
+}
+
+void CreateGameWindow::slotGoBack() {
+    MenuWindow *menuWindow = new MenuWindow(nullptr, m_Juego);
+    menuWindow->show();
     this->close();
 }
