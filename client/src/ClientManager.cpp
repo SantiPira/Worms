@@ -55,10 +55,12 @@ void ClientManager::gameLoop(EventSender& eventSender) {
             m_Game.se_muestra_la_lista_de_armas = false;
         }
 
+        gameUpdates.try_pop(svUpdate);
+
         if(svUpdate.m_Movement == GameAction::PROJECTILE_LAUNCHED) {
             std::cout << "LANZE UN PROYECTIL!!!!!!\n";
         }
-        gameUpdates.try_pop(svUpdate);
+
 
         if (svUpdate.m_TurnInfo != INVALID_ACTION) {
             m_Game.resetTurn(svUpdate.player_id, svUpdate.m_PlayerName, svUpdate.m_SecondsPerTurn);

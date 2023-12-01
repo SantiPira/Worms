@@ -41,6 +41,8 @@ void GameClient::Init(const std::vector<Grd>& beams, int idPlayer, std::vector<G
     weapons_list->init();
     weapons_list->setSourceRect(&weapons_list_rect);
 
+    projectile = new Projectile(_renderer);
+
     //La camara funciona con bugs.
     //InitCamera();
 
@@ -89,6 +91,11 @@ void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
             worm.second->update(elapsedSeconds);
         }
     } else {
+
+        if (gameUpdate.m_Movement == GameAction::PROJECTILE_LAUNCHED) {
+            projectile->update(elapsedSeconds, gameUpdate);
+        }
+
         for (auto& worm : m_Worms) {
             if (worm.first == gameUpdate.player_id) {
                 worm.second->update(elapsedSeconds, gameUpdate);
