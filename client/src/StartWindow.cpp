@@ -2,7 +2,7 @@
 
 StartWindow::StartWindow(QWidget *parent) : QMainWindow(parent) {
     this->setFixedSize(512, 512);
-
+    this->setWindowTitle("Worms");
     QPixmap background(std::filesystem::current_path().concat("/resources/Fondos/worms-start-2.png").c_str());
     QPalette palette;
     palette.setBrush(QPalette::Window, background);

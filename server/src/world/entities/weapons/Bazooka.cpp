@@ -5,11 +5,11 @@ Bazooka::Bazooka() : damage(1), distance(2.0f) {
 }
 
 void Bazooka::attack(WWorm *attacker, WWorm *attacked, uint8_t force) {
+    attacker->getActionToAnimation()->resetAnimation();
+    attacker->getActionToAnimation()->setAction(ActionType::ATTACK, m_WeaponId, 0);
     if (attacked->getId() == attacker->getId()) {
         return;
     }
-    attacker->getActionToAnimation()->resetAnimation();
-    attacker->getActionToAnimation()->setAction(ActionType::ATTACK, m_WeaponId, 0);
 
     // Ángulo para la bazooka
     float angle =  attacker->getWeaponAngle();   //attacker->getWeaponAngle();
