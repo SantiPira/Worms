@@ -204,7 +204,6 @@ void GameClient::Release() {
 }
 
 void GameClient::resetTurn(uint8_t idPlayer, std::string playerName, double secondsPerTurn) {
-    std::cout << "Seconds per turn: " << secondsPerTurn << std::endl;
     m_Timer.m_IdPlayerTurn = idPlayer;
     m_Timer.m_PlayerTurnName = std::move(playerName);
     m_Timer.m_SecondsPerTurn = secondsPerTurn;

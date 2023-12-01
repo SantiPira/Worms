@@ -8,10 +8,8 @@ ClientManager::ClientManager(Protocol *protocol, int idPlayer, int cantPlayers, 
 
 void ClientManager::init() {
     try {
-        std::cout << "Client ID: " << m_IdPlayer << std::endl;
         const std::vector<Grd> &map = m_Protocol->recvMap();
         GameUpdate turnInfo = m_Protocol->recvGameUpdate();
-        std::cout << "Seconds: " << turnInfo.m_SecondsPerTurn << std::endl;
         std::vector<GameUpdate> initInfo;
         
         for (int i = 0; i < m_CantPlayers; i++) {
