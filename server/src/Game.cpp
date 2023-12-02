@@ -83,6 +83,14 @@ int Game::addPlayer(ProtectedQueue<GameUpdate> *qClientUpdates, std::string& pla
     }
 }
 
+void Game::removePlayer(int idPlayer) {
+    m_QClientUpdates.erase(idPlayer);
+    if(!isStillPlayable() && m_Players != 1) {
+        int winner = m_QClientUpdates.begin()->first;
+        sendEndGame(winner);
+    }
+}
+
 bool Game::isReadyToStart() {
     return static_cast<int>(m_QClientUpdates.size()) == m_Players;
 }
@@ -141,6 +149,7 @@ void Game::kill() {
 }
 
 bool Game::isStillPlayable() {
+    /*
     unsigned long int compare;
     if( m_Players == 1) {
         compare = 1;
@@ -148,6 +157,14 @@ bool Game::isStillPlayable() {
         compare = 2;
     }
     return m_QClientUpdates.size()-1 >= compare && m_KeepRunning.load();
+    */
+   unsigned long int compare;
+   if( m_Players == 1) {
+        compare = 1;
+   } else {
+        compare = 2;
+   }
+   return m_QClientUpdates.size() >= compare && m_KeepRunning.load();
 }
 
 void Game::sendInfoTurns(int playerId, double secondsPerTurn, GameAction infoTurn) {
