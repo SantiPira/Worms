@@ -17,7 +17,6 @@ void ClientManager::init() {
         EventSender eventSender(*m_Protocol, m_IdPlayer, std::ref(settingsQueue), turnInfo.player_id == m_IdPlayer);
         ClientReceiver receiver(*m_Protocol, std::ref(gameUpdates), std::ref(eventSender), m_IdPlayer);
 
-        m_Game = GameClient();
         m_Game.Init(map, m_IdPlayer, std::ref(initInfo), std::ref(turnInfo));
         eventSender.start();
         receiver.start();

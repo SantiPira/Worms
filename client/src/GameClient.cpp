@@ -228,4 +228,34 @@ void GameClient::resetTurn(uint8_t idPlayer, std::string playerName, double seco
     m_Timer.m_StartTime = std::chrono::steady_clock::now();
 }
 
+GameClient::~GameClient() {
+    std::cout << "Destroing GameClient" << std::endl;
+    for (auto& beam : m_Beams) {
+        beam->release();
+        delete beam;
+    }
+
+    for (auto& worm : m_Worms) {
+        delete worm.second;
+    }
+
+    for (auto& worm : m_WormsDie) {
+        delete worm;
+    }
+
+    sky->release();
+    delete sky;
+
+    water->release();
+    delete water;
+
+    weapons_list->release();
+    delete weapons_list;
+
+    delete projectile;
+    delete mixer;
+    delete chunk;
+    delete camara;
+}
+
 

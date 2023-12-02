@@ -74,4 +74,6 @@ class GameClient {
     void Release();
 
     void resetTurn(uint8_t idPlayer, std::string playerName, double secondsPerTurn);
+
+    ~GameClient();
 };

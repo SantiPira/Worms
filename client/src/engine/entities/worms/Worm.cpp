@@ -534,3 +534,4 @@ void Worm::renderInfoWorm() {
     SDL_DestroyTexture(healthTexture);
     TTF_CloseFont(font);
 }
+
