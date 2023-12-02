@@ -96,27 +96,27 @@ void ClientManager::endGameWindow() {
     QDialog dialog;
     dialog.setWindowTitle("Worms");
 
-    std::unique_ptr<QLabel> label = std::make_unique<QLabel>(QString(winner.c_str()));
+    QLabel *label = new QLabel(winner.c_str());
     label->setAlignment(Qt::AlignCenter);
     label->setStyleSheet("font-size: 20px; color: black; font-weight: bold;");
 
-    std::unique_ptr<QPushButton> button = std::make_unique<QPushButton>("Salir");
+    QPushButton *button = new QPushButton("Salir");
     button->setFixedSize(100, 50);
-    QObject::connect(button.get(), &QPushButton::clicked, [&]() {
+    QObject::connect(button, &QPushButton::clicked, [&]() {
         m_Game.Release();
         dialog.close();
     });
 
-    std::unique_ptr<QHBoxLayout> buttonLayout = std::make_unique<QHBoxLayout>();
+    QHBoxLayout *buttonLayout = new QHBoxLayout;
     buttonLayout->addStretch(1);
-    buttonLayout->addWidget(button.get());
+    buttonLayout->addWidget(button);
     buttonLayout->addStretch(1);
 
-    std::unique_ptr<QVBoxLayout> layout = std::make_unique<QVBoxLayout>();
-    layout->addWidget(label.get());
-    layout->addLayout(buttonLayout.get());
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget(label);
+    layout->addLayout(buttonLayout);
 
-    dialog.setLayout(layout.get());
+    dialog.setLayout(layout);
     dialog.setFixedSize(500, 300);
 
     dialog.setStyleSheet("QDialog {background-image: url(" + QString(finalImagePath.c_str()) + ")}");
