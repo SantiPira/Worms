@@ -275,8 +275,8 @@ struct HasBazooka {
     BlendMode blendMode = {true, 128, 128, 192};
     int frames = 1;
     int distanceBetweenFrames = 60;
-    int frameWidth = 26;
-    int frameHeight = 41;
+    int frameWidth = 40;
+    int frameHeight = 50;
     float duration = 1.0f;
     SDL_Rect srcRect = {13, 972, 39, 36};
     int initYSprite = 972;
@@ -291,8 +291,8 @@ struct PositiveAnglesBazooka {
     BlendMode blendMode = {true, 128, 128, 192};
     int frames = 15;
     int distanceBetweenFrames = 60;
-    int frameWidth = 64;
-    int frameHeight = 60;
+    int frameWidth = 42;
+    int frameHeight = 52;
     float duration = 1.0f;
     SDL_Rect srcRect = {13, 969, 38, 41};
     int initYSprite = 969;
@@ -306,8 +306,8 @@ struct NegativeAnglesBazooka {
     BlendMode blendMode = {true, 128, 128, 192};
     int frames = 15;
     int distanceBetweenFrames = 60;
-    int frameWidth = 64;
-    int frameHeight = 60;
+    int frameWidth = 43;
+    int frameHeight = 53;
     float duration = 1.0f;
     SDL_Rect srcRect = {11, 12, 36, 40};
     int initYSprite = 12;
