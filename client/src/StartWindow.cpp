@@ -8,7 +8,7 @@ StartWindow::StartWindow(QWidget *parent) : QMainWindow(parent) {
     palette.setBrush(QPalette::Window, background);
     this->setPalette(palette);
 
-    startButton = new QPushButton("START GAME", this);
+    startButton = new QPushButton("EMPEZAR", this);
     startButton->setStyleSheet("background-color: red");
     startButton->resize(100, 50);
     startButton->move(this->width()/2 - startButton->width()/2, this->height()/2 - startButton->height()/2);

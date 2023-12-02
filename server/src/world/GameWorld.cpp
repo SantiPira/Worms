@@ -31,7 +31,7 @@ void GameWorld::StartWorld() {
     myBodyDef.type = b2_staticBody;
     myBodyDef.position.Set(0, 0);
     b2Body* staticBody = m_world.CreateBody(&myBodyDef);
-    
+
     //add four walls to the static body
     polygonShape.SetAsBox( 10, 1, b2Vec2(10, -1), 0);//ground
     staticBody->CreateFixture(&myFixtureDef);
@@ -145,15 +145,15 @@ bool GameWorld::isAlive(int idPlayer) {
 }
 
 bool GameWorld::wormBrokeTurn(const UserAction &userAction) {
-    for (auto& worm : worms) {
-        if (worm.second->getHealth() == 0) {
-            return true;
-        }
-    }
-    if (userAction.getAction() == ATTACK) {
-        return true;
-    }
-    return false;
+//    for (auto& worm : worms) {
+//        if (worm.second->getHealth() == 0) {
+//            return true;
+//        }
+//    }
+//    if (userAction.getAction() == ATTACK) {
+//        return true;
+//    }
+    return userAction.getAction() == ATTACK || userAction.getAction() == SELF_KILL;
 }
 
 bool GameWorld::wormsAlive(std::vector<int> &idsDeadWorms) {
@@ -219,5 +219,3 @@ b2Body* GameWorld::getProjectile(){
 
     return p_projectile;
 }
-
-

@@ -50,6 +50,8 @@ void EventSender::run() {
                 if (m_WeaponId == WeaponID::BATE || m_WeaponId == WeaponID::BAZOOKA) {
                     userAction = {ActionType::INCREASE_ANGLE, m_IdPlayer};
                 }
+            } else if (key == SDLK_m) {
+                userAction = {ActionType::SELF_KILL, m_IdPlayer};
             } else {
                 std::cout << "key no mapeada: " << key << std::endl;
             }
@@ -82,6 +84,10 @@ void EventSender::stop() {
     m_KeepRunning.store(false);
     m_Protocol.shutdown(SHUT_RDWR);
     m_Protocol.close();
+}
+
+void EventSender::setIsRunning(bool isRunning) {
+    m_KeepRunning.store(isRunning);
 }
 
 void EventSender::setItsMyTurn(bool isMyTurn) {

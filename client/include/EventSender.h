@@ -31,6 +31,8 @@ public:
     bool isRunning();
     void stop();
     void setItsMyTurn(bool isMyTurn);
+
+    void setIsRunning(bool isRunning);
 };
 
 #endif

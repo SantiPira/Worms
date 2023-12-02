@@ -16,8 +16,11 @@ class ClientManager {
     ProtectedQueue<GameUpdate> gameUpdates;
     bool m_KeepRunning;
     WaitingWindow* m_WaitingWindow;
+    bool m_EndGame;
+    std::string m_Winner;
+    bool m_YouWin;
 
- public:
+public:
     ClientManager(Protocol* protocol, int idPlayer, int cantPlayers, WaitingWindow* waitingWindow);
     void init();
     void gameLoop(EventSender& eventSender);
@@ -27,4 +30,7 @@ class ClientManager {
 
 private:
     void manageTurn(const GameUpdate& turnInfo);
+
+    void endGameWindow();
+
 };

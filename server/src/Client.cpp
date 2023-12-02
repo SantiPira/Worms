@@ -13,7 +13,6 @@ void Client::run() {
         if (hasGame) {
             initGame();
         }
-
     } catch (const LibError& e) {
         std::cerr << "LibError exception e.what(): " << e.what() << std::endl;
     } catch (const std::exception &e1) {
@@ -26,15 +25,19 @@ void Client::initGame() {
     sendMap();
     m_Sender.setPlayerId(m_IdPlayer);
     m_Sender.start();
-    //Receiver state
     while (isRunning()) {
         try{
             m_InputActions->push(m_Protocol.recvUserAction());
+        } catch (const LibError& e) {
+            m_KeepRunning.store(false);
+            break;
         } catch (...) {
             //should do nothing, either protocol has closed or queue is closed 
         }
     }
-    m_Sender.stop();
+    if (m_Sender.isRunning()) {
+        m_Sender.stop();
+    }
     m_Sender.join();
 }
 
@@ -85,8 +88,10 @@ void Client::stop() {
 
 void Client::kill() {
     m_KeepRunning.store(false);
-    m_Protocol.shutdown(SHUT_RDWR);
-    m_Protocol.close();
+    if (!m_Protocol.isClosed()) {
+        m_Protocol.shutdown(SHUT_RDWR);
+        m_Protocol.close();
+    }
 }
 
 void Client::sendMap() {
