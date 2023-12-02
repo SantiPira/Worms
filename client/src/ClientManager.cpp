@@ -42,6 +42,7 @@ void ClientManager::gameLoop(EventSender& eventSender) {
     auto lastTime = std::chrono::system_clock::now();
     while (eventSender.isRunning()) {
         GameUpdate svUpdate{};
+        m_Game.projectile_launched = false;
 
         auto current = std::chrono::system_clock::now();
         std::chrono::duration<double> elapsedSeconds = current - lastTime;
@@ -59,6 +60,9 @@ void ClientManager::gameLoop(EventSender& eventSender) {
 
         if(svUpdate.m_Movement == GameAction::PROJECTILE_LAUNCHED) {
             std::cout << "LANZE UN PROYECTIL!!!!!!\n";
+            std::cout << "POS X: " << WorldScale::worldToPixelX(svUpdate.x_pos, svUpdate.width) << std::endl;
+            std::cout << "POS Y: " <<  WorldScale::worldToPixelY(svUpdate.y_pos, svUpdate.height) << std::endl;
+            m_Game.projectile_launched = true;
         }
 
 

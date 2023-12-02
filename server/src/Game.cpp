@@ -239,8 +239,8 @@ void Game::allElementsIdle() {
 
         if (projectile != nullptr) {
             projectileUpdate.player_id = 0xFE;
-            projectileUpdate.x_pos = projectile->GetLinearVelocity().x;
-            projectileUpdate.y_pos = projectile->GetLinearVelocity().y;
+            projectileUpdate.x_pos = projectile->GetPosition().x;
+            projectileUpdate.y_pos = projectile->GetPosition().y;
             projectileUpdate.m_Movement = GameAction::PROJECTILE_LAUNCHED;
             projectileUpdate.m_CurrentSprite = SpritesEnum::SPRITE_BAZOOKA_MISSILE;
             updates.push_back((projectileUpdate));
