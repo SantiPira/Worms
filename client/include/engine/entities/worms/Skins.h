@@ -310,3 +310,31 @@ struct NegativeAnglesAttackBate {
     float deltaPosX = 85.0f;
     float deltaPosY = 35.0f;
 };
+
+struct GreenGranade {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/grenade.png");
+    BlendMode blendMode = {true, 128, 128, 192};
+    int frames = 36;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 26;
+    int frameHeight = 41;
+    float duration = 2.0f;
+    SDL_Rect srcRect = {20, 17, 22, 26};
+    int initYSprite = 17;
+    float deltaPosX = 25.6f;
+    float deltaPosY = 40.96f;
+};
+
+struct BazookaMissile {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/missile.png");
+    BlendMode blendMode = {true, 128, 128, 192};
+    int frames = 36;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 26;
+    int frameHeight = 41;
+    float duration = 2.0f;
+    SDL_Rect srcRect = {20, 17, 22, 26};
+    int initYSprite = 17;
+    float deltaPosX = 25.6f;
+    float deltaPosY = 40.96f;
+};

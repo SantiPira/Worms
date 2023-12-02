@@ -14,6 +14,7 @@
 #include <vector>
 #include "../include/camara.h"
 #include "engine/entities/worms/Skins.h"
+#include "engine/entities/projectiles/projectile.h"
 #include <chrono>
 #include <SDL_ttf.h>
 #include <sstream>
@@ -42,6 +43,7 @@ class GameClient {
     Texture* sky;
     Texture* water;
     Texture* weapons_list;
+    Projectile* projectile;
 
     SDL2pp::Mixer *mixer;
     SDL2pp::Chunk *chunk;

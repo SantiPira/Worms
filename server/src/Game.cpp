@@ -242,6 +242,7 @@ void Game::allElementsIdle() {
             projectileUpdate.x_pos = projectile->GetLinearVelocity().x;
             projectileUpdate.y_pos = projectile->GetLinearVelocity().y;
             projectileUpdate.m_Movement = GameAction::PROJECTILE_LAUNCHED;
+            projectileUpdate.m_CurrentSprite = SpritesEnum::SPRITE_BAZOOKA_MISSILE;
             updates.push_back((projectileUpdate));
         }
 
