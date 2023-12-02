@@ -5,6 +5,10 @@
 #include "GameClient.h"
 #include "waitingWindow.h"
 #include "EventSender.h"
+#include "client_receiver.h"
+#include "GameClient.h"
+#include <QMessageBox>
+#include <QPushButton>
 
 class ClientManager {
  private:
@@ -15,13 +19,12 @@ class ClientManager {
     ProtectedQueue<std::string> settingsQueue;
     ProtectedQueue<GameUpdate> gameUpdates;
     bool m_KeepRunning;
-    WaitingWindow* m_WaitingWindow;
     bool m_EndGame;
     std::string m_Winner;
     bool m_YouWin;
 
 public:
-    ClientManager(Protocol* protocol, int idPlayer, int cantPlayers, WaitingWindow* waitingWindow);
+    ClientManager(Protocol* protocol, int idPlayer, int cantPlayers);
     void init();
     void gameLoop(EventSender& eventSender);
     ~ClientManager() = default;
@@ -29,8 +32,7 @@ public:
     ClientManager(ClientManager&&) = delete;
 
 private:
-    void manageTurn(const GameUpdate& turnInfo);
-
     void endGameWindow();
 
+    GameUpdate initStage();
 };

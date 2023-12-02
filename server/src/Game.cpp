@@ -149,22 +149,13 @@ void Game::kill() {
 }
 
 bool Game::isStillPlayable() {
-    /*
-    unsigned long int compare;
-    if( m_Players == 1) {
-        compare = 1;
-    } else {
-        compare = 2;
-    }
-    return m_QClientUpdates.size()-1 >= compare && m_KeepRunning.load();
-    */
    unsigned long int compare;
    if( m_Players == 1) {
         compare = 1;
    } else {
         compare = 2;
    }
-   return m_QClientUpdates.size() >= compare && m_KeepRunning.load();
+   return m_QClientUpdates.size() >= compare && m_KeepRunning.load() && world.get;
 }
 
 void Game::sendInfoTurns(int playerId, double secondsPerTurn, GameAction infoTurn) {

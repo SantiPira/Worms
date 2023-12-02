@@ -1,25 +1,18 @@
-#include <QMessageBox>
-#include <QPushButton>
 #include "ClientManager.h"
-#include "client_receiver.h"
-#include "GameClient.h"
 
-ClientManager::ClientManager(Protocol *protocol, int idPlayer, int cantPlayers, WaitingWindow* waitingWindow) : m_Protocol(protocol),
+ClientManager::ClientManager(Protocol *protocol, int idPlayer, int cantPlayers) : m_Protocol(protocol),
     m_IdPlayer(idPlayer), m_CantPlayers(cantPlayers), settingsQueue(100), gameUpdates(100), m_KeepRunning(true),
-    m_WaitingWindow(waitingWindow), m_EndGame(false), m_YouWin(false) {}
+    m_EndGame(false), m_YouWin(false) {}
 
 void ClientManager::init() {
     try {
         const std::vector<Grd> &map = m_Protocol->recvMap();
-        GameUpdate turnInfo = m_Protocol->recvGameUpdate();
+        GameUpdate turnInfo = initStage();
         std::vector<GameUpdate> initInfo;
-        
         for (int i = 0; i < m_CantPlayers; i++) {
             initInfo.push_back(m_Protocol->recvGameUpdate());
         }
 
-        //Aca deberia cerrarse la ventana de espera pero eso no pasa.
-        //m_WaitingWindow->close();
 
         EventSender eventSender(*m_Protocol, m_IdPlayer, std::ref(settingsQueue), turnInfo.player_id == m_IdPlayer);
         ClientReceiver receiver(*m_Protocol, std::ref(gameUpdates), std::ref(eventSender), m_IdPlayer);
@@ -103,31 +96,71 @@ void ClientManager::endGameWindow() {
     QDialog dialog;
     dialog.setWindowTitle("Worms");
 
-    QLabel *label = new QLabel(winner.c_str());
+    std::unique_ptr<QLabel> label = std::make_unique<QLabel>(QString(winner.c_str()));
     label->setAlignment(Qt::AlignCenter);
     label->setStyleSheet("font-size: 20px; color: black; font-weight: bold;");
 
-    QPushButton *button = new QPushButton("Salir");
+    std::unique_ptr<QPushButton> button = std::make_unique<QPushButton>("Salir");
     button->setFixedSize(100, 50);
-    QObject::connect(button, &QPushButton::clicked, [&]() {
+    QObject::connect(button.get(), &QPushButton::clicked, [&]() {
         m_Game.Release();
         dialog.close();
     });
 
-    QHBoxLayout *buttonLayout = new QHBoxLayout;
+    std::unique_ptr<QHBoxLayout> buttonLayout = std::make_unique<QHBoxLayout>();
     buttonLayout->addStretch(1);
-    buttonLayout->addWidget(button);
+    buttonLayout->addWidget(button.get());
     buttonLayout->addStretch(1);
 
-    QVBoxLayout *layout = new QVBoxLayout;
-    layout->addWidget(label);
-    layout->addLayout(buttonLayout);
+    std::unique_ptr<QVBoxLayout> layout = std::make_unique<QVBoxLayout>();
+    layout->addWidget(label.get());
+    layout->addLayout(buttonLayout.get());
 
-    dialog.setLayout(layout);
+    dialog.setLayout(layout.get());
     dialog.setFixedSize(500, 300);
 
     dialog.setStyleSheet("QDialog {background-image: url(" + QString(finalImagePath.c_str()) + ")}");
     dialog.exec();
+}
+
+GameUpdate ClientManager::initStage() {
+    if (TTF_Init() == -1) {
+        fprintf(stderr, "Error al inicializar SDL_ttf: %s\n", TTF_GetError());
+        return {};
+    }
+
+    SDL_Window *window = SDL_CreateWindow("Esperando al resto de los jugadores...", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 500, 300, 0);
+    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
+
+    TTF_Font *font = TTF_OpenFont(std::filesystem::current_path()
+            .concat("/resources/Fonts/Dhurjati-Regular.ttf").c_str(), 24);
+    if (font == nullptr) {
+        fprintf(stderr, "Error al abrir la fuente: %s\n", TTF_GetError());
+        return {};
+    }
+
+    SDL_Color color = {255, 255, 255};
+    SDL_Surface *surface = TTF_RenderText_Solid(font, "Esperando al resto de los jugadores...", color);
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
+
+    SDL_Rect rect;
+    rect.x = 0;
+    rect.y = 0;
+    rect.w = surface->w;
+    rect.h = surface->h;
+    SDL_RenderCopy(renderer, texture, nullptr, &rect);
+
+    SDL_RenderPresent(renderer);
+
+    GameUpdate turnInfo = m_Protocol->recvGameUpdate();
+
+    SDL_DestroyTexture(texture);
+    SDL_FreeSurface(surface);
+    TTF_CloseFont(font);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    TTF_Quit();
+    return turnInfo;
 }
 
 

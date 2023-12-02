@@ -4,7 +4,6 @@
 
 MatchesMonitor::MatchesMonitor() {}
 
-//Private method, no need to lock
 void MatchesMonitor::removeGame(int id) {
     Game * gameToRemove = m_Games.at(id);
     if(! gameToRemove->hasStarted()) {

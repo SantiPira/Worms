@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
         app.exec();
         try {
             ClientManager clientManager(startWindow.getProtocol(), startWindow.getIdPlayer(),
-                                        startWindow.getCantPlayers(), startWindow.getWaitingWindow());
+                                        startWindow.getCantPlayers());
             clientManager.init();
         } catch (std::exception &exception) {
             fprintf(stderr, "%s", exception.what());

@@ -68,8 +68,6 @@ public:
 
     void getDeadWormsIds(std::vector<int>& deadWormsIds);
 
-    void passAway(int &id);
-
     bool isAlive(int idPlayer);
 
     bool wormBrokeTurn(const UserAction& userAction);
@@ -89,4 +87,6 @@ public:
     void updateWormsMove();
 
     b2Body* getProjectile();
+
+    int getWormsAlive() const;
 };
