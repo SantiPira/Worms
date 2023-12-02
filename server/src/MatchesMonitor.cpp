@@ -10,9 +10,10 @@ void MatchesMonitor::removeGame(int id) {
     if(! gameToRemove->hasStarted()) {
         m_Games.at(id)->start();
     }
-    m_Games.at(id)->kill();
-    m_Games.at(id)->join();
+    gameToRemove->kill();
+    gameToRemove->join();
     m_Games.erase(id);
+    delete gameToRemove;
 }
 
 int MatchesMonitor::createGame(std::string gameName, std::string mapName, int players) {
