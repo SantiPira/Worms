@@ -44,6 +44,11 @@ void Projectile::init(){
                 wBazookaMissile.deltaPosX,
                 wBazookaMissile.deltaPosY));
 
+
+    for (auto& sprite : m_SpritesMap) {
+        sprite.second->init();
+    }
+
 }
 
 void Projectile::update(double elapsedSeconds, const GameUpdate& gameUpdate){

@@ -269,19 +269,53 @@ struct SettingBazooka {
     float deltaPosY = 40.96f;
 };
 
+
 struct HasBazooka {
     const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wbaz.png");
     BlendMode blendMode = {true, 128, 128, 192};
-    int frames = 3;
+    int frames = 1;
     int distanceBetweenFrames = 60;
     int frameWidth = 26;
     int frameHeight = 41;
     float duration = 1.0f;
-    SDL_Rect srcRect = {19, 916, 23, 27};
-    int initYSprite = 916;
+    SDL_Rect srcRect = {13, 972, 39, 36};
+    int initYSprite = 972;
     float deltaPosX = 25.6f;
     float deltaPosY = 40.96f;
+    float unitAngle = 6.0f;
 };
+
+
+struct PositiveAnglesBazooka {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wbaz.png");
+    BlendMode blendMode = {true, 128, 128, 192};
+    int frames = 15;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 64;
+    int frameHeight = 60;
+    float duration = 1.0f;
+    SDL_Rect srcRect = {13, 969, 38, 41};
+    int initYSprite = 969;
+    float deltaPosX = 25.6f;
+    float deltaPosY = 40.96f;
+    float unitAngle = 6.0f;
+};
+
+struct NegativeAnglesBazooka {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wbaz.png");
+    BlendMode blendMode = {true, 128, 128, 192};
+    int frames = 15;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 64;
+    int frameHeight = 60;
+    float duration = 1.0f;
+    SDL_Rect srcRect = {11, 12, 36, 40};
+    int initYSprite = 12;
+    float deltaPosX = 25.6f;
+    float deltaPosY = 40.96f;
+    float unitAngle = 6.0f;
+};
+
 
 struct SavingBazooka {
     const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wbazbak.png");
@@ -312,7 +346,7 @@ struct NegativeAnglesAttackBate {
 };
 
 struct GreenGranade {
-    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/grenade.png");
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Weapons/grenade.png");
     BlendMode blendMode = {true, 128, 128, 192};
     int frames = 36;
     int distanceBetweenFrames = 60;
@@ -326,15 +360,15 @@ struct GreenGranade {
 };
 
 struct BazookaMissile {
-    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/missile.png");
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Weapons/missile.png");
     BlendMode blendMode = {true, 128, 128, 192};
-    int frames = 36;
+    int frames = 1;
     int distanceBetweenFrames = 60;
     int frameWidth = 26;
     int frameHeight = 41;
     float duration = 2.0f;
-    SDL_Rect srcRect = {20, 17, 22, 26};
-    int initYSprite = 17;
+    SDL_Rect srcRect = {10, 496, 40, 26};
+    int initYSprite = 496;
     float deltaPosX = 25.6f;
     float deltaPosY = 40.96f;
 };

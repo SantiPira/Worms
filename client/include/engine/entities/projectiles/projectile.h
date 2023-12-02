@@ -38,7 +38,7 @@ private:
     std::unique_ptr<Animation> getProjectileAnimation(const std::string& spritePath, BlendMode blendMode, int frames,
                                                    int distanceBetweenFrames,
                                                    int frameWidth, int frameHeight, float duration, SDL_Rect srcRect,
-                                                   int initYSprite, SDL_Rect destRect, float deltaPosX, float deltaPosY);
+                                                   int initYSprite, SDL_Rect destRect, float deltaPosX, float deltaPosY) ;
 
 
 public:

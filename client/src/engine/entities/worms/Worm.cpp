@@ -29,6 +29,9 @@ void Worm::init() {
         HasBazooka wHasBazooka;
         SavingBazooka wSavingBazooka;
 
+        NegativeAnglesBazooka wNegativeAnglesBazooka;
+        PositiveAnglesBazooka wPositiveAnglesBazooka;
+
 
     SDL_Rect destRect = {
                 static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
@@ -338,6 +341,35 @@ void Worm::init() {
             wNegativeAnglesAttackBate.deltaPosX,
             wNegativeAnglesAttackBate.deltaPosY));
 
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_POSITIVE_ANGLE_BAZOOKA, getWaccuseAnimation(
+            wPositiveAnglesBazooka.spritePath,
+            wPositiveAnglesBazooka.blendMode,
+            wPositiveAnglesBazooka.frames,
+            wPositiveAnglesBazooka.distanceBetweenFrames,
+            wPositiveAnglesBazooka.frameWidth,
+            wPositiveAnglesBazooka.frameHeight,
+            wPositiveAnglesBazooka.duration,
+            wPositiveAnglesBazooka.srcRect,
+            wPositiveAnglesBazooka.initYSprite,
+            destRect,
+            wPositiveAnglesBazooka.deltaPosX,
+            wPositiveAnglesBazooka.deltaPosY));
+
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_NEGATIVE_ANGLE_BAZOOKA, getWaccuseAnimation(
+            wNegativeAnglesBazooka.spritePath,
+            wNegativeAnglesBazooka.blendMode,
+            wNegativeAnglesBazooka.frames,
+            wNegativeAnglesBazooka.distanceBetweenFrames,
+            wNegativeAnglesBazooka.frameWidth,
+            wNegativeAnglesBazooka.frameHeight,
+            wNegativeAnglesBazooka.duration,
+            wNegativeAnglesBazooka.srcRect,
+            wNegativeAnglesBazooka.initYSprite,
+            destRect,
+            wNegativeAnglesBazooka.deltaPosX,
+            wNegativeAnglesBazooka.deltaPosY));
+
+
     for (auto& sprite : m_SpritesMap) {
         sprite.second->init();
     }
@@ -351,8 +383,10 @@ void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
     } else if (gameUpdate.m_CurrentSprite == SpritesEnum::SPRITE_ATTACK_BATE) {
         m_Health = static_cast<int>(gameUpdate.m_Health);
         updateBateHeat(elapsedSeconds, gameUpdate);
-    }
-    else {
+    } else if (gameUpdate.m_CurrentSprite == SpritesEnum::SPRITE_HAS_BAZOOKA) {
+        m_Health = static_cast<int>(gameUpdate.m_Health);
+        UpdateBazooka(elapsedSeconds, gameUpdate);
+    } else {
         m_CurrentSprite = gameUpdate.m_CurrentSprite;
         m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
     }
@@ -378,6 +412,27 @@ void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
                 static_cast<int>(NAME_WIDTH_FONT), static_cast<int>(NAME_HEIGHT_FONT)
         };
     }
+}
+
+
+void Worm::UpdateBazooka(double elapsedSeconds, const GameUpdate &gameUpdate) {
+
+    HasBazooka hasBazooka;
+    float angle = gameUpdate.m_WeaponAngle;
+    int pickedFrame = -1;
+
+    if (angle > 0) {
+        pickedFrame = static_cast<int>(angle / hasBazooka.unitAngle);
+        m_CurrentSprite = SpritesEnum::SPRITE_POSITIVE_ANGLE_BAZOOKA;
+    } else if (angle < 0) {
+        float normalizedAngle = angle + 90;
+        pickedFrame = static_cast<int>(normalizedAngle / 6);
+        m_CurrentSprite = SpritesEnum::SPRITE_NEGATIVE_ANGLE_BAZOOKA;
+    } else {
+        m_CurrentSprite = SpritesEnum::SPRITE_HAS_BAZOOKA;
+    }
+
+    m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds, pickedFrame);
 }
 
 void Worm::updateBateAttack(double elapsedSeconds, const GameUpdate &gameUpdate) {
@@ -431,6 +486,8 @@ void Worm::update(double elapsedSeconds) {
                        anim->getFrameHeight()});
     if (m_LastUpdate.m_CurrentSprite == SPRITE_HAS_BATE) {
         updateBateAttack(elapsedSeconds, m_LastUpdate);
+    } else if (m_LastUpdate.m_CurrentSprite == SPRITE_HAS_BAZOOKA) {
+        UpdateBazooka(elapsedSeconds, m_LastUpdate);
     } else {
         m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
     }

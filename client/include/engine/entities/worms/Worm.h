@@ -62,6 +62,7 @@ private:
     ~Worm() = default;
 
     void updateBateAttack(double elapsedSeconds, const GameUpdate &gameUpdate);
+    void UpdateBazooka(double elapsedSeconds, const GameUpdate &gameUpdate);
 
     void updateBateHeat(double seconds, const GameUpdate &update);
 };

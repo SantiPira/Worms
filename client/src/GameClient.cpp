@@ -1,5 +1,5 @@
 #include "../include/GameClient.h"
-
+#include "../../common_libs/include/utils/WorldScale.h"
 #include <thread>
 #include <iostream>
 #include <utility>
@@ -42,6 +42,7 @@ void GameClient::Init(const std::vector<Grd>& beams, int idPlayer, std::vector<G
     weapons_list->setSourceRect(&weapons_list_rect);
 
     projectile = new Projectile(_renderer);
+    projectile->init();
 
     //La camara funciona con bugs.
     //InitCamera();
@@ -122,9 +123,11 @@ void GameClient::Render() {
     SDL_Rect m_DestRect = {0 /*- camara->camara_rect.x/4*/, 0 /*- camara->camara_rect.y/4*/, 512, 512};
     sky->render(&m_DestRect, false);
 
+    //renderizar agua.
     const SDL_Rect m_DestRect2 = {0, 461, 1024, 51};
     water->render(&m_DestRect2, false);
 
+    //renderizar vigas.
     for (auto& beam : m_Beams) {
 
         //Las vigas se desplzan muy rapido respecto a la velocidad del gusano.
@@ -149,10 +152,16 @@ void GameClient::Render() {
 
     }
 
-
+    //renderizar gusanos.
     for (auto& worm : m_Worms) {
         worm.second->render();
     }
+
+
+    if (projectile_launched) {
+        projectile->render();
+    }
+
 
     //El gusano se pinta en en una parte del mapa, pero cuando este comienza a desplazarse hacia la derecha
     //comienza a desaperecer y aparecer de forma intermitente.
@@ -169,10 +178,12 @@ void GameClient::Render() {
 
     //camara->updateCamera();
 
+    //renderizar gusanos muertos.
     for (auto& worm : m_WormsDie) {
         worm->render();
     }
 
+    //renderizar lista de armas.
     if(se_muestra_la_lista_de_armas) {
         SDL_Rect weapons_list_dst_rect = {0, 0, 160, 64};
         weapons_list->render(&weapons_list_dst_rect, false);

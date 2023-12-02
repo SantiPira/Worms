@@ -52,6 +52,7 @@ class GameClient {
 
    public:
    bool se_muestra_la_lista_de_armas{false};
+   bool projectile_launched{false};
 
  private:
     void InitSDL();
