@@ -11,6 +11,7 @@
 #include "world/instructions/impl/WormUnSetWeapon.h"
 #include "world/instructions/impl/WormIncreaseAngle.h"
 #include "world/instructions/impl/WormDecreaseAngle.h"
+#include "world/instructions/impl/WormSelfKill.h"
 #include <iostream>
 
 class InstructionFactory {

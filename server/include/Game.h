@@ -8,7 +8,7 @@
 #include "world/instructions/InstructionFactory.h"
 
 class Game : public Thread {
- private:
+private:
     int m_IdGame;
     std::string m_GameName;
     std::string m_MapName;
@@ -19,7 +19,6 @@ class Game : public Thread {
     std::atomic<bool> m_HasStarted;
     int m_PopMessageQuantity;
     GameWorld world;
-    ActionType m_BrokeAction;
     std::unordered_map<int, std::string&> m_PlayersInfo;
 
 public:
@@ -53,8 +52,10 @@ private:
     void waitFrameTime();
 
     void processAttackTurn(TurnHandler &turnHandler, InstructionFactory &instructionFactory, UserAction userAction);
-
+    void processNormalTurn(TurnHandler& turnHandler, InstructionFactory& instructionFactory, UserAction& userAction);
     void finishTurn(int idCurrentPlayer, const ActionType& type);
     void startTurn(TurnHandler& turnHandler);
     void allElementsIdle();
+
+    void sendEndGame(int winner);
 };

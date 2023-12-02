@@ -1,6 +1,6 @@
-// main.cpp
 #include <iostream>
 #include <QApplication>
+#include <QMessageBox>
 #include "messages/server/GameUpdate.h"
 #include "waitingWindow.h"
 #include "StartWindow.h"
@@ -16,9 +16,6 @@ int main(int argc, char *argv[]) {
             ClientManager clientManager(startWindow.getProtocol(), startWindow.getIdPlayer(),
                                         startWindow.getCantPlayers(), startWindow.getWaitingWindow());
             clientManager.init();
-            //TODO: tener una ventana de QT con fin de juego
-
-            //TODO: Ver tema exceptions y manejo del main / ClientManager
         } catch (std::exception &exception) {
             fprintf(stderr, "%s", exception.what());
             SDL_Quit();

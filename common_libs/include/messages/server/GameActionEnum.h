@@ -18,5 +18,6 @@ enum GameAction : uint8_t {
     END_TURN = 0x0D,
     TURN_TRANSITION = 0x0E,
     PROJECTILE_LAUNCHED = 0x0F,
+    END_GAME = 0x10,
     INVALID_ACTION = 0xFF
 };

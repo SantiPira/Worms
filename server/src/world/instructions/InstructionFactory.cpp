@@ -19,6 +19,8 @@ IWormInstruction* InstructionFactory::createInstruction(UserAction userAction) {
             return new WormIncreaseAngle(userAction.getIdPlayer());
         case DECREASE_ANGLE:
             return new WormDecreaseAngle(userAction.getIdPlayer());
+        case SELF_KILL:
+            return new WormSelfKill(userAction.getIdPlayer());
         case NONE:
             return new WormNone(userAction.getIdPlayer());
         default:

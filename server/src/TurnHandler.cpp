@@ -1,8 +1,8 @@
 #include "../include/TurnHandler.h"
 
 
-TurnHandler::TurnHandler(int idPlayer, std::vector<int> idPlayers) : idCurrentPlayer(idPlayer),
-    m_StartTime(std::chrono::system_clock::now()), m_MaxTurnSeconds(20) {
+TurnHandler::TurnHandler(int idPlayer, std::vector<int> idPlayers, bool testMode) : idCurrentPlayer(idPlayer),
+                                                                                    m_StartTime(std::chrono::system_clock::now()), m_MaxTurnSeconds(20), m_TestMode(testMode), m_EndGame(false) {
     m_IdPlayers = std::map<int, int>();
     for (int i = 0; i < static_cast<int>(idPlayers.size()); i++) {
         m_IdPlayers.insert(std::pair<int, int>(i, idPlayers.at(i)));
@@ -16,6 +16,17 @@ bool TurnHandler::isValidTurn() {
 
 void TurnHandler::nextTurn(const std::vector<int>& wormsRemovedIds) {
     std::cout << "Turn prev id: " << idCurrentPlayer << std::endl;
+    if (m_TestMode) {
+        if (wormsRemovedIds.size() == m_IdPlayers.size()) {
+            m_EndGame = true;
+            return;
+        }
+    } else {
+        if (wormsRemovedIds.size() == m_IdPlayers.size() - 1) {
+            m_EndGame = true;
+            return;
+        }
+    }
     for (auto& wormRemovedId : wormsRemovedIds) {
         for (auto& idPlayer : m_IdPlayers) {
             if (idPlayer.second == wormRemovedId) {
@@ -45,6 +56,10 @@ int TurnHandler::getCurrentPlayer() const {
 
 double TurnHandler::getSecondsPerTurn() const {
     return m_MaxTurnSeconds;
+}
+
+bool TurnHandler::isEndGame() const {
+    return m_EndGame;
 }
 
 

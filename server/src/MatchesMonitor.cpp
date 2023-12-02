@@ -4,9 +4,8 @@
 
 MatchesMonitor::MatchesMonitor() {}
 
+//Private method, no need to lock
 void MatchesMonitor::removeGame(int id) {
-    // this lock is commented as this method is used as private
-    //std::lock_guard<std::mutex> lock(m_Mutex);
     Game * gameToRemove = m_Games.at(id);
     if(! gameToRemove->hasStarted()) {
         m_Games.at(id)->start();
@@ -40,9 +39,9 @@ std::vector<GameProperty> MatchesMonitor::getGameProperties() {
     for (auto& game : m_Games) {
         if(!game.second->isReadyToStart()) {
             gameProperties.emplace_back(game.second->getIdGame(), game.second->getGameName(),
-                                             game.second->getMapName(),
-                                             static_cast<int>(game.second->getClientUpdates()->size()),
-                                             game.second->getPlayers());
+                                        game.second->getMapName(),
+                                        static_cast<int>(game.second->getClientUpdates()->size()),
+                                        game.second->getPlayers());
         }
     }
     return gameProperties;
@@ -56,12 +55,11 @@ std::string MatchesMonitor::getMapName(int idGame) {
 void MatchesMonitor::removePlayer(int idGame, int idPlayer) {
     std::lock_guard<std::mutex> lock(m_Mutex);
     if(m_Games.count(idGame) > 0) {
-        if(! m_Games.at(idGame)->isStillPlayable()) {
+        if(!m_Games.at(idGame)->isStillPlayable()) {
             removeGame(idGame);
         } else {
             m_Games.at(idGame)->getClientUpdates()->erase(idPlayer);
         }
     }
-    //TODO: Preguntar si no hay race condition aca.
 }
 

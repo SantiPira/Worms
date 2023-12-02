@@ -12,6 +12,11 @@ void ClientSender::run() {
                 continue;
             }
             m_Protocol.sendGameUpdate(update);
+            if (update.m_TurnInfo == END_GAME) {
+                m_KeepRunning.store(false);
+                m_Protocol.shutdown(SHUT_RDWR);
+                m_Protocol.close();
+            }
         }
     } catch (const LibError& e) {
         m_KeepRunning.store(false);
@@ -40,4 +45,8 @@ void ClientSender::stop() {
 
 void ClientSender::setPlayerId(int idPlayer) {
     this->m_IdPlayer = idPlayer;
+}
+
+bool ClientSender::isRunning() const {
+    return m_KeepRunning.load();
 }

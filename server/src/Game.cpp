@@ -1,11 +1,11 @@
 #include "../include/Game.h"
 
 #define POP_MESSAGE_QUANTITY 1
+#define INVALID_USER_ACTION (-1)
 
 Game::Game(int id, std::string gameName, std::string mapName, int players) : m_IdGame(id),
-    m_GameName(std::move(gameName)), m_MapName(std::move(mapName)), m_Players(players), m_InputActions(100),
-    m_KeepRunning(true), m_HasStarted(false), m_PopMessageQuantity(POP_MESSAGE_QUANTITY), world(m_MapName),
-    m_BrokeAction(ActionType::NONE) {}
+                                                                             m_GameName(std::move(gameName)), m_MapName(std::move(mapName)), m_Players(players), m_InputActions(100),
+                                                                             m_KeepRunning(true), m_HasStarted(false), m_PopMessageQuantity(POP_MESSAGE_QUANTITY), world(m_MapName) {}
 
 void Game::run() {
     setupWorld();
@@ -13,7 +13,8 @@ void Game::run() {
     for (int i = 0; i < m_Players; i++) {
         idPlayers.push_back(i);
     }
-    TurnHandler turnHandler(0, idPlayers);
+    bool testMode = m_Players == 1;
+    TurnHandler turnHandler(0, idPlayers, testMode);
     sendInfoTurns(0, turnHandler.getSecondsPerTurn(), GameAction::START_TURN);
     InstructionFactory instructionFactory;
     {
@@ -36,21 +37,11 @@ void Game::processTurns(TurnHandler& turnHandler, InstructionFactory& instructio
             UserAction userAction;
             if (m_InputActions.try_pop(userAction) && userAction.getIdPlayer() == turnHandler.getCurrentPlayer()) {
                 if (world.wormBrokeTurn(std::ref(userAction))) {
-                    m_BrokeAction = ActionType::ATTACK;
                     processAttackTurn(turnHandler, instructionFactory, userAction);
                     return;
                 }
-                auto* instruction = instructionFactory.createInstruction(userAction);
-                world.execute(instruction, userAction.getIdPlayer());
-                delete instruction;
             }
-            world.step();
-            auto update = world.getWormUpdate(turnHandler.getCurrentPlayer(), false);
-            if (update.m_Movement != INVALID_ACTION) {
-                pushUpdateToClients(std::ref(update));
-            }
-            waitFrameTime();
-            world.updateWormsMove();
+            processNormalTurn(turnHandler, instructionFactory, std::ref(userAction));
         }
         finishTurn(turnHandler.getCurrentPlayer(), ActionType::NONE);
         allElementsIdle();
@@ -156,7 +147,7 @@ bool Game::isStillPlayable() {
     } else {
         compare = 2;
     }
-    return m_QClientUpdates.size()-1 >= compare;
+    return m_QClientUpdates.size()-1 >= compare && m_KeepRunning.load();
 }
 
 void Game::sendInfoTurns(int playerId, double secondsPerTurn, GameAction infoTurn) {
@@ -189,25 +180,16 @@ void Game::processAttackTurn(TurnHandler &turnHandler, InstructionFactory &instr
     auto* attackInstruction = instructionFactory.createInstruction(userAction);
     world.execute(attackInstruction, userAction.getIdPlayer());
     delete attackInstruction;
+    GameUpdate update;
     /*ANIMACION DE ATAQUE DEL WORM*/
-    while (true) {
-        auto update = world.getWormUpdate(turnHandler.getCurrentPlayer(), false);
-        std::cout << "Sprite: " << static_cast<int>(update.m_CurrentSprite) << std::endl;
-        if (update.m_Movement == INVALID_ACTION) {
-            std::cout << "Invalid Sprite" << std::endl;
-        }
-
-        if (update.m_CurrentSprite == SPRITE_WACCUSE_IDLE) {
-            pushUpdateToClients(std::ref(update));
-            break;
-        }
+    while (update.m_CurrentSprite != SPRITE_WACCUSE_IDLE) {
+        update = world.getWormUpdate(turnHandler.getCurrentPlayer(), false);
         pushUpdateToClients(std::ref(update));
     }
-//    world.getWormUpdate(turnHandler.getCurrentPlayer(), std::ref(update), true);
-//    pushUpdateToClients(std::ref(update));
+    pushUpdateToClients(std::ref(update));
     /*TERMINA LA ANIMACION DEL ATAQUE DE WORM, Y YA SE ENVIO AL CLIENTE.*/
     world.resetWormStatus(turnHandler.getCurrentPlayer(), ActionType::NONE);
-    auto update = world.getWormUpdate(turnHandler.getCurrentPlayer(), false);
+    update = world.getWormUpdate(turnHandler.getCurrentPlayer(), false);
     pushUpdateToClients(std::ref(update));
     world.step();
     allElementsIdle();
@@ -226,6 +208,11 @@ void Game::processAttackTurn(TurnHandler &turnHandler, InstructionFactory &instr
     }
     world.removeDeadWorms(deadWormsIds);
     turnHandler.nextTurn(std::ref(deadWormsIds));
+    if (turnHandler.isEndGame()) {
+        sendEndGame(turnHandler.getCurrentPlayer());
+        m_KeepRunning = false;
+        return;
+    }
     sendInfoTurns(turnHandler.getCurrentPlayer(), turnHandler.getSecondsPerTurn(), GameAction::START_TURN);
 }
 
@@ -252,4 +239,27 @@ void Game::allElementsIdle() {
         world.step();
     }
 
+}
+
+void Game::processNormalTurn(TurnHandler &turnHandler, InstructionFactory &instructionFactory, UserAction &userAction) {
+    if (userAction.getIdPlayer() != INVALID_USER_ACTION) {
+        auto* instruction = instructionFactory.createInstruction(userAction);
+        world.execute(instruction, userAction.getIdPlayer());
+        delete instruction;
+    }
+    world.step();
+    auto update = world.getWormUpdate(turnHandler.getCurrentPlayer(), false);
+    if (update.m_Movement != INVALID_ACTION) {
+        pushUpdateToClients(std::ref(update));
+    }
+    waitFrameTime();
+    world.updateWormsMove();
+}
+
+void Game::sendEndGame(int winner) {
+    GameUpdate update;
+    update.m_TurnInfo = GameAction::END_GAME;
+    update.player_id = winner;
+    update.m_PlayerName = m_PlayersInfo.at(winner);
+    pushUpdateToClients(std::ref(update));
 }

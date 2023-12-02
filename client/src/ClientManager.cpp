@@ -1,10 +1,12 @@
+#include <QMessageBox>
+#include <QPushButton>
 #include "ClientManager.h"
 #include "client_receiver.h"
 #include "GameClient.h"
 
 ClientManager::ClientManager(Protocol *protocol, int idPlayer, int cantPlayers, WaitingWindow* waitingWindow) : m_Protocol(protocol),
     m_IdPlayer(idPlayer), m_CantPlayers(cantPlayers), settingsQueue(100), gameUpdates(100), m_KeepRunning(true),
-    m_WaitingWindow(waitingWindow) {}
+    m_WaitingWindow(waitingWindow), m_EndGame(false), m_YouWin(false) {}
 
 void ClientManager::init() {
     try {
@@ -40,7 +42,7 @@ void ClientManager::init() {
 
 void ClientManager::gameLoop(EventSender& eventSender) {
     auto lastTime = std::chrono::system_clock::now();
-    while (eventSender.isRunning()) {
+    while (!m_EndGame) {
         GameUpdate svUpdate{};
 
         auto current = std::chrono::system_clock::now();
@@ -61,18 +63,67 @@ void ClientManager::gameLoop(EventSender& eventSender) {
             std::cout << "LANZE UN PROYECTIL!!!!!!\n";
         }
 
-
-        if (svUpdate.m_TurnInfo != INVALID_ACTION) {
+        if (svUpdate.m_TurnInfo == START_TURN) {
             m_Game.resetTurn(svUpdate.player_id, svUpdate.m_PlayerName, svUpdate.m_SecondsPerTurn);
         } else {
+            if (svUpdate.m_TurnInfo == END_GAME) {
+                m_Winner = svUpdate.m_PlayerName;
+                m_YouWin = svUpdate.player_id == m_IdPlayer;
+                m_EndGame = true;
+            }
             m_Game.Update(elapsedSeconds.count(), svUpdate);
         }
         m_Game.Render();
 
         lastTime = current;
         SDL_Delay(12);
+
+        if (m_EndGame) {
+            eventSender.setIsRunning(false);
+            endGameWindow();
+            break;
+        }
     }
-    m_Game.Release();
+}
+
+void ClientManager::endGameWindow() {
+    std::string winner;
+    std::string finalImagePath;
+    if (m_YouWin) {
+        winner = "Ganaste!";
+        finalImagePath = std::filesystem::current_path().concat("/resources/Fondos/worms-start.png");
+    } else {
+        winner = "El ganador es: " + m_Winner + ".";
+        finalImagePath = std::filesystem::current_path().concat("/resources/Fondos/worms-start.png");
+    }
+    QDialog dialog;
+    dialog.setWindowTitle("Worms");
+
+    QLabel *label = new QLabel(winner.c_str());
+    label->setAlignment(Qt::AlignCenter);
+    label->setStyleSheet("font-size: 20px; color: black; font-weight: bold;");
+
+    QPushButton *button = new QPushButton("Salir");
+    button->setFixedSize(100, 50);
+    QObject::connect(button, &QPushButton::clicked, [&]() {
+        m_Game.Release();
+        dialog.close();
+    });
+
+    QHBoxLayout *buttonLayout = new QHBoxLayout;
+    buttonLayout->addStretch(1);
+    buttonLayout->addWidget(button);
+    buttonLayout->addStretch(1);
+
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget(label);
+    layout->addLayout(buttonLayout);
+
+    dialog.setLayout(layout);
+    dialog.setFixedSize(500, 300);
+
+    dialog.setStyleSheet("QDialog {background-image: url(" + QString(finalImagePath.c_str()) + ")}");
+    dialog.exec();
 }
 
 
