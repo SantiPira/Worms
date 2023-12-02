@@ -42,7 +42,7 @@ void ClientManager::init() {
 
 void ClientManager::gameLoop(EventSender& eventSender) {
     auto lastTime = std::chrono::system_clock::now();
-    while (!m_EndGame) {
+    while (eventSender.isRunning()) {
         GameUpdate svUpdate{};
         m_Game.projectile_launched = false;
 
