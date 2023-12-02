@@ -4,8 +4,12 @@
 #define INVALID_USER_ACTION (-1)
 
 Game::Game(int id, std::string gameName, std::string mapName, int players) : m_IdGame(id),
-                                                                             m_GameName(std::move(gameName)), m_MapName(std::move(mapName)), m_Players(players), m_InputActions(100),
-                                                                             m_KeepRunning(true), m_HasStarted(false), m_PopMessageQuantity(POP_MESSAGE_QUANTITY), world(m_MapName) {}
+                                                                             m_GameName(std::move(gameName)),
+                                                                             m_MapName(std::move(mapName)),
+                                                                             m_Players(players), m_InputActions(100),
+                                                                             m_KeepRunning(true), m_HasStarted(false),
+                                                                             m_PopMessageQuantity(POP_MESSAGE_QUANTITY),
+                                                                             world(m_MapName) {}
 
 void Game::run() {
     setupWorld();
@@ -155,7 +159,7 @@ bool Game::isStillPlayable() {
    } else {
         compare = 2;
    }
-   return m_QClientUpdates.size() >= compare && m_KeepRunning.load() && world.get;
+   return m_QClientUpdates.size() >= compare && m_KeepRunning.load() && world.getWormsAlive() == m_Players;
 }
 
 void Game::sendInfoTurns(int playerId, double secondsPerTurn, GameAction infoTurn) {
