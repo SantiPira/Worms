@@ -29,6 +29,7 @@ public:
     std::string getMapName() const;
     int getPlayers() const;
     int addPlayer(ProtectedQueue<GameUpdate>* qClientUpdates, std::string& playerName);
+    void removePlayer(int idPlayer);
     ProtectedQueue<UserAction>* getInputActions();
     void stop();
     ~Game() override = default;
