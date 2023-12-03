@@ -7,6 +7,7 @@ void BazookaContact::BeginContact(b2Body* bodyA, b2Body* bodyB) {
 
     WWorm* worm;
     WProyectile* proyectile;
+
     if (entityA == nullptr || entityB == nullptr) {
         return;
     }
@@ -25,24 +26,39 @@ void BazookaContact::BeginContact(b2Body* bodyA, b2Body* bodyB) {
         float distance = std::sqrt(std::pow(worm->getPosition().x - proyectile->getPositionX(), 2) +
                                 std::pow(worm->getPosition().y - proyectile->getPositionY(), 2));
 
+        std::cout << "DISTANCIA: " << distance << std::endl;
+
         if(distance <= proyectile->getRadius() && worm->getHealth() > 50){
             worm->receiveDamage(50);
         }
 
-        if(worm->getHealth() <= 50) worm->setIsDead();
 
 
-
-
-        std::cout << proyectile->getEntityType() << std::endl;
+        std::cout << "COLIISIONO" << std::endl;
     }
 
-    std::cout <<"No hubo colision" << std::endl;
+    //std::cout <<"No hubo colision" << std::endl;
 
 }
 
 void BazookaContact::EndContact(b2Body* bodyA, b2Body* bodyB) {
-    std::cout << "[PROYECTILE END COLLIDE]" << std::endl;
+    //std::cout << "[PROYECTILE END COLLIDE]" << std::endl;
+    
+    
+    WEntity* entityA = reinterpret_cast<WEntity*>(bodyA->GetUserData().pointer);
+    WEntity* entityB = reinterpret_cast<WEntity*>(bodyB->GetUserData().pointer);
 
-    //ver quien es el projectil y delete
+    WProyectile* proyectile;
+
+    if(entityA == nullptr || entityB == nullptr) {
+        return;
+    }
+
+    if(entityA->getEntityType() == EntitiesType::ENTITY_PROYECTILE){
+        proyectile = reinterpret_cast<WProyectile*>(bodyA->GetUserData().pointer);
+        proyectile->deleteBody();
+    } else if (entityB->getEntityType() == EntitiesType::ENTITY_PROYECTILE) {
+        proyectile = reinterpret_cast<WProyectile*>(bodyB->GetUserData().pointer);
+        proyectile->deleteBody();
+    }   
 }

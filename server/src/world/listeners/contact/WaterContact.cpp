@@ -27,5 +27,5 @@ void WaterContact::BeginContact(b2Body* bodyA, b2Body* bodyB) {
 }
 
 void WaterContact::EndContact(b2Body* bodyA, b2Body* bodyB) {
-    std::cout << "[END WATER COLLIDE]" << std::endl;
+    //std::cout << "[END WATER COLLIDE]" << std::endl;
 }

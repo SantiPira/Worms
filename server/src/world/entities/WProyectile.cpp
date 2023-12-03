@@ -1,17 +1,18 @@
 #include "world/entities/WProyectile.h"
 
-WProyectile::WProyectile(b2World* world, WWorm* attacker) {
+WProyectile::WProyectile(b2World* world, WWorm* attacker) : m_World(world) {
 
     b2BodyDef projectileBodyDef;
     projectileBodyDef.type = b2_dynamicBody;
     projectileBodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
+
     if (attacker->getDirection() == Direction::LEFT) {
-        projectileBodyDef.position.Set(attacker->getPosition().x - 0.5, attacker->getPosition().y + 0.5);
+        projectileBodyDef.position.Set(attacker->getPosition().x - 1, attacker->getPosition().y + 0.5);
     } else {
-        projectileBodyDef.position.Set(attacker->getPosition().x + 0.5, attacker->getPosition().y + 0.5);
+        projectileBodyDef.position.Set(attacker->getPosition().x + 1, attacker->getPosition().y + 0.5);
     }
 
-    m_Body = world->CreateBody(&projectileBodyDef);
+    m_Body = m_World->CreateBody(&projectileBodyDef);
 
 
     b2CircleShape projectileShape;
@@ -57,4 +58,9 @@ float WProyectile::getRadius() {
 
 EntitiesType WProyectile::getEntityType() {
     return m_EntityType;
+}
+
+void WProyectile::deleteBody() {
+    m_World->Step(0.0f, 0, 0);
+    m_World->DestroyBody(m_Body);
 }

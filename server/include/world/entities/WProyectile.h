@@ -10,6 +10,7 @@ private:
 
     EntitiesType m_EntityType;
     b2Body* m_Body;
+    b2World* m_World;
 
     float m_Radius;
     uint16_t m_BeamCategory = 0x0002;
@@ -29,5 +30,8 @@ public:
 
     float getRadius();
 
+    void deleteBody();
+
     ~WProyectile() override = default;
 };
+
