@@ -16,8 +16,8 @@ GameInfo Juego::getGamesInfo(){
 }
 
 
-Juego::Juego(const std::string& ip, const std::string& puerto, WaitingWindow* waitingWindow) : 
-m_Protocol(ip, puerto), cola_de_mensajes(100), m_WaitingWindow(waitingWindow) {}
+Juego::Juego(const std::string& ip, const std::string& puerto) :
+m_Protocol(ip, puerto), cola_de_mensajes(100) {}
 
 void Juego::menu_window(){
     MenuWindow *menu = new MenuWindow(nullptr, this);
@@ -34,8 +34,6 @@ void Juego::createGame(const std::string& mapa, const std::string& nombre, const
     GameInfo serverResponse = m_Protocol.recvGameInfo();
     m_IdPlayer = serverResponse.getGameProperties().at(0).m_IdPlayer;
 
-    //m_WaitingWindow->show();
-    
     std::cout<<"El mapa es: "<<mapa<<std::endl;
     std::cout<<"El nombre es: "<<nombre<<std::endl;
     std::cout<<"La cantidad de jugadores es: "<<cantidad_jugadores<<std::endl;
@@ -48,8 +46,6 @@ void Juego::joinGame(int idGame, int players, std::string playerName) {
     m_Protocol.sendGameInfo(std::ref(gameInfo));
     GameInfo serverResponse = m_Protocol.recvGameInfo();
     m_IdPlayer = serverResponse.getGameProperties().at(0).m_IdPlayer;
-
-    //m_WaitingWindow->show();
 
     std::cout<<"El id del juego es: "<<idGame<<std::endl;
 }

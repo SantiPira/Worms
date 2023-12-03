@@ -12,9 +12,7 @@ StartWindow::StartWindow(QWidget *parent) : QMainWindow(parent) {
     startButton->setStyleSheet("background-color: red");
     startButton->resize(100, 50);
     startButton->move(this->width()/2 - startButton->width()/2, this->height()/2 - startButton->height()/2);
-
-    waitingWindow = new WaitingWindow();
-    mainWindow = new MainWindow(nullptr, waitingWindow);
+    mainWindow = new MainWindow(nullptr);
 
     connect(startButton, &QPushButton::clicked, this, &StartWindow::startGame);
 }
@@ -34,8 +32,4 @@ int StartWindow::getIdPlayer() const {
 
 int StartWindow::getCantPlayers() const {
     return mainWindow->getCantPlayers();
-}
-
-WaitingWindow *StartWindow::getWaitingWindow() {
-    return waitingWindow;
 }

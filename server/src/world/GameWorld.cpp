@@ -219,3 +219,13 @@ b2Body* GameWorld::getProjectile(){
 
     return p_projectile;
 }
+
+int GameWorld::getWormsAlive() const {
+    int alive = 0;
+    for (auto& worm : worms) {
+        if (worm.second->getHealth() > 0) {
+            ++alive;
+        }
+    }
+    return alive;
+}
