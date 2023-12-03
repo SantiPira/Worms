@@ -16,6 +16,7 @@
 #include <vector>
 #include <utility>
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 
 #define HEALTH_WIDTH_FONT 30
 #define HEALTH_HEIGHT_FONT 30
@@ -35,6 +36,10 @@ class Worm {
     SDL_Rect m_NameDestRect{};
     SDL_Rect m_HealthDestRect{};
     int m_Health;
+    Mix_Chunk* m_StepSound;
+    Mix_Chunk *m_JumpSound;
+    Mix_Chunk *m_DieSound;
+
  public:
     SDL_Renderer* m_Renderer;
     std::unordered_map<SpritesEnum, std::unique_ptr<Animation>> m_SpritesMap;
@@ -59,10 +64,12 @@ private:
     void update(double elapsedSeconds);
     void render();
 
-    ~Worm() = default;
+    ~Worm();
 
     void updateBateAttack(double elapsedSeconds, const GameUpdate &gameUpdate);
     void UpdateBazooka(double elapsedSeconds, const GameUpdate &gameUpdate);
 
     void updateBateHeat(double seconds, const GameUpdate &update);
+
+    void playSound();
 };

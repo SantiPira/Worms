@@ -82,7 +82,7 @@ void GameClient::CreateWindowAndRender() {
 
 void GameClient::InitMixerAndChunk() {
     mixer = new SDL2pp::Mixer(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096);
-    
+
     chunk = new SDL2pp::Chunk(std::filesystem::current_path().concat(Game_Music.c_str()).c_str());
 }
 

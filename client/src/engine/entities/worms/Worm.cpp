@@ -373,6 +373,13 @@ void Worm::init() {
     for (auto& sprite : m_SpritesMap) {
         sprite.second->init();
     }
+
+    m_StepSound = Mix_LoadWAV(std::filesystem::current_path().concat("/resources/Music/worm-walk.mp3").c_str());
+    m_JumpSound = Mix_LoadWAV(std::filesystem::current_path().concat("/resources/Music/worm-jump.mp3").c_str());
+    m_DieSound = Mix_LoadWAV(std::filesystem::current_path().concat("/resources/Music/worm-dead.mp3").c_str());
+    if (m_StepSound == NULL || m_JumpSound == NULL || m_DieSound == NULL) {
+        std::cout << "Error loading sound: " << Mix_GetError() << std::endl;
+    }
 }
 
 void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
@@ -389,6 +396,7 @@ void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
     } else {
         m_CurrentSprite = gameUpdate.m_CurrentSprite;
         m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
+        playSound();
     }
 
     if (gameUpdate.m_Movement != GameAction::INVALID_ACTION) {
@@ -533,5 +541,30 @@ void Worm::renderInfoWorm() {
     SDL_FreeSurface(healthSurface);
     SDL_DestroyTexture(healthTexture);
     TTF_CloseFont(font);
+}
+
+Worm::~Worm() {
+    std::cout << "Destroing Worm" << std::endl;
+    for (auto& sprite : m_SpritesMap) {
+        sprite.second = nullptr;
+    }
+    Mix_FreeChunk(m_StepSound);
+}
+
+void Worm::playSound() {
+    switch (m_CurrentSprite) {
+        case SPRITE_WALK:
+            m_CurrentSprite == SPRITE_WALK ? Mix_PlayChannel(-1, m_StepSound, 0) : Mix_HaltChannel(-1);
+            break;
+        case SPRITE_JUMPING:
+            m_CurrentSprite == SPRITE_JUMPING ? Mix_PlayChannel(-1, m_JumpSound, 0) : Mix_HaltChannel(-1);
+            break;
+        case SPRITE_WACCUSE_DIE:
+            m_CurrentSprite == SPRITE_WACCUSE_DIE ? Mix_PlayChannel(-1, m_DieSound, 0) : Mix_HaltChannel(-1);
+            break;
+        default:
+            Mix_HaltChannel(-1);
+            break;
+    }
 }
 
