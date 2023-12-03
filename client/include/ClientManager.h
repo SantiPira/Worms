@@ -3,12 +3,13 @@
 #include "Protocol.h"
 #include "ProtectedQueue.h"
 #include "GameClient.h"
-#include "waitingWindow.h"
 #include "EventSender.h"
 #include "client_receiver.h"
 #include "GameClient.h"
 #include <QMessageBox>
 #include <QPushButton>
+#include <QHBoxLayout>
+#include <QLabel>
 
 class ClientManager {
  private:

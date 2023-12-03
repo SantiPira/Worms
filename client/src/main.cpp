@@ -2,7 +2,6 @@
 #include <QApplication>
 #include <QMessageBox>
 #include "messages/server/GameUpdate.h"
-#include "waitingWindow.h"
 #include "StartWindow.h"
 #include "ClientManager.h"
 

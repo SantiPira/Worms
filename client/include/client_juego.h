@@ -6,7 +6,6 @@
 #include "EventSender.h"
 #include "client_receiver.h"
 #include <iostream>
-#include "waitingWindow.h"
 
 class Juego{
     private:
@@ -16,14 +15,13 @@ class Juego{
     ClientReceiver* receptor_de_mensajes{NULL};
     bool inicio_el_juego{false};
     ProtectedQueue<std::string> cola_de_mensajes;
-    WaitingWindow* m_WaitingWindow;
 
     int m_Players{};
     int m_IdPlayer{};
 
     public:
 
-    explicit Juego(const std::string& ip, const std::string& puerto, WaitingWindow* waitingWindow);
+    explicit Juego(const std::string& ip, const std::string& puerto);
 
     void joinGame(int idGame, int cantPlayers, std::string playerName);
 
