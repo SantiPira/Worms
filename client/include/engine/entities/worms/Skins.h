@@ -306,8 +306,8 @@ struct NegativeAnglesBazooka {
     BlendMode blendMode = {true, 128, 128, 192};
     int frames = 15;
     int distanceBetweenFrames = 60;
-    int frameWidth = 43;
-    int frameHeight = 53;
+    int frameWidth = 40;
+    int frameHeight = 54;
     float duration = 1.0f;
     SDL_Rect srcRect = {11, 12, 36, 40};
     int initYSprite = 12;

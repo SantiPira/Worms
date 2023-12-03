@@ -2,13 +2,17 @@
 
 #include "world/entities/weapons/Weapon.h"
 #include "world/entities/WWorm.h"
+#include "world/entities/WProyectile.h"
+#include <memory>
 
 class WWorm;
+class WProyectile;
 class Bazooka : public Weapon {
 private:
     int damage;
     float distance;
-    float radius{3.0f};
+
+    std::unique_ptr<WProyectile> projectile;       
 
 public:
     Bazooka();
