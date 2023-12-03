@@ -4,7 +4,7 @@ WProyectile::WProyectile(b2World* world, WWorm* attacker) {
 
     b2BodyDef projectileBodyDef;
     projectileBodyDef.type = b2_dynamicBody;
-
+    projectileBodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
     if (attacker->getDirection() == Direction::LEFT) {
         projectileBodyDef.position.Set(attacker->getPosition().x - 0.5, attacker->getPosition().y + 0.5);
     } else {

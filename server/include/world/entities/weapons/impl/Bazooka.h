@@ -12,7 +12,7 @@ private:
     int damage;
     float distance;
 
-    std::unique_ptr<WProyectile> projectile;       
+    WProyectile* projectile;
 
 public:
     Bazooka();

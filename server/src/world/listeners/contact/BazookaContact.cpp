@@ -43,4 +43,6 @@ void BazookaContact::BeginContact(b2Body* bodyA, b2Body* bodyB) {
 
 void BazookaContact::EndContact(b2Body* bodyA, b2Body* bodyB) {
     std::cout << "[PROYECTILE END COLLIDE]" << std::endl;
+
+    //ver quien es el projectil y delete
 }

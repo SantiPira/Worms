@@ -13,7 +13,7 @@ void Bazooka::attack(WWorm *attacker, WWorm *attacked, uint8_t force) {
 
     float angle = attacker->getWeaponAngle();
 
-    projectile = std::make_unique<WProyectile>(attacker->getWorld(), attacker);
+    projectile = new WProyectile(attacker->getWorld(), attacker);
 
     b2Body* projectileBody = projectile->getBody();
 
