@@ -52,6 +52,8 @@ void EventSender::run() {
                 }
             } else if (key == SDLK_m) {
                 userAction = {ActionType::SELF_KILL, m_IdPlayer};
+            } else if (key == SDLK_t) {
+                userAction = {ActionType::SET_TOOL, m_IdPlayer};
             } else {
                 std::cout << "key no mapeada: " << key << std::endl;
             }

@@ -54,6 +54,7 @@ WWorm::WWorm(b2World* world, std::string playerName, uint8_t id, float posX, flo
     this->m_SelfCondition = GameAction::WORM_IDLE;
     m_ActionToAnimation = ActionToAnimation();
     m_OtherDirection = Direction::NONE_DIR;
+    m_Tool = ToolID::NO_TOOL;
 }
 
 [[maybe_unused]] uint8_t WWorm::getId() const {
@@ -438,5 +439,13 @@ int32 WWorm::getPreviousHealth() const {
 
 std::string WWorm::getPlayerName() const {
     return m_PlayerName;
+}
+
+ToolID WWorm::getTool() const {
+    return m_Tool;
+}
+
+void WWorm::setTool(ToolID tool) {
+    m_Tool = tool;
 }
 

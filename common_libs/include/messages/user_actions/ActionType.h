@@ -15,6 +15,7 @@ enum ActionType : uint8_t {
     INCREASE_ANGLE = 0X09,
     DYING = 0X0A,
     SELF_KILL = 0X0B,
+    SET_TOOL = 0X0C,
     ATTACKED = 0X0B
 };
 

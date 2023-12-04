@@ -10,6 +10,7 @@
 #include "../../common_libs/include/messages/server/GameInfo.h"
 #include "../../common_libs/include/messages/user_actions/UserAction.h"
 #include "ProtectedQueue.h"
+#include "../../common_libs/include/messages/user_actions/ToolID.h"
 
 class EventSender : public Thread {
  private:

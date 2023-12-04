@@ -11,6 +11,7 @@
 #include "world/entities/action_animations/types/SActionWeapon.h"
 #include "EntitiesType.h"
 #include "WEntity.h"
+#include "messages/user_actions/ToolID.h"
 #include <iostream>
 #include <memory>
 #include <vector>
@@ -53,6 +54,7 @@ private:
     bool m_IsInContactWithWWorm = false;
     Direction m_OtherDirection{};
     ActionToAnimation m_ActionToAnimation;
+    ToolID m_Tool;
 
 public:
     bool tieneProyectil{false};
@@ -89,6 +91,7 @@ public:
     [[nodiscard]] bool getIsInContactWithAnotherWorm() const;
     ActionToAnimation* getActionToAnimation();
     std::string getPlayerName() const;
+    [[nodiscard]] ToolID getTool() const;
     bool isMoving() const;
     bool wasAttacked() const;
 
@@ -115,6 +118,7 @@ public:
     void setIsInContactWithAnotherWorm(bool isInContactWithAnotherWorm);
     void setOtherDirection(Direction otherDirection);
     void setWasAttacked(bool wasAttacked);
+    void setTool(ToolID tool);
 
     GameUpdate getUpdate(bool wormChanged);
 
