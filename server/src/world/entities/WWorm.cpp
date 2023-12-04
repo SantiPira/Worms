@@ -39,6 +39,7 @@ WWorm::WWorm(b2World* world, std::string playerName, uint8_t id, float posX, flo
     this->m_Angle = 0;
     this->m_AngularVelocity = 0;
     this->m_Health = 100; //Valores cargados por config?
+    this->m_PreviousHealth = 100;
     this->m_Ammo = 50;     //Valores cargados por config?
     this->m_Score = 0;
     this->m_IsDead = false;
@@ -181,7 +182,7 @@ GameUpdate WWorm::getUpdate(bool wormChanged) {
     currentState.y_pos = getPosition().y;
     currentState.width = m_Width * 2;
     currentState.height = m_Height * 2;
-    currentState.m_Health = m_Health;
+//    currentState.m_Health = m_PreviousHealth;
     currentState.m_Dir = m_Dir;
     currentState.m_Weapon = m_Weapon;
     currentState.m_IsAttacking = m_IsAttacking;
@@ -191,7 +192,7 @@ GameUpdate WWorm::getUpdate(bool wormChanged) {
     currentState.m_CurrentSprite = m_ActionToAnimation.getCurrentSprite(this);
     currentState.m_WeaponAngle = m_WeaponAngle * 180.0f / b2_pi;
 
-    if (currentState != m_PreviousState) {
+    if (currentState != m_PreviousState || m_PreviousHealth != m_Health) {
         m_PreviousState = currentState;
         return currentState;
     }
@@ -272,8 +273,7 @@ void WWorm::setIsAttacking(bool isAttacking) {
 
 void WWorm::receiveDamage(int damage) {
     m_WasAttacked = true;
-//    m_ActionToAnimation.resetAnimation();
-//    m_ActionToAnimation.setAction(ActionType::ATTACKED);
+    m_PreviousHealth = m_Health;
     if (damage >= m_Health) {
         m_Health = 0;
     } else {
@@ -421,10 +421,22 @@ GameUpdate WWorm::getAttackedUpdate() {
     update.m_PlayerName = m_PlayerName;
     update.x_pos = getPosition().x;
     update.y_pos = getPosition().y;
-//    update.m_Health = m_Health;
+    update.m_Health = m_PreviousHealth;
     update.m_CurrentSprite = m_ActionToAnimation.getCurrentSprite(this);
     update.m_Movement = getMovement();
     update.m_Dir = m_Dir;
     return update;
+}
+
+void WWorm::updateHealth() {
+    m_PreviousHealth = m_Health;
+}
+
+int32 WWorm::getPreviousHealth() const {
+    return m_PreviousHealth;
+}
+
+std::string WWorm::getPlayerName() const {
+    return m_PlayerName;
 }
 

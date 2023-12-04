@@ -51,7 +51,7 @@ void GameWorld::SetWorm(const int& player_number, const std::string& playerName,
     std::cout << "ID [" << player_number << "] - POS (" << x_pos << ", " << y_pos << ")" << std::endl;
 }
 
-std::vector<GameUpdate> GameWorld::getWormsUpdates(bool getAll) const {
+std::vector<GameUpdate> GameWorld::getWormsUpdates(bool getAll) {
     std::vector<GameUpdate> gameUpdates;
     for (auto& worm : worms) {
         auto update = worm.second->getUpdate(getAll);
@@ -239,6 +239,7 @@ std::vector<GameUpdate> GameWorld::getWormsMoving() {
             gameUpdate.m_Dir = worm.second->getDirection();
             gameUpdate.x_pos = worm.second->getPosition().x;
             gameUpdate.y_pos = worm.second->getPosition().y;
+//    gameUpdate.m_Health = worm.second->getPreviousHealth();
             gameUpdate.m_Movement = GameAction::WORM_IDLE;
             gameUpdate.m_CurrentSprite = SPRITE_WACCUSE_IDLE;
             updates.push_back(std::move(gameUpdate));
@@ -269,5 +270,33 @@ GameUpdate GameWorld::getWormsHealth(int id) {
     update.player_id = worm->getId();
     update.m_Dir = worm->getDirection();
     update.m_Health = worm->getHealth();
+    update.x_pos = worm->getPosition().x;
+    update.y_pos = worm->getPosition().y;
+    update.width = worm->getWidth() * 2;
+    update.height = worm->getHeight() * 2;
+    update.m_CurrentSprite =
+            worm->getActionToAnimation()->getCurrentSprite() == SPRITE_INVALID ? SPRITE_WACCUSE_IDLE
+            : worm->getActionToAnimation()->getCurrentSprite();
+    update.m_PlayerName = worm->getPlayerName();
+    worm->updateHealth();
     return update;
+}
+
+std::vector<GameUpdate> GameWorld::getWormsHealths() const {
+    std::vector<GameUpdate> updates;
+    for (auto& worm : worms) {
+        GameUpdate update;
+        update.player_id = worm.second->getId();
+        update.m_Health = worm.second->getHealth();
+        update.x_pos = worm.second->getPosition().x;
+        update.y_pos = worm.second->getPosition().y;
+        update.width = worm.second->getWidth() * 2;
+        update.height = worm.second->getHeight() * 2;
+        update.m_PlayerName = worm.second->getPlayerName();
+        update.m_CurrentSprite =
+                worm.second->getActionToAnimation()->getCurrentSprite() == SPRITE_INVALID ? SPRITE_WACCUSE_IDLE
+                : worm.second->getActionToAnimation()->getCurrentSprite();
+        updates.push_back(std::move(update));
+    }
+    return updates;
 }

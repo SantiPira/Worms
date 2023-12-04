@@ -25,11 +25,11 @@ void Game::run() {
         bool getAll = true;
         auto updates = world.getWormsUpdates(getAll);
         pushUpdatesToClients(std::ref(updates));
+        updates = world.getWormsHealths();
+        pushUpdatesToClients(std::ref(updates));
     }
-
     world.step();
     allElementsIdle();
-
     while (m_KeepRunning) {
         processTurns(turnHandler, instructionFactory);
     }
@@ -117,6 +117,7 @@ std::string Game::getMapName() const {
 
 void Game::pushUpdateToClients(GameUpdate &update) {
     for (auto& clientUpdate : m_QClientUpdates) {
+        std::cout << "Push update vida: " << static_cast<int>(update.m_Health) << std::endl;
         clientUpdate.second->push(std::ref(update));
     }
 }
@@ -125,6 +126,7 @@ void Game::pushUpdatesToClients(std::reference_wrapper<std::vector<GameUpdate>> 
     for (auto& clientQueue : m_QClientUpdates) {
         for (auto& update : updates.get()) {
             if(update.m_CurrentSprite != SPRITE_INVALID) {
+                std::cout << "Vida: " << static_cast<int>(update.m_Health) << std::endl;
                 clientQueue.second->push(std::ref(update));
             }
         }

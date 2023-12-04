@@ -87,8 +87,9 @@ void GameClient::InitMixerAndChunk() {
 }
 
 void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
-    if (gameUpdate.m_InfoWorm) {
-        m_Worms.at(gameUpdate.player_id)->updateInfo(gameUpdate);
+    if (gameUpdate.m_Health != 0xFF) {
+        std::cout << "Update health: " << static_cast<int>(gameUpdate.m_Health) << std::endl;
+        m_Worms.at(gameUpdate.player_id)->updateHealth(gameUpdate.m_Health);
     }
     if (gameUpdate.m_CurrentSprite == SPRITE_INVALID) {
         for (auto& worm : m_Worms) {

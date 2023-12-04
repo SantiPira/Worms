@@ -73,5 +73,5 @@ private:
 
     void playSound();
 
-    void updateInfo(const GameUpdate &update);
+    void updateHealth(const uint8_t &health);
 };

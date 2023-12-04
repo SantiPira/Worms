@@ -29,6 +29,7 @@ private:
     float m_Angle{};
     float m_AngularVelocity{};
     int32 m_Health{};
+    int32 m_PreviousHealth{};
     int32 m_Ammo{};
     int32 m_Score{};
     bool m_IsDead{};
@@ -68,6 +69,7 @@ public:
     [[nodiscard]] float getAngle() const;
     [[nodiscard]] float getAngularVelocity() const;
     [[nodiscard]] int32 getHealth() const;
+    [[nodiscard]] int32 getPreviousHealth() const;
     [[nodiscard]] int32 getAmmo() const;
     [[nodiscard]] int32 getScore() const;
     [[nodiscard]] bool getIsDead() const;
@@ -86,6 +88,7 @@ public:
     [[nodiscard]] GameUpdate getPreviousState() const;
     [[nodiscard]] bool getIsInContactWithAnotherWorm() const;
     ActionToAnimation* getActionToAnimation();
+    std::string getPlayerName() const;
     bool isMoving() const;
     bool wasAttacked() const;
 
@@ -140,4 +143,6 @@ public:
     void unSetWeapon();
 
     GameUpdate getAttackedUpdate();
+
+    void updateHealth();
 };

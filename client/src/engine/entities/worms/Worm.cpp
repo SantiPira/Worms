@@ -385,13 +385,13 @@ void Worm::init() {
 void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
     m_LastUpdate = gameUpdate;
     if (gameUpdate.m_CurrentSprite == SpritesEnum::SPRITE_HAS_BATE) {
-        m_Health = static_cast<int>(gameUpdate.m_Health);
+//    m_Health = static_cast<int>(gameUpdate.m_Health);
         updateBateAttack(elapsedSeconds, gameUpdate);
     } else if (gameUpdate.m_CurrentSprite == SpritesEnum::SPRITE_ATTACK_BATE) {
-        m_Health = static_cast<int>(gameUpdate.m_Health);
+//        m_Health = static_cast<int>(gameUpdate.m_Health);
         updateBateHit(elapsedSeconds, gameUpdate);
     } else if (gameUpdate.m_CurrentSprite == SpritesEnum::SPRITE_HAS_BAZOOKA) {
-        m_Health = static_cast<int>(gameUpdate.m_Health);
+//        m_Health = static_cast<int>(gameUpdate.m_Health);
         UpdateBazooka(elapsedSeconds, gameUpdate);
     } else {
         m_CurrentSprite = gameUpdate.m_CurrentSprite;
@@ -400,7 +400,7 @@ void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
     }
 
     if (gameUpdate.m_Movement != GameAction::INVALID_ACTION) {
-        m_Health = static_cast<int>(gameUpdate.m_Health);
+//        m_Health = static_cast<int>(gameUpdate.m_Health);
         m_Dir = gameUpdate.m_Dir;
         Animation* anim = m_SpritesMap.at(m_CurrentSprite).get();
         float tempX = WorldScale::worldToPixelX(gameUpdate.x_pos, anim->getDeltaPosX());
@@ -568,7 +568,7 @@ void Worm::playSound() {
     }
 }
 
-void Worm::updateInfo(const GameUpdate &update) {
-    m_Health = update.m_Health;
+void Worm::updateHealth(const uint8_t &health) {
+    m_Health = health;
 }
 
