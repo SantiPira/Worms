@@ -89,4 +89,12 @@ public:
     b2Body* getProjectile();
 
     int getWormsAlive() const;
+
+    std::vector<GameUpdate> getWormsMoving();
+
+    void wormsAttacked(std::vector<int> &idWorms);
+
+    GameUpdate getWormUpdateAttacked(int id);
+
+    GameUpdate getWormsHealth(int id);
 };

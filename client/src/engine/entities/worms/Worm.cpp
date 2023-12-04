@@ -389,7 +389,7 @@ void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
         updateBateAttack(elapsedSeconds, gameUpdate);
     } else if (gameUpdate.m_CurrentSprite == SpritesEnum::SPRITE_ATTACK_BATE) {
         m_Health = static_cast<int>(gameUpdate.m_Health);
-        updateBateHeat(elapsedSeconds, gameUpdate);
+        updateBateHit(elapsedSeconds, gameUpdate);
     } else if (gameUpdate.m_CurrentSprite == SpritesEnum::SPRITE_HAS_BAZOOKA) {
         m_Health = static_cast<int>(gameUpdate.m_Health);
         UpdateBazooka(elapsedSeconds, gameUpdate);
@@ -501,7 +501,7 @@ void Worm::update(double elapsedSeconds) {
     }
 }
 
-void Worm::updateBateHeat(double seconds, const GameUpdate &update) {
+void Worm::updateBateHit(double seconds, const GameUpdate &update) {
     HasBate hasBate;
     NormalAttackBate normalAttackBate;
     float angle = update.m_WeaponAngle;
@@ -554,17 +554,21 @@ Worm::~Worm() {
 void Worm::playSound() {
     switch (m_CurrentSprite) {
         case SPRITE_WALK:
-            m_CurrentSprite == SPRITE_WALK ? Mix_PlayChannel(-1, m_StepSound, 0) : Mix_HaltChannel(-1);
+            Mix_PlayChannel(-1, m_StepSound, 0);
             break;
         case SPRITE_JUMPING:
-            m_CurrentSprite == SPRITE_JUMPING ? Mix_PlayChannel(-1, m_JumpSound, 0) : Mix_HaltChannel(-1);
+            Mix_PlayChannel(-1, m_JumpSound, 0);
             break;
         case SPRITE_WACCUSE_DIE:
-            m_CurrentSprite == SPRITE_WACCUSE_DIE ? Mix_PlayChannel(-1, m_DieSound, 0) : Mix_HaltChannel(-1);
+            Mix_PlayChannel(-1, m_DieSound, 0);
             break;
         default:
             Mix_HaltChannel(-1);
             break;
     }
+}
+
+void Worm::updateInfo(const GameUpdate &update) {
+    m_Health = update.m_Health;
 }
 

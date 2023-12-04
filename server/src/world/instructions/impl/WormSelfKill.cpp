@@ -5,6 +5,6 @@ WormSelfKill::WormSelfKill(int idPlayer) {
 }
 
 void WormSelfKill::execute(WWorm *worm) {
-    worm->receiveDamage(worm->getHealth());
+    worm->receiveDamage(1);
 }
 

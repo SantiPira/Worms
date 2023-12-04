@@ -46,6 +46,7 @@ WWorm::WWorm(b2World* world, std::string playerName, uint8_t id, float posX, flo
     this->m_IsJumping = false;
     this->m_IsFalling = false;
     this->m_IsShooting = false;
+    this->m_WasAttacked = false;
     this->m_Weapon = WeaponID::NO_WEAPON;
     this->m_IsFacingRight = isFacingRight;
     this->m_Dir = isFacingRight ? Direction::RIGHT : Direction::LEFT;
@@ -191,12 +192,11 @@ GameUpdate WWorm::getUpdate(bool wormChanged) {
     currentState.m_WeaponAngle = m_WeaponAngle * 180.0f / b2_pi;
 
     if (currentState != m_PreviousState) {
-        wormChanged = true;
         m_PreviousState = currentState;
+        return currentState;
     }
 
     if(wormChanged) {
-        m_WasChanged = false;
         return currentState;
     }
 
@@ -271,8 +271,9 @@ void WWorm::setIsAttacking(bool isAttacking) {
 }
 
 void WWorm::receiveDamage(int damage) {
-    m_ActionToAnimation.resetAnimation();
-    m_ActionToAnimation.setAction(ActionType::ATTACKED);
+    m_WasAttacked = true;
+//    m_ActionToAnimation.resetAnimation();
+//    m_ActionToAnimation.setAction(ActionType::ATTACKED);
     if (damage >= m_Health) {
         m_Health = 0;
     } else {
@@ -403,6 +404,27 @@ void WWorm::setOtherDirection(Direction otherDirection) {
 }
 
 bool WWorm::isMoving() const {
-    return m_IsMoving;
+    return getVelocity() != b2Vec2_zero;
+}
+
+bool WWorm::wasAttacked() const {
+    return m_WasAttacked;
+}
+
+void WWorm::setWasAttacked(bool wasAttacked) {
+    m_WasAttacked = wasAttacked;
+}
+
+GameUpdate WWorm::getAttackedUpdate() {
+    GameUpdate update;
+    update.player_id = m_Id;
+    update.m_PlayerName = m_PlayerName;
+    update.x_pos = getPosition().x;
+    update.y_pos = getPosition().y;
+//    update.m_Health = m_Health;
+    update.m_CurrentSprite = m_ActionToAnimation.getCurrentSprite(this);
+    update.m_Movement = getMovement();
+    update.m_Dir = m_Dir;
+    return update;
 }
 

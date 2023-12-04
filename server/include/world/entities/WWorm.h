@@ -37,6 +37,7 @@ private:
     bool m_IsJumping{};
     bool m_IsFalling{};
     bool m_IsShooting{};
+    bool m_WasAttacked{};
     GameAction m_SelfCondition;
     WeaponID m_Weapon;
     Direction m_Dir;
@@ -86,6 +87,7 @@ public:
     [[nodiscard]] bool getIsInContactWithAnotherWorm() const;
     ActionToAnimation* getActionToAnimation();
     bool isMoving() const;
+    bool wasAttacked() const;
 
     void setPosition(b2Vec2 position);
     void setVelocity(b2Vec2 velocity);
@@ -109,6 +111,7 @@ public:
     void setWasChanged(bool wasChanged);
     void setIsInContactWithAnotherWorm(bool isInContactWithAnotherWorm);
     void setOtherDirection(Direction otherDirection);
+    void setWasAttacked(bool wasAttacked);
 
     GameUpdate getUpdate(bool wormChanged);
 
@@ -135,4 +138,6 @@ public:
     float getHeight() const;
 
     void unSetWeapon();
+
+    GameUpdate getAttackedUpdate();
 };

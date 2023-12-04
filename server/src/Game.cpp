@@ -124,7 +124,7 @@ void Game::pushUpdateToClients(GameUpdate &update) {
 void Game::pushUpdatesToClients(std::reference_wrapper<std::vector<GameUpdate>> updates) {
     for (auto& clientQueue : m_QClientUpdates) {
         for (auto& update : updates.get()) {
-            if(update.m_Movement != INVALID_ACTION) {
+            if(update.m_CurrentSprite != SPRITE_INVALID) {
                 clientQueue.second->push(std::ref(update));
             }
         }
@@ -203,8 +203,14 @@ void Game::processAttackTurn(TurnHandler &turnHandler, InstructionFactory &instr
     world.resetWormStatus(turnHandler.getCurrentPlayer(), ActionType::NONE);
     update = world.getWormUpdate(turnHandler.getCurrentPlayer(), false);
     pushUpdateToClients(std::ref(update));
+    /*SE ENVIAN TODOS LOS ELEMENTOS DEL WORLD QUE SE ESTAN MOVIENDO*/
     world.step();
     allElementsIdle();
+    /*TERMINO EL ENVIO DE TODOS LOS ELEMENTOS DEL WORLD QUE SE ESTABAN MOVIENDO*/
+
+    /*MANDO TODOS LOS WORMS QUE RECIBIERON DANIO*/
+    wormsGettingDamage();
+    /*TERMINO DE MANDAR TODOS LOS WORMS QUE RECIBIERON DANIO*/
     std::vector<int> deadWormsIds;
     world.getDeadWormsIds(deadWormsIds);
     world.getDeathWormsUpdates(deadWormsIds); //estaria muerto
@@ -232,10 +238,9 @@ void Game::allElementsIdle() {
 
     b2Body* projectile = world.getProjectile();
     GameUpdate projectileUpdate;
-
+    //wormsAtacados .setActionTOAnimation (ATTACKED)
     while(!world.allElementsIDLE()) {
-        auto updates = world.getWormsUpdates(false);
-
+        auto updates = world.getWormsMoving();
         if (projectile != nullptr) {
             projectileUpdate.player_id = 0xFE;
             projectileUpdate.x_pos = projectile->GetPosition().x;
@@ -245,12 +250,10 @@ void Game::allElementsIdle() {
             updates.push_back((projectileUpdate));
         }
 
-
         pushUpdatesToClients(std::ref(updates));
         waitFrameTime();
         world.step();
     }
-
 }
 
 void Game::processNormalTurn(TurnHandler &turnHandler, InstructionFactory &instructionFactory, UserAction &userAction) {
@@ -274,4 +277,23 @@ void Game::sendEndGame(int winner) {
     update.player_id = winner;
     update.m_PlayerName = m_PlayersInfo.at(winner);
     pushUpdateToClients(std::ref(update));
+}
+
+void Game::wormsGettingDamage() {
+    std::vector<int> idWormsGettingDamage;
+    std::vector<GameUpdate> updates;
+    world.wormsAttacked(std::ref(idWormsGettingDamage));
+    for (auto& id : idWormsGettingDamage) {
+        /*TODOS LOS UPDATES DE SAD FACE DE LOS WORMS UNO POR UNO*/
+        auto wormAttacked = world.getWormUpdateAttacked(id);
+        pushUpdateToClients(std::ref(wormAttacked));
+        while (wormAttacked.m_CurrentSprite != SPRITE_WACCUSE_IDLE) {
+            wormAttacked = world.getWormUpdateAttacked(id);
+        }
+        pushUpdateToClients(std::ref(wormAttacked));
+    }
+    for (auto& id : idWormsGettingDamage) {
+        updates.push_back(world.getWormsHealth(id));
+    }
+    pushUpdatesToClients(updates);
 }

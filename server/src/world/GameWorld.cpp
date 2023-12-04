@@ -183,7 +183,7 @@ bool GameWorld::allElementsIDLE() {
             }
         }
 
-        return worm.second->getVelocity().x == 0 && worm.second->getVelocity().y == 0;
+        return worm.second->getVelocity() == b2Vec2_zero;
     });
 
 
@@ -228,4 +228,46 @@ int GameWorld::getWormsAlive() const {
         }
     }
     return alive;
+}
+
+std::vector<GameUpdate> GameWorld::getWormsMoving() {
+    std::vector<GameUpdate> updates;
+    for (auto& worm : worms) {
+        if (worm.second->isMoving()) {
+            GameUpdate gameUpdate;
+            gameUpdate.player_id = worm.first;
+            gameUpdate.m_Dir = worm.second->getDirection();
+            gameUpdate.x_pos = worm.second->getPosition().x;
+            gameUpdate.y_pos = worm.second->getPosition().y;
+            gameUpdate.m_Movement = GameAction::WORM_IDLE;
+            gameUpdate.m_CurrentSprite = SPRITE_WACCUSE_IDLE;
+            updates.push_back(std::move(gameUpdate));
+        }
+    }
+    return updates;
+}
+
+void GameWorld::wormsAttacked(std::vector<int> &idWorms) {
+    for (auto& worm : worms) {
+        if (worm.second->wasAttacked()) {
+            worm.second->setWasAttacked(false);
+            worm.second->getActionToAnimation()->resetAnimation();
+            worm.second->getActionToAnimation()->setAction(ActionType::ATTACKED);
+            idWorms.push_back(worm.first);
+        }
+    }
+}
+
+GameUpdate GameWorld::getWormUpdateAttacked(int id) {
+    return worms.at(id)->getAttackedUpdate();
+}
+
+GameUpdate GameWorld::getWormsHealth(int id) {
+    auto* worm = worms.at(id);
+    GameUpdate update;
+    update.m_InfoWorm = true;
+    update.player_id = worm->getId();
+    update.m_Dir = worm->getDirection();
+    update.m_Health = worm->getHealth();
+    return update;
 }

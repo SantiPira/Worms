@@ -28,11 +28,12 @@ struct GameUpdate {
     GameAction m_TurnInfo;
     float m_WeaponAngle;
     double m_SecondsPerTurn;
+    bool m_InfoWorm;
 
     GameUpdate() : player_id(0xFF), x_pos(0), y_pos(0), width(0.0f), height(0.0f), m_TimeDuration(0.0f),
     m_Movement(INVALID_ACTION), m_Weapon(NO_WEAPON), m_IsAttacking(false), m_Health(0), m_Dir(Direction::RIGHT),
     m_SelfCondition(GameAction::WORM_NONE), m_VelocityX(0.0f), m_VelocityY(0.0f), m_CurrentSprite(SPRITE_INVALID),
-    m_TurnInfo(INVALID_ACTION), m_WeaponAngle(0.0f), m_SecondsPerTurn(0) {}
+    m_TurnInfo(INVALID_ACTION), m_WeaponAngle(0.0f), m_SecondsPerTurn(0), m_InfoWorm(false) {}
 
     bool operator!=(const GameUpdate& other) const;
 };

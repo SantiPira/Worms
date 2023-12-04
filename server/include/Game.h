@@ -59,4 +59,6 @@ private:
     void allElementsIdle();
 
     void sendEndGame(int winner);
+
+    void wormsGettingDamage();
 };
