@@ -252,11 +252,10 @@ void Game::allElementsIdle() {
             updates.push_back((projectileUpdate));
             projectile->getBody()->SetLinearVelocity(b2Vec2_zero);
             projectile->deleteBody();
-            projectile = nullptr;
+            delete projectile;
 
         }
-
-
+        
         pushUpdatesToClients(std::ref(updates));
         waitFrameTime();
         world.step();
