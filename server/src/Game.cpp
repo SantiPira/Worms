@@ -230,19 +230,30 @@ void Game::processAttackTurn(TurnHandler &turnHandler, InstructionFactory &instr
 
 void Game::allElementsIdle() {
 
-    b2Body* projectile = world.getProjectile();
+    WProyectile* projectile = world.getProjectile();
     GameUpdate projectileUpdate;
 
     while(!world.allElementsIDLE()) {
         auto updates = world.getWormsUpdates(false);
 
-        if (projectile != nullptr) {
+        if (projectile != nullptr && !projectile->GetCollide()) {
             projectileUpdate.player_id = 0xFE;
-            projectileUpdate.x_pos = projectile->GetPosition().x;
-            projectileUpdate.y_pos = projectile->GetPosition().y;
+            projectileUpdate.x_pos = projectile->getPositionX();
+            projectileUpdate.y_pos = projectile->getPositionY();
             projectileUpdate.m_Movement = GameAction::PROJECTILE_LAUNCHED;
             projectileUpdate.m_CurrentSprite = SpritesEnum::SPRITE_BAZOOKA_MISSILE;
             updates.push_back((projectileUpdate));
+        } else if (projectile != nullptr && projectile->GetCollide()) {
+            projectileUpdate.player_id = 0xFE;
+            projectileUpdate.x_pos = projectile->getPositionX();
+            projectileUpdate.y_pos = projectile->getPositionY();
+            projectileUpdate.m_Movement = GameAction::PROJECTILE_COLLIDED;
+            projectileUpdate.m_CurrentSprite = SpritesEnum::SPRITE_EXPLOTION;
+            updates.push_back((projectileUpdate));
+            projectile->getBody()->SetLinearVelocity(b2Vec2_zero);
+            projectile->deleteBody();
+            projectile = nullptr;
+
         }
 
 

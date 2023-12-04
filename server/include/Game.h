@@ -6,6 +6,7 @@
 #include "world/GameWorld.h"
 #include "messages/user_actions/UserAction.h"
 #include "world/instructions/InstructionFactory.h"
+#include "world/entities/WProyectile.h"
 
 class Game : public Thread {
 private:

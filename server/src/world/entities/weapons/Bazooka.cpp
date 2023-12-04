@@ -1,20 +1,21 @@
 #include "world/entities/weapons/impl/Bazooka.h"
 
-Bazooka::Bazooka() : damage(50), distance(2.0f) {
+Bazooka::Bazooka(WWorm* attacker) : damage(50), distance(2.0f) {
     this->m_WeaponId = WeaponID::BAZOOKA;
+    projectile = new WProyectile(attacker->getWorld(), attacker);
 }
 
 void Bazooka::attack(WWorm *attacker, WWorm *attacked, uint8_t force) {
     attacker->getActionToAnimation()->resetAnimation();
     attacker->getActionToAnimation()->setAction(ActionType::ATTACK, m_WeaponId, 0);
-    //if (attacked->getId() == attacker->getId()) {
-    //    return;
-    //}
+
+
+    if (attacked->getId() == attacker->getId()) {
+        return;
+    }
+
 
     float angle = attacker->getWeaponAngle();
-
-    projectile = new WProyectile(attacker->getWorld(), attacker);
-
     b2Body* projectileBody = projectile->getBody();
 
 
@@ -38,7 +39,7 @@ void Bazooka::attack(WWorm *attacker, WWorm *attacked, uint8_t force) {
 */
 
     attacker->tieneProyectil = true;
-    attacker->proyectil = projectileBody;
+    attacker->proyectil = std::move(projectile);
 }
 
 void Bazooka::setWeaponId(WeaponID weaponId) {
@@ -48,3 +49,4 @@ void Bazooka::setWeaponId(WeaponID weaponId) {
 WeaponID Bazooka::getWeaponId() const {
     return this->m_WeaponId;
 }
+

@@ -14,6 +14,9 @@ void BazookaContact::BeginContact(b2Body* bodyA, b2Body* bodyB) {
 
     if ((entityA->getEntityType() == EntitiesType::ENTITY_PROYECTILE && entityB->getEntityType() == EntitiesType::ENTITY_WORM) ||
         (entityA->getEntityType() == EntitiesType::ENTITY_WORM && entityB->getEntityType() == EntitiesType::ENTITY_PROYECTILE)) {
+
+        entityA->getEntityType();
+
         std::cout << "[PROYECTILE COLLIDE]" << std::endl;
         if (entityA->getEntityType() == EntitiesType::ENTITY_WORM) {
             worm = reinterpret_cast<WWorm*>(bodyA->GetUserData().pointer);
@@ -30,7 +33,11 @@ void BazookaContact::BeginContact(b2Body* bodyA, b2Body* bodyB) {
 
         if(distance <= proyectile->getRadius() && worm->getHealth() > 50){
             worm->receiveDamage(50);
+        } else if (distance <= proyectile->getRadius() && worm->getHealth() <= 50) {
+            worm->setIsDead();
         }
+
+        proyectile->SetCollide();
 
 
 
@@ -43,22 +50,7 @@ void BazookaContact::BeginContact(b2Body* bodyA, b2Body* bodyB) {
 
 void BazookaContact::EndContact(b2Body* bodyA, b2Body* bodyB) {
     //std::cout << "[PROYECTILE END COLLIDE]" << std::endl;
-    
-    
-    WEntity* entityA = reinterpret_cast<WEntity*>(bodyA->GetUserData().pointer);
-    WEntity* entityB = reinterpret_cast<WEntity*>(bodyB->GetUserData().pointer);
 
-    WProyectile* proyectile;
 
-    if(entityA == nullptr || entityB == nullptr) {
-        return;
-    }
 
-    if(entityA->getEntityType() == EntitiesType::ENTITY_PROYECTILE){
-        proyectile = reinterpret_cast<WProyectile*>(bodyA->GetUserData().pointer);
-        proyectile->deleteBody();
-    } else if (entityB->getEntityType() == EntitiesType::ENTITY_PROYECTILE) {
-        proyectile = reinterpret_cast<WProyectile*>(bodyB->GetUserData().pointer);
-        proyectile->deleteBody();
-    }   
 }

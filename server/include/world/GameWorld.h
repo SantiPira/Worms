@@ -12,6 +12,7 @@
 #include "world/entities/WDeadWorm.h"
 #include "world/instructions/IWormInstruction.h"
 #include "world/listeners/ContactListener.h"
+#include "world/entities/WProyectile.h"
 #include <fstream>
 #include <sstream>
 #include <unordered_map>
@@ -86,7 +87,7 @@ public:
 
     void updateWormsMove();
 
-    b2Body* getProjectile();
+    WProyectile* getProjectile();
 
     int getWormsAlive() const;
 };

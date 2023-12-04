@@ -229,15 +229,29 @@ void WWorm::stopMove() {
 }
 
 void WWorm::attack(uint8_t force) {
+    bool seCreoBazooka = false;
     m_CurrentActionType = ActionType::ATTACK;
+    Weapon* weaponSelected;
+
     if (m_Weapon != WeaponID::NO_WEAPON) {
         WeaponFactory weaponFactory;
         for (b2Body* entity = m_World->GetBodyList(); entity; entity = entity->GetNext()) {
             auto* wentity = reinterpret_cast<WEntity*>(entity->GetUserData().pointer);
             if (wentity != nullptr && wentity->getEntityType() == EntitiesType::ENTITY_WORM) {
                 auto* w = reinterpret_cast<WWorm*>(entity->GetUserData().pointer);
-                std::unique_ptr<Weapon> weaponPtr(weaponFactory.createWeapon(m_Weapon));
-                weaponPtr->attack(this, w, force);
+
+                if (m_Weapon == WeaponID::BAZOOKA && !seCreoBazooka) {
+                    weaponSelected =  weaponFactory.createWeapon(m_Weapon, this);
+                    seCreoBazooka = true;
+                    weaponSelected->attack(this, w, force);
+                } else if (m_Weapon != BAZOOKA){
+                    weaponSelected = weaponFactory.createWeapon(m_Weapon, this);
+                    weaponSelected->attack(this, w, force);
+                } else {
+                    weaponSelected->attack(this, w, force);
+                }
+
+
             }
         }
     }

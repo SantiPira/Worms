@@ -61,6 +61,14 @@ EntitiesType WProyectile::getEntityType() {
 }
 
 void WProyectile::deleteBody() {
-    m_World->Step(0.0f, 0, 0);
+    //m_World->Step(0.0f, 0, 0);
     m_World->DestroyBody(m_Body);
+}
+
+void WProyectile::SetCollide() {
+    explotion = true;
+}
+
+bool WProyectile::GetCollide() {
+    return explotion;
 }
