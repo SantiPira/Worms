@@ -192,6 +192,15 @@ void Game::startTurn(TurnHandler& turnHandler) {
 void Game::processAttackTurn(TurnHandler &turnHandler, InstructionFactory &instructionFactory, UserAction userAction) {
     finishTurn(turnHandler.getCurrentPlayer(), userAction.getAction());
     auto* attackInstruction = instructionFactory.createInstruction(userAction);
+    if (attackInstruction->getActionType() == USE_TOOL) {
+        GameUpdate update;
+        world.wormSetAnimationUseTool(turnHandler.getCurrentPlayer());
+        while (update.m_CurrentSprite != SPRITE_WACCUSE_IDLE) {
+            update = world.getWormUpdate(turnHandler.getCurrentPlayer(), false);
+            pushUpdateToClients(std::ref(update));
+        }
+        pushUpdateToClients(std::ref(update));
+    }
     world.execute(attackInstruction, userAction.getIdPlayer());
     delete attackInstruction;
     GameUpdate update;

@@ -31,7 +31,9 @@ void Worm::init() {
 
         NegativeAnglesBazooka wNegativeAnglesBazooka;
         PositiveAnglesBazooka wPositiveAnglesBazooka;
-
+        SettingTeleport settingTeleport;
+        HasTeleport hasTeleport;
+        UseTeleport useTeleport;
 
     SDL_Rect destRect = {
                 static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
@@ -369,6 +371,47 @@ void Worm::init() {
             wNegativeAnglesBazooka.deltaPosX,
             wNegativeAnglesBazooka.deltaPosY));
 
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_SETTING_TELEPORT, getWaccuseAnimation(
+            settingTeleport.spritePath,
+            settingTeleport.blendMode,
+            settingTeleport.frames,
+            settingTeleport.distanceBetweenFrames,
+            settingTeleport.frameWidth,
+            settingTeleport.frameHeight,
+            settingTeleport.duration,
+            settingTeleport.srcRect,
+            settingTeleport.initYSprite,
+            destRect,
+            settingTeleport.deltaPosX,
+            settingTeleport.deltaPosY));
+
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_HAS_TELEPORT, getWaccuseAnimation(
+            hasTeleport.spritePath,
+            hasTeleport.blendMode,
+            hasTeleport.frames,
+            hasTeleport.distanceBetweenFrames,
+            hasTeleport.frameWidth,
+            hasTeleport.frameHeight,
+            hasTeleport.duration,
+            hasTeleport.srcRect,
+            hasTeleport.initYSprite,
+            destRect,
+            hasTeleport.deltaPosX,
+            hasTeleport.deltaPosY));
+
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_USE_TELEPORTER, getWaccuseAnimation(
+            useTeleport.spritePath,
+            useTeleport.blendMode,
+            useTeleport.frames,
+            useTeleport.distanceBetweenFrames,
+            useTeleport.frameWidth,
+            useTeleport.frameHeight,
+            useTeleport.duration,
+            useTeleport.srcRect,
+            useTeleport.initYSprite,
+            destRect,
+            useTeleport.deltaPosX,
+            useTeleport.deltaPosY));
 
     for (auto& sprite : m_SpritesMap) {
         sprite.second->init();

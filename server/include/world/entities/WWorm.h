@@ -149,4 +149,6 @@ public:
     GameUpdate getAttackedUpdate();
 
     void updateHealth();
+
+    void useTool(float param1, float param2);
 };

@@ -153,7 +153,7 @@ bool GameWorld::wormBrokeTurn(const UserAction &userAction) {
 //    if (userAction.getAction() == ATTACK) {
 //        return true;
 //    }
-    return userAction.getAction() == ATTACK || userAction.getAction() == SELF_KILL;
+    return userAction.getAction() == ATTACK || userAction.getAction() == SELF_KILL || userAction.getAction() == USE_TOOL;
 }
 
 bool GameWorld::wormsAlive(std::vector<int> &idsDeadWorms) {
@@ -299,4 +299,9 @@ std::vector<GameUpdate> GameWorld::getWormsHealths() const {
         updates.push_back(std::move(update));
     }
     return updates;
+}
+
+void GameWorld::wormSetAnimationUseTool(int id) {
+    worms.at(id)->getActionToAnimation()->resetAnimation();
+    worms.at(id)->getActionToAnimation()->setAction(ActionType::USE_TOOL, worms.at(id)->getTool());
 }

@@ -99,4 +99,6 @@ public:
     GameUpdate getWormsHealth(int id);
 
     std::vector<GameUpdate> getWormsHealths() const;
+
+    void wormSetAnimationUseTool(int id);
 };

@@ -372,3 +372,45 @@ struct BazookaMissile {
     float deltaPosX = 25.6f;
     float deltaPosY = 40.96f;
 };
+
+struct SettingTeleport {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wtellnk.png");
+    BlendMode blendMode = {true, 192, 192, 128};
+    int frames = 10;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 40;
+    int frameHeight = 40;
+    float duration = 2.0f;
+    SDL_Rect srcRect = {14, 15, 28, 28};
+    int initYSprite = 15;
+    float deltaPosX = 45.0f;
+    float deltaPosY = 40.0f;
+};
+
+struct HasTeleport {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wteltlk.png");
+    BlendMode blendMode = {true, 192, 192, 128};
+    int frames = 10;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 40;
+    int frameHeight = 40;
+    float duration = 2.0f;
+    SDL_Rect srcRect = {14, 12, 28, 31};
+    int initYSprite = 12;
+    float deltaPosX = 48.0f;
+    float deltaPosY = 40.0f;
+};
+
+struct UseTeleport {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wteldsv.png");
+    BlendMode blendMode = {true, 192, 192, 128};
+    int frames = 48;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 40;
+    int frameHeight = 40;
+    float duration = 2.0f;
+    SDL_Rect srcRect = {7, 7, 40, 40};
+    int initYSprite = 7;
+    float deltaPosX = 48.0f;
+    float deltaPosY = 40.0f;
+};

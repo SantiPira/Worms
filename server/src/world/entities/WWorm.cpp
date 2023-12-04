@@ -183,9 +183,9 @@ GameUpdate WWorm::getUpdate(bool wormChanged) {
     currentState.y_pos = getPosition().y;
     currentState.width = m_Width * 2;
     currentState.height = m_Height * 2;
-//    currentState.m_Health = m_PreviousHealth;
     currentState.m_Dir = m_Dir;
     currentState.m_Weapon = m_Weapon;
+    currentState.m_Tool = m_Tool;
     currentState.m_IsAttacking = m_IsAttacking;
     currentState.m_Movement = getMovement();
     currentState.m_VelocityX = getVelocity().x;
@@ -250,6 +250,11 @@ WeaponID WWorm::getWeapon() const {
 }
 
 void WWorm::setWeapon(WeaponID weapon, ActionType actionType) {
+    if (m_Tool != NO_TOOL) {
+        m_ActionToAnimation.resetAnimation();
+        m_ActionToAnimation.setAction(ActionType::NONE, m_Tool);
+        m_Tool = NO_TOOL;
+    }
     m_ActionToAnimation.resetAnimation();
     m_ActionToAnimation.setAction(actionType, weapon);
     this->m_Weapon = weapon;
@@ -446,6 +451,23 @@ ToolID WWorm::getTool() const {
 }
 
 void WWorm::setTool(ToolID tool) {
+    if (m_Weapon != WeaponID::NO_WEAPON) {
+        unSetWeapon();
+    }
+    m_ActionToAnimation.resetAnimation();
+    m_ActionToAnimation.setAction(ActionType::SET_TOOL, tool);
     m_Tool = tool;
+}
+
+void WWorm::useTool(float param1, float param2) {
+    if (m_Tool == NO_TOOL) {
+        return;
+    }
+    m_ActionToAnimation.resetAnimation();
+    m_ActionToAnimation.setAction(ActionType::USE_TOOL, m_Tool);
+    if (m_Tool == TELEPORTER) {
+        m_Body->SetTransform(b2Vec2(param1, param2), 0);
+    }
+    m_Tool = NO_TOOL;
 }
 

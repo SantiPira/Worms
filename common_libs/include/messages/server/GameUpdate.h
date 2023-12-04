@@ -4,6 +4,7 @@
 #include "../user_actions/WeaponID.h"
 #include "messages/user_actions/ActionType.h"
 #include "messages/sprites/SpritesEnum.h"
+#include "messages/user_actions/ToolID.h"
 #include <unordered_set>
 #include <string>
 
@@ -29,11 +30,12 @@ struct GameUpdate {
     float m_WeaponAngle;
     double m_SecondsPerTurn;
     bool m_InfoWorm;
+    ToolID m_Tool;
 
     GameUpdate() : player_id(0xFF), x_pos(0), y_pos(0), width(0.0f), height(0.0f), m_TimeDuration(0.0f),
     m_Movement(INVALID_ACTION), m_Weapon(NO_WEAPON), m_IsAttacking(false), m_Health(0xFF), m_Dir(Direction::RIGHT),
     m_SelfCondition(GameAction::WORM_NONE), m_VelocityX(0.0f), m_VelocityY(0.0f), m_CurrentSprite(SPRITE_INVALID),
-    m_TurnInfo(INVALID_ACTION), m_WeaponAngle(0.0f), m_SecondsPerTurn(0), m_InfoWorm(false) {}
+    m_TurnInfo(INVALID_ACTION), m_WeaponAngle(0.0f), m_SecondsPerTurn(0), m_InfoWorm(false), m_Tool(NO_TOOL) {}
 
     bool operator!=(const GameUpdate& other) const;
 };

@@ -16,6 +16,7 @@ enum ActionType : uint8_t {
     DYING = 0X0A,
     SELF_KILL = 0X0B,
     SET_TOOL = 0X0C,
+    USE_TOOL = 0X0D,
     ATTACKED = 0X0B
 };
 
