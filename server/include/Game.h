@@ -59,5 +59,7 @@ private:
     void startTurn(TurnHandler& turnHandler);
     void allElementsIdle();
 
+    void checkWormsNear(WProyectile* proyectilCollide);
+
     void sendEndGame(int winner);
 };
