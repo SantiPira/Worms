@@ -192,6 +192,7 @@ bool GameWorld::allElementsIDLE() {
 
 void GameWorld::getDeathWormsUpdates(std::vector<int>& idsDeadWorms) {
     for (auto& id : idsDeadWorms) {
+        std::cout << "aca entra" << std::endl;
         worms.at(id)->getActionToAnimation()->resetAnimation();
         worms.at(id)->getActionToAnimation()->setAction(ActionType::DYING);
     }
@@ -304,4 +305,40 @@ std::vector<GameUpdate> GameWorld::getWormsHealths() const {
 void GameWorld::wormSetAnimationUseTool(int id) {
     worms.at(id)->getActionToAnimation()->resetAnimation();
     worms.at(id)->getActionToAnimation()->setAction(ActionType::USE_TOOL, worms.at(id)->getTool());
+}
+
+void GameWorld::wormGraveAction(int &deadWorm) {
+    worms.at(deadWorm)->getActionToAnimation()->resetAnimation();
+    worms.at(deadWorm)->getActionToAnimation()->setAction(ActionType::DYING);
+}
+
+void GameWorld::getWormGraveUpdate(int &deadWorm, GameUpdate &update) {
+    WWorm* worm = worms.at(deadWorm);
+    SpritesEnum action = SPRITE_WACCUSE_GRAVE;
+    update.player_id = worm->getId();
+    update.m_Dir = worm->getDirection();
+    update.x_pos = worm->getPosition().x;
+    update.y_pos = worm->getPosition().y;
+    update.width = worm->getWidth() * 2;
+    update.height = worm->getHeight() * 2;
+    update.m_Health = worm->getHealth();
+    update.m_Movement = GameAction::WORM_GRAVE;
+    update.m_CurrentSprite = action;
+    update.m_PlayerName = worm->getPlayerName();
+}
+
+
+void GameWorld::getWormDieUpdate(int &deadWorm, GameUpdate &update) {
+    WWorm* worm = worms.at(deadWorm);
+    SpritesEnum action = SPRITE_WACCUSE_DIE;
+    update.player_id = worm->getId();
+    update.m_Dir = worm->getDirection();
+    update.x_pos = worm->getPosition().x;
+    update.y_pos = worm->getPosition().y;
+    update.width = worm->getWidth() * 2;
+    update.height = worm->getHeight() * 2;
+    update.m_Health = worm->getHealth();
+    update.m_Movement = GameAction::WORM_GRAVE;
+    update.m_CurrentSprite = action;
+    update.m_PlayerName = worm->getPlayerName();
 }

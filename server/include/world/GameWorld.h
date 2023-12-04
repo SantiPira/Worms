@@ -101,4 +101,9 @@ public:
     std::vector<GameUpdate> getWormsHealths() const;
 
     void wormSetAnimationUseTool(int id);
+
+    void wormGraveAction(int &deadWorm);
+
+    void getWormGraveUpdate(int &deadWorm, GameUpdate &update);
+    void getWormDieUpdate(int &deadWorm, GameUpdate &update);
 };

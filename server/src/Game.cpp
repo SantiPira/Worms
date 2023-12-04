@@ -117,7 +117,6 @@ std::string Game::getMapName() const {
 
 void Game::pushUpdateToClients(GameUpdate &update) {
     for (auto& clientUpdate : m_QClientUpdates) {
-        std::cout << "Push update vida: " << static_cast<int>(update.m_Health) << std::endl;
         clientUpdate.second->push(std::ref(update));
     }
 }
@@ -126,7 +125,6 @@ void Game::pushUpdatesToClients(std::reference_wrapper<std::vector<GameUpdate>> 
     for (auto& clientQueue : m_QClientUpdates) {
         for (auto& update : updates.get()) {
             if(update.m_CurrentSprite != SPRITE_INVALID) {
-                std::cout << "Vida: " << static_cast<int>(update.m_Health) << std::endl;
                 clientQueue.second->push(std::ref(update));
             }
         }
@@ -202,6 +200,7 @@ void Game::processAttackTurn(TurnHandler &turnHandler, InstructionFactory &instr
         pushUpdateToClients(std::ref(update));
     }
     world.execute(attackInstruction, userAction.getIdPlayer());
+
     delete attackInstruction;
     GameUpdate update;
     /*ANIMACION DE ATAQUE DEL WORM*/
@@ -225,20 +224,11 @@ void Game::processAttackTurn(TurnHandler &turnHandler, InstructionFactory &instr
     std::vector<int> deadWormsIds;
     world.getDeadWormsIds(deadWormsIds);
     world.getDeathWormsUpdates(deadWormsIds); //estaria muerto
-    size_t i = 0;
-    while (i != deadWormsIds.size()) {
-        auto updates = world.getWormsUpdates(false);
-        for (auto& up : updates) {
-            if (up.m_CurrentSprite == SPRITE_WACCUSE_GRAVE) {
-                ++i;
-            }
-        }
-        pushUpdatesToClients(std::ref(updates));
-    }
+    wormsGrave(std::ref(deadWormsIds));
     world.removeDeadWorms(deadWormsIds);
     turnHandler.nextTurn(std::ref(deadWormsIds));
     if (turnHandler.isEndGame()) {
-        sendEndGame(turnHandler.getCurrentPlayer());
+        sendEndGame(turnHandler.getWinnerId());
         m_KeepRunning = false;
         return;
     }
@@ -307,4 +297,16 @@ void Game::wormsGettingDamage() {
         updates.push_back(world.getWormsHealth(id));
     }
     pushUpdatesToClients(updates);
+}
+
+void Game::wormsGrave(std::vector<int> &deadWorms) {
+    for (auto& deadWorm : deadWorms) {
+        GameUpdate update;
+        world.getWormDieUpdate(deadWorm, std::ref(update));
+        pushUpdateToClients(std::ref(update));
+        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+        world.getWormGraveUpdate(deadWorm, std::ref(update));
+        pushUpdateToClients(std::ref(update));
+        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+    }
 }

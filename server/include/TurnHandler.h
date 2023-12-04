@@ -14,6 +14,7 @@ private:
     double m_MaxTurnSeconds;
     bool m_TestMode;
     bool m_EndGame;
+    int m_WinnerId;
 
 public:
     explicit TurnHandler(int idPlayer, std::vector<int> players, bool testMode = false);
@@ -30,5 +31,7 @@ public:
     [[nodiscard]] double getSecondsPerTurn() const;
 
     [[nodiscard]] bool isEndGame() const;
+
+    [[nodiscard]] int getWinnerId() const;
 };
 

@@ -32,6 +32,7 @@ CreateGameWindow::CreateGameWindow(QWidget *parent, Juego* juego) : QWidget(pare
     comboBoxPlayers = new QComboBox();
     comboBoxPlayers->addItem("1");
     comboBoxPlayers->addItem("2");
+    comboBoxPlayers->addItem("3");
     comboBoxPlayers->addItem("4");
     comboBoxPlayers->addItem("6");
 

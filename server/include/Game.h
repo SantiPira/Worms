@@ -61,4 +61,6 @@ private:
     void sendEndGame(int winner);
 
     void wormsGettingDamage();
+
+    void wormsGrave(std::vector<int> &deadWorms);
 };
