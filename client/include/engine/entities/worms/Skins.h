@@ -374,15 +374,15 @@ struct BazookaMissile {
 };
 
 struct ProjectileExplotion {
-    const std::string spritePath = std::filesystem::current_path().concat("/resources/Effects/gassgrn.png");
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Effects/a_explosion.png");
     BlendMode blendMode = {true, 128, 128, 192};
-    int frames = 12;
+    int frames = 6;
     int distanceBetweenFrames = 60;
     int frameWidth = 34;
     int frameHeight = 41;
     float duration = 5.0f;
-    SDL_Rect srcRect = {5, 724, 51, 51};
-    int initYSprite = 724.0f;
+    SDL_Rect srcRect = {0, 0, 32, 32};
+    int initYSprite = 0.0f;
     float deltaPosX = 25.6f;
     float deltaPosY = 40.96f;
 };
