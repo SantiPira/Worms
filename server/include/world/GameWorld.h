@@ -110,4 +110,6 @@ public:
 
     void getWormGraveUpdate(int &deadWorm, GameUpdate &update);
     void getWormDieUpdate(int &deadWorm, GameUpdate &update);
+    SpritesEnum getWormAction(int idPlayer);
+    void getWormToolUpdate(int idPlayer, GameUpdate& update);
 };
