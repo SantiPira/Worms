@@ -372,3 +372,64 @@ struct BazookaMissile {
     float deltaPosX = 25.6f;
     float deltaPosY = 40.96f;
 };
+
+struct ProjectileExplotion {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Effects/gassgrn.png");
+    BlendMode blendMode = {true, 128, 128, 192};
+    int frames = 12;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 34;
+    int frameHeight = 41;
+    float duration = 5.0f;
+    SDL_Rect srcRect = {5, 724, 51, 51};
+    int initYSprite = 724.0f;
+    float deltaPosX = 25.6f;
+    float deltaPosY = 40.96f;
+};
+
+
+
+//
+
+
+struct SetGreenGranade {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wgrnlnk.png");
+    BlendMode blendMode = {true, 128, 128, 192};
+    int frames = 10;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 40;
+    int frameHeight = 52;
+    float duration = 2.0f;
+    SDL_Rect srcRect = {16, 7, 38, 47};
+    int initYSprite = 7;
+    float deltaPosX = 25.6f;
+    float deltaPosY = 40.96f;
+};
+
+struct HasGreenGranade {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wgrnbak.png");
+    BlendMode blendMode = {true, 128, 128, 192};
+    int frames = 3;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 40;
+    int frameHeight = 42;
+    float duration = 2.0f;
+    SDL_Rect srcRect = {17, 12, 39, 35};
+    int initYSprite = 7;
+    float deltaPosX = 25.6f;
+    float deltaPosY = 40.96f;
+};
+
+struct SaveGreenGranade {
+    const std::string spritePath = std::filesystem::current_path().concat("/resources/Worms/wgrnbak.png");
+    BlendMode blendMode = {true, 128, 128, 192};
+    int frames = 10;
+    int distanceBetweenFrames = 60;
+    int frameWidth = 40;
+    int frameHeight = 42;
+    float duration = 2.0f;
+    SDL_Rect srcRect = {17, 12, 39, 35};
+    int initYSprite = 7;
+    float deltaPosX = 25.6f;
+    float deltaPosY = 40.96f;
+};

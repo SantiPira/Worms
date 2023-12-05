@@ -93,7 +93,7 @@ void GameClient::Update(double elapsedSeconds, const GameUpdate& gameUpdate) {
         }
     } else {
 
-        if (gameUpdate.m_Movement == GameAction::PROJECTILE_LAUNCHED) {
+        if (gameUpdate.m_Movement == GameAction::PROJECTILE_LAUNCHED || gameUpdate.m_Movement == GameAction::PROJECTILE_COLLIDED) {
             projectile->update(elapsedSeconds, gameUpdate);
         }
 

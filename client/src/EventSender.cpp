@@ -23,6 +23,9 @@ void EventSender::run() {
                 m_SettingsQueue.push("MUESTRO LISTA");
             } else if (key == SDLK_2) {
                 m_SettingsQueue.push("GUARDO LISTA");
+            } else if (key == SDLK_g) {
+                m_WeaponId = WeaponID::GRANADE;
+                userAction = {ActionType::SET_WEAPON, m_IdPlayer, m_WeaponId};
             } else if (key == SDLK_a) {
                 userAction = {ActionType::MOVE, m_IdPlayer, Direction::LEFT};
             } else if (key == SDLK_SPACE) {

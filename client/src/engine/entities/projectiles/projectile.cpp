@@ -9,6 +9,7 @@ void Projectile::init(){
 
     GreenGranade wGreenGranada;
     BazookaMissile wBazookaMissile;
+    ProjectileExplotion wProjectileExplotion;
 
     SDL_Rect destRect = {
                 static_cast<int>(WorldScale::worldToPixelX(m_ProjectileXPosition, m_Widht)),
@@ -44,6 +45,21 @@ void Projectile::init(){
                 wBazookaMissile.deltaPosX,
                 wBazookaMissile.deltaPosY));
 
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_EXPLOTION, getProjectileAnimation(
+            wProjectileExplotion.spritePath,
+            wProjectileExplotion.blendMode,
+            wProjectileExplotion.frames,
+            wProjectileExplotion.distanceBetweenFrames,
+            wProjectileExplotion.frameWidth,
+            wProjectileExplotion.frameHeight,
+            wProjectileExplotion.duration,
+            wProjectileExplotion.srcRect,
+            wProjectileExplotion.initYSprite,
+            destRect,
+            wProjectileExplotion.deltaPosX,
+            wProjectileExplotion.deltaPosY));
+
+
 
     for (auto& sprite : m_SpritesMap) {
         sprite.second->init();
@@ -54,6 +70,10 @@ void Projectile::init(){
 void Projectile::update(double elapsedSeconds, const GameUpdate& gameUpdate){
     m_CurrentSprite = gameUpdate.m_CurrentSprite;
     m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
+
+    if(m_CurrentSprite == SpritesEnum::SPRITE_EXPLOTION){
+        //HOLAAA
+    }
 
     if (gameUpdate.m_Movement != GameAction::INVALID_ACTION) {
         m_Dir = gameUpdate.m_Dir;
