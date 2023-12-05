@@ -350,3 +350,21 @@ void GameWorld::getWormDieUpdate(int &deadWorm, GameUpdate &update) {
     update.m_CurrentSprite = action;
     update.m_PlayerName = worm->getPlayerName();
 }
+
+SpritesEnum GameWorld::getWormAction(int idPlayer) {
+    return worms.at(idPlayer)->getActionToAnimation()->getCurrentSprite(worms.at(idPlayer));
+}
+
+void GameWorld::getWormToolUpdate(int idPlayer, GameUpdate &update) {
+    WWorm* worm = worms.at(idPlayer);
+    update.player_id = worm->getId();
+    update.m_Dir = worm->getDirection();
+    update.x_pos = worm->getPosition().x;
+    update.y_pos = worm->getPosition().y;
+    update.width = worm->getWidth() * 2;
+    update.height = worm->getHeight() * 2;
+    update.m_Health = worm->getHealth();
+    update.m_Movement = GameAction::WORM_IDLE;
+    update.m_CurrentSprite = worm->getActionToAnimation()->getCurrentSprite(worms.at(idPlayer));
+    update.m_PlayerName = worm->getPlayerName();
+}

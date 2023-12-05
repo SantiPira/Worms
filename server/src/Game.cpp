@@ -195,8 +195,12 @@ void Game::processAttackTurn(TurnHandler &turnHandler, InstructionFactory &instr
     if (attackInstruction->getActionType() == USE_TOOL) {
         GameUpdate update;
         world.wormSetAnimationUseTool(turnHandler.getCurrentPlayer());
-        while (update.m_CurrentSprite != SPRITE_WACCUSE_IDLE) {
-            update = world.getWormUpdate(turnHandler.getCurrentPlayer(), false);
+        while (true) {
+            world.getWormToolUpdate(turnHandler.getCurrentPlayer(), std::ref(update));
+            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+            if (update.m_CurrentSprite == SPRITE_WACCUSE_IDLE) {
+                break;
+            }
             pushUpdateToClients(std::ref(update));
         }
         pushUpdateToClients(std::ref(update));
@@ -208,6 +212,7 @@ void Game::processAttackTurn(TurnHandler &turnHandler, InstructionFactory &instr
     /*ANIMACION DE ATAQUE DEL WORM*/
     while (update.m_CurrentSprite != SPRITE_WACCUSE_IDLE) {
         update = world.getWormUpdate(turnHandler.getCurrentPlayer(), false);
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
         pushUpdateToClients(std::ref(update));
     }
     pushUpdateToClients(std::ref(update));
