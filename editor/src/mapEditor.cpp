@@ -30,6 +30,7 @@ MapEditor::MapEditor(QWidget *parent) : QMainWindow(parent), currentBackground(n
     QPushButton *generateMapButton = new QPushButton("Generate Map", this);
 
     QComboBox *background = new QComboBox(this);
+    background->addItem("Seleccionar fondo"); 
     background->addItem(QIcon("resources/Fondos/cielo.png"), "Sky");
     background->addItem("City");
     background->addItem("Forest");
@@ -94,12 +95,15 @@ void MapEditor::backgroundSelection(int index)
 
     switch (index) {
         case 0:
-            backgroundPixmap = QPixmap("resources/Fondos/cielo.png");
+            backgroundPixmap = QPixmap();
             break;
         case 1:
-            //backgroundPixmap = QPixmap(".png");
+            backgroundPixmap = QPixmap("resources/Fondos/cielo.png");
             break;
         case 2:
+            //backgroundPixmap = QPixmap(".png");
+            break;
+        case 3:
             //backgroundPixmap = QPixmap(".png");
             break;
         default:
@@ -190,12 +194,12 @@ void MapEditor::generateMapFile(const QString &fileName)
             stream << "1 " << vigaPos.x() << " " << vigaPos.y() << Qt::endl;
         }
 
-        stream << spawnCount << Qt::endl;
+        //stream << spawnCount << Qt::endl;
 
-        foreach (const QPointF &spawnPos, spawnPosiciones)
-        {
-            stream << spawnPos.x() << " " << spawnPos.y() << Qt::endl;
-        }
+        //foreach (const QPointF &spawnPos, spawnPosiciones)
+        //{
+        //    stream << spawnPos.x() << " " << spawnPos.y() << Qt::endl;
+        //}
 
         QRectF sceneRect = scene->sceneRect();
         qDebug() << "Ancho de la escena: " << sceneRect.width() << " Altura de la escena: " << sceneRect.height();

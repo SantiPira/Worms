@@ -12,20 +12,20 @@ CreateGameWindow::CreateGameWindow(QWidget *parent, Juego* juego) : QWidget(pare
     setStyleSheet("QPushButton { font-size: 16px; background-color: #3498db; color: #ffffff; }"
                   "QLabel { font-size: 14px; }");
 
-    // Crear un desplegable para el campo "Mapa"
     comboBoxMapa = new QComboBox();
     comboBoxMapa->addItem("Mapa 1");
     comboBoxMapa->addItem("Mapa 2");
     comboBoxMapa->addItem("Mapa 3");
+    comboBoxMapa->addItem("Mapa 4");
+    comboBoxMapa->addItem("Mapa 5");
 
-    // Agregar elementos al diseño vertical
+
     layoutV->addWidget(new QLabel("Mapa:"));
     layoutV->addWidget(comboBoxMapa);
 
     layoutV->addWidget(new QLabel("Nombre de la partida:"));
     layoutV->addWidget(&this->editGameName);
 
-    // Crear widget para name del player
     editPlayerName.setPlaceholderText("Nombre del jugador");
     layoutV->addWidget(&editPlayerName);
 
