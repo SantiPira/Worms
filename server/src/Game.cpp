@@ -262,8 +262,9 @@ void Game::allElementsIdle() {
             projectile->getBody()->SetLinearVelocity(b2Vec2_zero);
             projectile->deleteBody();
             delete projectile;
-
+            world.unsetProjectiles();
         }
+
 
         pushUpdatesToClients(std::ref(updates));
         waitFrameTime();

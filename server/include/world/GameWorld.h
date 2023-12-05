@@ -104,6 +104,8 @@ public:
 
     void wormSetAnimationUseTool(int id);
 
+    void unsetProjectiles();
+
     void wormGraveAction(int &deadWorm);
 
     void getWormGraveUpdate(int &deadWorm, GameUpdate &update);

@@ -220,6 +220,15 @@ WProyectile* GameWorld::getProjectile(){
     return p_projectile;
 }
 
+void GameWorld::unsetProjectiles() {
+    
+    for (auto& worm : worms) {
+        if (worm.second->tieneProyectil) {
+            worm.second->tieneProyectil = false;
+        }
+    }
+}
+
 int GameWorld::getWormsAlive() const {
     int alive = 0;
     for (auto& worm : worms) {
