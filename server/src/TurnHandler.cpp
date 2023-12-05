@@ -2,7 +2,7 @@
 
 
 TurnHandler::TurnHandler(int idPlayer, std::vector<int> idPlayers, bool testMode) :
-    idCurrentPlayer(idPlayer), m_StartTime(std::chrono::system_clock::now()), m_MaxTurnSeconds(120),
+    idCurrentPlayer(idPlayer), m_StartTime(std::chrono::system_clock::now()), m_MaxTurnSeconds(60),
     m_TestMode(testMode), m_EndGame(false), m_WinnerId(-1) {
     m_IdPlayers = std::map<int, int>();
     for (int i = 0; i < static_cast<int>(idPlayers.size()); i++) {
