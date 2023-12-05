@@ -1,8 +1,8 @@
 #include "world/entities/WWorm.h"
 
-WWorm::WWorm() : m_Id(0xFF) {}
+#include <utility>
 
-WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRight, uint16_t wormCategory,
+WWorm::WWorm(b2World* world, std::string playerName, uint8_t id, float posX, float posY, bool isFacingRight, uint16_t wormCategory,
              const std::vector<uint16_t>& categories) {
     m_World = world;
     m_Width = 0.50f; //Valores cargados por config?
@@ -33,11 +33,13 @@ WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRi
     m_WasChanged = true;
 
     this->m_Id = id;
+    this->m_PlayerName = std::move(playerName);
     this->m_Position = b2Vec2_zero;
     this->m_Velocity = b2Vec2_zero;
     this->m_Angle = 0;
     this->m_AngularVelocity = 0;
     this->m_Health = 100; //Valores cargados por config?
+    this->m_PreviousHealth = 100;
     this->m_Ammo = 50;     //Valores cargados por config?
     this->m_Score = 0;
     this->m_IsDead = false;
@@ -45,12 +47,14 @@ WWorm::WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRi
     this->m_IsJumping = false;
     this->m_IsFalling = false;
     this->m_IsShooting = false;
+    this->m_WasAttacked = false;
     this->m_Weapon = WeaponID::NO_WEAPON;
     this->m_IsFacingRight = isFacingRight;
     this->m_Dir = isFacingRight ? Direction::RIGHT : Direction::LEFT;
     this->m_SelfCondition = GameAction::WORM_IDLE;
     m_ActionToAnimation = ActionToAnimation();
     m_OtherDirection = Direction::NONE_DIR;
+    m_Tool = ToolID::NO_TOOL;
 }
 
 [[maybe_unused]] uint8_t WWorm::getId() const {
@@ -174,13 +178,14 @@ void WWorm::setIsShooting(bool isShooting) {
 GameUpdate WWorm::getUpdate(bool wormChanged) {
     GameUpdate currentState;
     currentState.player_id = m_Id;
+    currentState.m_PlayerName = m_PlayerName;
     currentState.x_pos = getPosition().x;
     currentState.y_pos = getPosition().y;
     currentState.width = m_Width * 2;
     currentState.height = m_Height * 2;
-    currentState.m_Health = m_Health;
     currentState.m_Dir = m_Dir;
     currentState.m_Weapon = m_Weapon;
+    currentState.m_Tool = m_Tool;
     currentState.m_IsAttacking = m_IsAttacking;
     currentState.m_Movement = getMovement();
     currentState.m_VelocityX = getVelocity().x;
@@ -188,13 +193,12 @@ GameUpdate WWorm::getUpdate(bool wormChanged) {
     currentState.m_CurrentSprite = m_ActionToAnimation.getCurrentSprite(this);
     currentState.m_WeaponAngle = m_WeaponAngle * 180.0f / b2_pi;
 
-    if (currentState != m_PreviousState) {
-        wormChanged = true;
+    if (currentState != m_PreviousState || m_PreviousHealth != m_Health) {
         m_PreviousState = currentState;
+        return currentState;
     }
 
     if(wormChanged) {
-        m_WasChanged = false;
         return currentState;
     }
 
@@ -227,15 +231,29 @@ void WWorm::stopMove() {
 }
 
 void WWorm::attack(uint8_t force) {
+    bool seCreoBazooka = false;
     m_CurrentActionType = ActionType::ATTACK;
+    Weapon* weaponSelected;
+
     if (m_Weapon != WeaponID::NO_WEAPON) {
         WeaponFactory weaponFactory;
         for (b2Body* entity = m_World->GetBodyList(); entity; entity = entity->GetNext()) {
             auto* wentity = reinterpret_cast<WEntity*>(entity->GetUserData().pointer);
             if (wentity != nullptr && wentity->getEntityType() == EntitiesType::ENTITY_WORM) {
                 auto* w = reinterpret_cast<WWorm*>(entity->GetUserData().pointer);
-                std::unique_ptr<Weapon> weaponPtr(weaponFactory.createWeapon(m_Weapon));
-                weaponPtr->attack(this, w, force);
+
+                if (m_Weapon == WeaponID::BAZOOKA && !seCreoBazooka) {
+                    weaponSelected =  weaponFactory.createWeapon(m_Weapon, this);
+                    seCreoBazooka = true;
+                    weaponSelected->attack(this, w, force);
+                } else if (m_Weapon != BAZOOKA){
+                    weaponSelected = weaponFactory.createWeapon(m_Weapon, this);
+                    weaponSelected->attack(this, w, force);
+                } else {
+                    weaponSelected->attack(this, w, force);
+                }
+
+
             }
         }
     }
@@ -246,6 +264,11 @@ WeaponID WWorm::getWeapon() const {
 }
 
 void WWorm::setWeapon(WeaponID weapon, ActionType actionType) {
+    if (m_Tool != NO_TOOL) {
+        m_ActionToAnimation.resetAnimation();
+        m_ActionToAnimation.setAction(ActionType::NONE, m_Tool);
+        m_Tool = NO_TOOL;
+    }
     m_ActionToAnimation.resetAnimation();
     m_ActionToAnimation.setAction(actionType, weapon);
     this->m_Weapon = weapon;
@@ -269,8 +292,8 @@ void WWorm::setIsAttacking(bool isAttacking) {
 }
 
 void WWorm::receiveDamage(int damage) {
-    m_ActionToAnimation.resetAnimation();
-    m_ActionToAnimation.setAction(ActionType::ATTACKED);
+    m_WasAttacked = true;
+    m_PreviousHealth = m_Health;
     if (damage >= m_Health) {
         m_Health = 0;
     } else {
@@ -401,6 +424,64 @@ void WWorm::setOtherDirection(Direction otherDirection) {
 }
 
 bool WWorm::isMoving() const {
-    return m_IsMoving;
+    return getVelocity() != b2Vec2_zero;
+}
+
+bool WWorm::wasAttacked() const {
+    return m_WasAttacked;
+}
+
+void WWorm::setWasAttacked(bool wasAttacked) {
+    m_WasAttacked = wasAttacked;
+}
+
+GameUpdate WWorm::getAttackedUpdate() {
+    GameUpdate update;
+    update.player_id = m_Id;
+    update.m_PlayerName = m_PlayerName;
+    update.x_pos = getPosition().x;
+    update.y_pos = getPosition().y;
+    update.m_Health = m_PreviousHealth;
+    update.m_CurrentSprite = m_ActionToAnimation.getCurrentSprite(this);
+    update.m_Movement = getMovement();
+    update.m_Dir = m_Dir;
+    return update;
+}
+
+void WWorm::updateHealth() {
+    m_PreviousHealth = m_Health;
+}
+
+int32 WWorm::getPreviousHealth() const {
+    return m_PreviousHealth;
+}
+
+std::string WWorm::getPlayerName() const {
+    return m_PlayerName;
+}
+
+ToolID WWorm::getTool() const {
+    return m_Tool;
+}
+
+void WWorm::setTool(ToolID tool) {
+    if (m_Weapon != WeaponID::NO_WEAPON) {
+        unSetWeapon();
+    }
+    m_ActionToAnimation.resetAnimation();
+    m_ActionToAnimation.setAction(ActionType::SET_TOOL, tool);
+    m_Tool = tool;
+}
+
+void WWorm::useTool(float param1, float param2) {
+    if (m_Tool == NO_TOOL) {
+        return;
+    }
+    m_ActionToAnimation.resetAnimation();
+    m_ActionToAnimation.setAction(ActionType::USE_TOOL, m_Tool);
+    if (m_Tool == TELEPORTER) {
+        m_Body->SetTransform(b2Vec2(param1, param2), 0);
+    }
+    m_Tool = NO_TOOL;
 }
 

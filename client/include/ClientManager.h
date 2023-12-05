@@ -3,8 +3,13 @@
 #include "Protocol.h"
 #include "ProtectedQueue.h"
 #include "GameClient.h"
-#include "waitingWindow.h"
 #include "EventSender.h"
+#include "client_receiver.h"
+#include "GameClient.h"
+#include <QMessageBox>
+#include <QPushButton>
+#include <QHBoxLayout>
+#include <QLabel>
 
 class ClientManager {
  private:
@@ -15,13 +20,20 @@ class ClientManager {
     ProtectedQueue<std::string> settingsQueue;
     ProtectedQueue<GameUpdate> gameUpdates;
     bool m_KeepRunning;
-    WaitingWindow* m_WaitingWindow;
+    bool m_EndGame;
+    std::string m_Winner;
+    bool m_YouWin;
 
- public:
-    ClientManager(Protocol* protocol, int idPlayer, int cantPlayers, WaitingWindow* waitingWindow);
+public:
+    ClientManager(Protocol* protocol, int idPlayer, int cantPlayers);
     void init();
     void gameLoop(EventSender& eventSender);
     ~ClientManager() = default;
     ClientManager(const ClientManager&) = delete;
     ClientManager(ClientManager&&) = delete;
+
+private:
+    void endGameWindow();
+
+    GameUpdate initStage();
 };

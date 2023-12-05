@@ -2,7 +2,7 @@
 
 EventSender::EventSender(Protocol& protocol, int idPlayer, ProtectedQueue<std::string>& settingsQueue, bool isMyTurn)
     : m_Protocol(protocol), m_IsMyTurn(isMyTurn), m_KeepRunning(true), m_IdPlayer(idPlayer),
-    m_SettingsQueue(settingsQueue), m_WeaponId(WeaponID::NO_WEAPON) {}
+    m_SettingsQueue(settingsQueue), m_WeaponId(WeaponID::NO_WEAPON), m_ToolId(NO_TOOL) {}
 
 void EventSender::run() {
     while (isRunning()) {
@@ -23,6 +23,9 @@ void EventSender::run() {
                 m_SettingsQueue.push("MUESTRO LISTA");
             } else if (key == SDLK_2) {
                 m_SettingsQueue.push("GUARDO LISTA");
+            } else if (key == SDLK_g) {
+                m_WeaponId = WeaponID::GRANADE;
+                userAction = {ActionType::SET_WEAPON, m_IdPlayer, m_WeaponId};
             } else if (key == SDLK_a) {
                 userAction = {ActionType::MOVE, m_IdPlayer, Direction::LEFT};
             } else if (key == SDLK_SPACE) {
@@ -50,6 +53,11 @@ void EventSender::run() {
                 if (m_WeaponId == WeaponID::BATE || m_WeaponId == WeaponID::BAZOOKA) {
                     userAction = {ActionType::INCREASE_ANGLE, m_IdPlayer};
                 }
+            } else if (key == SDLK_m) {
+                userAction = {ActionType::SELF_KILL, m_IdPlayer};
+            } else if (key == SDLK_t) {
+                userAction = {ActionType::SET_TOOL, m_IdPlayer};
+                m_ToolId = ToolID::TELEPORTER;
             } else {
                 std::cout << "key no mapeada: " << key << std::endl;
             }
@@ -62,6 +70,13 @@ void EventSender::run() {
             } else {
                 std::cout << "key no mapeada: " << key << std::endl;
             }
+        } else if (event.type == SDL_MOUSEBUTTONDOWN) {
+            if (m_ToolId == TELEPORTER) {
+                float posX = WorldScale::pixelToWorldX(event.button.x, 0);
+                float posY = WorldScale::pixelToWorldY(event.button.y, 0);
+                userAction = {ActionType::USE_TOOL, m_IdPlayer, posX, posY};
+            }
+
         }
 
         if (userAction.getAction() != ActionType::NONE) {
@@ -82,6 +97,10 @@ void EventSender::stop() {
     m_KeepRunning.store(false);
     m_Protocol.shutdown(SHUT_RDWR);
     m_Protocol.close();
+}
+
+void EventSender::setIsRunning(bool isRunning) {
+    m_KeepRunning.store(isRunning);
 }
 
 void EventSender::setItsMyTurn(bool isMyTurn) {

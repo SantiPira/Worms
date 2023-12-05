@@ -6,6 +6,8 @@ Bate::Bate() {
 }
 
 void Bate::attack(WWorm *attacker, WWorm* attacked, uint8_t force) {
+    attacker->getActionToAnimation()->resetAnimation();
+    attacker->getActionToAnimation()->setAction(ActionType::ATTACK, m_WeaponId);
     if (attacked->getId() == attacker->getId()) {
         return;
     }
@@ -39,8 +41,6 @@ void Bate::attack(WWorm *attacker, WWorm* attacked, uint8_t force) {
     attacker->setIsAttacking(true);
     attacked->getBody()->ApplyLinearImpulseToCenter(forceVector, true);
     attacked->receiveDamage(1);
-    attacker->getActionToAnimation()->resetAnimation();
-    attacker->getActionToAnimation()->setAction(ActionType::ATTACK, m_WeaponId);
 }
 
 void Bate::setWeaponId(WeaponID weaponId) {

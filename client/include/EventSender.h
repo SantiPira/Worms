@@ -10,6 +10,8 @@
 #include "../../common_libs/include/messages/server/GameInfo.h"
 #include "../../common_libs/include/messages/user_actions/UserAction.h"
 #include "ProtectedQueue.h"
+#include "../../common_libs/include/messages/user_actions/ToolID.h"
+#include "utils/WorldScale.h"
 
 class EventSender : public Thread {
  private:
@@ -20,6 +22,7 @@ class EventSender : public Thread {
     ProtectedQueue<std::string>& m_SettingsQueue;
 
     WeaponID m_WeaponId;
+    ToolID m_ToolId;
     std::chrono::time_point<std::chrono::system_clock> m_StartAttackTime;
 
 private:
@@ -31,6 +34,8 @@ public:
     bool isRunning();
     void stop();
     void setItsMyTurn(bool isMyTurn);
+
+    void setIsRunning(bool isRunning);
 };
 
 #endif

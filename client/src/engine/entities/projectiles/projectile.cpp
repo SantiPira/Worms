@@ -1,4 +1,4 @@
-/*
+
 #include "engine/entities/projectiles/projectile.h"
 
 Projectile::Projectile(SDL_Renderer *renderer): 
@@ -7,8 +7,9 @@ Projectile::Projectile(SDL_Renderer *renderer):
 
 void Projectile::init(){
 
-    GreenGranade wGreenGranade;
+    GreenGranade wGreenGranada;
     BazookaMissile wBazookaMissile;
+    ProjectileExplotion wProjectileExplotion;
 
     SDL_Rect destRect = {
                 static_cast<int>(WorldScale::worldToPixelX(m_ProjectileXPosition, m_Widht)),
@@ -16,21 +17,21 @@ void Projectile::init(){
                 static_cast<int>(m_Widht), static_cast<int>(m_Height)
     };
 
-    m_SpritesMap.emplace(SpritesEnum::SPRITE_GREEN_GRENADE, getWaccuseAnimation(
-                wGreenGranade.spritePath,
-                wGreenGranade.blendMode,
-                wGreenGranade.frames,
-                wGreenGranade.distanceBetweenFrames,
-                wGreenGranade.frameWidth,
-                wGreenGranade.frameHeight,
-                wGreenGranade.duration,
-                wGreenGranade.srcRect,
-                wGreenGranade.initYSprite,
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_GREEN_GRANADE, getProjectileAnimation(
+                wGreenGranada.spritePath,
+                wGreenGranada.blendMode,
+                wGreenGranada.frames,
+                wGreenGranada.distanceBetweenFrames,
+                wGreenGranada.frameWidth,
+                wGreenGranada.frameHeight,
+                wGreenGranada.duration,
+                wGreenGranada.srcRect,
+                wGreenGranada.initYSprite,
                 destRect,
-                wGreenGranade.deltaPosX,
-                wGreenGranade.deltaPosY));
+                wGreenGranada.deltaPosX,
+                wGreenGranada.deltaPosY));
 
-    m_SpritesMap.emplace(SpritesEnum::SPRITE_BAZOOKA_MISSILE, getWaccuseAnimation(
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_BAZOOKA_MISSILE, getProjectileAnimation(
                 wBazookaMissile.spritePath,
                 wBazookaMissile.blendMode,
                 wBazookaMissile.frames,
@@ -44,11 +45,35 @@ void Projectile::init(){
                 wBazookaMissile.deltaPosX,
                 wBazookaMissile.deltaPosY));
 
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_EXPLOTION, getProjectileAnimation(
+            wProjectileExplotion.spritePath,
+            wProjectileExplotion.blendMode,
+            wProjectileExplotion.frames,
+            wProjectileExplotion.distanceBetweenFrames,
+            wProjectileExplotion.frameWidth,
+            wProjectileExplotion.frameHeight,
+            wProjectileExplotion.duration,
+            wProjectileExplotion.srcRect,
+            wProjectileExplotion.initYSprite,
+            destRect,
+            wProjectileExplotion.deltaPosX,
+            wProjectileExplotion.deltaPosY));
+
+
+
+    for (auto& sprite : m_SpritesMap) {
+        sprite.second->init();
+    }
+
 }
 
 void Projectile::update(double elapsedSeconds, const GameUpdate& gameUpdate){
     m_CurrentSprite = gameUpdate.m_CurrentSprite;
     m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
+
+    if(m_CurrentSprite == SpritesEnum::SPRITE_EXPLOTION){
+        //HOLAAA
+    }
 
     if (gameUpdate.m_Movement != GameAction::INVALID_ACTION) {
         m_Dir = gameUpdate.m_Dir;
@@ -66,8 +91,8 @@ void Projectile::update(double elapsedSeconds, const GameUpdate& gameUpdate){
 void Projectile::update(double elapsedSeconds){
 
      Animation* anim = m_SpritesMap.at(m_CurrentSprite).get();
-    float tempX = WorldScale::worldToPixelX(m_WormXPosition, anim->getDeltaPosX());
-    float tempY = WorldScale::worldToPixelY(m_WormYPosition, anim->getDeltaPosY());
+    float tempX = WorldScale::worldToPixelX(m_ProjectileXPosition, anim->getDeltaPosX());
+    float tempY = WorldScale::worldToPixelY(m_ProjectileYPosition, anim->getDeltaPosY());
     anim->setDestRect({static_cast<int>(tempX), static_cast<int>(tempY), anim->getFrameWidth(),
                        anim->getFrameHeight()});
     m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds); 
@@ -82,4 +107,14 @@ void Projectile::render(){
 
     m_SpritesMap.at(m_CurrentSprite)->render(isFlip);
 }
-*/
+
+std::unique_ptr<Animation> Projectile::getProjectileAnimation(const std::string& spritePath, BlendMode blendMode, int frames,
+                                                  int distanceBetweenFrames,
+                                                  int frameWidth, int frameHeight, float duration, SDL_Rect srcRect,
+                                                  int initYSprite, SDL_Rect destRect, float deltaPosX, float deltaPosY){
+
+    return std::unique_ptr<Animation>(new Animation(spritePath,m_Renderer, blendMode, frames, distanceBetweenFrames,
+                                                    frameWidth, frameHeight, duration, srcRect, initYSprite, destRect,
+                                                    deltaPosX, deltaPosY));
+
+}

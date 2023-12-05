@@ -10,6 +10,7 @@ void WaterContact::BeginContact(b2Body* bodyA, b2Body* bodyB) {
     if (entityA == nullptr || entityB == nullptr) {
         return;
     }
+
     if ((entityA->getEntityType() == EntitiesType::ENTITY_WORM && entityB->getEntityType() == EntitiesType::ENTITY_WATER)
         || (entityA->getEntityType() == EntitiesType::ENTITY_WATER && entityB->getEntityType() == EntitiesType::ENTITY_WORM)) {
         std::cout << "[WATER COLLIDE]" << std::endl;
@@ -26,5 +27,5 @@ void WaterContact::BeginContact(b2Body* bodyA, b2Body* bodyB) {
 }
 
 void WaterContact::EndContact(b2Body* bodyA, b2Body* bodyB) {
-    std::cout << "[END WATER COLLIDE]" << std::endl;
+    //std::cout << "[END WATER COLLIDE]" << std::endl;
 }

@@ -84,6 +84,7 @@ void Protocol::sendGameInfo(GameInfo& gameInfo) {
         sendByte(gameProperty.m_PlayersConnected);
         sendByte(gameProperty.m_Players);
         sendByte(gameProperty.m_IdPlayer);
+        sendString(gameProperty.m_PlayerName);
     }
 }
 
@@ -100,6 +101,7 @@ void Protocol::sendMap(std::reference_wrapper<std::vector<Grd>> map) {
 
 void Protocol::sendGameUpdate(GameUpdate &update) {
     sendByte(update.player_id);
+    sendString(update.m_PlayerName);
     sendFloat(update.x_pos);
     sendFloat(update.y_pos);
     sendFloat(update.width);
@@ -116,6 +118,9 @@ void Protocol::sendGameUpdate(GameUpdate &update) {
     sendByte(update.m_CurrentSprite);
     sendByte(update.m_TurnInfo);
     sendFloat(update.m_WeaponAngle);
+    sendByte(static_cast<uint8_t>(update.m_SecondsPerTurn));
+    sendByte(update.m_InfoWorm ? 0x01 : 0x00);
+    sendByte(update.m_Tool);
 }
 
 GameInfo Protocol::recvGameInfo() {
@@ -130,7 +135,8 @@ GameInfo Protocol::recvGameInfo() {
         int players = recvByte();
         int playersConnected = recvByte();
         int idPlayer = recvByte();
-        gameProperties.emplace_back(idGame, gameName, mapName, players, playersConnected, idPlayer);
+        std::string playerName = recvString();
+        gameProperties.emplace_back(idGame, gameName, mapName, players, playersConnected, idPlayer, playerName);
     }
     gameInfo.setGameProperties(gameProperties);
     return gameInfo;
@@ -153,6 +159,7 @@ std::vector<Grd> Protocol::recvMap() {
 GameUpdate Protocol::recvGameUpdate() {
     GameUpdate update{};
     update.player_id = recvByte();
+    update.m_PlayerName = recvString();
     update.x_pos = recvFloat();
     update.y_pos = recvFloat();
     update.width = recvFloat();
@@ -169,6 +176,9 @@ GameUpdate Protocol::recvGameUpdate() {
     update.m_CurrentSprite = SpritesEnum(recvByte());
     update.m_TurnInfo = GameAction(recvByte());
     update.m_WeaponAngle = recvFloat();
+    update.m_SecondsPerTurn = static_cast<double>(recvByte());
+    update.m_InfoWorm = recvByte() == 0x01;
+    update.m_Tool = ToolID(recvByte());
     return update;
 }
 
@@ -189,6 +199,8 @@ void Protocol::sendUserAction(UserAction action) {
     sendByte(action.getIdPlayer());
     sendByte(action.getParam1());
     sendByte(action.getParam2());
+    sendFloat(action.getParam3());
+    sendFloat(action.getParam4());
 }
 
 UserAction Protocol::recvUserAction() {
@@ -197,9 +209,8 @@ UserAction Protocol::recvUserAction() {
     userAction.setIdPlayer(recvByte());
     userAction.setParam1(recvByte());
     userAction.setParam2(recvByte());
+    userAction.setParam3(recvFloat());
+    userAction.setParam4(recvFloat());
     return userAction;
 }
-
-
-
 

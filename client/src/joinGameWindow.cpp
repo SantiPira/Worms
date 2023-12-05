@@ -4,6 +4,9 @@ JoinGameWindow::JoinGameWindow(QWidget *parent, Juego* juego) : QWidget(parent),
     QVBoxLayout *layout = new QVBoxLayout();
 
     auto gamesInfo = m_Juego->getGamesInfo();
+    layout->addWidget(new QLabel("Nombre del jugador:"));
+    m_EditPlayerName.setPlaceholderText("Ingrese su nombre");
+    layout->addWidget(&m_EditPlayerName);
         
     QListWidget *listWidget = new QListWidget();
 
@@ -14,19 +17,35 @@ JoinGameWindow::JoinGameWindow(QWidget *parent, Juego* juego) : QWidget(parent),
                                                          " - Jugadores permitidos: " + QString::number(partida.m_Players)
                                                          + " - Jugadores conectados: " +
                                                          QString::number(partida.m_PlayersConnected));
-        item->data(Qt::UserRole).setValue(partida.m_idGame);
+        //store in item gameId in a map
+        item->setData(Qt::UserRole, partida.m_idGame);
         listWidget->addItem(item);
     }
 
     layout->addWidget(listWidget);
+
+    backButton = new QPushButton("Volver al Menu");
+    backButton->setCursor(QCursor(Qt::PointingHandCursor));
+    backButton->setStyleSheet("QPushButton:hover { background-color: #555; }");
+    connect(backButton, &QPushButton::clicked, this, &JoinGameWindow::slotGoBack);
+    layout->addWidget(backButton);
+
     setLayout(layout);
 
     connect(listWidget, &QListWidget::itemClicked, this, &JoinGameWindow::slotJoinGame);
 }
 
 void JoinGameWindow::slotJoinGame(QListWidgetItem *selectedItem) {
-    idGame = selectedItem->data(Qt::UserRole).toInt();
-    m_Juego->joinGame(idGame, m_GameProperties.at(idGame).m_Players);
+    int id = selectedItem->data(Qt::UserRole).toInt();
+    QString playerName = m_EditPlayerName.text();
+    m_Juego->joinGame(id, m_GameProperties.at(id).m_Players, playerName.toStdString());
 
+    this->close();
+}
+
+void JoinGameWindow::slotGoBack() {
+
+    MenuWindow *menuWindow = new MenuWindow(nullptr, m_Juego);
+    menuWindow->show();
     this->close();
 }

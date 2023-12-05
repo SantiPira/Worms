@@ -38,6 +38,5 @@ public:
     int getFrameWidth() const;
     int getFrameHeight() const;
 
-    //destructor
     ~Animation();
 };

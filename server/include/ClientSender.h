@@ -19,6 +19,7 @@ private:
     void setPlayerId(int idPlayer);
     void run() override;
     void stop();
+    bool isRunning() const;
     ~ClientSender() override = default;
     ClientSender(const ClientSender&) = delete;
     ClientSender(ClientSender&& other) = delete;

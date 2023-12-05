@@ -11,14 +11,18 @@
 #include "world/entities/action_animations/types/SActionWeapon.h"
 #include "EntitiesType.h"
 #include "WEntity.h"
+#include "messages/user_actions/ToolID.h"
 #include <iostream>
 #include <memory>
 #include <vector>
 #include <chrono>
 
+class WProyectile;
+
 class WWorm : public WEntity {
 private:
     uint8_t m_Id;
+    std::string m_PlayerName;
     b2World* m_World{};
     b2Body* m_Body{};
     float m_Width{};
@@ -28,6 +32,7 @@ private:
     float m_Angle{};
     float m_AngularVelocity{};
     int32 m_Health{};
+    int32 m_PreviousHealth{};
     int32 m_Ammo{};
     int32 m_Score{};
     bool m_IsDead{};
@@ -36,6 +41,7 @@ private:
     bool m_IsJumping{};
     bool m_IsFalling{};
     bool m_IsShooting{};
+    bool m_WasAttacked{};
     GameAction m_SelfCondition;
     WeaponID m_Weapon;
     Direction m_Dir;
@@ -50,12 +56,17 @@ private:
     bool m_IsInContactWithWWorm = false;
     Direction m_OtherDirection{};
     ActionToAnimation m_ActionToAnimation;
+    ToolID m_Tool;
 
 public:
-    WWorm(b2World* world, uint8_t id, float posX, float posY, bool isFacingRight, uint16_t wormCategory,
+    bool tieneProyectil{false};
+    //b2Body* proyectil;
+    WProyectile* proyectil;
+
+public:
+    WWorm(b2World* world, std::string playerName, uint8_t id, float posX, float posY, bool isFacingRight, uint16_t wormCategory,
           const std::vector<uint16_t>& categories);
 
-    WWorm();
     [[maybe_unused]] [[nodiscard]] uint8_t getId() const;
     [[nodiscard]] b2Body* getBody() const;
     [[nodiscard]] b2Vec2 getPosition() const;
@@ -63,6 +74,7 @@ public:
     [[nodiscard]] float getAngle() const;
     [[nodiscard]] float getAngularVelocity() const;
     [[nodiscard]] int32 getHealth() const;
+    [[nodiscard]] int32 getPreviousHealth() const;
     [[nodiscard]] int32 getAmmo() const;
     [[nodiscard]] int32 getScore() const;
     [[nodiscard]] bool getIsDead() const;
@@ -81,7 +93,10 @@ public:
     [[nodiscard]] GameUpdate getPreviousState() const;
     [[nodiscard]] bool getIsInContactWithAnotherWorm() const;
     ActionToAnimation* getActionToAnimation();
+    std::string getPlayerName() const;
+    [[nodiscard]] ToolID getTool() const;
     bool isMoving() const;
+    bool wasAttacked() const;
 
     void setPosition(b2Vec2 position);
     void setVelocity(b2Vec2 velocity);
@@ -105,6 +120,8 @@ public:
     void setWasChanged(bool wasChanged);
     void setIsInContactWithAnotherWorm(bool isInContactWithAnotherWorm);
     void setOtherDirection(Direction otherDirection);
+    void setWasAttacked(bool wasAttacked);
+    void setTool(ToolID tool);
 
     GameUpdate getUpdate(bool wormChanged);
 
@@ -131,4 +148,10 @@ public:
     float getHeight() const;
 
     void unSetWeapon();
+
+    GameUpdate getAttackedUpdate();
+
+    void updateHealth();
+
+    void useTool(float param1, float param2);
 };

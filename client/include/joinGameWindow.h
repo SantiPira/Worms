@@ -12,6 +12,7 @@
 #include <QComboBox>
 #include <QListWidget>
 #include "client_juego.h"
+#include "menuWindow.h"
 
 class JoinGameWindow : public QWidget {
 public:
@@ -21,11 +22,14 @@ public:
 private:
     QPushButton buttonCreateGame;
     QLineEdit editGameName;
+    QLineEdit m_EditPlayerName;
+    QPushButton *backButton;
     int idGame{};
     std::unordered_map<int, GameProperty> m_GameProperties;
 
 public slots:
     void slotJoinGame(QListWidgetItem *selectedItem);
+    void slotGoBack();
 };
 
 #endif // JOINGAMEWINDOW_H_

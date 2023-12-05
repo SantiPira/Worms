@@ -1,8 +1,9 @@
 #include "engine/entities/worms/Worm.h"
 
-Worm::Worm(SDL_Renderer *renderer, float posX, float posY, float width, float height)
-        : m_Renderer(renderer), m_WormXPosition(posX),
-          m_WormYPosition(posY), m_Widht(WorldScale::toPixel(width)), m_Height(WorldScale::toPixel(height)) {}
+Worm::Worm(int idPlayer, std::string playerName, SDL_Renderer *renderer, float posX, float posY, float width,
+           float height) : m_IdPlayer(idPlayer), m_PlayerName(std::move(playerName)), m_Renderer(renderer),
+           m_WormXPosition(posX), m_WormYPosition(posY), m_Widht(WorldScale::toPixel(width)),
+           m_Height(WorldScale::toPixel(height)) {}
 
 void Worm::init() {
         m_CurrentSprite = SpritesEnum::SPRITE_WACCUSE_IDLE;
@@ -28,6 +29,16 @@ void Worm::init() {
         HasBazooka wHasBazooka;
         SavingBazooka wSavingBazooka;
 
+        NegativeAnglesBazooka wNegativeAnglesBazooka;
+        PositiveAnglesBazooka wPositiveAnglesBazooka;
+        SettingTeleport settingTeleport;
+        HasTeleport hasTeleport;
+        UseTeleport useTeleport;
+
+        SetGreenGranade wSetGreenGranade;
+        HasGreenGranade wHasGreenGranade;
+        SaveGreenGranade wSaveGreenGranade;
+
 
     SDL_Rect destRect = {
                 static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
@@ -35,6 +46,60 @@ void Worm::init() {
                 static_cast<int>(m_Widht), static_cast<int>(m_Height)
         };
 
+    m_NameDestRect = {
+                static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
+                static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)) - NAME_RECT_Y,
+                static_cast<int>(NAME_WIDTH_FONT), static_cast<int>(NAME_HEIGHT_FONT)
+        };
+
+    m_HealthDestRect = {
+                static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
+                static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)) - HEALTH_RECT_Y,
+                static_cast<int>(HEALTH_WIDTH_FONT), static_cast<int>(HEALTH_HEIGHT_FONT)
+        };
+
+
+        m_SpritesMap.emplace(SpritesEnum::SPRITE_SETTING_GREEN_GRANADE, getWaccuseAnimation(
+                wSetGreenGranade.spritePath,
+                wSetGreenGranade.blendMode,
+                wSetGreenGranade.frames,
+                wSetGreenGranade.distanceBetweenFrames,
+                wSetGreenGranade.frameWidth,
+                wSetGreenGranade.frameHeight,
+                wSetGreenGranade.duration,
+                wSetGreenGranade.srcRect,
+                wSetGreenGranade.initYSprite,
+                destRect,
+                wSetGreenGranade.deltaPosX,
+                wSetGreenGranade.deltaPosY));
+
+        m_SpritesMap.emplace(SpritesEnum::SPRITE_HAS_GREEN_GRANADE, getWaccuseAnimation(
+                wHasGreenGranade.spritePath,
+                wHasGreenGranade.blendMode,
+                wHasGreenGranade.frames,
+                wHasGreenGranade.distanceBetweenFrames,
+                wHasGreenGranade.frameWidth,
+                wHasGreenGranade.frameHeight,
+                wHasGreenGranade.duration,
+                wHasGreenGranade.srcRect,
+                wHasGreenGranade.initYSprite,
+                destRect,
+                wHasGreenGranade.deltaPosX,
+                wHasGreenGranade.deltaPosY));
+
+        m_SpritesMap.emplace(SpritesEnum::SPRITE_SAVING_GREEN_GRANADE, getWaccuseAnimation(
+                wSaveGreenGranade.spritePath,
+                wSaveGreenGranade.blendMode,
+                wSaveGreenGranade.frames,
+                wSaveGreenGranade.distanceBetweenFrames,
+                wSaveGreenGranade.frameWidth,
+                wSaveGreenGranade.frameHeight,
+                wSaveGreenGranade.duration,
+                wSaveGreenGranade.srcRect,
+                wSaveGreenGranade.initYSprite,
+                destRect,
+                wSaveGreenGranade.deltaPosX,
+                wSaveGreenGranade.deltaPosY));
 
         m_SpritesMap.emplace(SpritesEnum::SPRITE_SETTING_BAZOOKA, getWaccuseAnimation(
             wSettingBazooka.spritePath,
@@ -325,24 +390,107 @@ void Worm::init() {
             wNegativeAnglesAttackBate.deltaPosX,
             wNegativeAnglesAttackBate.deltaPosY));
 
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_POSITIVE_ANGLE_BAZOOKA, getWaccuseAnimation(
+            wPositiveAnglesBazooka.spritePath,
+            wPositiveAnglesBazooka.blendMode,
+            wPositiveAnglesBazooka.frames,
+            wPositiveAnglesBazooka.distanceBetweenFrames,
+            wPositiveAnglesBazooka.frameWidth,
+            wPositiveAnglesBazooka.frameHeight,
+            wPositiveAnglesBazooka.duration,
+            wPositiveAnglesBazooka.srcRect,
+            wPositiveAnglesBazooka.initYSprite,
+            destRect,
+            wPositiveAnglesBazooka.deltaPosX,
+            wPositiveAnglesBazooka.deltaPosY));
+
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_NEGATIVE_ANGLE_BAZOOKA, getWaccuseAnimation(
+            wNegativeAnglesBazooka.spritePath,
+            wNegativeAnglesBazooka.blendMode,
+            wNegativeAnglesBazooka.frames,
+            wNegativeAnglesBazooka.distanceBetweenFrames,
+            wNegativeAnglesBazooka.frameWidth,
+            wNegativeAnglesBazooka.frameHeight,
+            wNegativeAnglesBazooka.duration,
+            wNegativeAnglesBazooka.srcRect,
+            wNegativeAnglesBazooka.initYSprite,
+            destRect,
+            wNegativeAnglesBazooka.deltaPosX,
+            wNegativeAnglesBazooka.deltaPosY));
+
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_SETTING_TELEPORT, getWaccuseAnimation(
+            settingTeleport.spritePath,
+            settingTeleport.blendMode,
+            settingTeleport.frames,
+            settingTeleport.distanceBetweenFrames,
+            settingTeleport.frameWidth,
+            settingTeleport.frameHeight,
+            settingTeleport.duration,
+            settingTeleport.srcRect,
+            settingTeleport.initYSprite,
+            destRect,
+            settingTeleport.deltaPosX,
+            settingTeleport.deltaPosY));
+
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_HAS_TELEPORT, getWaccuseAnimation(
+            hasTeleport.spritePath,
+            hasTeleport.blendMode,
+            hasTeleport.frames,
+            hasTeleport.distanceBetweenFrames,
+            hasTeleport.frameWidth,
+            hasTeleport.frameHeight,
+            hasTeleport.duration,
+            hasTeleport.srcRect,
+            hasTeleport.initYSprite,
+            destRect,
+            hasTeleport.deltaPosX,
+            hasTeleport.deltaPosY));
+
+    m_SpritesMap.emplace(SpritesEnum::SPRITE_USE_TELEPORTER, getWaccuseAnimation(
+            useTeleport.spritePath,
+            useTeleport.blendMode,
+            useTeleport.frames,
+            useTeleport.distanceBetweenFrames,
+            useTeleport.frameWidth,
+            useTeleport.frameHeight,
+            useTeleport.duration,
+            useTeleport.srcRect,
+            useTeleport.initYSprite,
+            destRect,
+            useTeleport.deltaPosX,
+            useTeleport.deltaPosY));
+
     for (auto& sprite : m_SpritesMap) {
         sprite.second->init();
+    }
+
+    m_StepSound = Mix_LoadWAV(std::filesystem::current_path().concat("/resources/Music/worm-walk.mp3").c_str());
+    m_JumpSound = Mix_LoadWAV(std::filesystem::current_path().concat("/resources/Music/worm-jump.mp3").c_str());
+    m_DieSound = Mix_LoadWAV(std::filesystem::current_path().concat("/resources/Music/worm-dead.mp3").c_str());
+    if (m_StepSound == NULL || m_JumpSound == NULL || m_DieSound == NULL) {
+        std::cout << "Error loading sound: " << Mix_GetError() << std::endl;
     }
 }
 
 void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
     m_LastUpdate = gameUpdate;
     if (gameUpdate.m_CurrentSprite == SpritesEnum::SPRITE_HAS_BATE) {
+//    m_Health = static_cast<int>(gameUpdate.m_Health);
         updateBateAttack(elapsedSeconds, gameUpdate);
     } else if (gameUpdate.m_CurrentSprite == SpritesEnum::SPRITE_ATTACK_BATE) {
-        updateBateHeat(elapsedSeconds, gameUpdate);
-    }
-    else {
+//        m_Health = static_cast<int>(gameUpdate.m_Health);
+        updateBateHit(elapsedSeconds, gameUpdate);
+    } else if (gameUpdate.m_CurrentSprite == SpritesEnum::SPRITE_HAS_BAZOOKA) {
+//        m_Health = static_cast<int>(gameUpdate.m_Health);
+        UpdateBazooka(elapsedSeconds, gameUpdate);
+    } else {
         m_CurrentSprite = gameUpdate.m_CurrentSprite;
         m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
+        playSound();
     }
 
     if (gameUpdate.m_Movement != GameAction::INVALID_ACTION) {
+//        m_Health = static_cast<int>(gameUpdate.m_Health);
         m_Dir = gameUpdate.m_Dir;
         Animation* anim = m_SpritesMap.at(m_CurrentSprite).get();
         float tempX = WorldScale::worldToPixelX(gameUpdate.x_pos, anim->getDeltaPosX());
@@ -351,7 +499,38 @@ void Worm::update(double elapsedSeconds, const GameUpdate& gameUpdate) {
                            anim->getFrameHeight()});
         m_WormXPosition = gameUpdate.x_pos;
         m_WormYPosition = gameUpdate.y_pos;
+        m_HealthDestRect = {
+                static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
+                static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)) - HEALTH_RECT_Y,
+                static_cast<int>(HEALTH_WIDTH_FONT), static_cast<int>(HEALTH_HEIGHT_FONT)
+        };
+        m_NameDestRect = {
+                static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
+                static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)) - NAME_RECT_Y,
+                static_cast<int>(NAME_WIDTH_FONT), static_cast<int>(NAME_HEIGHT_FONT)
+        };
     }
+}
+
+
+void Worm::UpdateBazooka(double elapsedSeconds, const GameUpdate &gameUpdate) {
+
+    HasBazooka hasBazooka;
+    float angle = gameUpdate.m_WeaponAngle;
+    int pickedFrame = -1;
+
+    if (angle > 0) {
+        pickedFrame = static_cast<int>(angle / hasBazooka.unitAngle);
+        m_CurrentSprite = SpritesEnum::SPRITE_POSITIVE_ANGLE_BAZOOKA;
+    } else if (angle < 0) {
+        float normalizedAngle = angle + 90;
+        pickedFrame = static_cast<int>(normalizedAngle / 6);
+        m_CurrentSprite = SpritesEnum::SPRITE_NEGATIVE_ANGLE_BAZOOKA;
+    } else {
+        m_CurrentSprite = SpritesEnum::SPRITE_HAS_BAZOOKA;
+    }
+
+    m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds, pickedFrame);
 }
 
 void Worm::updateBateAttack(double elapsedSeconds, const GameUpdate &gameUpdate) {
@@ -385,7 +564,7 @@ void Worm::render() {
     } else {
         anim->render(isFlip);
     }
-    //m_SpritesMap.at(m_CurrentSprite)->render(isFlip);
+    renderInfoWorm();
 }
 
 std::unique_ptr<Animation> Worm::getWaccuseAnimation(const std::string& spritePath, BlendMode blendMode, int frames,
@@ -405,12 +584,14 @@ void Worm::update(double elapsedSeconds) {
                        anim->getFrameHeight()});
     if (m_LastUpdate.m_CurrentSprite == SPRITE_HAS_BATE) {
         updateBateAttack(elapsedSeconds, m_LastUpdate);
+    } else if (m_LastUpdate.m_CurrentSprite == SPRITE_HAS_BAZOOKA) {
+        UpdateBazooka(elapsedSeconds, m_LastUpdate);
     } else {
         m_SpritesMap.at(m_CurrentSprite)->update(elapsedSeconds);
     }
 }
 
-void Worm::updateBateHeat(double seconds, const GameUpdate &update) {
+void Worm::updateBateHit(double seconds, const GameUpdate &update) {
     HasBate hasBate;
     NormalAttackBate normalAttackBate;
     float angle = update.m_WeaponAngle;
@@ -428,4 +609,56 @@ void Worm::updateBateHeat(double seconds, const GameUpdate &update) {
     m_SpritesMap.at(m_CurrentSprite)->update(seconds, pickedFrame);
 }
 
+void Worm::renderInfoWorm() {
+    TTF_Font* font = TTF_OpenFont(std::filesystem::current_path()
+            .concat("/resources/Fonts/Dhurjati-Regular.ttf").c_str(), 30);
+
+    SDL_Color textColor = {0, 0, 0, 255};
+
+    SDL_Surface* playerNameSurface = TTF_RenderText_Solid(font, m_PlayerName.c_str(), textColor);
+    SDL_Texture* playerNameTexture = SDL_CreateTextureFromSurface(m_Renderer, playerNameSurface);
+
+    SDL_RenderCopy(m_Renderer, playerNameTexture, NULL, &m_NameDestRect);
+
+    std::string healthStr = std::to_string(m_Health);
+    SDL_Surface* healthSurface = TTF_RenderText_Solid(font, healthStr.c_str(), textColor);
+    SDL_Texture* healthTexture = SDL_CreateTextureFromSurface(m_Renderer, healthSurface);
+
+    SDL_RenderCopy(m_Renderer, healthTexture, NULL, &m_HealthDestRect);
+
+    SDL_FreeSurface(playerNameSurface);
+    SDL_DestroyTexture(playerNameTexture);
+    SDL_FreeSurface(healthSurface);
+    SDL_DestroyTexture(healthTexture);
+    TTF_CloseFont(font);
+}
+
+Worm::~Worm() {
+    std::cout << "Destroing Worm" << std::endl;
+    for (auto& sprite : m_SpritesMap) {
+        sprite.second = nullptr;
+    }
+    Mix_FreeChunk(m_StepSound);
+}
+
+void Worm::playSound() {
+    switch (m_CurrentSprite) {
+        case SPRITE_WALK:
+            Mix_PlayChannel(-1, m_StepSound, 0);
+            break;
+        case SPRITE_JUMPING:
+            Mix_PlayChannel(-1, m_JumpSound, 0);
+            break;
+        case SPRITE_WACCUSE_DIE:
+            Mix_PlayChannel(-1, m_DieSound, 0);
+            break;
+        default:
+            Mix_HaltChannel(-1);
+            break;
+    }
+}
+
+void Worm::updateHealth(const uint8_t &health) {
+    m_Health = health;
+}
 

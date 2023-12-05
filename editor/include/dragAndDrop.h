@@ -15,6 +15,8 @@ class DragAndDrop : public QGraphicsPixmapItem
 {
 public:
     DragAndDrop(const QPixmap &pixmap, qreal scale = 1.0, QGraphicsScene* scene = nullptr);
+    int getTipoElemento() const; 
+    void setTipoElemento(int tipo);
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
@@ -29,6 +31,7 @@ private:
 
     QGraphicsScene* scene;
     QMenu contextMenu;
+    int tipoElemento; // 0 = spawn, 1 = beam
 
     QPointF constrainToScene(const QPointF& newPos);
 };

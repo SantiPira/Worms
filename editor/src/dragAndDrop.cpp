@@ -21,6 +21,16 @@ void DragAndDrop::mouseReleaseEvent(QGraphicsSceneMouseEvent* event) {
     }
     QGraphicsPixmapItem::mouseReleaseEvent(event);
 }
+
+void DragAndDrop::setTipoElemento(int tipo) {
+    tipoElemento = tipo; // 0 = spawn, 1 = beam
+}
+
+int DragAndDrop::getTipoElemento() const {
+    return tipoElemento;
+}
+
+
 /*
 QVariant DragAndDrop::itemChange(GraphicsItemChange change, const QVariant &value)
 {

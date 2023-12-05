@@ -9,6 +9,7 @@ void ContactListener::BeginContact(b2Contact *contact) {
 
     wormsContact.BeginContact(bodyA, bodyB);
     waterContact.BeginContact(bodyA, bodyB);
+    bazookaContact.BeginContact(bodyA, bodyB);
 }
 
 void ContactListener::EndContact(b2Contact *contact) {
@@ -20,4 +21,5 @@ void ContactListener::EndContact(b2Contact *contact) {
 
     wormsContact.EndContact(bodyA, bodyB);
     waterContact.EndContact(bodyA, bodyB);
+    bazookaContact.EndContact(bodyA, bodyB);
 }

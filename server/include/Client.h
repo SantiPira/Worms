@@ -29,6 +29,7 @@ private:
     ProtectedQueue<GameUpdate> m_UpdatesGame;
     ProtectedQueue<UserAction>* m_InputActions{};
     ClientSender m_Sender;
+    std::string m_PlayerName;
 public:
     Client(Socket peer, MatchesMonitor* games);
     bool isDead();

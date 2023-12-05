@@ -2,6 +2,16 @@
 
 #include "SpriteAnimations.h"
 #include "messages/user_actions/ActionType.h"
+#include "world/entities/action_animations/types/SActionMove.h"
+#include "world/entities/action_animations/types/SActionIdle.h"
+#include "world/entities/action_animations/types/SActionJump.h"
+#include "world/entities/action_animations/types/SActionWeapon.h"
+#include "world/entities/action_animations/types/SActionDeath.h"
+#include "world/entities/action_animations/types/SActionAttacked.h"
+#include "world/entities/action_animations/types/SActionAttack.h"
+#include "world/entities/action_animations/types/SActionTool.h"
+#include "world/entities/action_animations/types/SActionUseTool.h"
+
 
 class AnimationFactory {
 public:

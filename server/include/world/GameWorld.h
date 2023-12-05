@@ -12,10 +12,12 @@
 #include "world/entities/WDeadWorm.h"
 #include "world/instructions/IWormInstruction.h"
 #include "world/listeners/ContactListener.h"
+#include "world/entities/WProyectile.h"
 #include <fstream>
 #include <sstream>
 #include <unordered_map>
 #include <memory>
+#include <iostream>
 
 class GameWorld {
 private:
@@ -43,13 +45,16 @@ private:
     ContactListener contactListener;
 
 public:
+    b2Body* projectile;
+
+public:
 
     explicit GameWorld(const std::string &map_path);
     void Setup();
     void StartWorld();
-    void SetWorm(const int& player_number, const float & x_pos, const float& y_pos);
+    void SetWorm(const int& player_number, const std::string& playerName, const float & x_pos, const float& y_pos);
     void execute(IWormInstruction* instruction, int playerId);
-    std::vector<GameUpdate> getWormsUpdates(bool getAll) const;
+    std::vector<GameUpdate> getWormsUpdates(bool getAll);
 
     void step();
 
@@ -64,8 +69,6 @@ public:
     bool isQuiet();
 
     void getDeadWormsIds(std::vector<int>& deadWormsIds);
-
-    void passAway(int &id);
 
     bool isAlive(int idPlayer);
 
@@ -84,4 +87,25 @@ public:
     void getDeathWormsUpdates(std::vector<int>& idsDeadWorms);
 
     void updateWormsMove();
+
+    WProyectile* getProjectile();
+
+    int getWormsAlive() const;
+
+    std::vector<GameUpdate> getWormsMoving();
+
+    void wormsAttacked(std::vector<int> &idWorms);
+
+    GameUpdate getWormUpdateAttacked(int id);
+
+    GameUpdate getWormsHealth(int id);
+
+    std::vector<GameUpdate> getWormsHealths() const;
+
+    void wormSetAnimationUseTool(int id);
+
+    void wormGraveAction(int &deadWorm);
+
+    void getWormGraveUpdate(int &deadWorm, GameUpdate &update);
+    void getWormDieUpdate(int &deadWorm, GameUpdate &update);
 };

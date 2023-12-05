@@ -31,7 +31,7 @@ void GameWorld::StartWorld() {
     myBodyDef.type = b2_staticBody;
     myBodyDef.position.Set(0, 0);
     b2Body* staticBody = m_world.CreateBody(&myBodyDef);
-    
+
     //add four walls to the static body
     polygonShape.SetAsBox( 10, 1, b2Vec2(10, -1), 0);//ground
     staticBody->CreateFixture(&myFixtureDef);
@@ -43,15 +43,15 @@ void GameWorld::StartWorld() {
     staticBody->CreateFixture(&myFixtureDef);
 }
 
-void GameWorld::SetWorm(const int& player_number, const float & x_pos, const float& y_pos) {
-    auto* wormEntity = new WWorm(&m_world, player_number, x_pos, y_pos, x_pos <= width/2, m_WormCategory,
+void GameWorld::SetWorm(const int& player_number, const std::string& playerName, const float & x_pos, const float& y_pos) {
+    auto* wormEntity = new WWorm(&m_world, playerName, player_number, x_pos, y_pos, x_pos <= width/2, m_WormCategory,
                                  {m_WaterCategory});
     worms.insert(std::make_pair(player_number, wormEntity));
     wormsPositions.insert(std::make_pair(player_number, b2Vec2(x_pos, y_pos)));
     std::cout << "ID [" << player_number << "] - POS (" << x_pos << ", " << y_pos << ")" << std::endl;
 }
 
-std::vector<GameUpdate> GameWorld::getWormsUpdates(bool getAll) const {
+std::vector<GameUpdate> GameWorld::getWormsUpdates(bool getAll) {
     std::vector<GameUpdate> gameUpdates;
     for (auto& worm : worms) {
         auto update = worm.second->getUpdate(getAll);
@@ -145,15 +145,15 @@ bool GameWorld::isAlive(int idPlayer) {
 }
 
 bool GameWorld::wormBrokeTurn(const UserAction &userAction) {
-    for (auto& worm : worms) {
-        if (worm.second->getHealth() == 0) {
-            return true;
-        }
-    }
-    if (userAction.getAction() == ATTACK) {
-        return true;
-    }
-    return false;
+//    for (auto& worm : worms) {
+//        if (worm.second->getHealth() == 0) {
+//            return true;
+//        }
+//    }
+//    if (userAction.getAction() == ATTACK) {
+//        return true;
+//    }
+    return userAction.getAction() == ATTACK || userAction.getAction() == SELF_KILL || userAction.getAction() == USE_TOOL;
 }
 
 bool GameWorld::wormsAlive(std::vector<int> &idsDeadWorms) {
@@ -176,8 +176,17 @@ GameUpdate GameWorld::getWormUpdate(int idPlayer, bool getAll) {
 
 bool GameWorld::allElementsIDLE() {
     bool isIDLE = std::all_of(worms.begin(), worms.end(), [](std::pair<const int, WWorm*>& worm) {
-        return worm.second->getVelocity().x == 0 && worm.second->getVelocity().y == 0;
+
+        if (worm.second->tieneProyectil){
+            if (worm.second->proyectil->getBody()->GetLinearVelocity().x != 0 || worm.second->proyectil->getBody()->GetLinearVelocity().y != 0) {
+                return false;
+            }
+        }
+
+        return worm.second->getVelocity() == b2Vec2_zero;
     });
+
+
     return isIDLE;
 }
 
@@ -198,4 +207,137 @@ void GameWorld::updateWormsMove() {
 }
 
 
+WProyectile* GameWorld::getProjectile(){
 
+    WProyectile* p_projectile = nullptr;
+
+    for (auto& worm : worms) {
+        if (worm.second->tieneProyectil) {
+            p_projectile = worm.second->proyectil;
+        }
+    }
+
+    return p_projectile;
+}
+
+int GameWorld::getWormsAlive() const {
+    int alive = 0;
+    for (auto& worm : worms) {
+        if (worm.second->getHealth() > 0) {
+            ++alive;
+        }
+    }
+    return alive;
+}
+
+std::vector<GameUpdate> GameWorld::getWormsMoving() {
+    std::vector<GameUpdate> updates;
+    for (auto& worm : worms) {
+        if (worm.second->isMoving()) {
+            GameUpdate gameUpdate;
+            gameUpdate.player_id = worm.first;
+            gameUpdate.m_Dir = worm.second->getDirection();
+            gameUpdate.x_pos = worm.second->getPosition().x;
+            gameUpdate.y_pos = worm.second->getPosition().y;
+//    gameUpdate.m_Health = worm.second->getPreviousHealth();
+            gameUpdate.m_Movement = GameAction::WORM_IDLE;
+            gameUpdate.m_CurrentSprite = SPRITE_WACCUSE_IDLE;
+            updates.push_back(std::move(gameUpdate));
+        }
+    }
+    return updates;
+}
+
+void GameWorld::wormsAttacked(std::vector<int> &idWorms) {
+    for (auto& worm : worms) {
+        if (worm.second->wasAttacked()) {
+            worm.second->setWasAttacked(false);
+            worm.second->getActionToAnimation()->resetAnimation();
+            worm.second->getActionToAnimation()->setAction(ActionType::ATTACKED);
+            idWorms.push_back(worm.first);
+        }
+    }
+}
+
+GameUpdate GameWorld::getWormUpdateAttacked(int id) {
+    return worms.at(id)->getAttackedUpdate();
+}
+
+GameUpdate GameWorld::getWormsHealth(int id) {
+    auto* worm = worms.at(id);
+    GameUpdate update;
+    update.m_InfoWorm = true;
+    update.player_id = worm->getId();
+    update.m_Dir = worm->getDirection();
+    update.m_Health = worm->getHealth();
+    update.x_pos = worm->getPosition().x;
+    update.y_pos = worm->getPosition().y;
+    update.width = worm->getWidth() * 2;
+    update.height = worm->getHeight() * 2;
+    update.m_CurrentSprite =
+            worm->getActionToAnimation()->getCurrentSprite() == SPRITE_INVALID ? SPRITE_WACCUSE_IDLE
+            : worm->getActionToAnimation()->getCurrentSprite();
+    update.m_PlayerName = worm->getPlayerName();
+    worm->updateHealth();
+    return update;
+}
+
+std::vector<GameUpdate> GameWorld::getWormsHealths() const {
+    std::vector<GameUpdate> updates;
+    for (auto& worm : worms) {
+        GameUpdate update;
+        update.player_id = worm.second->getId();
+        update.m_Health = worm.second->getHealth();
+        update.x_pos = worm.second->getPosition().x;
+        update.y_pos = worm.second->getPosition().y;
+        update.width = worm.second->getWidth() * 2;
+        update.height = worm.second->getHeight() * 2;
+        update.m_PlayerName = worm.second->getPlayerName();
+        update.m_CurrentSprite =
+                worm.second->getActionToAnimation()->getCurrentSprite() == SPRITE_INVALID ? SPRITE_WACCUSE_IDLE
+                : worm.second->getActionToAnimation()->getCurrentSprite();
+        updates.push_back(std::move(update));
+    }
+    return updates;
+}
+
+void GameWorld::wormSetAnimationUseTool(int id) {
+    worms.at(id)->getActionToAnimation()->resetAnimation();
+    worms.at(id)->getActionToAnimation()->setAction(ActionType::USE_TOOL, worms.at(id)->getTool());
+}
+
+void GameWorld::wormGraveAction(int &deadWorm) {
+    worms.at(deadWorm)->getActionToAnimation()->resetAnimation();
+    worms.at(deadWorm)->getActionToAnimation()->setAction(ActionType::DYING);
+}
+
+void GameWorld::getWormGraveUpdate(int &deadWorm, GameUpdate &update) {
+    WWorm* worm = worms.at(deadWorm);
+    SpritesEnum action = SPRITE_WACCUSE_GRAVE;
+    update.player_id = worm->getId();
+    update.m_Dir = worm->getDirection();
+    update.x_pos = worm->getPosition().x;
+    update.y_pos = worm->getPosition().y;
+    update.width = worm->getWidth() * 2;
+    update.height = worm->getHeight() * 2;
+    update.m_Health = worm->getHealth();
+    update.m_Movement = GameAction::WORM_GRAVE;
+    update.m_CurrentSprite = action;
+    update.m_PlayerName = worm->getPlayerName();
+}
+
+
+void GameWorld::getWormDieUpdate(int &deadWorm, GameUpdate &update) {
+    WWorm* worm = worms.at(deadWorm);
+    SpritesEnum action = SPRITE_WACCUSE_DIE;
+    update.player_id = worm->getId();
+    update.m_Dir = worm->getDirection();
+    update.x_pos = worm->getPosition().x;
+    update.y_pos = worm->getPosition().y;
+    update.width = worm->getWidth() * 2;
+    update.height = worm->getHeight() * 2;
+    update.m_Health = worm->getHealth();
+    update.m_Movement = GameAction::WORM_GRAVE;
+    update.m_CurrentSprite = action;
+    update.m_PlayerName = worm->getPlayerName();
+}

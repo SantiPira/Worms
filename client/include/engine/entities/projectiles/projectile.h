@@ -1,4 +1,3 @@
-/*
 #ifndef PROJECTILE_H
 #define PROJECTILE_H
 
@@ -9,7 +8,7 @@
 #include "utils/WorldScale.h"
 #include "engine/graphics/Animation.h"
 #include "engine/entities/TexturePaths.h"
-#include "Skins.h"
+#include "engine/entities/worms/Skins.h"
 #include "engine/entities/effects/EffectSkins.h"
 #include "messages/server/GameUpdate.h"
 #include "messages/user_actions/ActionType.h"
@@ -39,7 +38,7 @@ private:
     std::unique_ptr<Animation> getProjectileAnimation(const std::string& spritePath, BlendMode blendMode, int frames,
                                                    int distanceBetweenFrames,
                                                    int frameWidth, int frameHeight, float duration, SDL_Rect srcRect,
-                                                   int initYSprite, SDL_Rect destRect, float deltaPosX, float deltaPosY);
+                                                   int initYSprite, SDL_Rect destRect, float deltaPosX, float deltaPosY) ;
 
 
 public:
@@ -55,4 +54,3 @@ public:
 };
 
 #endif
-*/

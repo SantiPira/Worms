@@ -1,5 +1,7 @@
 #include "messages/server/GameInfo.h"
 
+#include <utility>
+
 GameInfo::GameInfo() : m_IdAction(InitGameEnum::INVALID) {}
 
 GameInfo::GameInfo(InitGameEnum idAction, int idPlayer) {
@@ -12,9 +14,14 @@ GameProperty::GameProperty(int idGame, std::string gameName, std::string mapName
     m_PlayersConnected(playersConnected), m_Players(players) {}
 
 GameProperty::GameProperty(int idGame, std::string gameName, std::string mapName, int playersConnected, int players,
-                           int idPlayer) : m_idGame(idGame), m_GameName(std::move(gameName)),
+                           int idPlayer, std::string playerName) : m_idGame(idGame), m_GameName(std::move(gameName)),
                            m_MapName(std::move(mapName)), m_PlayersConnected(playersConnected), m_Players(players),
-                           m_IdPlayer(idPlayer) {}
+                           m_IdPlayer(idPlayer), m_PlayerName(std::move(playerName)) {}
+
+GameProperty::GameProperty(int idGame, std::string gameName, std::string mapName, int playersConnected, int players,
+                           std::string playerName) : m_idGame(idGame), m_GameName(std::move(gameName)),
+                           m_MapName(std::move(mapName)), m_PlayersConnected(playersConnected),
+                           m_Players(players), m_PlayerName(std::move(playerName)) {}
 
 GameInfo::GameInfo(InitGameEnum idAction, std::vector<GameProperty> gameProperties) : m_IdAction(idAction),
     m_GameProperties(std::move(gameProperties)) {}

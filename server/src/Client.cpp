@@ -13,7 +13,6 @@ void Client::run() {
         if (hasGame) {
             initGame();
         }
-
     } catch (const LibError& e) {
         std::cerr << "LibError exception e.what(): " << e.what() << std::endl;
     } catch (const std::exception &e1) {
@@ -26,15 +25,19 @@ void Client::initGame() {
     sendMap();
     m_Sender.setPlayerId(m_IdPlayer);
     m_Sender.start();
-    //Receiver state
     while (isRunning()) {
         try{
             m_InputActions->push(m_Protocol.recvUserAction());
+        } catch (const LibError& e) {
+            m_KeepRunning.store(false);
+            break;
         } catch (...) {
             //should do nothing, either protocol has closed or queue is closed 
         }
     }
-    m_Sender.stop();
+    if (m_Sender.isRunning()) {
+        m_Sender.stop();
+    }
     m_Sender.join();
 }
 
@@ -46,7 +49,8 @@ void Client::lobbyGame() {
                 m_IdGame = m_Matches->createGame(clientResponse.getGameProperties()[0].m_GameName,
                                                  clientResponse.getGameProperties()[0].m_MapName,
                                                  clientResponse.getGameProperties()[0].m_Players);
-                m_IdPlayer = m_Matches->addPlayer(m_IdGame, &m_UpdatesGame);
+                m_PlayerName = clientResponse.getGameProperties()[0].m_PlayerName;
+                m_IdPlayer = m_Matches->addPlayer(m_IdGame, &m_UpdatesGame, std::ref(m_PlayerName));
                 GameInfo response(InitGameEnum::ID_PLAYER, m_IdPlayer);
                 m_Protocol.sendGameInfo(response);
                 m_InputActions = m_Matches->getInputActionGame(m_IdGame);
@@ -55,7 +59,8 @@ void Client::lobbyGame() {
             }
             case JOIN_GAME: {
                 m_IdGame = clientResponse.getGameProperties()[0].m_idGame;
-                m_IdPlayer = m_Matches->addPlayer(m_IdGame, &m_UpdatesGame);
+                m_PlayerName = clientResponse.getGameProperties()[0].m_PlayerName;
+                m_IdPlayer = m_Matches->addPlayer(m_IdGame, &m_UpdatesGame, std::ref(m_PlayerName));
                 GameInfo response(InitGameEnum::ID_PLAYER, m_IdPlayer);
                 m_Protocol.sendGameInfo(response);
                 m_InputActions = m_Matches->getInputActionGame(m_IdGame);
@@ -83,8 +88,10 @@ void Client::stop() {
 
 void Client::kill() {
     m_KeepRunning.store(false);
-    m_Protocol.shutdown(SHUT_RDWR);
-    m_Protocol.close();
+    if (!m_Protocol.isClosed()) {
+        m_Protocol.shutdown(SHUT_RDWR);
+        m_Protocol.close();
+    }
 }
 
 void Client::sendMap() {

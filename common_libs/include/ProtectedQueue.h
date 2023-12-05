@@ -135,6 +135,10 @@ public:
         is_not_empty.notify_all();
     }
 
+    bool isClosed() const {
+        return closed;
+    }
+
     ProtectedQueue& operator=(const ProtectedQueue&) = delete;
     ProtectedQueue& operator=(ProtectedQueue&&) = delete;
     ProtectedQueue(const ProtectedQueue&) = delete;
