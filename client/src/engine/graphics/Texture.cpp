@@ -33,8 +33,11 @@ void Texture::render(const SDL_Rect *destRect, bool isFlip) const {
 }
 
 void Texture::release() {
-    SDL_DestroyTexture(m_Texture);
-    m_Texture = nullptr;
+    #ifdef TEST
+    #else
+        SDL_DestroyTexture(m_Texture);
+        m_Texture = nullptr;
+    #endif
 }
 
 Texture::~Texture() {

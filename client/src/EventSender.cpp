@@ -7,13 +7,90 @@ EventSender::EventSender(Protocol& protocol, int idPlayer, ProtectedQueue<std::s
 void EventSender::run() {
     while (isRunning()) {
         SDL_Event event;
-        SDL_WaitEvent(&event);
+        #ifdef TEST
+            SDL_Keycode key;
+            event.type = SDL_KEYDOWN;
+            event.key.repeat = 0;
+            if (std::cin.peek() != EOF) {
+                char input;
+                std::cin >> input;
+
+                switch (input) {
+                    case 'a':
+                        key = SDLK_a;
+                        break;
+                    case 'd':
+                        key = SDLK_d;
+                        break;
+                    case '1':
+                        key = SDLK_1;
+                        break;
+                    case '2':
+                        key = SDLK_2;
+                        break;
+                    case 'e':
+                        key = SDLK_SPACE;
+                        break;
+                    case 'c':
+                        key = SDLK_c;
+                        break;
+                    case 'h':
+                        key = SDLK_h;
+                        break;
+                    case 'k':
+                        key = SDLK_k;
+                        break;
+                    case 'j':
+                        key = SDLK_j;
+                        break;
+                    case 'b':
+                        key = SDLK_b;
+                        break;
+                    case 'o':
+                        key = SDLK_DOWN;
+                        break;
+                    case 'p':
+                        key = SDLK_UP;
+                        break;
+                    case 'm':
+                        key = SDLK_m;
+                        break;
+                    case 'q':
+                        key = SDLK_m;
+                        event.type = SDL_QUIT;
+                        break;
+                    case 's':
+                        key = SDLK_a;
+                        event.type = SDL_KEYUP;
+                        break;
+                    case 'w':
+                        key = SDLK_d;
+                        event.type = SDL_KEYUP;
+                        break;
+                    case 'v':
+                        key = SDLK_c;
+                        event.type = SDL_KEYUP;
+                        break;
+                    case '.':
+                        key = SDLK_m;
+                        event.type = SDL_MOUSEBUTTONDOWN;
+                        event.button.x = 0;
+                        event.button.y = 0;
+                        break;
+                    default:
+                        key = SDLK_UNKNOWN;
+                        break;
+                }
+            }   
+        #else
+            SDL_WaitEvent(&event);
+            SDL_Keycode key = event.key.keysym.sym;
+        #endif
+
         if (event.type == SDL_QUIT) {
             stop();
             break;
         }
-
-        SDL_Keycode key = event.key.keysym.sym;
 
         UserAction userAction;
         if (event.type == SDL_KEYDOWN && event.key.repeat == 0) {
@@ -90,13 +167,16 @@ void EventSender::run() {
 }
 
 bool EventSender::isRunning() {
-    return !m_Protocol.isClosed() && m_KeepRunning.load();
+    //!m_Protocol.isClosed() && 
+    return m_KeepRunning.load();
 }
 
 void EventSender::stop() {
     m_KeepRunning.store(false);
-    m_Protocol.shutdown(SHUT_RDWR);
-    m_Protocol.close();
+    if(!m_Protocol.isClosed()) {
+        m_Protocol.shutdown(SHUT_RDWR);
+        m_Protocol.close();
+    }
 }
 
 void EventSender::setIsRunning(bool isRunning) {

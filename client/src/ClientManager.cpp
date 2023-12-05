@@ -17,7 +17,10 @@ void ClientManager::init() {
         EventSender eventSender(*m_Protocol, m_IdPlayer, std::ref(settingsQueue), turnInfo.player_id == m_IdPlayer);
         ClientReceiver receiver(*m_Protocol, std::ref(gameUpdates), std::ref(eventSender), m_IdPlayer);
 
-        m_Game.Init(map, m_IdPlayer, std::ref(initInfo), std::ref(turnInfo));
+        #ifdef TEST
+        #else
+            m_Game.Init(map, m_IdPlayer, std::ref(initInfo), std::ref(turnInfo));
+        #endif
         eventSender.start();
         receiver.start();
         gameLoop(eventSender);
@@ -26,7 +29,10 @@ void ClientManager::init() {
 
     } catch (std::exception &exception) {
         fprintf(stderr, "%s", exception.what());
-        SDL_Quit();
+        #ifdef TEST
+        #else
+            SDL_Quit();
+        #endif
         //TODO: throw Exception para que el main la catchee y devuelva codigo de error 1
         return;
     }
@@ -74,14 +80,20 @@ void ClientManager::gameLoop(EventSender& eventSender) {
             }
             m_Game.Update(elapsedSeconds.count(), svUpdate);
         }
-        m_Game.Render();
+        #ifdef TEST
+        #else
+            m_Game.Render();
+        #endif
 
         lastTime = current;
         SDL_Delay(12);
 
         if (m_EndGame) {
             eventSender.setIsRunning(false);
-            endGameWindow();
+            #ifdef TEST
+            #else
+                endGameWindow();
+            #endif
             break;
         }
     }
@@ -128,42 +140,46 @@ void ClientManager::endGameWindow() {
 }
 
 GameUpdate ClientManager::initStage() {
-    if (TTF_Init() == -1) {
-        fprintf(stderr, "Error al inicializar SDL_ttf: %s\n", TTF_GetError());
-        return {};
-    }
+    #ifdef TEST
+        GameUpdate turnInfo = m_Protocol->recvGameUpdate();
+    #else
+        if (TTF_Init() == -1) {
+            fprintf(stderr, "Error al inicializar SDL_ttf: %s\n", TTF_GetError());
+            return {};
+        }
 
-    SDL_Window *window = SDL_CreateWindow("Esperando al resto de los jugadores...", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 500, 300, 0);
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
+        SDL_Window *window = SDL_CreateWindow("Esperando al resto de los jugadores...", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 500, 300, 0);
+        SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
 
-    TTF_Font *font = TTF_OpenFont(std::filesystem::current_path()
-            .concat("/resources/Fonts/Dhurjati-Regular.ttf").c_str(), 24);
-    if (font == nullptr) {
-        fprintf(stderr, "Error al abrir la fuente: %s\n", TTF_GetError());
-        return {};
-    }
+        TTF_Font *font = TTF_OpenFont(std::filesystem::current_path()
+                .concat("/resources/Fonts/Dhurjati-Regular.ttf").c_str(), 24);
+        if (font == nullptr) {
+            fprintf(stderr, "Error al abrir la fuente: %s\n", TTF_GetError());
+            return {};
+        }
 
-    SDL_Color color = {255, 255, 255};
-    SDL_Surface *surface = TTF_RenderText_Solid(font, "Esperando al resto de los jugadores...", color);
-    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
+        SDL_Color color = {255, 255, 255};
+        SDL_Surface *surface = TTF_RenderText_Solid(font, "Esperando al resto de los jugadores...", color);
+        SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
 
-    SDL_Rect rect;
-    rect.x = 0;
-    rect.y = 0;
-    rect.w = surface->w;
-    rect.h = surface->h;
-    SDL_RenderCopy(renderer, texture, nullptr, &rect);
+        SDL_Rect rect;
+        rect.x = 0;
+        rect.y = 0;
+        rect.w = surface->w;
+        rect.h = surface->h;
+        SDL_RenderCopy(renderer, texture, nullptr, &rect);
 
-    SDL_RenderPresent(renderer);
+        SDL_RenderPresent(renderer);
 
-    GameUpdate turnInfo = m_Protocol->recvGameUpdate();
+        GameUpdate turnInfo = m_Protocol->recvGameUpdate();
 
-    SDL_DestroyTexture(texture);
-    SDL_FreeSurface(surface);
-    TTF_CloseFont(font);
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    TTF_Quit();
+        SDL_DestroyTexture(texture);
+        SDL_FreeSurface(surface);
+        TTF_CloseFont(font);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        TTF_Quit();
+    #endif
     return turnInfo;
 }
 

@@ -182,7 +182,10 @@ GameUpdate Protocol::recvGameUpdate() {
     return update;
 }
 
-void Protocol::close() { socket.close(); }
+void Protocol::close() { 
+    socket.close(); 
+    wasClosed = true;
+    }
 void Protocol::shutdown(int mode) { socket.shutdown(mode); }
 Protocol::~Protocol() {
     try {

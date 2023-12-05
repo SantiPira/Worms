@@ -139,8 +139,16 @@ std::unordered_map<int, ProtectedQueue<GameUpdate>*>* Game::getClientUpdates() {
 
 void Game::setupWorld() {
     this->world.Setup();
+    #ifdef TEST
+        float i = 0;
+    #endif
     for (auto& clientId : m_QClientUpdates) {
-        float randPosX = static_cast<float>(rand() % 20);
+        #ifdef TEST
+            i = i + 2;
+            float randPosX = i;
+        #else
+            float randPosX = static_cast<float>(rand() % 20);
+        #endif
         world.SetWorm(clientId.first, m_PlayersInfo.at(clientId.first), randPosX, 11.0f);//cambiar por posicion random
     }
 }

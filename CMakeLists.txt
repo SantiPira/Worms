@@ -12,6 +12,16 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 add_subdirectory(SDL2pp)
 add_subdirectory(Box2D)
 
+option(TESTING "Enable testing" OFF)
+
+if(NOT TESTING)
+    set(TESTING OFF)
+endif()
+
+if(TESTING)
+    add_definitions(-DTEST)
+endif()
+
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
 file(GLOB_RECURSE COMMON_SRCS ./common_libs/src/*.cpp)
@@ -44,19 +54,19 @@ list(FILTER CLIENT_SRCS EXCLUDE REGEX "main.cpp")
 add_library(libclient STATIC ${CLIENT_SRCS})
 target_link_libraries(libclient libcommon)
 
-add_executable(worms-client "client/src/main.cpp")
-target_link_libraries(worms-client libclient)
+add_executable(client "client/src/main.cpp")
+target_link_libraries(client libclient)
 
-add_executable(worms-server "server/src/main.cpp")
-target_link_libraries(worms-server libserver)
+add_executable(server "server/src/main.cpp")
+target_link_libraries(server libserver)
 
-add_executable(worms-editor "editor/src/main.cpp")
-target_link_libraries(worms-editor libeditor)
+add_executable(editor "editor/src/main.cpp")
+target_link_libraries(editor libeditor)
 
 file(COPY ${CMAKE_SOURCE_DIR}/maps DESTINATION ${CMAKE_BINARY_DIR})
 file(COPY ${CMAKE_SOURCE_DIR}/resources DESTINATION ${CMAKE_BINARY_DIR})
 
-install(TARGETS worms-server worms-client worms-editor libclient libserver libcommon libeditor
+install(TARGETS server client editor libclient libserver libcommon libeditor
         ARCHIVE DESTINATION "lib"
         RUNTIME DESTINATION "bin"
         INCLUDES DESTINATION "include")

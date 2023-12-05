@@ -7,13 +7,32 @@
 
 int main(int argc, char *argv[]) {
     try {
-        QApplication app(argc, argv);
-        StartWindow startWindow;
-        startWindow.show();
-        app.exec();
+        #ifdef TEST 
+            Juego juego(argv[1],argv[2]);
+            std::string decision(argv[3]);
+            if(decision == "create") {
+                std::string players(argv[4]);
+                juego.createGame(std::string("Mapa 1"), std::string("Mapa testing"), std::string("1"), players);
+            } else if(decision == "join") {
+                juego.joinGame(int(0),int(2),std::string("2"));
+            } else {
+                std::cout << "Undefined decision in testing mode\n";
+                return -1;
+            }
+        #else
+            QApplication app(argc, argv);
+            StartWindow startWindow;
+            startWindow.show();
+            app.exec();
+        #endif
         try {
-            ClientManager clientManager(startWindow.getProtocol(), startWindow.getIdPlayer(),
-                                        startWindow.getCantPlayers());
+            #ifdef TEST
+                ClientManager clientManager(juego.getProtocol(), juego.getIdPlayer(), 
+                                            juego.getPlayers());
+            #else
+                ClientManager clientManager(startWindow.getProtocol(), startWindow.getIdPlayer(),
+                                            startWindow.getCantPlayers());
+            #endif
             clientManager.init();
         } catch (std::exception &exception) {
             fprintf(stderr, "%s", exception.what());
