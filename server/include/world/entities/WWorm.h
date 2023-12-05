@@ -17,6 +17,8 @@
 #include <vector>
 #include <chrono>
 
+class WProyectile;
+
 class WWorm : public WEntity {
 private:
     uint8_t m_Id;
@@ -58,7 +60,8 @@ private:
 
 public:
     bool tieneProyectil{false};
-    b2Body* proyectil;
+    //b2Body* proyectil;
+    WProyectile* proyectil;
 
 public:
     WWorm(b2World* world, std::string playerName, uint8_t id, float posX, float posY, bool isFacingRight, uint16_t wormCategory,

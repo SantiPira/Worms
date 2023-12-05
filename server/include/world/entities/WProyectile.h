@@ -17,6 +17,8 @@ private:
     uint16_t m_WormCategory = 0x0003;
     uint16_t m_BazookaCategory = 0x0005;
 
+    bool explotion{false};
+
 
 public:
     WProyectile(b2World* world, WWorm* attacker);
@@ -31,6 +33,10 @@ public:
     float getRadius();
 
     void deleteBody();
+
+    void SetCollide();
+
+    bool GetCollide();
 
     ~WProyectile() override = default;
 };

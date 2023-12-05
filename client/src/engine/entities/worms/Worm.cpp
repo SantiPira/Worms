@@ -35,6 +35,11 @@ void Worm::init() {
         HasTeleport hasTeleport;
         UseTeleport useTeleport;
 
+        SetGreenGranade wSetGreenGranade;
+        HasGreenGranade wHasGreenGranade;
+        SaveGreenGranade wSaveGreenGranade;
+
+
     SDL_Rect destRect = {
                 static_cast<int>(WorldScale::worldToPixelX(m_WormXPosition, m_Widht)),
                 static_cast<int>(WorldScale::worldToPixelY(m_WormYPosition, m_Height)),
@@ -53,6 +58,48 @@ void Worm::init() {
                 static_cast<int>(HEALTH_WIDTH_FONT), static_cast<int>(HEALTH_HEIGHT_FONT)
         };
 
+
+        m_SpritesMap.emplace(SpritesEnum::SPRITE_SETTING_GREEN_GRANADE, getWaccuseAnimation(
+                wSetGreenGranade.spritePath,
+                wSetGreenGranade.blendMode,
+                wSetGreenGranade.frames,
+                wSetGreenGranade.distanceBetweenFrames,
+                wSetGreenGranade.frameWidth,
+                wSetGreenGranade.frameHeight,
+                wSetGreenGranade.duration,
+                wSetGreenGranade.srcRect,
+                wSetGreenGranade.initYSprite,
+                destRect,
+                wSetGreenGranade.deltaPosX,
+                wSetGreenGranade.deltaPosY));
+
+        m_SpritesMap.emplace(SpritesEnum::SPRITE_HAS_GREEN_GRANADE, getWaccuseAnimation(
+                wHasGreenGranade.spritePath,
+                wHasGreenGranade.blendMode,
+                wHasGreenGranade.frames,
+                wHasGreenGranade.distanceBetweenFrames,
+                wHasGreenGranade.frameWidth,
+                wHasGreenGranade.frameHeight,
+                wHasGreenGranade.duration,
+                wHasGreenGranade.srcRect,
+                wHasGreenGranade.initYSprite,
+                destRect,
+                wHasGreenGranade.deltaPosX,
+                wHasGreenGranade.deltaPosY));
+
+        m_SpritesMap.emplace(SpritesEnum::SPRITE_SAVING_GREEN_GRANADE, getWaccuseAnimation(
+                wSaveGreenGranade.spritePath,
+                wSaveGreenGranade.blendMode,
+                wSaveGreenGranade.frames,
+                wSaveGreenGranade.distanceBetweenFrames,
+                wSaveGreenGranade.frameWidth,
+                wSaveGreenGranade.frameHeight,
+                wSaveGreenGranade.duration,
+                wSaveGreenGranade.srcRect,
+                wSaveGreenGranade.initYSprite,
+                destRect,
+                wSaveGreenGranade.deltaPosX,
+                wSaveGreenGranade.deltaPosY));
 
         m_SpritesMap.emplace(SpritesEnum::SPRITE_SETTING_BAZOOKA, getWaccuseAnimation(
             wSettingBazooka.spritePath,

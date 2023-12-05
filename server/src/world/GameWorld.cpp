@@ -178,7 +178,7 @@ bool GameWorld::allElementsIDLE() {
     bool isIDLE = std::all_of(worms.begin(), worms.end(), [](std::pair<const int, WWorm*>& worm) {
 
         if (worm.second->tieneProyectil){
-            if (worm.second->proyectil->GetLinearVelocity().x != 0 || worm.second->proyectil->GetLinearVelocity().y != 0) {
+            if (worm.second->proyectil->getBody()->GetLinearVelocity().x != 0 || worm.second->proyectil->getBody()->GetLinearVelocity().y != 0) {
                 return false;
             }
         }
@@ -192,7 +192,6 @@ bool GameWorld::allElementsIDLE() {
 
 void GameWorld::getDeathWormsUpdates(std::vector<int>& idsDeadWorms) {
     for (auto& id : idsDeadWorms) {
-        std::cout << "aca entra" << std::endl;
         worms.at(id)->getActionToAnimation()->resetAnimation();
         worms.at(id)->getActionToAnimation()->setAction(ActionType::DYING);
     }
@@ -208,9 +207,9 @@ void GameWorld::updateWormsMove() {
 }
 
 
-b2Body* GameWorld::getProjectile(){
+WProyectile* GameWorld::getProjectile(){
 
-    b2Body* p_projectile = nullptr;
+    WProyectile* p_projectile = nullptr;
 
     for (auto& worm : worms) {
         if (worm.second->tieneProyectil) {

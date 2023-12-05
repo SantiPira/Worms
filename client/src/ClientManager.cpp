@@ -52,7 +52,12 @@ void ClientManager::gameLoop(EventSender& eventSender) {
 
         gameUpdates.try_pop(svUpdate);
 
-        if(svUpdate.m_Movement == GameAction::PROJECTILE_LAUNCHED) {
+        if (svUpdate.m_Movement == GameAction::PROJECTILE_COLLIDED) {
+            std::cout << "BUENAS\n";
+        }
+
+
+        if(svUpdate.m_Movement == GameAction::PROJECTILE_LAUNCHED || svUpdate.m_Movement == GameAction::PROJECTILE_COLLIDED) {
            // std::cout << "LANZE UN PROYECTIL!!!!!!\n";
             //std::cout << "POS X: " << WorldScale::worldToPixelX(svUpdate.x_pos, svUpdate.width) << std::endl;
             //std::cout << "POS Y: " <<  WorldScale::worldToPixelY(svUpdate.y_pos, svUpdate.height) << std::endl;

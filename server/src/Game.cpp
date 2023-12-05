@@ -28,8 +28,10 @@ void Game::run() {
         updates = world.getWormsHealths();
         pushUpdatesToClients(std::ref(updates));
     }
+
     world.step();
     allElementsIdle();
+
     while (m_KeepRunning) {
         processTurns(turnHandler, instructionFactory);
     }
@@ -237,23 +239,54 @@ void Game::processAttackTurn(TurnHandler &turnHandler, InstructionFactory &instr
 
 void Game::allElementsIdle() {
 
-    b2Body* projectile = world.getProjectile();
+    WProyectile* projectile = world.getProjectile();
     GameUpdate projectileUpdate;
-    //wormsAtacados .setActionTOAnimation (ATTACKED)
+
     while(!world.allElementsIDLE()) {
         auto updates = world.getWormsMoving();
-        if (projectile != nullptr) {
+        if (projectile != nullptr && !projectile->GetCollide()) {
             projectileUpdate.player_id = 0xFE;
-            projectileUpdate.x_pos = projectile->GetPosition().x;
-            projectileUpdate.y_pos = projectile->GetPosition().y;
+            projectileUpdate.x_pos = projectile->getPositionX();
+            projectileUpdate.y_pos = projectile->getPositionY();
             projectileUpdate.m_Movement = GameAction::PROJECTILE_LAUNCHED;
             projectileUpdate.m_CurrentSprite = SpritesEnum::SPRITE_BAZOOKA_MISSILE;
             updates.push_back((projectileUpdate));
+        } else if (projectile != nullptr && projectile->GetCollide()) {
+            projectileUpdate.player_id = 0xFE;
+            projectileUpdate.x_pos = projectile->getPositionX();
+            projectileUpdate.y_pos = projectile->getPositionY();
+            projectileUpdate.m_Movement = GameAction::PROJECTILE_COLLIDED;
+            projectileUpdate.m_CurrentSprite = SpritesEnum::SPRITE_EXPLOTION;
+            updates.push_back((projectileUpdate));
+            checkWormsNear(projectile);
+            projectile->getBody()->SetLinearVelocity(b2Vec2_zero);
+            projectile->deleteBody();
+            delete projectile;
+
         }
 
         pushUpdatesToClients(std::ref(updates));
         waitFrameTime();
         world.step();
+    }
+
+}
+
+void Game::checkWormsNear(WProyectile* proyectilCollide){
+
+    for (b2Body* entity = proyectilCollide->getBody()->GetWorld()->GetBodyList(); entity; entity = entity->GetNext()){
+        auto* wentity = reinterpret_cast<WEntity*>(entity->GetUserData().pointer);
+
+        if (wentity != nullptr && wentity->getEntityType() == EntitiesType::ENTITY_WORM) {
+            auto* worm = reinterpret_cast<WWorm*>(entity->GetUserData().pointer);
+            float distance = std::sqrt(std::pow(worm->getPosition().x - proyectilCollide->getPositionX(), 2) +
+                                       std::pow(worm->getPosition().y - proyectilCollide->getPositionY(), 2));
+            if(distance <= proyectilCollide->getRadius() && worm->getHealth() > 50){
+                worm->receiveDamage(50);
+            } else if (distance <= proyectilCollide->getRadius() && worm->getHealth() <= 50) {
+                worm->setIsDead();
+            }
+        }
     }
 }
 

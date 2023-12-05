@@ -15,8 +15,9 @@ private:
     WProyectile* projectile;
 
 public:
-    Bazooka();
+    Bazooka(WWorm* attacker);
     void attack(WWorm* attacker, WWorm* attacked, uint8_t force) override;
+
 
     void setWeaponId(WeaponID weaponId) override;
     WeaponID getWeaponId() const override;

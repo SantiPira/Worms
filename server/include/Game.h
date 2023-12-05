@@ -6,6 +6,7 @@
 #include "world/GameWorld.h"
 #include "messages/user_actions/UserAction.h"
 #include "world/instructions/InstructionFactory.h"
+#include "world/entities/WProyectile.h"
 
 class Game : public Thread {
 private:
@@ -57,6 +58,8 @@ private:
     void finishTurn(int idCurrentPlayer, const ActionType& type);
     void startTurn(TurnHandler& turnHandler);
     void allElementsIdle();
+
+    void checkWormsNear(WProyectile* proyectilCollide);
 
     void sendEndGame(int winner);
 
